@@ -1,3 +1,6 @@
+/*
+ * Copyright 2008 the original author or authors.
+ */
 package cz.silesnet.sis.sync;
 
 import static org.junit.Assert.*;
@@ -15,7 +18,7 @@ import org.springframework.core.io.ClassPathResource;
 
 import cz.silesnet.sis.sync.domain.Customer;
 
-public class SpsResCutomerReaderTest {
+public class SpsResCustomerItemReaderTest {
 
     private File input;
     private ItemReader reader;
@@ -23,8 +26,8 @@ public class SpsResCutomerReaderTest {
     @Before
     public void setUp() throws Exception {
         input = (new ClassPathResource("/data/20081206_sps_res_customers_small.xml")).getFile();
-        reader = new SpsResCutomerReader();
-        ((SpsResCutomerReader) reader).setInputFile(input);
+        reader = new SpsResCustomerItemReader();
+        ((SpsResCustomerItemReader) reader).setInputFile(input);
     }
 
     @After
@@ -60,6 +63,6 @@ public class SpsResCutomerReaderTest {
     public void testFailWhenSetingFileOnInitializedReader() throws UnexpectedInputException, NoWorkFoundException,
             ParseException, Exception {
         reader.read();
-        ((SpsResCutomerReader) reader).setInputFile(null);
+        ((SpsResCustomerItemReader) reader).setInputFile(null);
     }
 }

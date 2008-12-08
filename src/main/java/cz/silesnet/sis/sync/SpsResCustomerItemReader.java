@@ -7,6 +7,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.MarkFailedException;
@@ -18,19 +20,19 @@ import org.springframework.batch.item.UnexpectedInputException;
 import cz.silesnet.sis.sync.domain.Customer;
 
 /**
- * ItemReader implementation, that reads SPS generated Customers import result
+ * ItemReader implementation, that reads SPS generated customers import result
  * XML file.
  * 
  * 
  * @author Richard Sikora
  */
-public class SpsResCutomerReader implements ItemReader {
+public class SpsResCustomerItemReader implements ItemReader {
 
     private File file;
     private BufferedReader input;
     private boolean initialized = false;
 
-    public SpsResCutomerReader() {
+    public SpsResCustomerItemReader() {
         super();
     }
 
@@ -65,18 +67,37 @@ public class SpsResCutomerReader implements ItemReader {
         if (!initialized) {
             initializeInput();
         }
-        String line = input.readLine();
-        while (line != null) {
-            /*-
-             * TODO read lines till "<rdc:producedDetails>",
-             * next line is "<rdc:id>spsId</rdc:id>" map it to customer.symbol,
-             * next line is "<rdc:code>customerName</rdc:code>" map it to customer.name
-             */
-            return new Customer();
+        Pattern detailsBegin = Pattern.compile("\\s*<rdc:producedDetails>\\s*");
+        Pattern detailsEnd = Pattern.compile("\\s*</rdc:producedDetails>\\s*");
+        Pattern idLine = Pattern.compile("\\s*<rdc:id>(\\d+)</rdc:id>\\s*");
+        Pattern codeLine = Pattern.compile("\\s*<rdc:code>(.+)</rdc:code>\\s*");
+        String line = null;
+        Customer customer = null;
+        Matcher matcher = null;
+        while ((line = input.readLine()) != null) {
+            if (detailsBegin.matcher(line).matches()) {
+                customer = new Customer();
+                continue;
+            }
+            matcher = idLine.matcher(line);
+            if (matcher.matches()) {
+                customer.setSymbol(matcher.group(1));
+                continue;
+            }
+            matcher = codeLine.matcher(line);
+            if (matcher.matches()) {
+                customer.setName(matcher.group(1));
+                continue;
+            }
+            if (detailsEnd.matcher(line).matches()) {
+                break;
+            }
         }
-        return null;
+        if (line == null) {
+            input.close();
+        }
+        return customer;
     }
-
     /**
      * Does nothing in this ItemReader implementation.
      * 
