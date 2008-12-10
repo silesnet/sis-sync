@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="jobLancher"
+    class="org.springframework.batch.core.launch.support.SimpleJobLauncher"
+    p:jobRepository-ref="jobRepository" />
+
+  <bean id="jobRepository"
+    class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean"
+    p:transactionManager-ref="transactionManager" />
+
+  <bean id="transactionManager"
+    class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
+
+  <bean id="sisCustomerJob" class="org.springframework.batch.core.job.SimpleJob"
+    p:jobRepository-ref="jobRepository">
+    <property name="steps">
+      <list>
+        <ref bean="sisCustomerTaskletStep" />
+        <ref bean="spsCustomerIdStep" />
+      </list>
+    </property>
+  </bean>
+
+  <bean id="sisCustomerTaskletStep"
+    class="org.springframework.batch.core.step.tasklet.TaskletStep"
+    p:jobRepository-ref="jobRepository">
+    <property name="tasklet">
+      <bean class="cz.silesnet.sis.sync.SisCustomerTasklet"
+        p:inputFileName="data/20081206_sis_customers.xml"
+        p:outputFileName="target/20081206_sps_customers.xml"
+        p:spsFolder="C:\Program Files\STORMWARE\Pohoda"/>
+    </property>
+  </bean>
+
+  <bean id="spsCustomerIdStep"
+    class="org.springframework.batch.core.step.item.SimpleStepFactoryBean"
+    p:transactionManager-ref="transactionManager" p:jobRepository-ref="jobRepository">
+    <property name="itemReader">
+      <bean class="cz.silesnet.sis.sync.SpsResCustomerItemReader"
+        p:inputFile="target/20081206_sps_customers.xml" />
+    </property>
+    <property name="itemWriter">
+      <bean class="cz.silesnet.sis.sync.SpsResCustomerItemWriter"
+        p:outputFile="target/20081206_sis_customers_update.txt" />
+    </property>
+  </bean>
+
+</beans>
