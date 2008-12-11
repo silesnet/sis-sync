@@ -29,9 +29,9 @@
     p:jobRepository-ref="jobRepository">
     <property name="tasklet">
       <bean class="cz.silesnet.sis.sync.SisCustomerTasklet"
-        p:inputFileName="data/20081206_sis_customers.xml"
-        p:outputFileName="target/20081206_sps_customers.xml"
-        p:spsFolder="C:\Program Files\STORMWARE\Pohoda"/>
+        p:input="classpath:data/20081206_sis_customers.xml"
+        p:output="file:target/20081206_sps_customers.xml"
+        p:spsFolder="file:C:\Program Files\STORMWARE\Pohoda"/>
     </property>
   </bean>
 
@@ -40,11 +40,11 @@
     p:transactionManager-ref="transactionManager" p:jobRepository-ref="jobRepository">
     <property name="itemReader">
       <bean class="cz.silesnet.sis.sync.SpsResCustomerItemReader"
-        p:inputFile="target/20081206_sps_customers.xml" />
+        p:resource="file:target/20081206_sps_customers.xml" />
     </property>
     <property name="itemWriter">
       <bean class="cz.silesnet.sis.sync.SpsResCustomerItemWriter"
-        p:outputFile="target/20081206_sis_customers_update.txt" />
+        p:resource="file:target/20081206_sis_customers_update.txt" />
     </property>
   </bean>
 
