@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 
 import cz.silesnet.sis.sync.domain.Customer;
 
@@ -21,14 +22,14 @@ public class SpsResCustomerItemWriterTest {
 
     // FIXME target/test-outputs/ has to exist! do it somehow
     private static final String RESOURCE_NAME = "target/20081206_sps_res_customers_small.txt";
-    private File output;
+    private Resource output;
     private ItemWriter writer;
 
     @Before
     public void setUp() throws Exception {
-        output = (new FileSystemResource(RESOURCE_NAME)).getFile();
+        output = new FileSystemResource(RESOURCE_NAME);
         writer = new SpsResCustomerItemWriter();
-        ((SpsResCustomerItemWriter) writer).setOutputFile(output);
+        ((SpsResCustomerItemWriter) writer).setResource(output);
     }
 
     @After

@@ -5,8 +5,6 @@ package cz.silesnet.sis.sync;
 
 import static org.junit.Assert.*;
 
-import java.io.File;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,19 +13,20 @@ import org.springframework.batch.item.NoWorkFoundException;
 import org.springframework.batch.item.ParseException;
 import org.springframework.batch.item.UnexpectedInputException;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
 import cz.silesnet.sis.sync.domain.Customer;
 
 public class SpsResCustomerItemReaderTest {
 
-    private File input;
+    private Resource input;
     private ItemReader reader;
 
     @Before
     public void setUp() throws Exception {
-        input = (new ClassPathResource("/data/20081206_sps_res_customers_small.xml")).getFile();
+        input = new ClassPathResource("/data/20081206_sps_res_customers_small.xml");
         reader = new SpsResCustomerItemReader();
-        ((SpsResCustomerItemReader) reader).setInputFile(input);
+        ((SpsResCustomerItemReader) reader).setResource(input);
     }
 
     @After
@@ -63,6 +62,6 @@ public class SpsResCustomerItemReaderTest {
     public void testFailWhenSetingFileOnInitializedReader() throws UnexpectedInputException, NoWorkFoundException,
             ParseException, Exception {
         reader.read();
-        ((SpsResCustomerItemReader) reader).setInputFile(null);
+        ((SpsResCustomerItemReader) reader).setResource(null);
     }
 }

@@ -12,6 +12,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.ExitStatus;
+import org.springframework.core.io.Resource;
 
 /**
  * Tasklet that executes SPS XML import.
@@ -22,9 +23,9 @@ public class SisCustomerTasklet implements Tasklet {
 
     private static final Log log = LogFactory.getLog(SisCustomerTasklet.class);
 
-    private String inputFileName;
-    private String outputFileName;
-    private String spsFolder;
+    private Resource input;
+    private Resource output;
+    private Resource spsFolder;
 
     private String login = "Admin";
     private String password = "";
@@ -38,26 +39,26 @@ public class SisCustomerTasklet implements Tasklet {
     }
 
     /**
-     * @param inputFileName
+     * @param input
      *            the inputFileName to set
      */
-    public void setInputFileName(String inputFileName) {
-        this.inputFileName = inputFileName;
+    public void setInput(Resource input) {
+        this.input = input;
     }
 
     /**
-     * @param outputFileName
+     * @param output
      *            the outputFileName to set
      */
-    public void setOutputFileName(String outputFileName) {
-        this.outputFileName = outputFileName;
+    public void setOutput(Resource output) {
+        this.output = output;
     }
 
     /**
      * @param spsFolder
      *            the spsFolder to set
      */
-    public void setSpsFolder(String spsFolder) {
+    public void setSpsFolder(Resource spsFolder) {
         this.spsFolder = spsFolder;
     }
 
@@ -84,8 +85,7 @@ public class SisCustomerTasklet implements Tasklet {
      */
     private String createSpsImportConfig() throws IOException {
         // create import configuration file in the same folder as the input file
-        File input = new File(inputFileName);
-        String inputFolder = input.getParentFile().getAbsolutePath();
+        String inputFolder = input.getFile().getParentFile().getAbsolutePath();
         File configFile = new File(inputFolder + File.separator + configName);
         if (configFile.exists()) {
             configFile.delete();
@@ -102,12 +102,13 @@ public class SisCustomerTasklet implements Tasklet {
      * Creates content of SPS XML import configuration file.
      * 
      * @return XML configuration file content
+     * @throws IOException
      */
-    protected String composeSpsImportConfig() {
+    protected String composeSpsImportConfig() throws IOException {
         StringBuilder config = new StringBuilder();
         config.append("[XML]\n");
-        config.append("input_xml=").append(inputFileName).append("\n");
-        config.append("response_xml=").append(outputFileName).append("\n");
+        config.append("input_xml=").append(input.getFile().getAbsolutePath()).append("\n");
+        config.append("response_xml=").append(output.getFile().getAbsolutePath()).append("\n");
         config.append("database=").append(database).append("\n");
         config.append("check_duplicity=1\n");
         config.append("format_output=1\n");
@@ -120,10 +121,12 @@ public class SisCustomerTasklet implements Tasklet {
      * @param config
      *            configuration file path
      * @return command line
+     * @throws IOException
      */
-    protected String composeCommand(String config) {
+    protected String composeCommand(String config) throws IOException {
         StringBuilder line = new StringBuilder();
-        line.append("\"").append(spsFolder).append(File.separator).append(executable).append("\" ");
+        line.append("\"").append(spsFolder.getFile().getAbsolutePath()).append(File.separator).append(executable)
+                .append("\" ");
         line.append("/XML \"").append(login).append("\" \"").append(password).append("\" ");
         line.append("\"").append(config).append("\"");
         String command = line.toString();

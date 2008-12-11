@@ -4,9 +4,8 @@
 package cz.silesnet.sis.sync;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,6 +15,7 @@ import org.springframework.batch.item.NoWorkFoundException;
 import org.springframework.batch.item.ParseException;
 import org.springframework.batch.item.ResetFailedException;
 import org.springframework.batch.item.UnexpectedInputException;
+import org.springframework.core.io.Resource;
 
 import cz.silesnet.sis.sync.domain.Customer;
 
@@ -28,7 +28,7 @@ import cz.silesnet.sis.sync.domain.Customer;
  */
 public class SpsResCustomerItemReader implements ItemReader {
 
-    private File file;
+    private Resource resource;
     private BufferedReader input;
     private boolean initialized = false;
 
@@ -39,13 +39,13 @@ public class SpsResCustomerItemReader implements ItemReader {
     /**
      * Input file injection method.
      * 
-     * @param file
+     * @param resource
      *            input file
      */
-    public void setInputFile(File file) {
+    public void setResource(Resource resource) {
         if (initialized)
             throw new IllegalStateException("Reader already initialized.");
-        this.file = file;
+        this.resource = resource;
     }
 
     /**
@@ -106,8 +106,8 @@ public class SpsResCustomerItemReader implements ItemReader {
     public void reset() throws ResetFailedException {
     }
 
-    private void initializeInput() throws FileNotFoundException {
-        input = new BufferedReader(new FileReader(file));
+    private void initializeInput() throws IOException {
+        input = new BufferedReader(new FileReader(resource.getFile()));
         initialized = true;
     }
 }

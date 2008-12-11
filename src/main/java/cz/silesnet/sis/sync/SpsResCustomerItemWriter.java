@@ -4,7 +4,6 @@
 package cz.silesnet.sis.sync;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -13,6 +12,7 @@ import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.FlushFailedException;
 import org.springframework.batch.item.ItemStreamException;
 import org.springframework.batch.item.support.AbstractItemStreamItemWriter;
+import org.springframework.core.io.Resource;
 
 import cz.silesnet.sis.sync.domain.Customer;
 
@@ -24,7 +24,7 @@ import cz.silesnet.sis.sync.domain.Customer;
  */
 public class SpsResCustomerItemWriter extends AbstractItemStreamItemWriter {
 
-    private File file;
+    private Resource resource;
     private BufferedWriter output;
     private boolean initialized = false;
 
@@ -34,13 +34,13 @@ public class SpsResCustomerItemWriter extends AbstractItemStreamItemWriter {
     /**
      * Input file injection method.
      * 
-     * @param file
-     *            input file
+     * @param resource
+     *            output file
      */
-    public void setOutputFile(File file) {
+    public void setResource(Resource resource) {
         if (initialized)
             throw new IllegalStateException("Writer already initialized.");
-        this.file = file;
+        this.resource = resource;
     }
 
     public void clear() throws ClearFailedException {
@@ -50,7 +50,7 @@ public class SpsResCustomerItemWriter extends AbstractItemStreamItemWriter {
         try {
             output.flush();
         } catch (IOException e) {
-            throw new FlushFailedException("Can not flush the file: " + file.getAbsolutePath(), e);
+            throw new FlushFailedException("Can not flush the file: " + resource.getDescription(), e);
         }
     }
 
@@ -87,10 +87,10 @@ public class SpsResCustomerItemWriter extends AbstractItemStreamItemWriter {
 
     private void initializeOutput() {
         try {
-            file.createNewFile();
-            output = new BufferedWriter(new FileWriter(file));
+            resource.getFile().createNewFile();
+            output = new BufferedWriter(new FileWriter(resource.getFile()));
         } catch (IOException e) {
-            throw new IllegalStateException("Can not open file for writting: " + file.getAbsolutePath(), e);
+            throw new IllegalStateException("Can not open file for writting: " + resource.getDescription(), e);
         }
         initialized = true;
     }

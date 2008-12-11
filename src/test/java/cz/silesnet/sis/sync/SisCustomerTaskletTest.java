@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.ExitStatus;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 
 public class SisCustomerTaskletTest {
 
@@ -39,29 +40,28 @@ public class SisCustomerTaskletTest {
     @Test
     public void testExecute() throws Exception {
         SisCustomerTasklet sisTasklet = (SisCustomerTasklet) tasklet;
-        sisTasklet.setInputFileName((new ClassPathResource(SIS_CUSTOMERS_FILE)).getFile().getAbsolutePath());
-        sisTasklet.setOutputFileName((new File(SPS_CUSTOMERS_FILE).getAbsolutePath()));
-        sisTasklet.setSpsFolder(SPS_FOLDER);
+        sisTasklet.setInput(new ClassPathResource(SIS_CUSTOMERS_FILE));
+        sisTasklet.setOutput(new FileSystemResource(SPS_CUSTOMERS_FILE));
+        sisTasklet.setSpsFolder(new FileSystemResource(SPS_FOLDER));
         assertEquals(ExitStatus.FINISHED, tasklet.execute());
         assertTrue((new File(SPS_CUSTOMERS_FILE)).exists());
     }
-
     @Test
     public void testComposeCommand() throws Exception {
         SisCustomerTasklet sisTasklet = (SisCustomerTasklet) tasklet;
-        sisTasklet.setSpsFolder("SPS");
+        sisTasklet.setSpsFolder(new FileSystemResource("C:\\SPS"));
         String command = sisTasklet.composeCommand("CONFIG");
-        assertEquals("\"SPS\\Pohoda.exe\" /XML \"Admin\" \"\" \"CONFIG\"", command);
+        assertEquals("\"C:\\SPS\\Pohoda.exe\" /XML \"Admin\" \"\" \"CONFIG\"", command);
     }
 
     @Test
     public void testComposeSpsImportConfig() throws Exception {
         SisCustomerTasklet sisTasklet = (SisCustomerTasklet) tasklet;
-        sisTasklet.setInputFileName("IN");
-        sisTasklet.setOutputFileName("OUT");
+        sisTasklet.setInput(new FileSystemResource("C:\\IN"));
+        sisTasklet.setOutput(new FileSystemResource("C:\\OUT"));
         String config = sisTasklet.composeSpsImportConfig();
         assertEquals(
-                "[XML]\ninput_xml=IN\nresponse_xml=OUT\ndatabase=12345678_2008.mdb\ncheck_duplicity=1\nformat_output=1\n",
+                "[XML]\ninput_xml=C:\\IN\nresponse_xml=C:\\OUT\ndatabase=12345678_2008.mdb\ncheck_duplicity=1\nformat_output=1\n",
                 config);
 
     }
