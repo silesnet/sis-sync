@@ -85,7 +85,7 @@ public class SisCustomerTasklet implements Tasklet {
      */
     private String createSpsImportConfig() throws IOException {
         // create import configuration file in the same folder as the input file
-        String inputFolder = input.getFile().getParentFile().getAbsolutePath();
+        String inputFolder = input.getFile().getAbsoluteFile().getParentFile().getAbsolutePath();
         File configFile = new File(inputFolder + File.separator + configName);
         if (configFile.exists()) {
             configFile.delete();

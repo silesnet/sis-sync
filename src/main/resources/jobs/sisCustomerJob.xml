@@ -3,6 +3,10 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+  <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+    p:location="batch.properties"
+    p:systemPropertiesModeName="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+
   <bean id="jobLancher"
     class="org.springframework.batch.core.launch.support.SimpleJobLauncher"
     p:jobRepository-ref="jobRepository" />
@@ -29,9 +33,9 @@
     p:jobRepository-ref="jobRepository">
     <property name="tasklet">
       <bean class="cz.silesnet.sis.sync.SisCustomerTasklet"
-        p:input="classpath:data/20081206_sis_customers.xml"
-        p:output="file:target/20081206_sps_customers.xml"
-        p:spsFolder="file:C:\Program Files\STORMWARE\Pohoda"/>
+        p:input="${sis.customers.file}"
+        p:output="${sps.customers.file}"
+        p:spsFolder="${sps.folder}"/>
     </property>
   </bean>
 
@@ -40,11 +44,11 @@
     p:transactionManager-ref="transactionManager" p:jobRepository-ref="jobRepository">
     <property name="itemReader">
       <bean class="cz.silesnet.sis.sync.SpsResCustomerItemReader"
-        p:resource="file:target/20081206_sps_customers.xml" />
+        p:resource="${sps.customers.file}" />
     </property>
     <property name="itemWriter">
       <bean class="cz.silesnet.sis.sync.SpsResCustomerItemWriter"
-        p:resource="file:target/20081206_sis_customers_update.txt" />
+        p:resource="${sis.customers.update.file}" />
     </property>
   </bean>
 
