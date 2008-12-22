@@ -32,7 +32,7 @@
     class="org.springframework.batch.core.step.tasklet.TaskletStep"
     p:jobRepository-ref="jobRepository">
     <property name="tasklet">
-      <bean class="cz.silesnet.sis.sync.SisCustomerTasklet"
+      <bean class="cz.silesnet.sis.sync.tasklet.SisCustomerTasklet"
         p:input="${sis.customers.file}"
         p:output="${sps.customers.file}"
         p:spsFolder="${sps.folder}"/>
@@ -43,11 +43,11 @@
     class="org.springframework.batch.core.step.item.SimpleStepFactoryBean"
     p:transactionManager-ref="transactionManager" p:jobRepository-ref="jobRepository">
     <property name="itemReader">
-      <bean class="cz.silesnet.sis.sync.SpsResCustomerItemReader"
+      <bean class="cz.silesnet.sis.sync.item.reader.SpsResCustomerItemReader"
         p:resource="${sps.customers.file}" />
     </property>
     <property name="itemWriter">
-      <bean class="cz.silesnet.sis.sync.SpsResCustomerItemWriter"
+      <bean class="cz.silesnet.sis.sync.item.writer.SpsResCustomerItemWriter"
         p:resource="${sis.customers.update.file}" />
     </property>
   </bean>

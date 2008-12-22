@@ -1,4 +1,4 @@
-package cz.silesnet.sis.sync;
+package cz.silesnet.sis.sync.tasklet;
 
 import static org.junit.Assert.*;
 
@@ -11,6 +11,8 @@ import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.ExitStatus;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
+
+import cz.silesnet.sis.sync.tasklet.SisCustomerTasklet;
 
 public class SisCustomerTaskletTest {
 

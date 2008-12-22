@@ -1,7 +1,7 @@
 /*
  * Copyright 2008 the original author or authors.
  */
-package cz.silesnet.sis.sync;
+package cz.silesnet.sis.sync.item.writer;
 
 import static org.junit.Assert.*;
 
@@ -17,6 +17,7 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 
 import cz.silesnet.sis.sync.domain.Customer;
+import cz.silesnet.sis.sync.item.writer.SpsResCustomerItemWriter;
 
 public class SpsResCustomerItemWriterTest {
 

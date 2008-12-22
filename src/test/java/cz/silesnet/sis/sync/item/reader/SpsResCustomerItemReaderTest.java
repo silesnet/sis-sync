@@ -1,7 +1,7 @@
 /*
  * Copyright 2008 the original author or authors.
  */
-package cz.silesnet.sis.sync;
+package cz.silesnet.sis.sync.item.reader;
 
 import static org.junit.Assert.*;
 
@@ -16,6 +16,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
 import cz.silesnet.sis.sync.domain.Customer;
+import cz.silesnet.sis.sync.item.reader.SpsResCustomerItemReader;
 
 public class SpsResCustomerItemReaderTest {
 

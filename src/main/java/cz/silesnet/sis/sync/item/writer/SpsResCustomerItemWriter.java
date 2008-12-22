@@ -1,7 +1,7 @@
 /*
  * Copyright 2008 the original author or authors.
  */
-package cz.silesnet.sis.sync;
+package cz.silesnet.sis.sync.item.writer;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
