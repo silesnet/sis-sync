@@ -2,6 +2,8 @@ package cz.silesnet.sis.sync.item.writer;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -77,12 +79,18 @@ public class SisCustomerItemWriterTest {
 
     @Test
     public void testGetBatchImportId() {
-        fail();
+        long deadline = (new Date()).getTime() + 1000;
+        assertTrue(writer.getBatchImportId().compareTo(String.format("%X", deadline)) < 0);
     }
 
     @Test
-    public void testGetItemImportId() {
-        fail();
+    public void testGetItemImportId() throws Exception {
+        String batchId = writer.getBatchImportId();
+        String firstItemId = writer.getItemImportId(null);
+        writer.itemWritten(null);
+        String secondItemId = writer.getItemImportId(null);
+        assertEquals(batchId + "_00000000", firstItemId);
+        assertEquals(batchId + "_00000001", secondItemId);
     }
 
 }

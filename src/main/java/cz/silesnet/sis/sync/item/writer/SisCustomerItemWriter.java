@@ -3,8 +3,11 @@
  */
 package cz.silesnet.sis.sync.item.writer;
 
+import java.util.Date;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.core.io.Resource;
 
 import cz.silesnet.sis.sync.domain.Customer;
 
@@ -18,14 +21,26 @@ public class SisCustomerItemWriter extends AbstractFileItemWritter {
 
     private static Log log = LogFactory.getLog(SisCustomerItemWriter.class);
 
-    private String ico;
-
-    public void setIco(String ico) {
-        this.ico = ico;
-    }
+    private String ico = "12345678";
+    private String stamp = getStamp();
+    private long counter = 0;
 
     public SisCustomerItemWriter() {
         super();
+    }
+
+    protected String getBatchImportId() {
+        return stamp;
+    }
+
+    protected String getItemImportId(Object item) {
+        return stamp + "_" + String.format("%08d", counter);
+    }
+
+    private String getStamp() {
+        long now = (new Date()).getTime();
+        String tmpStamp = String.format("%X", now);
+        return tmpStamp;
     }
 
     @Override
@@ -41,14 +56,6 @@ public class SisCustomerItemWriter extends AbstractFileItemWritter {
         String fullHeader = header.toString();
         log.debug(fullHeader);
         return fullHeader;
-    }
-
-    protected String getBatchImportId() {
-        return "1234";
-    }
-
-    protected String getItemImportId(Object item) {
-        return "12345";
     }
 
     @Override
@@ -80,10 +87,25 @@ public class SisCustomerItemWriter extends AbstractFileItemWritter {
     }
 
     @Override
+    protected void itemWritten(Object item) {
+        counter++;
+    }
+
+    public void setIco(String ico) {
+        this.ico = ico;
+    }
+
+    @Override
+    public void setResource(Resource resource) {
+        super.setResource(resource);
+        stamp = getStamp();
+        counter = 0;
+    }
+
+    @Override
     protected String trailerToString() {
         String trailer = "</dat:dataPack>";
         log.debug(trailer);
         return trailer;
     }
-
 }
