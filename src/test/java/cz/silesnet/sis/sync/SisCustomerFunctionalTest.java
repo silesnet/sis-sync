@@ -26,8 +26,8 @@ import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 import cz.silesnet.sis.sync.domain.Customer;
 import cz.silesnet.sis.sync.mapping.SisCustomerMapper;
 
-public class sisCustomerFunctionalTest extends AbstractDependencyInjectionSpringContextTests {
-    private static Log log = LogFactory.getLog(sisCustomerFunctionalTest.class);
+public class SisCustomerFunctionalTest extends AbstractDependencyInjectionSpringContextTests {
+    private static Log log = LogFactory.getLog(SisCustomerFunctionalTest.class);
 
     private JobLauncher launcher;
     private Job job;
