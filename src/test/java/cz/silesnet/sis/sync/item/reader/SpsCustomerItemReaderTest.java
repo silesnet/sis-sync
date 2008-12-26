@@ -16,9 +16,9 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
 import cz.silesnet.sis.sync.domain.Customer;
-import cz.silesnet.sis.sync.item.reader.SpsResCustomerItemReader;
+import cz.silesnet.sis.sync.item.reader.SpsCustomerItemReader;
 
-public class SpsResCustomerItemReaderTest {
+public class SpsCustomerItemReaderTest {
 
     private Resource input;
     private ItemReader reader;
@@ -26,8 +26,8 @@ public class SpsResCustomerItemReaderTest {
     @Before
     public void setUp() throws Exception {
         input = new ClassPathResource("data/20081206_sps_customers.xml");
-        reader = new SpsResCustomerItemReader();
-        ((SpsResCustomerItemReader) reader).setResource(input);
+        reader = new SpsCustomerItemReader();
+        ((SpsCustomerItemReader) reader).setResource(input);
     }
 
     @After
@@ -66,6 +66,6 @@ public class SpsResCustomerItemReaderTest {
     public void testFailWhenSetingFileOnInitializedReader() throws UnexpectedInputException, NoWorkFoundException,
             ParseException, Exception {
         reader.read();
-        ((SpsResCustomerItemReader) reader).setResource(null);
+        ((SpsCustomerItemReader) reader).setResource(null);
     }
 }

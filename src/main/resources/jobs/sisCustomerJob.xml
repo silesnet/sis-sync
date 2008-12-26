@@ -80,7 +80,7 @@
 		class="org.springframework.batch.core.step.item.SimpleStepFactoryBean"
 		p:transactionManager-ref="transactionManager" p:jobRepository-ref="jobRepository">
 		<property name="itemReader">
-			<bean class="cz.silesnet.sis.sync.item.reader.SpsResCustomerItemReader"
+			<bean class="cz.silesnet.sis.sync.item.reader.SpsCustomerItemReader"
 				p:resource="${sps.customers.file}" />
 		</property>
 		<property name="itemWriter">

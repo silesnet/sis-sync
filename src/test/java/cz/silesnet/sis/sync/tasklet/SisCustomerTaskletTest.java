@@ -21,7 +21,7 @@ public class SisCustomerTaskletTest {
      */
     private static final String SPS_FOLDER = "C:\\Program Files\\STORMWARE\\Pohoda";
     private static final String SIS_CUSTOMERS_FILE = "data/20081206_sis_customers.xml";
-    private static final String SPS_CUSTOMERS_FILE = "target/20081206_sps_customers.xml";
+    private static final String SPS_CUSTOMERS_FILE = "target/20081206_sps_customers.TEMP.xml";
 
     private Tasklet tasklet;
 

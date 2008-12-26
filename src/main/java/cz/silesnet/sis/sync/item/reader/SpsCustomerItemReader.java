@@ -25,13 +25,13 @@ import cz.silesnet.sis.sync.domain.Customer;
  * 
  * @author Richard Sikora
  */
-public class SpsResCustomerItemReader implements ItemReader {
+public class SpsCustomerItemReader implements ItemReader {
 
     private Resource resource;
     private BufferedReader input;
     private boolean initialized = false;
 
-    public SpsResCustomerItemReader() {
+    public SpsCustomerItemReader() {
         super();
     }
 
