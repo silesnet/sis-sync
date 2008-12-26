@@ -3,12 +3,9 @@ package cz.silesnet.sis.sync;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.dbunit.DataSourceDatabaseTester;
 import org.dbunit.IDatabaseTester;
 import org.dbunit.dataset.IDataSet;
@@ -23,11 +20,8 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 
-import cz.silesnet.sis.sync.domain.Customer;
-import cz.silesnet.sis.sync.mapping.CustomerRowMapper;
-
-public class SisCustomerFunctionalTest extends AbstractDependencyInjectionSpringContextTests {
-    private static Log log = LogFactory.getLog(SisCustomerFunctionalTest.class);
+public class SisInvoiceFunctionalTest extends AbstractDependencyInjectionSpringContextTests {
+    // private static Log log = LogFactory.getLog(SisInvoiceFunctionalTest.class);
 
     private JobLauncher launcher;
     private Job job;
@@ -48,10 +42,9 @@ public class SisCustomerFunctionalTest extends AbstractDependencyInjectionSpring
 
     @Override
     protected String[] getConfigLocations() {
-        return new String[] { "classpath:jobs/sisCustomerJob.xml" };
+        return new String[] { "classpath:jobs/sisInvoiceJob.xml" };
     }
 
-    @SuppressWarnings("unchecked")
     @Test
     public void testSisCustomerJob() throws Exception {
         // create customers table
@@ -73,7 +66,7 @@ public class SisCustomerFunctionalTest extends AbstractDependencyInjectionSpring
         }
         // import customers initial data
         IDatabaseTester databaseTester = new DataSourceDatabaseTester(dataSource);
-        IDataSet dataSet = new FlatXmlDataSet((new ClassPathResource("data/20081223_db_customers.xml")).getFile());
+        IDataSet dataSet = new FlatXmlDataSet((new ClassPathResource("data/20081226_db_invoices.xml")).getFile());
         databaseTester.setDataSet(dataSet);
         databaseTester.onSetup();
         // run the job
@@ -82,12 +75,12 @@ public class SisCustomerFunctionalTest extends AbstractDependencyInjectionSpring
         assertEquals(jobExecution.getExitStatus(), ExitStatus.FINISHED);
         databaseTester.onTearDown();
         // test synchronized customers
-        List<Customer> customers = template
-                .query("SELECT * FROM customers WHERE symbol <> ''", new CustomerRowMapper());
-        assertEquals(5, customers.size());
-        for (Customer customer : customers) {
-            assertTrue(Long.valueOf(customer.getSymbol()) > 0);
-            log.debug(customer.getSymbol());
-        }
+        // List<Customer> customers = template
+        // .query("SELECT * FROM customers WHERE symbol <> ''", new SisCustomerMapper());
+        // assertEquals(5, customers.size());
+        // for (Customer customer : customers) {
+        // assertTrue(Long.valueOf(customer.getSymbol()) > 0);
+        // log.debug(customer.getSymbol());
+        // }
     }
 }

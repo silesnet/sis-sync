@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<customers id='1' name='Test Customer1' symbol="" city="Test City"	updated="2008-12-23 05:00:00" />
+	<customers id='2' name='Test Customer2' symbol="" city="Test City"	updated="2008-12-23 05:00:00" />
+	<customers id='3' name='Test Customer3' symbol="" city="Test City"	updated="2008-12-23 05:00:00" />
+	
+	<invoices id="1" customer_id="1" number="200800001" synchronized="2008-12-23 05:00:00" />
+	<invoices id="2" customer_id="2" number="200800002" synchronized="2008-12-23 05:00:00" />
+	<invoices id="3" customer_id="1" number="200800003" />
+	<invoices id="4" customer_id="2" number="200800004" />
+	<invoices id="5" customer_id="3" number="200800005" />
+	
+	<items id="1" invoice_id="3" name="Connectivity 1" net="120.00" />
+	<items id="2" invoice_id="4" name="Connectivity 2" net="240.00" />
+	<items id="3" invoice_id="5" name="Connectivity 1" net="120.00" />
+	<items id="4" invoice_id="5" name="Connectivity 3" net="10.00" />
+
+</dataset>

@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import cz.silesnet.sis.sync.domain.Customer;
 
-public class SisCustomerMapperTest {
+public class CustomerRowMapperTest {
 
     private static final String CUSTOMER_NAME = "Test Customer";
     private static final int IGNORED_ROW_NUM = 0;
@@ -25,7 +25,7 @@ public class SisCustomerMapperTest {
 
     @Before
     public void setUp() throws Exception {
-        mapper = new SisCustomerMapper();
+        mapper = new CustomerRowMapper();
         rs = createMock(ResultSet.class);
     }
 
@@ -37,10 +37,10 @@ public class SisCustomerMapperTest {
 
     @Test
     public void testMapRow() throws SQLException {
-        expect(rs.getLong(SisCustomerMapper.ID_COLUMN)).andReturn(ID);
-        expect(rs.getString(SisCustomerMapper.NAME_COLUMN)).andReturn(CUSTOMER_NAME);
-        expect(rs.getString(SisCustomerMapper.SYMBOL_COLUMN)).andReturn(SYMBOL);
-        expect(rs.getString(SisCustomerMapper.CITY_COLUMN)).andReturn(CITY);
+        expect(rs.getLong(CustomerRowMapper.ID_COLUMN)).andReturn(ID);
+        expect(rs.getString(CustomerRowMapper.NAME_COLUMN)).andReturn(CUSTOMER_NAME);
+        expect(rs.getString(CustomerRowMapper.SYMBOL_COLUMN)).andReturn(SYMBOL);
+        expect(rs.getString(CustomerRowMapper.CITY_COLUMN)).andReturn(CITY);
         replay(rs);
         Customer customer = (Customer) mapper.mapRow(rs, IGNORED_ROW_NUM);
         assertEquals(ID, customer.getId());

@@ -16,7 +16,7 @@ import cz.silesnet.sis.sync.domain.Customer;
  * @author sikorric
  * 
  */
-public class SisCustomerMapper implements RowMapper {
+public class CustomerRowMapper implements RowMapper {
 
     public static final String ID_COLUMN = "id";
     public static final String NAME_COLUMN = "name";

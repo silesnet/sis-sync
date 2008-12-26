@@ -4,7 +4,7 @@
 package cz.silesnet.sis.sync.domain;
 
 /**
- * Customer data object with no logic. It contain only fields needed for synchronization.
+ * Customer data object with no logic. It contains only fields needed for synchronization.
  * 
  * @author Richard Sikora
  */

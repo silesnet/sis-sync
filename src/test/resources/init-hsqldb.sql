@@ -1,4 +1,4 @@
-DROP TABLE invoice_items IF EXISTS;
+DROP TABLE items IF EXISTS;
 DROP TABLE invoices IF EXISTS;
 DROP TABLE customers IF EXISTS;
 
@@ -14,10 +14,11 @@ CREATE TABLE customers (
 CREATE TABLE invoices (
     id BIGINT IDENTITY NOT NULL PRIMARY KEY,
     customer_id BIGINT,
-    number VARCHAR(12)
+    number VARCHAR(20),
+    synchronized TIMESTAMP
 );
 
-CREATE TABLE invoice_items (
+CREATE TABLE items (
     id BIGINT IDENTITY NOT NULL PRIMARY KEY,
     invoice_id BIGINT,
     name VARCHAR(80),
