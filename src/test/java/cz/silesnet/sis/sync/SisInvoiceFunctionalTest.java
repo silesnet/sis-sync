@@ -46,7 +46,7 @@ public class SisInvoiceFunctionalTest extends AbstractDependencyInjectionSpringC
     }
 
     @Test
-    public void testSisCustomerJob() throws Exception {
+    public void testSisInvoiceJob() throws Exception {
         // create customers table
         File scriptFile = new ClassPathResource("init-hsqldb.sql").getFile();
         BufferedReader reader = new BufferedReader(new FileReader(scriptFile));

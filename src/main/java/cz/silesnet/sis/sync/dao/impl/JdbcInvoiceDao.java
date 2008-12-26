@@ -14,6 +14,8 @@ import cz.silesnet.sis.sync.dao.InvoiceDao;
 import cz.silesnet.sis.sync.domain.Invoice;
 
 /**
+ * Implements InvoiceDao using Spring's JdbcTemplate.
+ * 
  * @author sikorric
  * 
  */
@@ -34,11 +36,15 @@ public class JdbcInvoiceDao implements InvoiceDao {
         } catch (DataAccessException e) {
             throw new IllegalArgumentException(e);
         }
-        if (invoice == null)
-            throw new IllegalArgumentException("Invoice (id: " + id + ") can not be retrieved from the database.");
         return invoice;
     }
 
+    /**
+     * Maps result set to Invoice object. Uses JdbcTemplate to extract invoice items.
+     * 
+     * @author sikorric
+     * 
+     */
     private class InvoiceRowMapper implements RowMapper {
 
         private static final String ITEMS_SQL = "SELECT * FROM items WHERE invoice_id = ?";
@@ -47,6 +53,9 @@ public class JdbcInvoiceDao implements InvoiceDao {
         private static final String NAME_COLUMN = "name";
         private static final String NET_COLUMN = "net";
 
+        /**
+         * Maps result set to Invoice object. Retrieves invoice items and associates them with the invoice.
+         */
         @Override
         public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
             final Invoice invoice = new Invoice();

@@ -69,6 +69,7 @@ public class Invoice {
         public Item(String name, float net) {
             this.name = name;
             this.net = net;
+            // automatically associates new item with the invoice
             addItem(this);
         }
 
