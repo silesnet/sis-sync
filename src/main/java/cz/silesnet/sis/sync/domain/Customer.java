@@ -4,21 +4,27 @@
 package cz.silesnet.sis.sync.domain;
 
 /**
- * Customer data object with no logic. It contain only fields needed for
- * synchronization.
+ * Customer data object with no logic. It contain only fields needed for synchronization.
  * 
  * @author Richard Sikora
  */
 public class Customer {
 
+    private long id;
     private String name;
     private String symbol;
+    private String city;
 
-    /**
-     *  
-     */
     public Customer() {
         // TODO Auto-generated constructor stub
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     /**
@@ -49,6 +55,14 @@ public class Customer {
      */
     public void setSymbol(String symbol) {
         this.symbol = symbol;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
 }

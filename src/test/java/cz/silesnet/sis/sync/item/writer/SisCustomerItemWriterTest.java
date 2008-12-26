@@ -12,6 +12,7 @@ import cz.silesnet.sis.sync.domain.Customer;
 
 public class SisCustomerItemWriterTest {
 
+    private static final long ID = 1234L;
     private static final String ICO = "12345678";
     private SisCustomerItemWriter writer;
 
@@ -48,11 +49,13 @@ public class SisCustomerItemWriterTest {
     @Test
     public void testItemToString() {
         Customer customer = new Customer();
+        customer.setId(ID);
         customer.setName("Customer Name");
+        customer.setCity("Test City");
         String customerXml = writer.itemToString(customer);
         String[] customerLines = customerXml.split("\n");
         int dataIndex = 5;
-        int trailerIndex = 6;
+        int trailerIndex = 7;
         // element header
         assertEquals("<dat:dataPackItem id=\"" + writer.getItemImportId(customer) + "\" version=\"1.0\">",
                 customerLines[0]);
@@ -62,13 +65,14 @@ public class SisCustomerItemWriterTest {
         assertEquals("<typ:address>", customerLines[4]);
         // customer data
         assertEquals("<typ:company>" + customer.getName() + "</typ:company>", customerLines[dataIndex]);
+        assertEquals("<typ:city>" + customer.getCity() + "</typ:city>", customerLines[dataIndex + 1]);
         // element trailer
         assertEquals("</typ:address>", customerLines[trailerIndex]);
         assertEquals("</adb:identity>", customerLines[trailerIndex + 1]);
         assertEquals("</adb:addressbookHeader>", customerLines[trailerIndex + 2]);
         assertEquals("</adb:addressbook>", customerLines[trailerIndex + 3]);
         assertEquals("</dat:dataPackItem>", customerLines[trailerIndex + 4]);
-        assertEquals(customerLines.length, 11);
+        assertEquals(customerLines.length, 12);
     }
 
     @Test
@@ -85,12 +89,14 @@ public class SisCustomerItemWriterTest {
 
     @Test
     public void testGetItemImportId() throws Exception {
+        Customer customer = new Customer();
+        customer.setId(ID);
         String batchId = writer.getBatchImportId();
-        String firstItemId = writer.getItemImportId(null);
+        String firstItemId = writer.getItemImportId(customer);
         writer.itemWritten(null);
-        String secondItemId = writer.getItemImportId(null);
-        assertEquals(batchId + "_00000000", firstItemId);
-        assertEquals(batchId + "_00000001", secondItemId);
+        String secondItemId = writer.getItemImportId(customer);
+        assertEquals(batchId + "_00000000_" + ID, firstItemId);
+        assertEquals(batchId + "_00000001_" + ID, secondItemId);
     }
 
 }

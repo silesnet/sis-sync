@@ -28,10 +28,6 @@ public class SisCustomerTaskletTest {
     @Before
     public void setUp() throws Exception {
         tasklet = new SisCustomerTasklet();
-        File outFile = new File(SPS_CUSTOMERS_FILE);
-        if (outFile.exists()) {
-            outFile.delete();
-        }
     }
 
     @After
@@ -41,6 +37,10 @@ public class SisCustomerTaskletTest {
 
     @Test
     public void testExecute() throws Exception {
+        File outFile = new File(SPS_CUSTOMERS_FILE);
+        if (outFile.exists()) {
+            outFile.delete();
+        }
         SisCustomerTasklet sisTasklet = (SisCustomerTasklet) tasklet;
         sisTasklet.setInput(new ClassPathResource(SIS_CUSTOMERS_FILE));
         sisTasklet.setOutput(new FileSystemResource(SPS_CUSTOMERS_FILE));
@@ -48,6 +48,7 @@ public class SisCustomerTaskletTest {
         assertEquals(ExitStatus.FINISHED, tasklet.execute());
         assertTrue((new File(SPS_CUSTOMERS_FILE)).exists());
     }
+
     @Test
     public void testComposeCommand() throws Exception {
         SisCustomerTasklet sisTasklet = (SisCustomerTasklet) tasklet;

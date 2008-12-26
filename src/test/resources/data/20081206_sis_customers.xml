@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="Windows-1250"?>
+<dat:dataPack id="11E6F9FA0F6" ico="12345678"
+  application="SIS" version="1.1" note="Customers import."
+  xmlns:dat="http://www.stormware.cz/schema/data.xsd" xmlns:adb="http://www.stormware.cz/schema/addressbook.xsd"
+  xmlns:typ="http://www.stormware.cz/schema/type.xsd">
+  <dat:dataPackItem id="11E6F9FA0F6_00000000_123456" version="1.0">
+    <adb:addressbook version="1.4">
+      <adb:addressbookHeader>
+        <adb:identity>
+          <typ:address>
+            <typ:company>Test Customer 0</typ:company>
+            <typ:city>The City</typ:city>
+          </typ:address>
+        </adb:identity>
+      </adb:addressbookHeader>
+    </adb:addressbook>
+  </dat:dataPackItem>
+  <dat:dataPackItem id="11E6F9FA0F6_00000001_123457" version="1.0">
+    <adb:addressbook version="1.4">
+      <adb:addressbookHeader>
+        <adb:identity>
+          <typ:address>
+            <typ:company>Test Customer 1</typ:company>
+            <typ:city>The City</typ:city>
+          </typ:address>
+        </adb:identity>
+      </adb:addressbookHeader>
+    </adb:addressbook>
+  </dat:dataPackItem>
+</dat:dataPack>

@@ -25,7 +25,7 @@ public class SpsResCustomerItemReaderTest {
 
     @Before
     public void setUp() throws Exception {
-        input = new ClassPathResource("/data/20081206_sps_res_customers_small.xml");
+        input = new ClassPathResource("data/20081206_sps_customers.xml");
         reader = new SpsResCustomerItemReader();
         ((SpsResCustomerItemReader) reader).setResource(input);
     }
@@ -39,13 +39,16 @@ public class SpsResCustomerItemReaderTest {
     @Test
     public void testReadFirst() throws UnexpectedInputException, NoWorkFoundException, ParseException, Exception {
         Customer customer = (Customer) reader.read();
+        assertEquals(123456, customer.getId());
         assertEquals("62", customer.getSymbol());
         assertEquals("Test Customer 0", customer.getName());
     }
+
     @Test
     public void testReadSecond() throws UnexpectedInputException, NoWorkFoundException, ParseException, Exception {
         reader.read();
         Customer customer = (Customer) reader.read();
+        assertEquals(123457, customer.getId());
         assertEquals("63", customer.getSymbol());
         assertEquals("Test Customer 1", customer.getName());
     }

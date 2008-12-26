@@ -20,8 +20,7 @@ import org.springframework.core.io.Resource;
 import cz.silesnet.sis.sync.domain.Customer;
 
 /**
- * ItemReader implementation, that reads SPS generated customers import result
- * XML file.
+ * ItemReader implementation, that reads SPS generated customers import result XML file.
  * 
  * 
  * @author Richard Sikora
@@ -57,39 +56,42 @@ public class SpsResCustomerItemReader implements ItemReader {
     }
 
     /**
-     * Reads new Customer status from SPS import result XML by simple string
-     * comparison.
+     * Reads new Customer status from SPS import result XML by simple string comparison.
      * 
-     * @return customer with initialized name and symbol, null when end of file
-     *         reached
+     * @return customer with initialized name and symbol, null when end of file reached
      */
     public Object read() throws Exception, UnexpectedInputException, NoWorkFoundException, ParseException {
         if (!initialized) {
             initializeInput();
         }
-        Pattern detailsBegin = Pattern.compile("\\s*<rdc:producedDetails>\\s*");
-        Pattern detailsEnd = Pattern.compile("\\s*</rdc:producedDetails>\\s*");
-        Pattern idLine = Pattern.compile("\\s*<rdc:id>(\\d+)</rdc:id>\\s*");
-        Pattern codeLine = Pattern.compile("\\s*<rdc:code>(.+)</rdc:code>\\s*");
+        Pattern itemBegin = Pattern.compile("<rsp:responsePackItem.* id=\".+_\\d+_(\\d+)\".* state=\"ok\".*>");
+        Pattern itemEnd = Pattern.compile("</rsp:responsePackItem>");
+        Pattern idLine = Pattern.compile("<rdc:id>(\\d+)</rdc:id>");
+        Pattern codeLine = Pattern.compile("<rdc:code>(.+)</rdc:code>");
         String line = null;
         Customer customer = null;
-        Matcher matcher = null;
+        Matcher itemMatcher = null;
+        Matcher idMatcher = null;
+        Matcher codeMatcher = null;
         while ((line = input.readLine()) != null) {
-            if (detailsBegin.matcher(line).matches()) {
+            line = line.trim();
+            itemMatcher = itemBegin.matcher(line);
+            if (itemMatcher.matches()) {
                 customer = new Customer();
+                customer.setId(Long.valueOf(itemMatcher.group(1)));
                 continue;
             }
-            matcher = idLine.matcher(line);
-            if (matcher.matches()) {
-                customer.setSymbol(matcher.group(1));
+            idMatcher = idLine.matcher(line);
+            if (idMatcher.matches()) {
+                customer.setSymbol(idMatcher.group(1));
                 continue;
             }
-            matcher = codeLine.matcher(line);
-            if (matcher.matches()) {
-                customer.setName(matcher.group(1));
+            codeMatcher = codeLine.matcher(line);
+            if (codeMatcher.matches()) {
+                customer.setName(codeMatcher.group(1));
                 continue;
             }
-            if (detailsEnd.matcher(line).matches()) {
+            if (itemEnd.matcher(line).matches()) {
                 break;
             }
         }
@@ -98,6 +100,7 @@ public class SpsResCustomerItemReader implements ItemReader {
         }
         return customer;
     }
+
     /**
      * Does nothing in this ItemReader implementation.
      * 

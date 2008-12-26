@@ -34,7 +34,8 @@ public class SisCustomerItemWriter extends AbstractFileItemWritter {
     }
 
     protected String getItemImportId(Object item) {
-        return stamp + "_" + String.format("%08d", counter);
+        // return stamp + "_" + String.format("%08d", counter) + "_" + customer.getId();
+        return String.format("%s_%08d_%d", stamp, counter, ((Customer) item).getId());
     }
 
     private String getStamp() {
@@ -75,6 +76,7 @@ public class SisCustomerItemWriter extends AbstractFileItemWritter {
         xml.append("<typ:address>\n");
         // customer data
         xml.append("<typ:company>").append(customer.getName()).append("</typ:company>\n");
+        xml.append("<typ:city>").append(customer.getCity()).append("</typ:city>\n");
         // element trailer
         xml.append("</typ:address>\n");
         xml.append("</adb:identity>\n");

@@ -22,7 +22,7 @@ import cz.silesnet.sis.sync.item.writer.SpsResCustomerItemWriter;
 public class SpsResCustomerItemWriterTest {
 
     // FIXME target/test-outputs/ has to exist! do it somehow
-    private static final String RESOURCE_NAME = "target/20081206_sps_res_customers_small.txt";
+    private static final String RESOURCE_NAME = "target/sps_res_customers.TEMP.txt";
     private Resource output;
     private ItemWriter writer;
 

@@ -1,55 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-  <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-    p:location="batch.properties"
-    p:systemPropertiesModeName="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+		p:systemPropertiesModeName="SYSTEM_PROPERTIES_MODE_OVERRIDE">
+		<property name="locations">
+			<list>
+				<value>batch.properties</value>
+				<value>jbdc.properties</value>
+			</list>
+		</property>
+	</bean>
 
-  <bean id="jobLancher"
-    class="org.springframework.batch.core.launch.support.SimpleJobLauncher"
-    p:jobRepository-ref="jobRepository" />
+	<bean id="jobLancher"
+		class="org.springframework.batch.core.launch.support.SimpleJobLauncher"
+		p:jobRepository-ref="jobRepository" />
 
-  <bean id="jobRepository"
-    class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean"
-    p:transactionManager-ref="transactionManager" />
+	<bean id="jobRepository"
+		class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean"
+		p:transactionManager-ref="transactionManager" />
 
-  <bean id="transactionManager"
-    class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
+	<bean id="transactionManager"
+		class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
 
-  <bean id="sisCustomerJob" class="org.springframework.batch.core.job.SimpleJob"
-    p:jobRepository-ref="jobRepository">
-    <property name="steps">
-      <list>
-        <ref bean="sisCustomerTaskletStep" />
-        <ref bean="spsCustomerIdStep" />
-      </list>
-    </property>
-  </bean>
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		p:driverClassName="${jdbc.driver}" p:url="${jdbc.url}" p:username="${jdbc.user}"
+		p:password="${jdbc.password}" />
 
-  <bean id="sisCustomerTaskletStep"
-    class="org.springframework.batch.core.step.tasklet.TaskletStep"
-    p:jobRepository-ref="jobRepository">
-    <property name="tasklet">
-      <bean class="cz.silesnet.sis.sync.tasklet.SisCustomerTasklet"
-        p:input="${sis.customers.file}"
-        p:output="${sps.customers.file}"
-        p:spsFolder="${sps.folder}"/>
-    </property>
-  </bean>
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"
+		p:dataSource-ref="dataSource" />
 
-  <bean id="spsCustomerIdStep"
-    class="org.springframework.batch.core.step.item.SimpleStepFactoryBean"
-    p:transactionManager-ref="transactionManager" p:jobRepository-ref="jobRepository">
-    <property name="itemReader">
-      <bean class="cz.silesnet.sis.sync.item.reader.SpsResCustomerItemReader"
-        p:resource="${sps.customers.file}" />
-    </property>
-    <property name="itemWriter">
-      <bean class="cz.silesnet.sis.sync.item.writer.SpsResCustomerItemWriter"
-        p:resource="${sis.customers.update.file}" />
-    </property>
-  </bean>
+	<bean id="sisCustomerJob" class="org.springframework.batch.core.job.SimpleJob"
+		p:jobRepository-ref="jobRepository">
+		<property name="steps">
+			<list>
+				<ref bean="sisCustomerStep" />
+				<ref bean="sisCustomerSpsTaskletStep" />
+				<ref bean="spsCustomerIdStep" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="sisCustomerStep"
+		class="org.springframework.batch.core.step.item.SimpleStepFactoryBean"
+		p:transactionManager-ref="transactionManager" p:jobRepository-ref="jobRepository">
+		<property name="itemReader">
+			<bean class="org.springframework.batch.item.database.JdbcCursorItemReader"
+				p:dataSource-ref="dataSource">
+				<property name="mapper">
+					<bean class="cz.silesnet.sis.sync.mapping.SisCustomerMapper" />
+				</property>
+				<property name="sql">
+					<value><![CDATA[
+					   SELECT * FROM customers
+					     WHERE synchronized IS NULL
+					       OR synchronized <= updated
+					]]></value>
+				</property>
+			</bean>
+		</property>
+		<property name="itemWriter">
+			<bean class="cz.silesnet.sis.sync.item.writer.SisCustomerItemWriter"
+				p:ico="12345678" p:resource="${sis.customers.file}" />
+		</property>
+	</bean>
+
+	<bean id="sisCustomerSpsTaskletStep" class="org.springframework.batch.core.step.tasklet.TaskletStep"
+		p:jobRepository-ref="jobRepository">
+		<property name="tasklet">
+			<bean class="cz.silesnet.sis.sync.tasklet.SisCustomerTasklet"
+				p:input="${sis.customers.file}" p:output="${sps.customers.file}"
+				p:spsFolder="${sps.folder}" />
+		</property>
+	</bean>
+
+	<bean id="spsCustomerIdStep"
+		class="org.springframework.batch.core.step.item.SimpleStepFactoryBean"
+		p:transactionManager-ref="transactionManager" p:jobRepository-ref="jobRepository">
+		<property name="itemReader">
+			<bean class="cz.silesnet.sis.sync.item.reader.SpsResCustomerItemReader"
+				p:resource="${sps.customers.file}" />
+		</property>
+		<property name="itemWriter">
+			<bean
+				class="org.springframework.batch.item.database.BatchSqlUpdateItemWriter"
+				p:jdbcTemplate-ref="jdbcTemplate">
+				<property name="itemPreparedStatementSetter">
+					<bean
+						class="cz.silesnet.sis.sync.item.writer.CustomerUpdatePreparedStatementSetter" />
+				</property>
+				<property name="sql">
+					<value><![CDATA[
+                       UPDATE customers
+                         SET symbol = ?,
+                           synchronized = ?
+                         WHERE id = ?
+                    ]]></value>
+				</property>
+			</bean>
+		</property>
+	</bean>
 
 </beans>
