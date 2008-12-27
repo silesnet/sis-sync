@@ -12,12 +12,12 @@ import org.springframework.core.io.Resource;
 import cz.silesnet.sis.sync.domain.Customer;
 
 /**
- * Concrete implementation of #{@link AbstractFileItemWritter} that writes customer data to SPS XML import file.
+ * Concrete implementation of #{@link AbstractFileItemWriter} that writes customer data to SPS XML import file.
  * 
  * @author sikorric
  * 
  */
-public class SisCustomerItemWriter extends AbstractFileItemWritter {
+public class SisCustomerItemWriter extends AbstractFileItemWriter {
 
     private static Log log = LogFactory.getLog(SisCustomerItemWriter.class);
 

@@ -19,13 +19,13 @@ import org.springframework.core.io.Resource;
  * 
  * @author Richard Sikora
  */
-public abstract class AbstractFileItemWritter extends AbstractItemStreamItemWriter {
+public abstract class AbstractFileItemWriter extends AbstractItemStreamItemWriter {
 
     private Resource resource;
     private BufferedWriter output;
     private boolean initialized = false;
 
-    public AbstractFileItemWritter() {
+    public AbstractFileItemWriter() {
         super();
     }
 

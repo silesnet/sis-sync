@@ -11,20 +11,20 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.io.FileSystemResource;
 
-import cz.silesnet.sis.sync.item.writer.AbstractFileItemWritter;
+import cz.silesnet.sis.sync.item.writer.AbstractFileItemWriter;
 
-public class AbstractFileItemWritterTest {
+public class AbstractFileItemWriterTest {
 
     private static final String RESOURCE_NAME = "target/abstract_file_itemwriter.TEMP.txt";
     private static final String ITEM = "ITEM LINE";
     private static final String HEADER = "HEADER";
     private static final String TRAILER = "TRAILER";
-    private AbstractFileItemWritter writer;
+    private AbstractFileItemWriter writer;
     private boolean itemWritten;
 
     @Before
     public void setUp() throws Exception {
-        writer = new AbstractFileItemWritter() {
+        writer = new AbstractFileItemWriter() {
 
             @Override
             protected String headerToString() {
@@ -58,7 +58,7 @@ public class AbstractFileItemWritterTest {
 
     @Test
     public void testWriteNulls() throws Exception {
-        writer = new AbstractFileItemWritter() {
+        writer = new AbstractFileItemWriter() {
 
             @Override
             protected String itemToString(Object item) {
