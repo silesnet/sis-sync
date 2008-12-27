@@ -34,7 +34,6 @@ public class SisCustomerItemWriter extends AbstractFileItemWriter {
     }
 
     protected String getItemImportId(Object item) {
-        // return stamp + "_" + String.format("%08d", counter) + "_" + customer.getId();
         return String.format("%s_%08d_%d", stamp, counter, ((Customer) item).getId());
     }
 
