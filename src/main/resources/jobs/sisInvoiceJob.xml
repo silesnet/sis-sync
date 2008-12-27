@@ -52,18 +52,23 @@
 				class="org.springframework.batch.item.database.support.SingleColumnJdbcKeyCollector"
 				p:jdbcTemplate-ref="jdbcTemplate">
 				<property name="keyMapper">
-					<bean class="cz.silesnet.sis.sync.mapping.InvoiceRowMapper" />
+					<bean class="cz.silesnet.sis.sync.mapping.InvoiceRowMapper">
+						<property name="dao">
+							<bean class="cz.silesnet.sis.sync.dao.impl.JdbcInvoiceDao"
+								p:template-ref="jdbcTemplate" />
+						</property>
+					</bean>
 				</property>
 				<property name="sql">
 					<value><![CDATA[
-                       SELECT * FROM invoices
+                       SELECT id FROM invoices
                          WHERE synchronized IS NULL
                          ORDER BY id
                     ]]></value>
 				</property>
 				<property name="restartSql">
 					<value><![CDATA[
-                       SELECT * FROM invoices
+                       SELECT id FROM invoices
                          WHERE synchronized IS NULL
                            AND id > ?
                          ORDER BY id
