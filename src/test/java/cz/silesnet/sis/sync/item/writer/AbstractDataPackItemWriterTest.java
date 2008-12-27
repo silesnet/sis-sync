@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -11,15 +13,19 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import cz.silesnet.sis.sync.domain.ItemIdentity;
+
 public class AbstractDataPackItemWriterTest {
 
     private static final Log log = LogFactory.getLog(AbstractDataPackItemWriterTest.class);
     private static final int MAX_ID_LENGTH = 64;
     private static final long ID = 1234L;
+    private static final long ID2 = 1235L;
     private static final String ICO = "12345678";
     private static final String NAME_SPACE_1 = "NAME SPACE 1";
     private static final String NAME_SPACE_2 = "NAME SPACE 2";
-    protected static final long ITEMS_WRITTEN = 5;
+    private static final long ITEMS_WRITTEN = 5;
+    private static final String ITEM = "<item />";
     private AbstractDataPackItemWriter itemWriter;
 
     @Before
@@ -52,17 +58,64 @@ public class AbstractDataPackItemWriterTest {
 
     @Test
     public final void testHeaderLines() {
-        fail("Not yet implemented");
-    }
-
-    @Test
-    public final void testTrailerLines() {
-        fail("Not yet implemented");
+        String[] headerLines = itemWriter.headerLines();
+        log.debug(headerLines[0]);
+        assertEquals("<?xml version=\"1.0\" encoding=\"" + AbstractDataPackItemWriter.XML_ENCODING + "\"?>",
+                headerLines[0]);
+        log.debug(headerLines[1]);
+        Pattern pattern = Pattern
+                .compile("<dat:dataPack id=\"(.+?)\" ico=\"(.+?)\" application=\"(.+?)\" version=\"(.+?)\" note=\"(.+?)\"");
+        Matcher matcher = pattern.matcher(headerLines[1]);
+        assertTrue(matcher.matches());
+        assertEquals(itemWriter.getDataPackId(), matcher.group(1));
+        assertEquals(ICO, matcher.group(2));
+        assertEquals(AbstractDataPackItemWriter.DATA_PACK_APPLICATION, matcher.group(3));
+        assertEquals(AbstractDataPackItemWriter.DATA_PACK_VERSION, matcher.group(4));
+        assertEquals(AbstractDataPackItemWriter.DATA_PACK_NOTE, matcher.group(5));
+        log.debug(headerLines[2]);
+        assertEquals("xmlns:dat=\"http://www.stormware.cz/schema/data.xsd\"", headerLines[2]);
+        log.debug(headerLines[3]);
+        assertEquals("xmlns:typ=\"http://www.stormware.cz/schema/type.xsd\"", headerLines[3]);
+        log.debug(headerLines[4]);
+        assertEquals(NAME_SPACE_1, headerLines[4]);
+        log.debug(headerLines[5]);
+        assertEquals(NAME_SPACE_2, headerLines[5]);
+        log.debug(headerLines[6]);
+        assertEquals(">", headerLines[6]);
+        assertEquals(7, headerLines.length);
     }
 
     @Test
     public final void testItemLines() {
-        fail("Not yet implemented");
+        // initialize data pack id
+        itemWriter.headerLines();
+        String[] itemLines = itemWriter.itemLines(new ItemIdentity() {
+            @Override
+            public long getId() {
+                return ID;
+            }
+
+            @Override
+            public String toString() {
+                return ITEM;
+            }
+        });
+        assertEquals("<dat:dataPackItem id=\"" + itemWriter.getDataPackItemId(ID) + "\" version=\""
+                + AbstractDataPackItemWriter.DATA_PACK_ITEM_VERSION + "\">", itemLines[0]);
+        log.debug(itemLines[0]);
+        assertEquals(ITEM, itemLines[1]);
+        log.debug(itemLines[1]);
+        assertEquals("</dat:dataPackItem>", itemLines[2]);
+        log.debug(itemLines[2]);
+        assertEquals(3, itemLines.length);
+    }
+
+    @Test
+    public final void testTrailerLines() {
+        String[] trailerLines = itemWriter.trailerLines();
+        assertEquals("</dat:dataPack>", trailerLines[0]);
+        log.debug(trailerLines[0]);
+        assertEquals(1, trailerLines.length);
     }
 
     @Test
@@ -81,13 +134,29 @@ public class AbstractDataPackItemWriterTest {
     }
 
     @Test
-    public final void testGetDataPackItemId() {
+    public final void testGetDataPackItemIdHashCode() {
         itemWriter.headerLines();
         String dataPackId = itemWriter.getDataPackId();
         String itemsWritten = itemWriter.getItemsWrittenString();
         String dataPackItemId = itemWriter.getDataPackItemId(ID);
         log.debug(dataPackItemId);
         assertEquals(dataPackId + "_" + itemsWritten + "_" + ID, dataPackItemId);
+        assertTrue(dataPackItemId.length() <= MAX_ID_LENGTH);
+    }
+
+    @Test
+    public final void testGetDataPackItemIdIdentity() {
+        itemWriter.headerLines();
+        String dataPackId = itemWriter.getDataPackId();
+        String itemsWritten = itemWriter.getItemsWrittenString();
+        String dataPackItemId = itemWriter.getDataPackItemId(new ItemIdentity() {
+            @Override
+            public long getId() {
+                return ID2;
+            }
+        });
+        log.debug(dataPackItemId);
+        assertEquals(dataPackId + "_" + itemsWritten + "_" + ID2, dataPackItemId);
         assertTrue(dataPackItemId.length() <= MAX_ID_LENGTH);
     }
 

@@ -13,7 +13,7 @@ import edu.emory.mathcs.backport.java.util.Collections;
  * 
  * @author Richard Sikora
  */
-public class Invoice {
+public class Invoice implements ItemIdentity {
 
     private long id;
     private long customerId;
@@ -38,6 +38,7 @@ public class Invoice {
         return net;
     }
 
+    @Override
     public long getId() {
         return id;
     }

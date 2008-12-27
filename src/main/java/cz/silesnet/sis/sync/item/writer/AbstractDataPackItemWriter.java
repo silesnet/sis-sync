@@ -5,7 +5,11 @@ package cz.silesnet.sis.sync.item.writer;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+
+import cz.silesnet.sis.sync.domain.ItemIdentity;
 
 /**
  * @author sikorric
@@ -13,11 +17,16 @@ import java.util.Date;
  */
 public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFileItemWriter {
 
+    public static final String XML_ENCODING = "Windows-1250";
+    public static final String DATA_PACK_APPLICATION = "SIS";
+    public static final String DATA_PACK_VERSION = "1.0";
+    public static final String DATA_PACK_NOTE = "SIS import.";
+    public static final String DATA_PACK_ITEM_VERSION = "1.0";
     public static final DateFormat DATA_PACK_ID_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
     public static final int ITEMS_WRITTEN_LENGHT = 10;
 
-    private String ico;
     private String dataPackId;
+    private String ico;
 
     public AbstractDataPackItemWriter() {
         super();
@@ -35,26 +44,48 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
         return String.format("%0" + ITEMS_WRITTEN_LENGHT + "d", getItemsWritten());
     }
 
-    protected String getDataPackItemId(long id) {
+    protected String getDataPackItemId(Object item) {
+        long id = 0;
+        if (item instanceof ItemIdentity) {
+            id = ((ItemIdentity) item).getId();
+        } else {
+            id = item.hashCode();
+        }
         return String.format("%s_%s_%d", getDataPackId(), getItemsWrittenString(), id);
     }
 
     @Override
     protected String[] headerLines() {
         dataPackId = DATA_PACK_ID_DATE_FORMAT.format(new Date());
-        return super.headerLines();
+        ArrayList<String> lines = new ArrayList<String>();
+        lines.add("<?xml version=\"1.0\" encoding=\"" + XML_ENCODING + "\"?>");
+        StringBuffer dataPackBuffer = new StringBuffer("<dat:dataPack ");
+        dataPackBuffer.append("id=\"" + getDataPackId() + "\" ");
+        dataPackBuffer.append("ico=\"" + ico + "\" ");
+        dataPackBuffer.append("application=\"" + DATA_PACK_APPLICATION + "\" ");
+        dataPackBuffer.append("version=\"" + DATA_PACK_VERSION + "\" ");
+        dataPackBuffer.append("note=\"" + DATA_PACK_NOTE + "\"");
+        lines.add(dataPackBuffer.toString());
+        lines.add("xmlns:dat=\"http://www.stormware.cz/schema/data.xsd\"");
+        lines.add("xmlns:typ=\"http://www.stormware.cz/schema/type.xsd\"");
+        lines.addAll(Arrays.asList(nameSpaceLines()));
+        lines.add(">");
+        return lines.toArray(new String[] {});
     }
 
     @Override
     protected String[] trailerLines() {
-        // TODO Auto-generated method stub
-        return super.trailerLines();
+        return new String[] { "</dat:dataPack>" };
     }
 
     @Override
-    protected String[] itemLines(Object item) {
-        // TODO Auto-generated method stub
-        return dataPackItemLines(item);
+    protected final String[] itemLines(Object item) {
+        ArrayList<String> lines = new ArrayList<String>();
+        lines.add("<dat:dataPackItem id=\"" + getDataPackItemId(item) + "\" version=\"" + DATA_PACK_ITEM_VERSION
+                + "\">");
+        lines.addAll(Arrays.asList(dataPackItemLines(item)));
+        lines.add("</dat:dataPackItem>");
+        return lines.toArray(new String[] {});
     }
 
     protected abstract String[] nameSpaceLines();

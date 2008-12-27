@@ -8,7 +8,7 @@ package cz.silesnet.sis.sync.domain;
  * 
  * @author Richard Sikora
  */
-public class Customer {
+public class Customer implements ItemIdentity {
 
     private long id;
     private String name;
@@ -16,9 +16,9 @@ public class Customer {
     private String city;
 
     public Customer() {
-        // TODO Auto-generated constructor stub
     }
 
+    @Override
     public long getId() {
         return id;
     }
