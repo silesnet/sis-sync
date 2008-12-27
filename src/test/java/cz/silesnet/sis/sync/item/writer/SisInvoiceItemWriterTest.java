@@ -4,8 +4,6 @@ import org.junit.After;
 import org.junit.Before;
 
 public class SisInvoiceItemWriterTest {
-    private static final long ID = 1234L;
-    private static final String ICO = "12345678";
     private SisInvoiceItemWriter writer;
 
     @Before

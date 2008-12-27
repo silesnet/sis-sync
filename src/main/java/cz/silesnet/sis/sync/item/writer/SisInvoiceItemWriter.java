@@ -7,26 +7,20 @@ package cz.silesnet.sis.sync.item.writer;
  * @author sikorric
  * 
  */
-public class SisInvoiceItemWriter extends AbstractFileItemWriter {
+public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
 
     public SisInvoiceItemWriter() {
         super();
     }
 
     @Override
-    protected String headerToString() {
+    protected String[] dataPackItemLines(Object item) {
         // TODO Auto-generated method stub
-        return super.headerToString();
+        return null;
     }
 
     @Override
-    protected String trailerToString() {
-        // TODO Auto-generated method stub
-        return super.trailerToString();
-    }
-
-    @Override
-    protected String itemToString(Object item) {
+    protected String[] nameSpaceLines() {
         // TODO Auto-generated method stub
         return null;
     }
