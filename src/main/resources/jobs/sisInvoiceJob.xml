@@ -36,12 +36,6 @@
 		p:jobRepository-ref="jobRepository">
 		<property name="steps">
 			<list>
-				<!--
-                <ref bean="sisInvoiceStep" />
-					<ref bean="sisCustomerStep" /> <ref
-					bean="sisCustomerSpsTaskletStep" /> <ref bean="spsCustomerIdStep"
-					/>
-				-->
 			</list>
 		</property>
 	</bean>
@@ -51,39 +45,32 @@
 		p:jobRepository-ref="jobRepository" p:transactionManager-ref="transactionManager">
 	</bean>
 
-	<!--
-		<bean id="sisCustomerStep"
-		class="org.springframework.batch.core.step.item.SimpleStepFactoryBean"
-		p:transactionManager-ref="transactionManager"
-		p:jobRepository-ref="jobRepository"> <property name="itemReader">
-		<bean
-		class="org.springframework.batch.item.database.JdbcCursorItemReader"
-		p:dataSource-ref="dataSource"> <property name="mapper"> <bean
-		class="cz.silesnet.sis.sync.mapping.SisCustomerMapper" /> </property>
-		<property name="sql"> <value><![CDATA[ SELECT * FROM customers WHERE
-		synchronized IS NULL OR synchronized <= updated ]]></value>
-		</property> </bean> </property> <property name="itemWriter"> <bean
-		class="cz.silesnet.sis.sync.item.writer.SisCustomerItemWriter"
-		p:ico="12345678" p:resource="${sis.customers.file}" /> </property>
-		</bean> <bean id="sisCustomerSpsTaskletStep"
-		class="org.springframework.batch.core.step.tasklet.TaskletStep"
-		p:jobRepository-ref="jobRepository"> <property name="tasklet"> <bean
-		class="cz.silesnet.sis.sync.tasklet.SisCustomerTasklet"
-		p:input="${sis.customers.file}" p:output="${sps.customers.file}"
-		p:spsFolder="${sps.folder}" /> </property> </bean> <bean
-		id="spsCustomerIdStep"
-		class="org.springframework.batch.core.step.item.SimpleStepFactoryBean"
-		p:transactionManager-ref="transactionManager"
-		p:jobRepository-ref="jobRepository"> <property name="itemReader">
-		<bean class="cz.silesnet.sis.sync.item.reader.SpsCustomerItemReader"
-		p:resource="${sps.customers.file}" /> </property> <property
-		name="itemWriter"> <bean
-		class="org.springframework.batch.item.database.BatchSqlUpdateItemWriter"
-		p:jdbcTemplate-ref="jdbcTemplate"> <property
-		name="itemPreparedStatementSetter"> <bean
-		class="cz.silesnet.sis.sync.item.writer.CustomerUpdatePreparedStatementSetter"
-		/> </property> <property name="sql"> <value><![CDATA[ UPDATE customers
-		SET symbol = ?, synchronized = ? WHERE id = ? ]]></value> </property>
-		</bean> </property> </bean>
-	-->
+	<bean id="invoiceItemReader"
+		class="org.springframework.batch.item.database.DrivingQueryItemReader">
+		<property name="keyCollector">
+			<bean
+				class="org.springframework.batch.item.database.support.SingleColumnJdbcKeyCollector"
+				p:jdbcTemplate-ref="jdbcTemplate">
+				<property name="keyMapper">
+					<bean class="cz.silesnet.sis.sync.mapping.InvoiceRowMapper" />
+				</property>
+				<property name="sql">
+					<value><![CDATA[
+                       SELECT * FROM invoices
+                         WHERE synchronized IS NULL
+                         ORDER BY id
+                    ]]></value>
+				</property>
+				<property name="restartSql">
+					<value><![CDATA[
+                       SELECT * FROM invoices
+                         WHERE synchronized IS NULL
+                           AND id > ?
+                         ORDER BY id
+                    ]]></value>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
 </beans>
