@@ -14,7 +14,8 @@ import org.springframework.batch.item.file.mapping.PassThroughFieldSetMapper;
 import org.springframework.core.io.Resource;
 
 /**
- * Abstract implementation of file ItemWriter with header and trailer. Delegates to {@link FlatFileItemWriter}.
+ * Abstract implementation of file ItemWriter with header and trailer. Delegates
+ * to {@link FlatFileItemWriter}.
  * 
  * @author sikorric
  * 
@@ -35,32 +36,29 @@ public abstract class AbstractHeaderTrailerFileItemWriter implements ItemWriter,
         itemWriter.setResource(resource);
     }
 
-    @Override
     public final void open(ExecutionContext executionContext) throws ItemStreamException {
         itemWriter.open(executionContext);
         writeLines(headerLines());
         itemsWritten = 0;
     }
 
-    @Override
     public final void close(ExecutionContext executionContext) throws ItemStreamException {
         writeLines(trailerLines());
         itemWriter.flush();
         itemWriter.close(executionContext);
     }
 
-    @Override
     public final void write(Object item) throws Exception {
         writeLines(itemLines(item));
         itemsWritten++;
     }
 
     protected String[] headerLines() {
-        return new String[] {};
+        return new String[]{};
     }
 
     protected String[] trailerLines() {
-        return new String[] {};
+        return new String[]{};
     }
 
     protected abstract String[] itemLines(Object item);
@@ -79,17 +77,14 @@ public abstract class AbstractHeaderTrailerFileItemWriter implements ItemWriter,
         }
     }
 
-    @Override
     public final void clear() throws ClearFailedException {
         itemWriter.clear();
     }
 
-    @Override
     public final void flush() throws FlushFailedException {
         itemWriter.flush();
     }
 
-    @Override
     public final void update(ExecutionContext executionContext) throws ItemStreamException {
         itemWriter.update(executionContext);
     }

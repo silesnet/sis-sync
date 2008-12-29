@@ -24,10 +24,9 @@ public class InvoiceRowMapper implements RowMapper {
     }
 
     /**
-     * RowMapper that expect only one column in ResultSet containing invoice id. Uses {@link #InvoiceDao.find()} to
-     * retrieve the invoice from database.
+     * RowMapper that expect only one column in ResultSet containing invoice id.
+     * Uses {@link #InvoiceDao.find()} to retrieve the invoice from database.
      */
-    @Override
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
         return dao.find(rs.getLong(ID_COLUMN));
     }

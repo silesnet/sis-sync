@@ -23,7 +23,6 @@ public class CustomerRowMapper implements RowMapper {
     public static final String SYMBOL_COLUMN = "symbol";
     public static final String CITY_COLUMN = "city";
 
-    @Override
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
         Customer customer = new Customer();
         customer.setId(rs.getLong(ID_COLUMN));

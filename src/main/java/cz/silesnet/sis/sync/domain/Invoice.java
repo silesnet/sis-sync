@@ -9,7 +9,8 @@ import java.util.List;
 import edu.emory.mathcs.backport.java.util.Collections;
 
 /**
- * Invoice data object with no logic. It contains only fields needed for synchronization.
+ * Invoice data object with no logic. It contains only fields needed for
+ * synchronization.
  * 
  * @author Richard Sikora
  */
@@ -38,7 +39,6 @@ public class Invoice implements ItemIdentity {
         return net;
     }
 
-    @Override
     public long getId() {
         return id;
     }

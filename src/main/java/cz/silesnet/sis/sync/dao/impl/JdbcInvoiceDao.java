@@ -28,11 +28,10 @@ public class JdbcInvoiceDao implements InvoiceDao {
         this.template = template;
     }
 
-    @Override
     public Invoice find(long id) {
         Invoice invoice = null;
         try {
-            invoice = (Invoice) template.queryForObject(INVOICE_SQL, new Object[] { id }, new InvoiceRowMapper());
+            invoice = (Invoice) template.queryForObject(INVOICE_SQL, new Object[]{id}, new InvoiceRowMapper());
         } catch (DataAccessException e) {
             throw new IllegalArgumentException(e);
         }
@@ -40,7 +39,8 @@ public class JdbcInvoiceDao implements InvoiceDao {
     }
 
     /**
-     * Maps result set to Invoice object. Uses JdbcTemplate to extract invoice items.
+     * Maps result set to Invoice object. Uses JdbcTemplate to extract invoice
+     * items.
      * 
      * @author sikorric
      * 
@@ -54,20 +54,20 @@ public class JdbcInvoiceDao implements InvoiceDao {
         private static final String NET_COLUMN = "net";
 
         /**
-         * Maps result set to Invoice object. Retrieves invoice items and associates them with the invoice.
+         * Maps result set to Invoice object. Retrieves invoice items and
+         * associates them with the invoice.
          */
-        @Override
         public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
             final Invoice invoice = new Invoice();
             invoice.setId(rs.getLong(ID_COLUMN));
             invoice.setNumber(rs.getString(NUMBER_COLUMN));
             // retrieve invoice items from database by invoice_id
-            template.query(ITEMS_SQL, new Object[] { rs.getLong(ID_COLUMN) }, new RowMapper() {
-                @Override
+            template.query(ITEMS_SQL, new Object[]{rs.getLong(ID_COLUMN)}, new RowMapper() {
                 public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
                     // result set contains row from invoice items table
                     invoice.new Item(rs.getString(NAME_COLUMN), rs.getFloat(NET_COLUMN));
-                    // just creating new Item automatically associates it with the invoice
+                    // just creating new Item automatically associates it with
+                    // the invoice
                     // result is not read, null can be returned
                     return null;
                 }

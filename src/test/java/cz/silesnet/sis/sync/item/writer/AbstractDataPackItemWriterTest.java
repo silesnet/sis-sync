@@ -34,12 +34,12 @@ public class AbstractDataPackItemWriterTest {
 
             @Override
             protected String[] dataPackItemLines(Object item) {
-                return new String[] { item.toString() };
+                return new String[]{item.toString()};
             }
 
             @Override
             protected String[] nameSpaceLines() {
-                return new String[] { NAME_SPACE_1, NAME_SPACE_2 };
+                return new String[]{NAME_SPACE_1, NAME_SPACE_2};
             }
 
             @Override
@@ -90,12 +90,10 @@ public class AbstractDataPackItemWriterTest {
         // initialize data pack id
         itemWriter.headerLines();
         String[] itemLines = itemWriter.itemLines(new ItemIdentity() {
-            @Override
             public long getId() {
                 return ID;
             }
 
-            @Override
             public String toString() {
                 return ITEM;
             }
@@ -150,7 +148,6 @@ public class AbstractDataPackItemWriterTest {
         String dataPackId = itemWriter.getDataPackId();
         String itemsWritten = itemWriter.getItemsWrittenString();
         String dataPackItemId = itemWriter.getDataPackItemId(new ItemIdentity() {
-            @Override
             public long getId() {
                 return ID2;
             }

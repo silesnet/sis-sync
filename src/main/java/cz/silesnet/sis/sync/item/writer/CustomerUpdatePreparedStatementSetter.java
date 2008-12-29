@@ -18,7 +18,6 @@ import cz.silesnet.sis.sync.domain.Customer;
  */
 public class CustomerUpdatePreparedStatementSetter implements ItemPreparedStatementSetter {
 
-    @Override
     public void setValues(Object item, PreparedStatement ps) throws SQLException {
         Customer customer = (Customer) item;
         ps.setString(1, customer.getSymbol());
