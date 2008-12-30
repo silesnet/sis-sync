@@ -3,6 +3,8 @@
  */
 package cz.silesnet.sis.sync.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +18,9 @@ import edu.emory.mathcs.backport.java.util.Collections;
  */
 public class Invoice implements ItemIdentity {
 
+    public static final int VAT_PERCENT = 19;
+    private static final BigDecimal VAT_BIG_DECIMAL = BigDecimal.valueOf(VAT_PERCENT, 2);
+
     private long id;
     private long customerId;
     private String number;
@@ -28,6 +33,18 @@ public class Invoice implements ItemIdentity {
         if (items.add(item)) {
             net += item.getNet();
         }
+    }
+
+    public float getVat() {
+        return calculateVat(net);
+    }
+
+    public float getBrt() {
+        return calculateBrt(net);
+    }
+
+    public float getRounding() {
+        return calculateRounding(net);
     }
 
     @SuppressWarnings("unchecked")
@@ -74,6 +91,14 @@ public class Invoice implements ItemIdentity {
             addItem(this);
         }
 
+        public float getVat() {
+            return calculateVat(net);
+        }
+
+        public float getBrt() {
+            return calculateBrt(net);
+        }
+
         public String getName() {
             return name;
         }
@@ -89,5 +114,19 @@ public class Invoice implements ItemIdentity {
         public void setNet(float net) {
             this.net = net;
         }
+    }
+
+    protected float calculateVat(float net) {
+        BigDecimal vB = BigDecimal.valueOf(net).multiply(VAT_BIG_DECIMAL);
+        return vB.setScale(2, RoundingMode.HALF_UP).floatValue();
+    }
+    protected float calculateBrt(float net) {
+        return net + calculateVat(net);
+    }
+
+    protected float calculateRounding(float net) {
+        BigDecimal bB = BigDecimal.valueOf(calculateBrt(net));
+        BigDecimal rB = bB.setScale(0, RoundingMode.HALF_UP).subtract(bB);
+        return rB.setScale(2, RoundingMode.HALF_UP).floatValue();
     }
 }

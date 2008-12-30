@@ -30,7 +30,7 @@ public class JdbcInvoiceDaoTest extends AbstractDependencyInjectionSpringContext
 
     @Override
     protected String[] getConfigLocations() {
-        return new String[] { "classpath:jobs/sisInvoiceJob.xml" };
+        return new String[]{"classpath:jobs/sisInvoiceJob.xml"};
     }
 
     @Override
@@ -52,6 +52,7 @@ public class JdbcInvoiceDaoTest extends AbstractDependencyInjectionSpringContext
         Invoice invoice = dao.find(ID);
         assertEquals(ID, invoice.getId());
         assertEquals("200800005", invoice.getNumber());
+        assertEquals(3, invoice.getCustomerId());
         assertEquals(2, invoice.getItems().size());
         assertEquals(new BigDecimal("130.0"), BigDecimal.valueOf((double) invoice.getNet()));
     }

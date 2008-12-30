@@ -49,6 +49,7 @@ public class JdbcInvoiceDao implements InvoiceDao {
 
         private static final String ITEMS_SQL = "SELECT * FROM items WHERE invoice_id = ?";
         private static final String ID_COLUMN = "id";
+        private static final String CUSTOMER_ID_COLUMN = "customer_id";
         private static final String NUMBER_COLUMN = "number";
         private static final String NAME_COLUMN = "name";
         private static final String NET_COLUMN = "net";
@@ -61,6 +62,7 @@ public class JdbcInvoiceDao implements InvoiceDao {
             final Invoice invoice = new Invoice();
             invoice.setId(rs.getLong(ID_COLUMN));
             invoice.setNumber(rs.getString(NUMBER_COLUMN));
+            invoice.setCustomerId(rs.getLong(CUSTOMER_ID_COLUMN));
             // retrieve invoice items from database by invoice_id
             template.query(ITEMS_SQL, new Object[]{rs.getLong(ID_COLUMN)}, new RowMapper() {
                 public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
