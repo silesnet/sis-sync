@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cz.silesnet.sis.sync.domain.Invoice;
+import cz.silesnet.sis.sync.domain.Invoice.Item;
 
 /**
  * Writes SIS invoice in DataPack XML format to the output file.
@@ -24,16 +25,16 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
     }
 
     /**
-     * Converts Invoice into XML lines. It will be content of <dataPackItem>
-     * element.
+     * Converts Invoice into XML lines. It will be content of <dataPackItem> element.
      */
     @Override
-    protected String[] dataPackItemLines(Object item) {
-        if (!(item instanceof Invoice))
+    protected String[] dataPackItemLines(Object dataPackItem) {
+        if (!(dataPackItem instanceof Invoice))
             throw new IllegalArgumentException("Item has to be an Invoice.");
-        Invoice invoice = (Invoice) item;
+        Invoice invoice = (Invoice) dataPackItem;
         List<String> lines = new ArrayList<String>();
         lines.add("<inv:invoice version=\"" + ELEMENT_INVOICE_VERSION + "\">");
+        // Header
         lines.add("<inv:invoiceHeader>");
         lines.add("<inv:invoiceType>issuedInvoice</inv:invoiceType>");
         lines.add("<inv:number>");
@@ -42,18 +43,49 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
         lines.add("<inv:partnerIdentity>");
         lines.add("<typ:id>" + invoice.getCustomerId() + "</typ:id>");
         lines.add("</inv:partnerIdentity>");
-        // lines.add("");
-
-        return lines.toArray(new String[]{});
+        lines.add("</inv:invoiceHeader>");
+        // Details
+        if (invoice.getItems().size() > 0) {
+            for (Item item : invoice.getItems()) {
+                lines.add("<inv:invoiceDetail>");
+                lines.add("<inv:invoiceItem>");
+                lines.add("<inv:text>" + item.getName() + "</inv:text>");
+                lines.add("<inv:quantity>" + "1" + "</inv:quantity>");
+                lines.add("<inv:unit>" + "m&#236;s." + "</inv:unit>");
+                lines.add("<inv:coefficient>" + "1.0" + "</inv:coefficient>");
+                lines.add("<inv:homeCurrency>");
+                lines.add("<typ:unitPrice>" + item.getNet() + "</typ:unitPrice>");
+                lines.add("<typ:price>" + item.getNet() + "</typ:price>");
+                lines.add("<typ:priceVAT>" + item.getVat() + "</typ:priceVAT>");
+                lines.add("<typ:priceSum>" + item.getBrt() + "</typ:priceSum>");
+                lines.add("</inv:homeCurrency>");
+                lines.add("</inv:invoiceItem>");
+                lines.add("</inv:invoiceDetail>");
+            }
+        }
+        // Summary
+        lines.add("<inv:invoiceSummary>");
+        lines.add("<inv:roundingDocument>math2one</inv:roundingDocument>");
+        lines.add("<inv:roundingVAT>none</inv:roundingVAT>");
+        lines.add("<inv:homeCurrency>");
+        lines.add("<typ:priceHigh>" + invoice.getNet() + "</typ:priceHigh>");
+        lines.add("<typ:priceHighVAT>" + invoice.getVat() + "</typ:priceHighVAT>");
+        lines.add("<typ:priceHighSum>" + invoice.getBrt() + "</typ:priceHighSum>");
+        lines.add("<typ:round>");
+        lines.add("<typ:priceRound>" + invoice.getRounding() + "</typ:priceRound>");
+        lines.add("</typ:round>");
+        lines.add("</inv:homeCurrency>");
+        lines.add("</inv:invoiceSummary>");
+        lines.add("</inv:invoice>");
+        return lines.toArray(new String[] {});
     }
 
     /**
-     * Returns name space definitions to be appended to the root element
-     * (<dataPack>).
+     * Returns name space definitions to be appended to the root element (<dataPack>).
      */
     @Override
     protected String[] nameSpaceLines() {
-        return new String[]{"xmlns:inv=\"http://www.stormware.cz/schema/invoice.xsd\""};
+        return new String[] { "xmlns:inv=\"http://www.stormware.cz/schema/invoice.xsd\"" };
     }
 
 }
