@@ -7,27 +7,35 @@ import java.io.File;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.ExitStatus;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
-
-import cz.silesnet.sis.sync.tasklet.SpsImportTasklet;
 
 public class SpsImportTaskletTest {
 
     /**
      * 
      */
-    private static final String SPS_FOLDER = "C:\\Program Files\\STORMWARE\\Pohoda";
+    private static final String SPS_EXECUTABLE = "C:\\Program Files\\STORMWARE\\Pohoda\\Pohoda.exe";
     private static final String SIS_CUSTOMERS_FILE = "data/20081206_sis_customers.xml";
     private static final String SPS_CUSTOMERS_FILE = "target/20081206_sps_customers.TEMP.xml";
+    private static final String SPS_LOGIN = "Admin";
+    private static final String SPS_PASSWORD = "";
+    private static final String SPS_DATABASE = "12345678_2008.mdb";
+    private static final String SPS_INI_FILE_NAME = "sisImport.ini";
 
-    private Tasklet tasklet;
+    private SpsImportTasklet tasklet;
 
     @Before
     public void setUp() throws Exception {
         tasklet = new SpsImportTasklet();
+        tasklet.setInput(new ClassPathResource(SIS_CUSTOMERS_FILE));
+        tasklet.setOutput(new FileSystemResource(SPS_CUSTOMERS_FILE));
+        tasklet.setSpsExecutable(new FileSystemResource(SPS_EXECUTABLE));
+        tasklet.setLogin(SPS_LOGIN);
+        tasklet.setPassword(SPS_PASSWORD);
+        tasklet.setDatabase(SPS_DATABASE);
+        tasklet.setIniFileName(SPS_INI_FILE_NAME);
     }
 
     @After
@@ -41,32 +49,24 @@ public class SpsImportTaskletTest {
         if (outFile.exists()) {
             outFile.delete();
         }
-        SpsImportTasklet sisTasklet = (SpsImportTasklet) tasklet;
-        sisTasklet.setInput(new ClassPathResource(SIS_CUSTOMERS_FILE));
-        sisTasklet.setOutput(new FileSystemResource(SPS_CUSTOMERS_FILE));
-        sisTasklet.setSpsFolder(new FileSystemResource(SPS_FOLDER));
         assertEquals(ExitStatus.FINISHED, tasklet.execute());
         assertTrue((new File(SPS_CUSTOMERS_FILE)).exists());
     }
 
     @Test
     public void testComposeCommand() throws Exception {
-        SpsImportTasklet sisTasklet = (SpsImportTasklet) tasklet;
-        sisTasklet.setSpsFolder(new FileSystemResource("C:\\SPS"));
-        String command = sisTasklet.composeCommand("CONFIG");
-        assertEquals("\"C:\\SPS\\Pohoda.exe\" /XML \"Admin\" \"\" \"CONFIG\"", command);
+        String command = tasklet.composeCommand(SPS_INI_FILE_NAME);
+        assertEquals("\"" + SPS_EXECUTABLE + "\" /XML \"" + SPS_LOGIN + "\" \"" + SPS_PASSWORD + "\" \""
+                + SPS_INI_FILE_NAME + "\"", command);
     }
 
     @Test
     public void testComposeSpsImportConfig() throws Exception {
-        SpsImportTasklet sisTasklet = (SpsImportTasklet) tasklet;
-        sisTasklet.setInput(new FileSystemResource("C:\\IN"));
-        sisTasklet.setOutput(new FileSystemResource("C:\\OUT"));
-        String config = sisTasklet.composeSpsImportConfig();
-        assertEquals(
-                "[XML]\ninput_xml=C:\\IN\nresponse_xml=C:\\OUT\ndatabase=12345678_2008.mdb\ncheck_duplicity=1\nformat_output=1\n",
-                config);
+        tasklet.setInput(new FileSystemResource("C:\\IN"));
+        tasklet.setOutput(new FileSystemResource("C:\\OUT"));
+        String config = tasklet.composeSpsImportConfig();
+        assertEquals("[XML]\ninput_xml=C:\\IN\nresponse_xml=C:\\OUT\ndatabase=" + SPS_DATABASE
+                + "\ncheck_duplicity=1\nformat_output=1\n", config);
 
     }
-
 }

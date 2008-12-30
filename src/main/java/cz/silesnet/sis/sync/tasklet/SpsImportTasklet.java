@@ -25,13 +25,12 @@ public class SpsImportTasklet implements Tasklet {
 
     private Resource input;
     private Resource output;
-    private Resource spsFolder;
+    private Resource spsExecutable;
 
-    private String login = "Admin";
-    private String password = "";
-    private String database = "12345678_2008.mdb";
-    private String configName = "sisCustomers.ini";
-    private String executable = "Pohoda.exe";
+    private String login;
+    private String password;
+    private String database;
+    private String iniFileName;
 
     private long checkInterval = 100;
 
@@ -55,11 +54,43 @@ public class SpsImportTasklet implements Tasklet {
     }
 
     /**
-     * @param spsFolder
+     * @param spsExecutable
      *            the spsFolder to set
      */
-    public void setSpsFolder(Resource spsFolder) {
-        this.spsFolder = spsFolder;
+    public void setSpsExecutable(Resource spsExecutable) {
+        this.spsExecutable = spsExecutable;
+    }
+
+    /**
+     * @param login
+     *            the login to set
+     */
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    /**
+     * @param password
+     *            the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * @param database
+     *            the database to set
+     */
+    public void setDatabase(String database) {
+        this.database = database;
+    }
+
+    /**
+     * @param iniFileName
+     *            the iniFileName to set
+     */
+    public void setIniFileName(String iniFileName) {
+        this.iniFileName = iniFileName;
     }
 
     public ExitStatus execute() throws Exception {
@@ -70,7 +101,7 @@ public class SpsImportTasklet implements Tasklet {
             Thread.sleep(checkInterval);
         }
         if (commandThread.completed) {
-            log.info("SisCustomerTasklet executed.");
+            log.info("SpsImportTasklet executed.");
             return commandThread.exitCode == 0 ? ExitStatus.FINISHED : ExitStatus.FAILED;
         } else {
             throw new RuntimeException("SPS XML import failed.");
@@ -86,7 +117,7 @@ public class SpsImportTasklet implements Tasklet {
     private String createSpsImportConfig() throws IOException {
         // create import configuration file in the same folder as the input file
         String inputFolder = input.getFile().getAbsoluteFile().getParentFile().getAbsolutePath();
-        File configFile = new File(inputFolder + File.separator + configName);
+        File configFile = new File(inputFolder + File.separator + iniFileName);
         if (configFile.exists()) {
             configFile.delete();
         }
@@ -125,8 +156,7 @@ public class SpsImportTasklet implements Tasklet {
      */
     protected String composeCommand(String config) throws IOException {
         StringBuilder line = new StringBuilder();
-        line.append("\"").append(spsFolder.getFile().getAbsolutePath()).append(File.separator).append(executable)
-                .append("\" ");
+        line.append("\"").append(spsExecutable.getFile().getAbsolutePath()).append("\" ");
         line.append("/XML \"").append(login).append("\" \"").append(password).append("\" ");
         line.append("\"").append(config).append("\"");
         String command = line.toString();

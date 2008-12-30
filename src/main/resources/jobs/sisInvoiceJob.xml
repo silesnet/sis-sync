@@ -37,6 +37,7 @@
     <property name="steps">
       <list>
         <ref bean="sisInvoiceStep" />
+        <ref bean="spsInvoicesImportTaskletStep" />
       </list>
     </property>
   </bean>
@@ -45,11 +46,11 @@
     class="org.springframework.batch.core.step.item.SimpleStepFactoryBean"
     p:jobRepository-ref="jobRepository" p:transactionManager-ref="transactionManager">
     <property name="itemReader">
-        <ref bean="sisInvoiceItemReader"/>
+      <ref bean="sisInvoiceItemReader" />
     </property>
     <property name="itemWriter">
       <bean class="cz.silesnet.sis.sync.item.writer.SisInvoiceItemWriter"
-        p:ico="${silesnet.ico}" p:resource="${sis.invoices.resource}" />
+        p:ico="${sps.silesnet.ico}" p:resource="${sis.invoices.resource}" />
     </property>
   </bean>
 
@@ -86,5 +87,16 @@
     </property>
   </bean>
 
-
+  <bean id="spsInvoicesImportTaskletStep"
+    class="org.springframework.batch.core.step.tasklet.TaskletStep"
+    p:jobRepository-ref="jobRepository">
+    <property name="tasklet">
+      <bean class="cz.silesnet.sis.sync.tasklet.SpsImportTasklet"
+        p:input="${sis.invoices.resource}" p:output="${sps.invoices.resource}"
+        p:spsExecutable="${sps.executable.resource}" p:login="${sps.login}"
+        p:password="${sps.password}" p:database="${sps.database}"
+        p:iniFileName="${sps.ini.filename}" />
+    </property>
+  </bean>
+  
 </beans>
