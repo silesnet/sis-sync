@@ -12,9 +12,9 @@ import org.springframework.batch.repeat.ExitStatus;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 
-import cz.silesnet.sis.sync.tasklet.SisCustomerTasklet;
+import cz.silesnet.sis.sync.tasklet.SpsImportTasklet;
 
-public class SisCustomerTaskletTest {
+public class SpsImportTaskletTest {
 
     /**
      * 
@@ -27,7 +27,7 @@ public class SisCustomerTaskletTest {
 
     @Before
     public void setUp() throws Exception {
-        tasklet = new SisCustomerTasklet();
+        tasklet = new SpsImportTasklet();
     }
 
     @After
@@ -41,7 +41,7 @@ public class SisCustomerTaskletTest {
         if (outFile.exists()) {
             outFile.delete();
         }
-        SisCustomerTasklet sisTasklet = (SisCustomerTasklet) tasklet;
+        SpsImportTasklet sisTasklet = (SpsImportTasklet) tasklet;
         sisTasklet.setInput(new ClassPathResource(SIS_CUSTOMERS_FILE));
         sisTasklet.setOutput(new FileSystemResource(SPS_CUSTOMERS_FILE));
         sisTasklet.setSpsFolder(new FileSystemResource(SPS_FOLDER));
@@ -51,7 +51,7 @@ public class SisCustomerTaskletTest {
 
     @Test
     public void testComposeCommand() throws Exception {
-        SisCustomerTasklet sisTasklet = (SisCustomerTasklet) tasklet;
+        SpsImportTasklet sisTasklet = (SpsImportTasklet) tasklet;
         sisTasklet.setSpsFolder(new FileSystemResource("C:\\SPS"));
         String command = sisTasklet.composeCommand("CONFIG");
         assertEquals("\"C:\\SPS\\Pohoda.exe\" /XML \"Admin\" \"\" \"CONFIG\"", command);
@@ -59,7 +59,7 @@ public class SisCustomerTaskletTest {
 
     @Test
     public void testComposeSpsImportConfig() throws Exception {
-        SisCustomerTasklet sisTasklet = (SisCustomerTasklet) tasklet;
+        SpsImportTasklet sisTasklet = (SpsImportTasklet) tasklet;
         sisTasklet.setInput(new FileSystemResource("C:\\IN"));
         sisTasklet.setOutput(new FileSystemResource("C:\\OUT"));
         String config = sisTasklet.composeSpsImportConfig();

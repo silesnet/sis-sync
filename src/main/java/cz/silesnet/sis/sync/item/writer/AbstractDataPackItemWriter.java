@@ -32,7 +32,7 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
         super();
     }
 
-    protected void setIco(String ico) {
+    public void setIco(String ico) {
         this.ico = ico;
     }
 
@@ -70,12 +70,12 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
         lines.add("xmlns:typ=\"http://www.stormware.cz/schema/type.xsd\"");
         lines.addAll(Arrays.asList(nameSpaceLines()));
         lines.add(">");
-        return lines.toArray(new String[] {});
+        return lines.toArray(new String[]{});
     }
 
     @Override
     protected String[] trailerLines() {
-        return new String[] { "</dat:dataPack>" };
+        return new String[]{"</dat:dataPack>"};
     }
 
     @Override
@@ -85,7 +85,7 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
                 + "\">");
         lines.addAll(Arrays.asList(dataPackItemLines(item)));
         lines.add("</dat:dataPackItem>");
-        return lines.toArray(new String[] {});
+        return lines.toArray(new String[]{});
     }
 
     protected abstract String[] nameSpaceLines();

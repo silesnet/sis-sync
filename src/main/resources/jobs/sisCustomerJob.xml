@@ -37,7 +37,7 @@
 		<property name="steps">
 			<list>
 				<ref bean="sisCustomerStep" />
-				<ref bean="sisCustomerSpsTaskletStep" />
+				<ref bean="spsCustomersImportTaskletStep" />
 				<ref bean="spsCustomerIdStep" />
 			</list>
 		</property>
@@ -63,15 +63,15 @@
 		</property>
 		<property name="itemWriter">
 			<bean class="cz.silesnet.sis.sync.item.writer.SisCustomerItemWriter"
-				p:ico="12345678" p:resource="${sis.customers.file}" />
+				p:ico="${silesnet.ico}" p:resource="${sis.customers.resource}" />
 		</property>
 	</bean>
 
-	<bean id="sisCustomerSpsTaskletStep" class="org.springframework.batch.core.step.tasklet.TaskletStep"
+	<bean id="spsCustomersImportTaskletStep" class="org.springframework.batch.core.step.tasklet.TaskletStep"
 		p:jobRepository-ref="jobRepository">
 		<property name="tasklet">
-			<bean class="cz.silesnet.sis.sync.tasklet.SisCustomerTasklet"
-				p:input="${sis.customers.file}" p:output="${sps.customers.file}"
+			<bean class="cz.silesnet.sis.sync.tasklet.SpsImportTasklet"
+				p:input="${sis.customers.resource}" p:output="${sps.customers.resource}"
 				p:spsFolder="${sps.folder}" />
 		</property>
 	</bean>
@@ -81,7 +81,7 @@
 		p:transactionManager-ref="transactionManager" p:jobRepository-ref="jobRepository">
 		<property name="itemReader">
 			<bean class="cz.silesnet.sis.sync.item.reader.SpsCustomerItemReader"
-				p:resource="${sps.customers.file}" />
+				p:resource="${sps.customers.resource}" />
 		</property>
 		<property name="itemWriter">
 			<bean

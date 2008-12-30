@@ -19,9 +19,9 @@ import org.springframework.core.io.Resource;
  * 
  * @author Richard Sikora
  */
-public class SisCustomerTasklet implements Tasklet {
+public class SpsImportTasklet implements Tasklet {
 
-    private static final Log log = LogFactory.getLog(SisCustomerTasklet.class);
+    private static final Log log = LogFactory.getLog(SpsImportTasklet.class);
 
     private Resource input;
     private Resource output;
@@ -35,7 +35,7 @@ public class SisCustomerTasklet implements Tasklet {
 
     private long checkInterval = 100;
 
-    public SisCustomerTasklet() {
+    public SpsImportTasklet() {
     }
 
     /**
