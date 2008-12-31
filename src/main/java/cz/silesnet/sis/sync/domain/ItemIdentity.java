@@ -16,5 +16,4 @@ public interface ItemIdentity {
      * @return item id
      */
     long getId();
-
 }
