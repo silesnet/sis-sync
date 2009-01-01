@@ -30,7 +30,7 @@ public class JdbcInvoiceDaoTest extends AbstractDependencyInjectionSpringContext
 
     @Override
     protected String[] getConfigLocations() {
-        return new String[]{"classpath:jobs/sisInvoiceJob.xml"};
+        return new String[]{"classpath:sisInvoiceJob.xml"};
     }
 
     @Override

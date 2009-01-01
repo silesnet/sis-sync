@@ -43,7 +43,7 @@ public class SisCustomerFunctionalTest extends AbstractDependencyInjectionSpring
 
     @Override
     protected String[] getConfigLocations() {
-        return new String[] { "classpath:jobs/sisCustomerJob.xml" };
+        return new String[]{"classpath:sisCustomerJob.xml"};
     }
 
     @SuppressWarnings("unchecked")

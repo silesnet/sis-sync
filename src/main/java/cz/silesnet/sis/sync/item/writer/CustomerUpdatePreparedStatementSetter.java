@@ -13,11 +13,22 @@ import org.springframework.batch.item.database.ItemPreparedStatementSetter;
 import cz.silesnet.sis.sync.domain.Customer;
 
 /**
+ * Sets parameters for Customer update SQL.
+ * 
  * @author sikorric
  * 
  */
 public class CustomerUpdatePreparedStatementSetter implements ItemPreparedStatementSetter {
-
+    /**
+     * Maps Customer members to SQL update command.
+     * <p>
+     * UPDATE customers SET symbol = ?, synchronized = ? WHERE id = ?
+     * 
+     * @param item
+     *            customer
+     * @param ps
+     *            SQL wrapped in PreparedStatement
+     */
     public void setValues(Object item, PreparedStatement ps) throws SQLException {
         Customer customer = (Customer) item;
         ps.setString(1, customer.getSymbol());

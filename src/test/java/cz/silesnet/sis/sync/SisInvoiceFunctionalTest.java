@@ -13,7 +13,8 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 
 public class SisInvoiceFunctionalTest extends AbstractDependencyInjectionSpringContextTests {
-    // private static Log log = LogFactory.getLog(SisInvoiceFunctionalTest.class);
+    // private static Log log =
+    // LogFactory.getLog(SisInvoiceFunctionalTest.class);
 
     private JobLauncher launcher;
     private Job job;
@@ -35,7 +36,7 @@ public class SisInvoiceFunctionalTest extends AbstractDependencyInjectionSpringC
 
     @Override
     protected String[] getConfigLocations() {
-        return new String[] { "classpath:jobs/sisInvoiceJob.xml" };
+        return new String[]{"classpath:sisInvoiceJob.xml"};
     }
 
     @Test
@@ -48,7 +49,8 @@ public class SisInvoiceFunctionalTest extends AbstractDependencyInjectionSpringC
         dbTester.onTearDown();
         // test synchronized customers
         // List<Customer> customers = template
-        // .query("SELECT * FROM customers WHERE symbol <> ''", new SisCustomerMapper());
+        // .query("SELECT * FROM customers WHERE symbol <> ''", new
+        // SisCustomerMapper());
         // assertEquals(5, customers.size());
         // for (Customer customer : customers) {
         // assertTrue(Long.valueOf(customer.getSymbol()) > 0);
