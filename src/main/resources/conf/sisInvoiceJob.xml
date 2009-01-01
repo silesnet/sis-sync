@@ -8,8 +8,10 @@
     p:systemPropertiesModeName="SYSTEM_PROPERTIES_MODE_OVERRIDE">
     <property name="locations">
       <list>
-        <value>conf/batch.properties</value>
-        <value>conf/jbdc.properties</value>
+        <value>conf/batch.properties
+        </value>
+        <value>conf/jbdc.properties
+        </value>
       </list>
     </property>
   </bean>
@@ -112,7 +114,8 @@
         class="org.springframework.batch.item.database.BatchSqlUpdateItemWriter"
         p:jdbcTemplate-ref="jdbcTemplate">
         <property name="itemPreparedStatementSetter">
-          <bean class="cz.silesnet.sis.sync.item.writer.InvoiceUpdatePreparedStatementSetter" />
+          <bean
+            class="cz.silesnet.sis.sync.item.writer.InvoiceUpdatePreparedStatementSetter" />
         </property>
         <property name="sql">
           <value><![CDATA[

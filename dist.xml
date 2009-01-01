@@ -12,6 +12,13 @@
         <include>*.jar</include>
       </includes>
     </fileSet>
+    <fileSet>
+      <directory>target/classes</directory>
+      <outputDirectory></outputDirectory>
+      <includes>
+        <include>conf/**</include>
+      </includes>
+    </fileSet>
   </fileSets>
   <dependencySets>
     <dependencySet>
