@@ -8,8 +8,8 @@
     p:systemPropertiesModeName="SYSTEM_PROPERTIES_MODE_OVERRIDE">
     <property name="locations">
       <list>
-        <value>batch.properties</value>
-        <value>jbdc.properties</value>
+        <value>conf/batch.properties</value>
+        <value>conf/jbdc.properties</value>
       </list>
     </property>
   </bean>

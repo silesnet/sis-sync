@@ -53,7 +53,7 @@ public class SisInvoiceFunctionalTest extends AbstractDependencyInjectionSpringC
 
     @Override
     protected String[] getConfigLocations() {
-        return new String[]{"classpath:sisInvoiceJob.xml"};
+        return new String[]{"classpath:conf/sisInvoiceJob.xml"};
     }
 
     @SuppressWarnings("unchecked")
@@ -82,7 +82,7 @@ public class SisInvoiceFunctionalTest extends AbstractDependencyInjectionSpringC
         assertEquals(3, invoices.size());
     }
     public static IDatabaseTester initializeDatabase(DataSource dataSource) throws Exception {
-        DbUtils.initializeDatabase(dataSource, new ClassPathResource("init-hsqldb.sql"));
+        DbUtils.initializeDatabase(dataSource, new ClassPathResource("conf/init-hsqldb.sql"));
         return DbUtils.createAndInitializeDatabaseTester(dataSource, new ClassPathResource(
                 "data/20081226_db_invoices.xml"));
     }
