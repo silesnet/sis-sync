@@ -21,10 +21,11 @@ public class CustomerUpdatePreparedStatementSetterTest {
         customer.setSymbol(SYMBOL);
         customer.setId(ID);
         // mock prepared statement
+        // SQL: UPDATE customers SET symbol = ?, synchronized = ? WHERE id = ?
         PreparedStatement ps = createStrictMock(PreparedStatement.class);
         ps.setString(1, SYMBOL);
         ps.setTimestamp(eq(2), (Timestamp) geq(new Timestamp((new java.util.Date()).getTime())));
-        ps.setLong(3, 1L);
+        ps.setLong(3, ID);
         replay(ps);
         CustomerUpdatePreparedStatementSetter psSetter = new CustomerUpdatePreparedStatementSetter();
         psSetter.setValues(customer, ps);

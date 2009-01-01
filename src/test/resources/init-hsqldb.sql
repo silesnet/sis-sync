@@ -1,5 +1,5 @@
-DROP TABLE items IF EXISTS;
-DROP TABLE invoices IF EXISTS;
+DROP TABLE bill_items IF EXISTS;
+DROP TABLE bills IF EXISTS;
 DROP TABLE customers IF EXISTS;
 
 CREATE TABLE customers (
@@ -11,17 +11,18 @@ CREATE TABLE customers (
     synchronized TIMESTAMP
 );
 
-CREATE TABLE invoices (
+CREATE TABLE bills (
     id BIGINT IDENTITY NOT NULL PRIMARY KEY,
-    customer_id BIGINT,
     number VARCHAR(20),
+    billing_date TIMESTAMP,
+    customer_id BIGINT,
     synchronized TIMESTAMP
 );
 
-CREATE TABLE items (
+CREATE TABLE bill_items (
     id BIGINT IDENTITY NOT NULL PRIMARY KEY,
-    invoice_id BIGINT,
-    name VARCHAR(80),
+    bill_id BIGINT,
+    text VARCHAR(80),
     net DOUBLE PRECISION 
 );
 

@@ -37,7 +37,8 @@
     <property name="steps">
       <list>
         <ref bean="sisInvoiceStep" />
-        <ref bean="spsInvoicesImportTaskletStep" />
+        <ref bean="spsInvoiceImportTaskletStep" />
+        <ref bean="spsInvoiceUpdateStep" />
       </list>
     </property>
   </bean>
@@ -70,24 +71,24 @@
         </property>
         <property name="sql">
           <value><![CDATA[
-                       SELECT id FROM invoices
-                         WHERE synchronized IS NULL
-                         ORDER BY id
-                    ]]></value>
+            SELECT id FROM bills
+              WHERE synchronized IS NULL
+              ORDER BY id
+          ]]></value>
         </property>
         <property name="restartSql">
           <value><![CDATA[
-                       SELECT id FROM invoices
-                         WHERE synchronized IS NULL
-                           AND id > ?
-                         ORDER BY id
-                    ]]></value>
+            SELECT id FROM bills
+              WHERE synchronized IS NULL
+                AND id > ?
+              ORDER BY id
+          ]]></value>
         </property>
       </bean>
     </property>
   </bean>
 
-  <bean id="spsInvoicesImportTaskletStep"
+  <bean id="spsInvoiceImportTaskletStep"
     class="org.springframework.batch.core.step.tasklet.TaskletStep"
     p:jobRepository-ref="jobRepository">
     <property name="tasklet">
@@ -98,5 +99,29 @@
         p:iniFileName="${sps.ini.filename}" />
     </property>
   </bean>
-  
+
+  <bean id="spsInvoiceUpdateStep"
+    class="org.springframework.batch.core.step.item.SimpleStepFactoryBean"
+    p:jobRepository-ref="jobRepository" p:transactionManager-ref="transactionManager">
+    <property name="itemReader">
+      <bean class="cz.silesnet.sis.sync.item.reader.SpsInvoiceItemReader"
+        p:resource="${sps.invoices.resource}" />
+    </property>
+    <property name="itemWriter">
+      <bean
+        class="org.springframework.batch.item.database.BatchSqlUpdateItemWriter"
+        p:jdbcTemplate-ref="jdbcTemplate">
+        <property name="itemPreparedStatementSetter">
+          <bean class="cz.silesnet.sis.sync.item.writer.InvoiceUpdatePreparedStatementSetter" />
+        </property>
+        <property name="sql">
+          <value><![CDATA[
+            UPDATE bills
+              SET synchronized = ?
+              WHERE id = ?
+          ]]></value>
+        </property>
+      </bean>
+    </property>
+  </bean>
 </beans>

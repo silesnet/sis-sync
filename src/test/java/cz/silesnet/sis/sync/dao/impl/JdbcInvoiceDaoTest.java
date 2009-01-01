@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import javax.sql.DataSource;
 
 import org.dbunit.IDatabaseTester;
+import org.joda.time.LocalDate;
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
@@ -51,12 +52,13 @@ public class JdbcInvoiceDaoTest extends AbstractDependencyInjectionSpringContext
     public void testFind() {
         Invoice invoice = dao.find(ID);
         assertEquals(ID, invoice.getId());
+        assertEquals(new LocalDate("2009-01-05"), invoice.getDate().toLocalDate());
+        assertEquals(Invoice.INVOICE_TEXT, invoice.getText());
         assertEquals("200800005", invoice.getNumber());
         assertEquals(3, invoice.getCustomerId());
         assertEquals(2, invoice.getItems().size());
         assertEquals(new BigDecimal("130.0"), BigDecimal.valueOf((double) invoice.getNet()));
     }
-
     @Test
     public void testFailWhenInvoiceDoesNotExist() {
         try {

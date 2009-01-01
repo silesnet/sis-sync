@@ -8,22 +8,26 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joda.time.DateTime;
+
 import edu.emory.mathcs.backport.java.util.Collections;
 
 /**
- * Invoice data object with no logic. It contains only fields needed for
- * synchronization.
+ * Invoice data object. It contains only fields needed for synchronization.
  * 
  * @author Richard Sikora
  */
 public class Invoice implements ItemIdentity {
 
+    public static final String INVOICE_TEXT = "Invoice text";
     public static final int VAT_PERCENT = 19;
     private static final BigDecimal VAT_BIG_DECIMAL = BigDecimal.valueOf(VAT_PERCENT, 2);
 
     private long id;
-    private long customerId;
     private String number;
+    private DateTime date;
+    private String text = INVOICE_TEXT;
+    private long customerId;
     private List<Item> items = new ArrayList<Item>();
     private float net;
 
@@ -80,12 +84,28 @@ public class Invoice implements ItemIdentity {
         this.number = number;
     }
 
+    public DateTime getDate() {
+        return date;
+    }
+
+    public void setDate(DateTime date) {
+        this.date = date;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
     public class Item {
-        private String name;
+        private String text;
         private float net;
 
-        public Item(String name, float net) {
-            this.name = name;
+        public Item(String text, float net) {
+            this.text = text;
             this.net = net;
             // automatically associates new item with the invoice
             addItem(this);
@@ -99,12 +119,12 @@ public class Invoice implements ItemIdentity {
             return calculateBrt(net);
         }
 
-        public String getName() {
-            return name;
+        public String getText() {
+            return this.text;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setText(String text) {
+            this.text = text;
         }
 
         public float getNet() {

@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.joda.time.DateTime;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,6 +31,8 @@ public class SisInvoiceItemWriterTest {
     public void testInvoiceLines() throws Exception {
         Invoice invoice = new Invoice();
         invoice.setNumber("1234567890");
+        invoice.setDate(new DateTime("2009-01-01"));
+        invoice.setText("Invoice");
         invoice.setCustomerId(1234);
         invoice.new Item("Item text", 10.00F);
         Item item = invoice.getItems().get(0);
@@ -42,6 +45,8 @@ public class SisInvoiceItemWriterTest {
         assertEquals("<inv:number>", lines[index++]);
         assertEquals("<typ:numberRequested>" + invoice.getNumber() + "</typ:numberRequested>", lines[index++]);
         assertEquals("</inv:number>", lines[index++]);
+        assertEquals("<inv:date>" + invoice.getDate().toString("yyyy-MM-dd") + "</inv:date>", lines[index++]);
+        assertEquals("<inv:text>" + invoice.getText() + "</inv:text>", lines[index++]);
         assertEquals("<inv:partnerIdentity>", lines[index++]);
         assertEquals("<typ:id>" + invoice.getCustomerId() + "</typ:id>", lines[index++]);
         assertEquals("</inv:partnerIdentity>", lines[index++]);
@@ -49,7 +54,7 @@ public class SisInvoiceItemWriterTest {
         // Detail
         assertEquals("<inv:invoiceDetail>", lines[index++]);
         assertEquals("<inv:invoiceItem>", lines[index++]);
-        assertEquals("<inv:text>" + item.getName() + "</inv:text>", lines[index++]);
+        assertEquals("<inv:text>" + item.getText() + "</inv:text>", lines[index++]);
         assertEquals("<inv:quantity>" + "1" + "</inv:quantity>", lines[index++]);
         assertEquals("<inv:unit>" + "m&#236;s." + "</inv:unit>", lines[index++]);
         assertEquals("<inv:coefficient>" + "1.0" + "</inv:coefficient>", lines[index++]);

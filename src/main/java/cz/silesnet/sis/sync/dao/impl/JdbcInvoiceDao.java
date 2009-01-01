@@ -6,6 +6,7 @@ package cz.silesnet.sis.sync.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.joda.time.DateTime;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -21,7 +22,7 @@ import cz.silesnet.sis.sync.domain.Invoice;
  */
 public class JdbcInvoiceDao implements InvoiceDao {
 
-    private static final String INVOICE_SQL = "SELECT * FROM invoices WHERE id = ?";
+    private static final String INVOICE_SQL = "SELECT * FROM bills WHERE id = ?";
     private JdbcTemplate template;
 
     public void setTemplate(JdbcTemplate template) {
@@ -47,12 +48,13 @@ public class JdbcInvoiceDao implements InvoiceDao {
      */
     private class InvoiceRowMapper implements RowMapper {
 
-        private static final String ITEMS_SQL = "SELECT * FROM items WHERE invoice_id = ?";
         private static final String ID_COLUMN = "id";
-        private static final String CUSTOMER_ID_COLUMN = "customer_id";
         private static final String NUMBER_COLUMN = "number";
-        private static final String NAME_COLUMN = "name";
-        private static final String NET_COLUMN = "net";
+        private static final String DATE_COLUMN = "billing_date";
+        private static final String CUSTOMER_ID_COLUMN = "customer_id";
+        private static final String ITEMS_SQL = "SELECT * FROM bill_items WHERE bill_id = ?";
+        private static final String ITEMS_TEXT_COLUMN = "text";
+        private static final String ITEMS_NET_COLUMN = "net";
 
         /**
          * Maps result set to Invoice object. Retrieves invoice items and
@@ -62,12 +64,13 @@ public class JdbcInvoiceDao implements InvoiceDao {
             final Invoice invoice = new Invoice();
             invoice.setId(rs.getLong(ID_COLUMN));
             invoice.setNumber(rs.getString(NUMBER_COLUMN));
+            invoice.setDate(new DateTime(rs.getTimestamp(DATE_COLUMN)));
             invoice.setCustomerId(rs.getLong(CUSTOMER_ID_COLUMN));
             // retrieve invoice items from database by invoice_id
             template.query(ITEMS_SQL, new Object[]{rs.getLong(ID_COLUMN)}, new RowMapper() {
                 public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
                     // result set contains row from invoice items table
-                    invoice.new Item(rs.getString(NAME_COLUMN), rs.getFloat(NET_COLUMN));
+                    invoice.new Item(rs.getString(ITEMS_TEXT_COLUMN), rs.getFloat(ITEMS_NET_COLUMN));
                     // just creating new Item automatically associates it with
                     // the invoice
                     // result is not read, null can be returned

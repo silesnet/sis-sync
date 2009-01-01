@@ -23,6 +23,7 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
     public static final String DATA_PACK_NOTE = "SIS import.";
     public static final String DATA_PACK_ITEM_VERSION = "1.0";
     public static final DateFormat DATA_PACK_ID_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+    public static final DateFormat ELEMENT_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     public static final int ITEMS_WRITTEN_LENGHT = 10;
 
     private String dataPackId;
@@ -70,7 +71,7 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
         lines.add("xmlns:typ=\"http://www.stormware.cz/schema/type.xsd\"");
         lines.addAll(Arrays.asList(nameSpaceLines()));
         lines.add(">");
-        return lines.toArray(new String[]{});
+        return lines.toArray(new String[lines.size()]);
     }
 
     @Override
@@ -85,7 +86,7 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
                 + "\">");
         lines.addAll(Arrays.asList(dataPackItemLines(item)));
         lines.add("</dat:dataPackItem>");
-        return lines.toArray(new String[]{});
+        return lines.toArray(new String[lines.size()]);
     }
 
     protected abstract String[] nameSpaceLines();

@@ -25,7 +25,7 @@ public class CustomerUpdatePreparedStatementSetter implements ItemPreparedStatem
      * UPDATE customers SET symbol = ?, synchronized = ? WHERE id = ?
      * 
      * @param item
-     *            customer
+     *            Customer object
      * @param ps
      *            SQL wrapped in PreparedStatement
      */

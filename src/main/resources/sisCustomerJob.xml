@@ -55,10 +55,10 @@
         </property>
         <property name="sql">
           <value><![CDATA[
-					   SELECT * FROM customers
-					     WHERE synchronized IS NULL
-					       OR synchronized <= updated
-					]]></value>
+            SELECT * FROM customers
+              WHERE synchronized IS NULL
+                OR synchronized <= updated
+		  ]]></value>
         </property>
       </bean>
     </property>
@@ -97,11 +97,11 @@
         </property>
         <property name="sql">
           <value><![CDATA[
-                       UPDATE customers
-                         SET symbol = ?,
-                           synchronized = ?
-                         WHERE id = ?
-                    ]]></value>
+            UPDATE customers
+              SET symbol = ?,
+                synchronized = ?
+              WHERE id = ?
+          ]]></value>
         </property>
       </bean>
     </property>
