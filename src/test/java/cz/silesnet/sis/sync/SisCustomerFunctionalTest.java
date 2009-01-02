@@ -43,7 +43,7 @@ public class SisCustomerFunctionalTest extends AbstractDependencyInjectionSpring
 
     @Override
     protected String[] getConfigLocations() {
-        return new String[]{"classpath:conf/sisCustomerJob.xml"};
+        return new String[] { "classpath:sisCustomerJob.xml" };
     }
 
     @SuppressWarnings("unchecked")
@@ -66,7 +66,7 @@ public class SisCustomerFunctionalTest extends AbstractDependencyInjectionSpring
     }
 
     public static IDatabaseTester initializeDatabase(DataSource dataSource) throws Exception {
-        DbUtils.initializeDatabase(dataSource, new ClassPathResource("conf/init-hsqldb.sql"));
+        DbUtils.initializeDatabase(dataSource, new ClassPathResource("init-hsqldb.sql"));
         return DbUtils.createAndInitializeDatabaseTester(dataSource, new ClassPathResource(
                 "data/20081223_db_customers.xml"));
     }

@@ -7,24 +7,18 @@
   <fileSets>
     <fileSet>
       <directory>target</directory>
-      <outputDirectory></outputDirectory>
+      <outputDirectory>lib</outputDirectory>
       <includes>
         <include>*.jar</include>
       </includes>
     </fileSet>
     <fileSet>
       <directory>target/classes</directory>
-      <outputDirectory></outputDirectory>
+      <outputDirectory>etc</outputDirectory>
       <includes>
-        <include>conf/**</include>
+        <include>*.properties</include>
+        <include>*.xml</include>
       </includes>
     </fileSet>
   </fileSets>
-  <dependencySets>
-    <dependencySet>
-      <outputDirectory>/lib</outputDirectory>
-      <unpack>false</unpack>
-      <scope>runtime</scope>
-    </dependencySet>
-  </dependencySets>
 </assembly>

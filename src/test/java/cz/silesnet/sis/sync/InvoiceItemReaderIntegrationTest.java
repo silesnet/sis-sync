@@ -27,7 +27,7 @@ public class InvoiceItemReaderIntegrationTest extends AbstractDependencyInjectio
 
     @Override
     protected String[] getConfigLocations() {
-        return new String[]{"classpath:conf/sisInvoiceJob.xml"};
+        return new String[] { "classpath:sisInvoiceJob.xml" };
     }
 
     @Override
