@@ -28,6 +28,7 @@ public class Invoice implements ItemIdentity {
     private DateTime date;
     private String text = INVOICE_TEXT;
     private long customerId;
+    private String customerSymbol;
     private List<Item> items = new ArrayList<Item>();
     private float net;
 
@@ -74,6 +75,14 @@ public class Invoice implements ItemIdentity {
 
     public void setCustomerId(long customerId) {
         this.customerId = customerId;
+    }
+
+    public String getCustomerSymbol() {
+        return customerSymbol;
+    }
+
+    public void setCustomerSymbol(String customerSymbol) {
+        this.customerSymbol = customerSymbol;
     }
 
     public String getNumber() {

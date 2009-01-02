@@ -55,6 +55,8 @@ public class JdbcInvoiceDao implements InvoiceDao {
         private static final String ITEMS_SQL = "SELECT * FROM bill_items WHERE bill_id = ?";
         private static final String ITEMS_TEXT_COLUMN = "text";
         private static final String ITEMS_NET_COLUMN = "net";
+        private static final String CUSTOMERS_SYMBOL_SQL = "SELECT symbol FROM customers WHERE id = ?";
+        private static final String CUSTOMERS_SYMBOL_COLUMN = "symbol";
 
         /**
          * Maps result set to Invoice object. Retrieves invoice items and
@@ -66,8 +68,16 @@ public class JdbcInvoiceDao implements InvoiceDao {
             invoice.setNumber(rs.getString(NUMBER_COLUMN));
             invoice.setDate(new DateTime(rs.getTimestamp(DATE_COLUMN)));
             invoice.setCustomerId(rs.getLong(CUSTOMER_ID_COLUMN));
+            // retrieve customer's symbol from customers table
+            String symbol = (String) template.queryForObject(CUSTOMERS_SYMBOL_SQL,
+                    new Object[]{invoice.getCustomerId()}, new RowMapper() {
+                        public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+                            return rs.getString(CUSTOMERS_SYMBOL_COLUMN);
+                        }
+                    });
+            invoice.setCustomerSymbol(symbol);
             // retrieve invoice items from database by invoice_id
-            template.query(ITEMS_SQL, new Object[]{rs.getLong(ID_COLUMN)}, new RowMapper() {
+            template.query(ITEMS_SQL, new Object[]{invoice.getId()}, new RowMapper() {
                 public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
                     // result set contains row from invoice items table
                     invoice.new Item(rs.getString(ITEMS_TEXT_COLUMN), rs.getFloat(ITEMS_NET_COLUMN));

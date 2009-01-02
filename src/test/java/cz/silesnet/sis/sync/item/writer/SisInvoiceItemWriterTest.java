@@ -34,6 +34,7 @@ public class SisInvoiceItemWriterTest {
         invoice.setDate(new DateTime("2009-01-01"));
         invoice.setText("Invoice");
         invoice.setCustomerId(1234);
+        invoice.setCustomerSymbol("1235");
         invoice.new Item("Item text", 10.00F);
         Item item = invoice.getItems().get(0);
         int index = 0;
@@ -48,7 +49,8 @@ public class SisInvoiceItemWriterTest {
         assertEquals("<inv:date>" + invoice.getDate().toString("yyyy-MM-dd") + "</inv:date>", lines[index++]);
         assertEquals("<inv:text>" + invoice.getText() + "</inv:text>", lines[index++]);
         assertEquals("<inv:partnerIdentity>", lines[index++]);
-        assertEquals("<typ:id>" + invoice.getCustomerId() + "</typ:id>", lines[index++]);
+        // NOTE: SPS customer Id == SIS customer Symbol
+        assertEquals("<typ:id>" + invoice.getCustomerSymbol() + "</typ:id>", lines[index++]);
         assertEquals("</inv:partnerIdentity>", lines[index++]);
         assertEquals("</inv:invoiceHeader>", lines[index++]);
         // Detail
