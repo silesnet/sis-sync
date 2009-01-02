@@ -1,10 +1,11 @@
 package cz.silesnet.sis.sync;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.sql.DataSource;
 
@@ -18,12 +19,8 @@ import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.repeat.ExitStatus;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
-
-import cz.silesnet.sis.sync.domain.Invoice;
-import cz.silesnet.sis.sync.mapping.InvoiceRowMapper;
 
 public class SisInvoiceFunctionalTest extends AbstractDependencyInjectionSpringContextTests {
     private static Log log = LogFactory.getLog(SisInvoiceFunctionalTest.class);
@@ -33,7 +30,6 @@ public class SisInvoiceFunctionalTest extends AbstractDependencyInjectionSpringC
     private JobParameters jobParameters;
     private DataSource dataSource;
     private IDatabaseTester dbTester;
-    private JdbcTemplate template;
 
     public void setLauncher(JobLauncher launcher) {
         this.launcher = launcher;
@@ -47,16 +43,11 @@ public class SisInvoiceFunctionalTest extends AbstractDependencyInjectionSpringC
         this.dataSource = dataSource;
     }
 
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.template = jdbcTemplate;
-    }
-
     @Override
     protected String[] getConfigLocations() {
-        return new String[] { "classpath:sisInvoiceJob.xml" };
+        return new String[]{"classpath:sisInvoiceJob.xml"};
     }
 
-    @SuppressWarnings("unchecked")
     @Test
     public void testSisInvoiceJob() throws Exception {
         String nowTimeStamp = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date());
@@ -67,19 +58,24 @@ public class SisInvoiceFunctionalTest extends AbstractDependencyInjectionSpringC
         JobExecution jobExecution = launcher.run(job, jobParameters);
         assertEquals(ExitStatus.FINISHED, jobExecution.getExitStatus());
         dbTester.onTearDown();
-        // get synchronized invoices
-        List<Invoice> invoices = template.query("SELECT * FROM bills WHERE synchronized >= '" + nowTimeStamp + "'",
-                new RowMapper() {
-                    public Object mapRow(ResultSet arg0, int arg1) throws SQLException {
-                        Invoice invoice = new Invoice();
-                        invoice.setId(arg0.getLong(InvoiceRowMapper.ID_COLUMN));
-                        return invoice;
-                    }
-                });
-        for (Invoice invoice : invoices) {
-            log.debug(invoice.getId());
+        /*
+         * Can not check results against database because SPS duplicity
+         * checking. At least we will check against SPS response file for
+         * correct number of processed invoices. Last writer is thus not tested.
+         */
+        BufferedReader reader = new BufferedReader(new FileReader((new FileSystemResource(
+                "target/20081226_sps_invoices.TEMP.xml")).getFile()));
+        Pattern itemPattern = Pattern.compile("<rsp:responsePackItem.* id=\".+_\\d+_(\\d+)\".* state=\"ok\".*>");
+        int count = 0;
+        String line;
+        while ((line = reader.readLine()) != null) {
+            Matcher matcher = itemPattern.matcher(line);
+            if (matcher.matches()) {
+                count++;
+                log.debug(matcher.group(1));
+            }
         }
-        assertEquals(3, invoices.size());
+        assertEquals(3, count);
     }
 
     public static IDatabaseTester initializeDatabase(DataSource dataSource) throws Exception {
