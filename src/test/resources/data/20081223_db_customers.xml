@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-	<customers id='1' name='Test Customer1' symbol="" city="Test City" updated="2008-12-23 05:00:00" synchronized="2008-12-23 05:00:01" />
-	<customers id='2' name='Test Customer2' symbol="" city="Test City" updated="2008-12-23 05:00:00" />
-	<customers id='3' name='Test Customer3' symbol="" city="Test City" updated="2008-12-23 05:00:00" />
-	<customers id='4' name='Test Customer4' symbol="" city="Test City" updated="2008-12-23 05:00:00" />
-	<customers id='5' name='Test Customer5' symbol="" city="Test City" updated="2008-12-23 05:00:00" />
-	<customers id='6' name='Test Customer6' symbol="" city="Test City" updated="2008-12-23 05:00:00" synchronized="2008-12-23 05:00:01" />
-	<customers id='7' name='Test Customer7' symbol="" city="Test City" updated="2008-12-23 05:00:00" synchronized="2008-12-23 05:00:00" />
+	<customers id='1' name='Test Customer1' symbol="" city="Test City" is_active="true" country="10" updated="2008-12-23 05:00:00" synchronized="2008-12-23 05:00:01" />
+	<customers id='2' name='Test Customer2' symbol="" city="Test City" is_active="true" country="10" updated="2008-12-23 05:00:00" />
+	<customers id='3' name='Test Customer3' symbol="" city="Test City" is_active="true" country="10" updated="2008-12-23 05:00:00" />
+	<customers id='4' name='Test Customer4' symbol="" city="Test City" is_active="true" country="10" updated="2008-12-23 05:00:00" />
+	<customers id='5' name='Test Customer5' symbol="" city="Test City" is_active="true" country="10" updated="2008-12-23 05:00:00" />
+	<customers id='6' name='Test Customer6' symbol="" city="Test City" is_active="true" country="10" updated="2008-12-23 05:00:00" synchronized="2008-12-23 05:00:01" />
+	<customers id='7' name='Test Customer7' symbol="" city="Test City" is_active="true" country="10" updated="2008-12-23 05:00:00" synchronized="2008-12-23 05:00:00" />
+    <customers id='8' name='Test Customer8' symbol="" city="Test City" is_active="false" country="10" updated="2008-12-23 05:00:00" />
+    <customers id='9' name='Test Customer9' symbol="" city="Test City" is_active="true" country="20" updated="2008-12-23 05:00:00" />
 </dataset>

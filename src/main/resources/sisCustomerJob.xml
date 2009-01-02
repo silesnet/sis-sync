@@ -26,8 +26,12 @@
         <property name="sql">
           <value><![CDATA[
             SELECT * FROM customers
-              WHERE synchronized IS NULL
-                OR synchronized <= updated
+              WHERE country = 10
+                AND is_active
+                AND (
+                    synchronized IS NULL
+                    OR synchronized <= updated
+                )
 		  ]]></value>
         </property>
       </bean>

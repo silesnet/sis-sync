@@ -7,6 +7,8 @@ CREATE TABLE customers (
     symbol VARCHAR(9),
     name VARCHAR(45),
     city VARCHAR(50),
+    is_active BOOLEAN,
+    country INT,
     updated TIMESTAMP NOT NULL,
     synchronized TIMESTAMP
 );
