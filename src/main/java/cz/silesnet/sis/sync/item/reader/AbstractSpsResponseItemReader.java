@@ -25,18 +25,23 @@ import org.springframework.batch.item.file.transform.LineTokenizer;
 import org.springframework.core.io.Resource;
 
 /**
- * Abstract implementation of SPS response XML file reader. This implementation reads sequence of <responsePackItem>
- * elements extracting SIS item id form element composite id.
+ * Abstract implementation of SPS response XML file reader. This implementation
+ * reads sequence of <responsePackItem> elements extracting SIS item id form
+ * element composite id.
  * 
  * @author sikorric
  * 
  */
 public abstract class AbstractSpsResponseItemReader implements ItemReader, ItemStream {
 
+    /**
+     * 
+     */
     private static final String ITEM_END_LINE = "</rsp:responsePackItem>";
     private static final int UNDEFINED_ITEM_ID = -1;
     private static final Pattern ITEM_BEGIN_PATTERN = Pattern
             .compile("<rsp:responsePackItem.* id=\".+_\\d+_(\\d+)\".* state=\"ok\".*>");
+    private static final Pattern ELEMENT_STATE_OK_PATTERN = Pattern.compile("<.+ state=\"ok\".*>");
 
     private FlatFileItemReader itemReader;
 
@@ -44,27 +49,55 @@ public abstract class AbstractSpsResponseItemReader implements ItemReader, ItemS
         List<String> itemLines = null;
         long itemId = UNDEFINED_ITEM_ID;
         boolean itemBeginFound = false;
+        boolean itemEndFound = false;
         String line = null;
-        while ((line = (String) itemReader.read()) != null) {
+        while ((line = readTrimmed()) != null) {
             line = line.trim();
             // find item beginning and store its id
             if (!itemBeginFound) {
                 Matcher itemBeginMatcher = ITEM_BEGIN_PATTERN.matcher(line);
                 if (itemBeginMatcher.matches()) {
+                    /*
+                     * read ahead and check if contained element has state="ok",
+                     * skip the responsePackItem otherwise
+                     */
+                    String containedLine = readTrimmed();
+                    if (containedLine == null)
+                        return null; // EOF
+                    if (!ELEMENT_STATE_OK_PATTERN.matcher(containedLine).matches()) {
+                        // item was not imported correctly to SPS, skip it then
+                        continue;
+                    }
                     itemId = Long.valueOf(itemBeginMatcher.group(1));
                     itemLines = new ArrayList<String>();
+                    // add eagerly read line to item lines
+                    itemLines.add(containedLine);
                     itemBeginFound = true;
                     continue;
                 }
             } else if (ITEM_END_LINE.equals(line)) {
                 // whole item read, break the loop
+                itemEndFound = true;
                 break;
             } else {
                 // store item line
                 itemLines.add(line);
             }
         }
-        return itemBeginFound ? mapLines(itemId, itemLines.toArray(new String[itemLines.size()])) : null;
+        return (itemBeginFound && itemEndFound)
+                ? mapLines(itemId, itemLines.toArray(new String[itemLines.size()]))
+                : null;
+    }
+
+    /**
+     * Return trimmed line read from itemReader.read()
+     * 
+     * @return trimmed line, can be null
+     * @throws Exception
+     */
+    private String readTrimmed() throws Exception {
+        String line = (String) itemReader.read();
+        return line != null ? line.trim() : null;
     }
 
     protected abstract Object mapLines(long id, String[] lines);
@@ -74,7 +107,7 @@ public abstract class AbstractSpsResponseItemReader implements ItemReader, ItemS
         // set tokenizer that puts the line into one token of a FieldSet
         itemReader.setLineTokenizer(new LineTokenizer() {
             public FieldSet tokenize(String line) {
-                return new DefaultFieldSet(new String[] { line });
+                return new DefaultFieldSet(new String[]{line});
             }
         });
         // set mapper that returns the first value of the FieldSet

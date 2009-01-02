@@ -8,32 +8,32 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.batch.item.ItemReader;
+import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.NoWorkFoundException;
 import org.springframework.batch.item.ParseException;
 import org.springframework.batch.item.UnexpectedInputException;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 
 import cz.silesnet.sis.sync.domain.Customer;
-import cz.silesnet.sis.sync.item.reader.SpsCustomerItemReader;
 
 public class SpsCustomerItemReaderTest {
 
-    private Resource input;
-    private ItemReader reader;
+    private SpsCustomerItemReader reader;
+    private ExecutionContext executionContext;
 
     @Before
     public void setUp() throws Exception {
-        input = new ClassPathResource("data/20081206_sps_customers.xml");
         reader = new SpsCustomerItemReader();
-        ((SpsCustomerItemReader) reader).setResource(input);
+        reader.setResource(new ClassPathResource("data/20081206_sps_customers.xml"));
+        executionContext = new ExecutionContext();
+        reader.open(executionContext);
     }
 
     @After
     public void tearDown() throws Exception {
+        reader.close(executionContext);
         reader = null;
-        input = null;
+        executionContext = null;
     }
 
     @Test
@@ -60,12 +60,5 @@ public class SpsCustomerItemReaderTest {
             counter++;
         }
         assertEquals(2, counter);
-    }
-
-    @Test(expected = IllegalStateException.class)
-    public void testFailWhenSetingFileOnInitializedReader() throws UnexpectedInputException, NoWorkFoundException,
-            ParseException, Exception {
-        reader.read();
-        ((SpsCustomerItemReader) reader).setResource(null);
     }
 }
