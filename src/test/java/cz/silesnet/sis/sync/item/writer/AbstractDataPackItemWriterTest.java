@@ -165,15 +165,21 @@ public class AbstractDataPackItemWriterTest {
     }
 
     @Test
-        public void testElValue() throws Exception {
-            assertEquals("<name>value</name>", AbstractDataPackItemWriter.elValue("name", "value"));
-        }
+    public void testElValue() throws Exception {
+        assertEquals("<name>value</name>", AbstractDataPackItemWriter.elValue("name", "value"));
+    }
+
     @Test
-            public void testElBeg() throws Exception {
-                assertEquals("<name>", AbstractDataPackItemWriter.elBeg("name"));
-            }
+    public void testElValueNull() throws Exception {
+        assertEquals("<name />", AbstractDataPackItemWriter.elValue("name", null));
+    }
+
     @Test
-        public void testElEnd() throws Exception {
-            assertEquals("</name>", AbstractDataPackItemWriter.elEnd("name"));
-        }
+    public void testElBeg() throws Exception {
+        assertEquals("<name>", AbstractDataPackItemWriter.elBeg("name"));
+    }
+    @Test
+    public void testElEnd() throws Exception {
+        assertEquals("</name>", AbstractDataPackItemWriter.elEnd("name"));
+    }
 }

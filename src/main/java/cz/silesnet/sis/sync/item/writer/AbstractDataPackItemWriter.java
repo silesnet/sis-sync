@@ -145,7 +145,12 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
      */
     protected static String elValue(String name, String value) {
         StringBuilder element = new StringBuilder("<");
-        element.append(name).append(">").append(value).append("</").append(name).append(">");
+        element.append(name);
+        if (value != null) {
+            element.append(">").append(value).append("</").append(name).append(">");
+        } else {
+            element.append(" />");
+        }
         return element.toString();
     }
 
