@@ -30,17 +30,33 @@ public class SisCustomerItemWriter extends AbstractDataPackItemWriter {
         }
         Customer customer = (Customer) item;
         List<String> lines = new ArrayList<String>();
-
+        // header
         lines.add("<adb:addressbook version=\"" + ADDRESSBOOK_ELEMENT_VERSION + "\">");
         lines.add("<adb:addressbookHeader>");
+        // identity
         lines.add("<adb:identity>");
         lines.add("<typ:address>");
-        // customer data
         lines.add("<typ:company>" + customer.getName() + "</typ:company>");
+        lines.add("<typ:division>" + customer.getSupplementaryName() + "</typ:division>");
+        lines.add("<typ:name>" + customer.getContactName() + "</typ:name>");
         lines.add("<typ:city>" + customer.getCity() + "</typ:city>");
-        // element trailer
+        lines.add("<typ:street>" + customer.getStreet() + "</typ:street>");
+        lines.add("<typ:zip>" + customer.getZip() + "</typ:zip>");
+        lines.add("<typ:ico>" + customer.getIco() + "</typ:ico>");
+        lines.add("<typ:dic>" + customer.getDic() + "</typ:dic>");
         lines.add("</typ:address>");
         lines.add("</adb:identity>");
+        // other
+        lines.add("<adb:phone>" + customer.getPhone() + "</adb:phone>");
+        lines.add("<adb:email>" + customer.getEmail() + "</adb:email>");
+        lines.add("<adb:adGroup>" + Customer.AD_GROUP_KEY + "</adb:adGroup>");
+        lines.add("<adb:contract>" + customer.getContract() + "</adb:contract>");
+        // duplicity check
+        lines.add("<adb:duplicityFields actualize=\"true\">");
+        lines.add("<adb:fieldICO>true</adb:fieldICO>");
+        lines.add("<adb:fieldFirma>true</adb:fieldFirma>");
+        lines.add("</adb:duplicityFields>");
+        // trailer
         lines.add("</adb:addressbookHeader>");
         lines.add("</adb:addressbook>");
 

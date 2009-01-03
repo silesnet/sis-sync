@@ -12,6 +12,8 @@ import java.util.Date;
 import cz.silesnet.sis.sync.domain.ItemIdentity;
 
 /**
+ * Base implementation of SPS Import XML file ItemWriter.
+ * 
  * @author sikorric
  * 
  */
@@ -37,14 +39,31 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
         this.ico = ico;
     }
 
+    /**
+     * Returns dataPack@id based on current time stamp. The time stamp is
+     * refreshed on {@link AbstractDataPackItemWriter#headerLines()} call.
+     * 
+     * @return dataPack@id
+     */
     protected String getDataPackId() {
         return dataPackId;
     }
 
+    /* protected for testing purposes */
     protected String getItemsWrittenString() {
         return String.format("%0" + ITEMS_WRITTEN_STRING_LENGHT + "d", getItemsWritten());
     }
 
+    /**
+     * Returns dataPackItem@id based on item identity, items written count and
+     * dataPack@id. If item does not implement {@link ItemIdentity} then
+     * hashCode() is used. This id is populated by SPS to responsePackItem@id,
+     * from which the original item identity can be parsed.
+     * 
+     * @param item
+     *            dataPack content item
+     * @return dataPackItem@id
+     */
     protected String getDataPackItemId(Object item) {
         long id = 0;
         if (item instanceof ItemIdentity) {
@@ -54,7 +73,10 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
         }
         return String.format("%s_%s_%d", getDataPackId(), getItemsWrittenString(), id);
     }
-
+    /**
+     * Returns dataPack XML header lines. Additional name space lines are
+     * included from {@link AbstractDataPackItemWriter#nameSpaceLines()}.
+     */
     @Override
     protected String[] headerLines() {
         dataPackId = DATA_PACK_ID_DATE_FORMAT.format(new Date());
@@ -73,12 +95,18 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
         lines.add(">");
         return lines.toArray(new String[lines.size()]);
     }
-
+    /**
+     * Returns dataPack XML trailer lines.
+     */
     @Override
     protected String[] trailerLines() {
         return new String[]{"</dat:dataPack>"};
     }
 
+    /**
+     * Returns dataPackItem lines. Actual content of dataPackItem is delegated
+     * to {@link AbstractDataPackItemWriter#dataPackItemLines(item)}
+     */
     @Override
     protected final String[] itemLines(Object item) {
         ArrayList<String> lines = new ArrayList<String>();
@@ -89,8 +117,21 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
         return lines.toArray(new String[lines.size()]);
     }
 
+    /**
+     * Returns additional name space definitions that will be added to dataPack
+     * element definition.
+     * 
+     * @return name space definition lines, for example
+     *         xmlns:adb="http://www.stormware.cz/schema/addressbook.xsd"
+     */
     protected abstract String[] nameSpaceLines();
 
+    /**
+     * Returns dataPackItem content lines.
+     * 
+     * @param item
+     * @return dataPackItem lines
+     */
     protected abstract String[] dataPackItemLines(Object item);
 
 }

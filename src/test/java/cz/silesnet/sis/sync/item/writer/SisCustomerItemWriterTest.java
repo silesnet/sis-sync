@@ -29,24 +29,50 @@ public class SisCustomerItemWriterTest {
     @Test
     public void testItemLines() {
         Customer customer = new Customer();
-        customer.setId(1234L);
         customer.setName("Customer Name");
+        customer.setSupplementaryName("Supplementary name");
+        customer.setContactName("Contact Name");
         customer.setCity("Test City");
+        customer.setStreet("Street 1234");
+        customer.setZip("12345");
+        customer.setIco("12345679");
+        customer.setDic("DIC12345679");
+        customer.setPhone("+420123456789");
+        customer.setEmail("contact@customer.cz");
+        customer.setContract("2008/007");
         String[] lines = writer.dataPackItemLines(customer);
         int index = 0;
+        // header
         assertEquals("<adb:addressbook version=\"" + SisCustomerItemWriter.ADDRESSBOOK_ELEMENT_VERSION + "\">",
                 lines[index++]);
         assertEquals("<adb:addressbookHeader>", lines[index++]);
+        // identity
         assertEquals("<adb:identity>", lines[index++]);
         assertEquals("<typ:address>", lines[index++]);
-        // customer data
         assertEquals("<typ:company>" + customer.getName() + "</typ:company>", lines[index++]);
+        assertEquals("<typ:division>" + customer.getSupplementaryName() + "</typ:division>", lines[index++]);
+        assertEquals("<typ:name>" + customer.getContactName() + "</typ:name>", lines[index++]);
         assertEquals("<typ:city>" + customer.getCity() + "</typ:city>", lines[index++]);
-        // element trailer
+        assertEquals("<typ:street>" + customer.getStreet() + "</typ:street>", lines[index++]);
+        assertEquals("<typ:zip>" + customer.getZip() + "</typ:zip>", lines[index++]);
+        assertEquals("<typ:ico>" + customer.getIco() + "</typ:ico>", lines[index++]);
+        assertEquals("<typ:dic>" + customer.getDic() + "</typ:dic>", lines[index++]);
         assertEquals("</typ:address>", lines[index++]);
         assertEquals("</adb:identity>", lines[index++]);
+        // other
+        assertEquals("<adb:phone>" + customer.getPhone() + "</adb:phone>", lines[index++]);
+        assertEquals("<adb:email>" + customer.getEmail() + "</adb:email>", lines[index++]);
+        assertEquals("<adb:adGroup>" + Customer.AD_GROUP_KEY + "</adb:adGroup>", lines[index++]);
+        assertEquals("<adb:contract>" + customer.getContract() + "</adb:contract>", lines[index++]);
+        // duplicity check
+        assertEquals("<adb:duplicityFields actualize=\"true\">", lines[index++]);
+        assertEquals("<adb:fieldICO>true</adb:fieldICO>", lines[index++]);
+        assertEquals("<adb:fieldFirma>true</adb:fieldFirma>", lines[index++]);
+        assertEquals("</adb:duplicityFields>", lines[index++]);
+        // trailer
         assertEquals("</adb:addressbookHeader>", lines[index++]);
         assertEquals("</adb:addressbook>", lines[index++]);
+
         assertEquals(index, lines.length);
 
         if (log.isDebugEnabled()) {

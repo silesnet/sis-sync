@@ -11,10 +11,21 @@ package cz.silesnet.sis.sync.domain;
  */
 public class Customer implements ItemIdentity {
 
+    public static final String AD_GROUP_KEY = "SIS";
+
     private long id;
-    private String name;
     private String symbol;
+    private String name;
+    private String supplementaryName;
+    private String contactName;
     private String city;
+    private String street;
+    private String zip;
+    private String ico;
+    private String dic;
+    private String phone;
+    private String email;
+    private String contract;
 
     public Customer() {
     }
@@ -27,34 +38,36 @@ public class Customer implements ItemIdentity {
         this.id = id;
     }
 
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name
-     *            the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * @return the symbol
-     */
     public String getSymbol() {
         return symbol;
     }
 
-    /**
-     * @param symbol
-     *            the symbol to set
-     */
     public void setSymbol(String symbol) {
         this.symbol = symbol;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSupplementaryName() {
+        return supplementaryName;
+    }
+
+    public void setSupplementaryName(String supplementaryName) {
+        this.supplementaryName = supplementaryName;
+    }
+
+    public String getContactName() {
+        return contactName;
+    }
+
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
     }
 
     public String getCity() {
@@ -63,6 +76,62 @@ public class Customer implements ItemIdentity {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public String getIco() {
+        return ico;
+    }
+
+    public void setIco(String ico) {
+        this.ico = ico;
+    }
+
+    public String getDic() {
+        return dic;
+    }
+
+    public void setDic(String dic) {
+        this.dic = dic;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getContract() {
+        return contract;
+    }
+
+    public void setContract(String contract) {
+        this.contract = contract;
     }
 
 }
