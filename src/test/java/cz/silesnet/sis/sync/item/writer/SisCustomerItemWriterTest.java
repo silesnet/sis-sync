@@ -1,5 +1,6 @@
 package cz.silesnet.sis.sync.item.writer;
 
+import static cz.silesnet.sis.sync.item.writer.AbstractDataPackItemWriter.*;
 import static org.junit.Assert.*;
 
 import org.apache.commons.logging.Log;
@@ -43,35 +44,35 @@ public class SisCustomerItemWriterTest {
         String[] lines = writer.dataPackItemLines(customer);
         int index = 0;
         // header
-        assertEquals("<adb:addressbook version=\"" + SisCustomerItemWriter.ADDRESSBOOK_ELEMENT_VERSION + "\">",
+        assertEquals(elBeg("adb:addressbook version=\"" + SisCustomerItemWriter.ADDRESSBOOK_ELEMENT_VERSION + "\""),
                 lines[index++]);
-        assertEquals("<adb:addressbookHeader>", lines[index++]);
+        assertEquals(elBeg("adb:addressbookHeader"), lines[index++]);
         // identity
-        assertEquals("<adb:identity>", lines[index++]);
-        assertEquals("<typ:address>", lines[index++]);
-        assertEquals("<typ:company>" + customer.getName() + "</typ:company>", lines[index++]);
-        assertEquals("<typ:division>" + customer.getSupplementaryName() + "</typ:division>", lines[index++]);
-        assertEquals("<typ:name>" + customer.getContactName() + "</typ:name>", lines[index++]);
-        assertEquals("<typ:city>" + customer.getCity() + "</typ:city>", lines[index++]);
-        assertEquals("<typ:street>" + customer.getStreet() + "</typ:street>", lines[index++]);
-        assertEquals("<typ:zip>" + customer.getZip() + "</typ:zip>", lines[index++]);
-        assertEquals("<typ:ico>" + customer.getIco() + "</typ:ico>", lines[index++]);
-        assertEquals("<typ:dic>" + customer.getDic() + "</typ:dic>", lines[index++]);
-        assertEquals("</typ:address>", lines[index++]);
-        assertEquals("</adb:identity>", lines[index++]);
+        assertEquals(elBeg("adb:identity"), lines[index++]);
+        assertEquals(elBeg("typ:address"), lines[index++]);
+        assertEquals(elValue("typ:company", customer.getName()), lines[index++]);
+        assertEquals(elValue("typ:division", customer.getSupplementaryName()), lines[index++]);
+        assertEquals(elValue("typ:name", customer.getContactName()), lines[index++]);
+        assertEquals(elValue("typ:city", customer.getCity()), lines[index++]);
+        assertEquals(elValue("typ:street", customer.getStreet()), lines[index++]);
+        assertEquals(elValue("typ:zip", customer.getZip()), lines[index++]);
+        assertEquals(elValue("typ:ico", customer.getIco()), lines[index++]);
+        assertEquals(elValue("typ:dic", customer.getDic()), lines[index++]);
+        assertEquals(elEnd("typ:address"), lines[index++]);
+        assertEquals(elEnd("adb:identity"), lines[index++]);
         // other
-        assertEquals("<adb:phone>" + customer.getPhone() + "</adb:phone>", lines[index++]);
-        assertEquals("<adb:email>" + customer.getEmail() + "</adb:email>", lines[index++]);
-        assertEquals("<adb:adGroup>" + Customer.AD_GROUP_KEY + "</adb:adGroup>", lines[index++]);
-        assertEquals("<adb:contract>" + customer.getContract() + "</adb:contract>", lines[index++]);
+        assertEquals(elValue("adb:phone", customer.getPhone()), lines[index++]);
+        assertEquals(elValue("adb:email", customer.getEmail()), lines[index++]);
+        assertEquals(elValue("adb:adGroup", Customer.AD_GROUP_KEY), lines[index++]);
+        assertEquals(elValue("adb:contract", customer.getContract()), lines[index++]);
         // duplicity check
-        assertEquals("<adb:duplicityFields actualize=\"true\">", lines[index++]);
-        assertEquals("<adb:fieldICO>true</adb:fieldICO>", lines[index++]);
-        assertEquals("<adb:fieldFirma>true</adb:fieldFirma>", lines[index++]);
-        assertEquals("</adb:duplicityFields>", lines[index++]);
+        assertEquals(elBeg("adb:duplicityFields actualize=\"true\""), lines[index++]);
+        assertEquals(elValue("adb:fieldICO", "true"), lines[index++]);
+        assertEquals(elValue("adb:fieldFirma", "true"), lines[index++]);
+        assertEquals(elEnd("adb:duplicityFields"), lines[index++]);
         // trailer
-        assertEquals("</adb:addressbookHeader>", lines[index++]);
-        assertEquals("</adb:addressbook>", lines[index++]);
+        assertEquals(elEnd("adb:addressbookHeader"), lines[index++]);
+        assertEquals(elEnd("adb:addressbook"), lines[index++]);
 
         assertEquals(index, lines.length);
 
@@ -81,7 +82,6 @@ public class SisCustomerItemWriterTest {
             }
         }
     }
-
     @Test
     public void testNameSpaceLines() throws Exception {
         String[] lines = writer.nameSpaceLines();

@@ -31,38 +31,37 @@ public class SisCustomerItemWriter extends AbstractDataPackItemWriter {
         Customer customer = (Customer) item;
         List<String> lines = new ArrayList<String>();
         // header
-        lines.add("<adb:addressbook version=\"" + ADDRESSBOOK_ELEMENT_VERSION + "\">");
-        lines.add("<adb:addressbookHeader>");
+        lines.add(elBeg("adb:addressbook version=\"" + ADDRESSBOOK_ELEMENT_VERSION + "\""));
+        lines.add(elBeg("adb:addressbookHeader"));
         // identity
-        lines.add("<adb:identity>");
-        lines.add("<typ:address>");
-        lines.add("<typ:company>" + customer.getName() + "</typ:company>");
-        lines.add("<typ:division>" + customer.getSupplementaryName() + "</typ:division>");
-        lines.add("<typ:name>" + customer.getContactName() + "</typ:name>");
-        lines.add("<typ:city>" + customer.getCity() + "</typ:city>");
-        lines.add("<typ:street>" + customer.getStreet() + "</typ:street>");
-        lines.add("<typ:zip>" + customer.getZip() + "</typ:zip>");
-        lines.add("<typ:ico>" + customer.getIco() + "</typ:ico>");
-        lines.add("<typ:dic>" + customer.getDic() + "</typ:dic>");
-        lines.add("</typ:address>");
-        lines.add("</adb:identity>");
+        lines.add(elBeg("adb:identity"));
+        lines.add(elBeg("typ:address"));
+        lines.add(elValue("typ:company", customer.getName()));
+        lines.add(elValue("typ:division", customer.getSupplementaryName()));
+        lines.add(elValue("typ:name", customer.getContactName()));
+        lines.add(elValue("typ:city", customer.getCity()));
+        lines.add(elValue("typ:street", customer.getStreet()));
+        lines.add(elValue("typ:zip", customer.getZip()));
+        lines.add(elValue("typ:ico", customer.getIco()));
+        lines.add(elValue("typ:dic", customer.getDic()));
+        lines.add(elEnd("typ:address"));
+        lines.add(elEnd("adb:identity"));
         // other
-        lines.add("<adb:phone>" + customer.getPhone() + "</adb:phone>");
-        lines.add("<adb:email>" + customer.getEmail() + "</adb:email>");
-        lines.add("<adb:adGroup>" + Customer.AD_GROUP_KEY + "</adb:adGroup>");
-        lines.add("<adb:contract>" + customer.getContract() + "</adb:contract>");
+        lines.add(elValue("adb:phone", customer.getPhone()));
+        lines.add(elValue("adb:email", customer.getEmail()));
+        lines.add(elValue("adb:adGroup", Customer.AD_GROUP_KEY));
+        lines.add(elValue("adb:contract", customer.getContract()));
         // duplicity check
-        lines.add("<adb:duplicityFields actualize=\"true\">");
-        lines.add("<adb:fieldICO>true</adb:fieldICO>");
-        lines.add("<adb:fieldFirma>true</adb:fieldFirma>");
-        lines.add("</adb:duplicityFields>");
+        lines.add(elBeg("adb:duplicityFields actualize=\"true\""));
+        lines.add(elValue("adb:fieldICO", "true"));
+        lines.add(elValue("adb:fieldFirma", "true"));
+        lines.add(elEnd("adb:duplicityFields"));
         // trailer
-        lines.add("</adb:addressbookHeader>");
-        lines.add("</adb:addressbook>");
+        lines.add(elEnd("adb:addressbookHeader"));
+        lines.add(elEnd("adb:addressbook"));
 
         return lines.toArray(new String[lines.size()]);
     }
-
     @Override
     protected String[] nameSpaceLines() {
         return new String[]{"xmlns:adb=\"http://www.stormware.cz/schema/addressbook.xsd\""};

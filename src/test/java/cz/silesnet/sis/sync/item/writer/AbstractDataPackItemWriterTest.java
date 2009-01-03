@@ -163,4 +163,17 @@ public class AbstractDataPackItemWriterTest {
         assertEquals(Long.valueOf(itemsWrittenString), Long.valueOf(ITEMS_WRITTEN));
         assertEquals(AbstractDataPackItemWriter.ITEMS_WRITTEN_STRING_LENGHT, itemsWrittenString.length());
     }
+
+    @Test
+        public void testElValue() throws Exception {
+            assertEquals("<name>value</name>", AbstractDataPackItemWriter.elValue("name", "value"));
+        }
+    @Test
+            public void testElBeg() throws Exception {
+                assertEquals("<name>", AbstractDataPackItemWriter.elBeg("name"));
+            }
+    @Test
+        public void testElEnd() throws Exception {
+            assertEquals("</name>", AbstractDataPackItemWriter.elEnd("name"));
+        }
 }

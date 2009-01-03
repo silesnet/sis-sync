@@ -134,4 +134,41 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
      */
     protected abstract String[] dataPackItemLines(Object item);
 
+    /**
+     * Returns XML element with value, for example <name>value</value>.
+     * 
+     * @param name
+     *            element name
+     * @param value
+     *            element value
+     * @return XML element with value
+     */
+    protected static String elValue(String name, String value) {
+        StringBuilder element = new StringBuilder("<");
+        element.append(name).append(">").append(value).append("</").append(name).append(">");
+        return element.toString();
+    }
+
+    /**
+     * Return XML element beginning, for example <name>.
+     * 
+     * @param name
+     *            element name
+     * @return XML element beginning
+     */
+    protected static String elBeg(String name) {
+        return "<" + name + ">";
+    }
+
+    /**
+     * Return XML element ending, for example </name>.
+     * 
+     * @param name
+     *            element name
+     * @return XML element ending
+     */
+    protected static String elEnd(String name) {
+        return "</" + name + ">";
+    }
+
 }
