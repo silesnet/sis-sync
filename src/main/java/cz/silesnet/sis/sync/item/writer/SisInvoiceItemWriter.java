@@ -18,8 +18,7 @@ import cz.silesnet.sis.sync.domain.Invoice.Item;
  */
 public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
 
-    public static final String ELEMENT_INVOICE_VERSION = "1.3";
-    public static final String MY_COMPANY_NAME = "SilesNet s.r.o.";
+    public static final String INVOICE_ELEMENT_VERSION = "1.3";
 
     public SisInvoiceItemWriter() {
         super();
@@ -35,7 +34,7 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
             throw new IllegalArgumentException("Item has to be an Invoice.");
         Invoice invoice = (Invoice) dataPackItem;
         List<String> lines = new ArrayList<String>();
-        lines.add("<inv:invoice version=\"" + ELEMENT_INVOICE_VERSION + "\">");
+        lines.add("<inv:invoice version=\"" + INVOICE_ELEMENT_VERSION + "\">");
         // Header
         lines.add("<inv:invoiceHeader>");
         lines.add("<inv:invoiceType>issuedInvoice</inv:invoiceType>");

@@ -39,7 +39,7 @@ public class SisInvoiceItemWriterTest {
         Item item = invoice.getItems().get(0);
         int index = 0;
         String[] lines = writer.dataPackItemLines(invoice);
-        assertEquals("<inv:invoice version=\"" + SisInvoiceItemWriter.ELEMENT_INVOICE_VERSION + "\">", lines[index++]);
+        assertEquals("<inv:invoice version=\"" + SisInvoiceItemWriter.INVOICE_ELEMENT_VERSION + "\">", lines[index++]);
         // Header
         assertEquals("<inv:invoiceHeader>", lines[index++]);
         assertEquals("<inv:invoiceType>issuedInvoice</inv:invoiceType>", lines[index++]);

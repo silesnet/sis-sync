@@ -161,6 +161,6 @@ public class AbstractDataPackItemWriterTest {
     public void testGetItemsWrittenString() {
         String itemsWrittenString = itemWriter.getItemsWrittenString();
         assertEquals(Long.valueOf(itemsWrittenString), Long.valueOf(ITEMS_WRITTEN));
-        assertEquals(AbstractDataPackItemWriter.ITEMS_WRITTEN_LENGHT, itemsWrittenString.length());
+        assertEquals(AbstractDataPackItemWriter.ITEMS_WRITTEN_STRING_LENGHT, itemsWrittenString.length());
     }
 }

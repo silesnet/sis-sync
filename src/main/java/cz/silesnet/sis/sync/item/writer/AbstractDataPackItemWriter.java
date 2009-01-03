@@ -24,7 +24,7 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
     public static final String DATA_PACK_ITEM_VERSION = "1.0";
     public static final DateFormat DATA_PACK_ID_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
     public static final DateFormat ELEMENT_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
-    public static final int ITEMS_WRITTEN_LENGHT = 10;
+    public static final int ITEMS_WRITTEN_STRING_LENGHT = 10;
 
     private String dataPackId;
     private String ico;
@@ -42,7 +42,7 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
     }
 
     protected String getItemsWrittenString() {
-        return String.format("%0" + ITEMS_WRITTEN_LENGHT + "d", getItemsWritten());
+        return String.format("%0" + ITEMS_WRITTEN_STRING_LENGHT + "d", getItemsWritten());
     }
 
     protected String getDataPackItemId(Object item) {
