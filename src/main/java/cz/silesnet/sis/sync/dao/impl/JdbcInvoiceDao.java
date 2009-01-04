@@ -12,7 +12,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import cz.silesnet.sis.sync.dao.InvoiceDao;
+import cz.silesnet.sis.sync.domain.Customer;
 import cz.silesnet.sis.sync.domain.Invoice;
+import cz.silesnet.sis.sync.mapping.CustomerRowMapper;
 
 /**
  * Implements InvoiceDao using Spring's JdbcTemplate.
@@ -63,8 +65,7 @@ public class JdbcInvoiceDao implements InvoiceDao {
         private static final String ITEMS_AMOUNT_COLUMN = "amount";
         private static final String ITEMS_PRICE_COLUMN = "price";
         private static final String ITEMS_DISPLAY_UNIT_COLUMN = "is_display_unit";
-        private static final String CUSTOMERS_SYMBOL_SQL = "SELECT symbol FROM customers WHERE id = ?";
-        private static final String CUSTOMERS_SYMBOL_COLUMN = "symbol";
+        private static final String CUSTOMERS_SYMBOL_SQL = "SELECT * FROM customers WHERE id = ?";
 
         /**
          * Maps result set to Invoice object. Retrieves invoice items and associates them with the invoice.
@@ -75,21 +76,16 @@ public class JdbcInvoiceDao implements InvoiceDao {
             invoice.setNumber(rs.getString(NUMBER_COLUMN));
             invoice.setDate(new DateTime(rs.getTimestamp(DATE_COLUMN)));
             invoice.setDueDate(new DateTime(rs.getTimestamp(DUE_DATE_COLUMN)));
-            invoice.setCustomerId(rs.getLong(CUSTOMER_ID_COLUMN));
             invoice.setInvoicingId(rs.getLong(INVOICING_ID_COLUMN));
             invoice.setCustomerName(rs.getString(CUSTOMER_NAME_COLUMN));
             invoice.setPeriodFrom(new DateTime(rs.getTimestamp(PERIOD_FROM_COLUMN)));
             invoice.setPeriodTo(new DateTime(rs.getTimestamp(PERIOD_TO_COLUMN)));
             invoice.setVatRate(rs.getInt(VAT_RATE_COLUMN));
             invoice.setHashCode(rs.getString(HASH_CODE_COLUMN));
-            // retrieve customer's symbol from customers table
-            String symbol = (String) template.queryForObject(CUSTOMERS_SYMBOL_SQL, new Object[] { invoice
-                    .getCustomerId() }, new RowMapper() {
-                public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-                    return rs.getString(CUSTOMERS_SYMBOL_COLUMN);
-                }
-            });
-            invoice.setCustomerSymbol(symbol);
+            // retrieve the customer
+            Customer customer = (Customer) template.queryForObject(CUSTOMERS_SYMBOL_SQL, new Object[] { rs
+                    .getLong(CUSTOMER_ID_COLUMN) }, new CustomerRowMapper());
+            invoice.setCustomer(customer);
             // retrieve invoice items from database by invoice_id
             template.query(ITEMS_SQL, new Object[] { invoice.getId() }, new RowMapper() {
                 public Object mapRow(ResultSet rs, int rowNum) throws SQLException {

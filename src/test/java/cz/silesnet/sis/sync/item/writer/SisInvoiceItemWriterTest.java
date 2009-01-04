@@ -10,6 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import cz.silesnet.sis.sync.domain.Customer;
 import cz.silesnet.sis.sync.domain.Invoice;
 import cz.silesnet.sis.sync.domain.Invoice.Item;
 
@@ -34,10 +35,12 @@ public class SisInvoiceItemWriterTest {
         invoice.setNumber("1234567890");
         invoice.setDate(new DateTime("2009-01-01"));
         invoice.setText("Invoice");
-        invoice.setCustomerId(1234);
-        invoice.setCustomerSymbol("1235");
         invoice.new Item("Item text", 1.0F, 10);
         Item item = invoice.getItems().get(0);
+        Customer customer = new Customer();
+        customer.setId(1234);
+        customer.setSymbol("1235");
+        invoice.setCustomer(customer);
         int index = 0;
         String[] lines = writer.dataPackItemLines(invoice);
         assertEquals(elBeg("inv:invoice version=\"" + SisInvoiceItemWriter.INVOICE_ELEMENT_VERSION + "\""),
@@ -52,7 +55,7 @@ public class SisInvoiceItemWriterTest {
         assertEquals(elValue("inv:text", invoice.getText()), lines[index++]);
         assertEquals(elBeg("inv:partnerIdentity"), lines[index++]);
         // NOTE: SPS customer Id == SIS customer Symbol
-        assertEquals(elValue("typ:id", invoice.getCustomerSymbol()), lines[index++]);
+        assertEquals(elValue("typ:id", invoice.getCustomer().getSymbol()), lines[index++]);
         assertEquals(elEnd("inv:partnerIdentity"), lines[index++]);
         assertEquals(elEnd("inv:invoiceHeader"), lines[index++]);
         // Detail

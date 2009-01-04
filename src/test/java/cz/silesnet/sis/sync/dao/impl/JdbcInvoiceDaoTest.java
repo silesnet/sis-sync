@@ -55,8 +55,6 @@ public class JdbcInvoiceDaoTest extends AbstractDependencyInjectionSpringContext
         assertEquals("200800005", invoice.getNumber());
         assertEquals(new LocalDate("2009-01-05"), invoice.getDate().toLocalDate());
         assertEquals(new LocalDate("2009-01-19"), invoice.getDueDate().toLocalDate());
-        assertEquals(3, invoice.getCustomerId());
-        assertEquals("1003", invoice.getCustomerSymbol());
         assertEquals(2, invoice.getInvoicingId());
         assertEquals("Old Test Customer3", invoice.getCustomerName());
         assertEquals(new LocalDate("2009-01-01"), invoice.getPeriodFrom().toLocalDate());
@@ -74,6 +72,8 @@ public class JdbcInvoiceDaoTest extends AbstractDependencyInjectionSpringContext
         assertEquals(1.0F, invoice.getItems().get(1).getAmount());
         assertEquals(10, invoice.getItems().get(1).getPrice());
         assertFalse(invoice.getItems().get(1).isDisplayUnit());
+        assertEquals(3, invoice.getCustomer().getId());
+        assertEquals("1003", invoice.getCustomer().getSymbol());
     }
 
     @Test

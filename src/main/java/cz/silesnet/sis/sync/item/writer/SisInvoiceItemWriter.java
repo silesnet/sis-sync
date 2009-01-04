@@ -45,7 +45,7 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
         lines.add(elValue("inv:text", invoice.getText()));
         lines.add(elBeg("inv:partnerIdentity"));
         // NOTE: SPS customer Id == SIS customer Symbol
-        lines.add(elValue("typ:id", invoice.getCustomerSymbol()));
+        lines.add(elValue("typ:id", invoice.getCustomer().getSymbol()));
         lines.add(elEnd("inv:partnerIdentity"));
         lines.add(elEnd("inv:invoiceHeader"));
         // Details

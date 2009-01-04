@@ -27,8 +27,6 @@ public class Invoice implements ItemIdentity {
     private DateTime date;
     private DateTime dueDate;
     private String text = INVOICE_TEXT;
-    private String customerSymbol;
-    private long customerId;
     private long invoicingId;
     private String customerName;
     private DateTime periodFrom;
@@ -38,6 +36,7 @@ public class Invoice implements ItemIdentity {
     private List<Item> items = new ArrayList<Item>();
     private float net;
     private BigDecimal vatValue = BigDecimal.valueOf(vatRate, 2);
+    private Customer customer;
 
     private void addItem(Item item) {
         if (item == null)
@@ -74,22 +73,6 @@ public class Invoice implements ItemIdentity {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public long getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(long customerId) {
-        this.customerId = customerId;
-    }
-
-    public String getCustomerSymbol() {
-        return customerSymbol;
-    }
-
-    public void setCustomerSymbol(String customerSymbol) {
-        this.customerSymbol = customerSymbol;
     }
 
     public String getNumber() {
@@ -171,6 +154,14 @@ public class Invoice implements ItemIdentity {
 
     public void setHashCode(String hashCode) {
         this.hashCode = hashCode;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public class Item {
