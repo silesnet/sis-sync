@@ -20,17 +20,24 @@ import edu.emory.mathcs.backport.java.util.Collections;
 public class Invoice implements ItemIdentity {
 
     public static final String INVOICE_TEXT = "Invoice text";
-    public static final int VAT_PERCENT = 19;
-    private static final BigDecimal VAT_BIG_DECIMAL = BigDecimal.valueOf(VAT_PERCENT, 2);
+    private static final int DEFAULT_VAT_RATE = 19;
 
     private long id;
     private String number;
     private DateTime date;
+    private DateTime dueDate;
     private String text = INVOICE_TEXT;
-    private long customerId;
     private String customerSymbol;
+    private long customerId;
+    private long invoicingId;
+    private String customerName;
+    private DateTime periodFrom;
+    private DateTime periodTo;
+    private int vatRate = DEFAULT_VAT_RATE;
+    private String hashCode;
     private List<Item> items = new ArrayList<Item>();
     private float net;
+    private BigDecimal vatValue = BigDecimal.valueOf(vatRate, 2);
 
     private void addItem(Item item) {
         if (item == null)
@@ -109,13 +116,80 @@ public class Invoice implements ItemIdentity {
         this.text = text;
     }
 
+    public DateTime getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(DateTime dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public long getInvoicingId() {
+        return invoicingId;
+    }
+
+    public void setInvoicingId(long invoicingId) {
+        this.invoicingId = invoicingId;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public DateTime getPeriodFrom() {
+        return periodFrom;
+    }
+
+    public void setPeriodFrom(DateTime periodFrom) {
+        this.periodFrom = periodFrom;
+    }
+
+    public DateTime getPeriodTo() {
+        return periodTo;
+    }
+
+    public void setPeriodTo(DateTime periodTo) {
+        this.periodTo = periodTo;
+    }
+
+    public int getVatRate() {
+        return vatRate;
+    }
+
+    public void setVatRate(int vatRate) {
+        this.vatRate = vatRate;
+        vatValue = BigDecimal.valueOf(vatRate, 2);
+    }
+
+    public String getHashCode() {
+        return hashCode;
+    }
+
+    public void setHashCode(String hashCode) {
+        this.hashCode = hashCode;
+    }
+
     public class Item {
         private String text;
+        private float amount;
+        private int price;
+        private boolean isDisplayUnit;
         private float net;
 
-        public Item(String text, float net) {
+        public Item(String text, float amount, int price) {
+            this(text, amount, price, true);
+        }
+
+        public Item(String text, float amount, int price, boolean isDisplayUnit) {
             this.text = text;
-            this.net = net;
+            this.amount = amount;
+            this.price = price;
+            this.net = amount * price;
+            this.isDisplayUnit = isDisplayUnit;
             // automatically associates new item with the invoice
             addItem(this);
         }
@@ -132,23 +206,29 @@ public class Invoice implements ItemIdentity {
             return this.text;
         }
 
-        public void setText(String text) {
-            this.text = text;
-        }
-
         public float getNet() {
             return net;
         }
 
-        public void setNet(float net) {
-            this.net = net;
+        public float getAmount() {
+            return amount;
         }
+
+        public int getPrice() {
+            return price;
+        }
+
+        public boolean isDisplayUnit() {
+            return isDisplayUnit;
+        }
+
     }
 
     protected float calculateVat(float net) {
-        BigDecimal vB = BigDecimal.valueOf(net).multiply(VAT_BIG_DECIMAL);
+        BigDecimal vB = BigDecimal.valueOf(net).multiply(vatValue);
         return vB.setScale(2, RoundingMode.HALF_UP).floatValue();
     }
+
     protected float calculateBrt(float net) {
         return net + calculateVat(net);
     }

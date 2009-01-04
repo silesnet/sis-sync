@@ -36,7 +36,7 @@ public class SisInvoiceItemWriterTest {
         invoice.setText("Invoice");
         invoice.setCustomerId(1234);
         invoice.setCustomerSymbol("1235");
-        invoice.new Item("Item text", 10.00F);
+        invoice.new Item("Item text", 1.0F, 10);
         Item item = invoice.getItems().get(0);
         int index = 0;
         String[] lines = writer.dataPackItemLines(invoice);

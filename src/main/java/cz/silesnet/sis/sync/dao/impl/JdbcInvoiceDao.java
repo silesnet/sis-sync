@@ -32,7 +32,7 @@ public class JdbcInvoiceDao implements InvoiceDao {
     public Invoice find(long id) {
         Invoice invoice = null;
         try {
-            invoice = (Invoice) template.queryForObject(INVOICE_SQL, new Object[]{id}, new InvoiceRowMapper());
+            invoice = (Invoice) template.queryForObject(INVOICE_SQL, new Object[] { id }, new InvoiceRowMapper());
         } catch (DataAccessException e) {
             throw new IllegalArgumentException(e);
         }
@@ -40,8 +40,7 @@ public class JdbcInvoiceDao implements InvoiceDao {
     }
 
     /**
-     * Maps result set to Invoice object. Uses JdbcTemplate to extract invoice
-     * items.
+     * Maps result set to Invoice object. Uses JdbcTemplate to extract invoice items.
      * 
      * @author sikorric
      * 
@@ -51,36 +50,52 @@ public class JdbcInvoiceDao implements InvoiceDao {
         private static final String ID_COLUMN = "id";
         private static final String NUMBER_COLUMN = "number";
         private static final String DATE_COLUMN = "billing_date";
+        private static final String DUE_DATE_COLUMN = "purge_date";
         private static final String CUSTOMER_ID_COLUMN = "customer_id";
+        private static final String INVOICING_ID_COLUMN = "invoicing_id";
+        private static final String CUSTOMER_NAME_COLUMN = "customer_name";
+        private static final String PERIOD_FROM_COLUMN = "period_from";
+        private static final String PERIOD_TO_COLUMN = "period_to";
+        private static final String VAT_RATE_COLUMN = "vat";
+        private static final String HASH_CODE_COLUMN = "hash_code";
         private static final String ITEMS_SQL = "SELECT * FROM bill_items WHERE bill_id = ?";
         private static final String ITEMS_TEXT_COLUMN = "text";
-        private static final String ITEMS_NET_COLUMN = "net";
+        private static final String ITEMS_AMOUNT_COLUMN = "amount";
+        private static final String ITEMS_PRICE_COLUMN = "price";
+        private static final String ITEMS_DISPLAY_UNIT_COLUMN = "is_display_unit";
         private static final String CUSTOMERS_SYMBOL_SQL = "SELECT symbol FROM customers WHERE id = ?";
         private static final String CUSTOMERS_SYMBOL_COLUMN = "symbol";
 
         /**
-         * Maps result set to Invoice object. Retrieves invoice items and
-         * associates them with the invoice.
+         * Maps result set to Invoice object. Retrieves invoice items and associates them with the invoice.
          */
         public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
             final Invoice invoice = new Invoice();
             invoice.setId(rs.getLong(ID_COLUMN));
             invoice.setNumber(rs.getString(NUMBER_COLUMN));
             invoice.setDate(new DateTime(rs.getTimestamp(DATE_COLUMN)));
+            invoice.setDueDate(new DateTime(rs.getTimestamp(DUE_DATE_COLUMN)));
             invoice.setCustomerId(rs.getLong(CUSTOMER_ID_COLUMN));
+            invoice.setInvoicingId(rs.getLong(INVOICING_ID_COLUMN));
+            invoice.setCustomerName(rs.getString(CUSTOMER_NAME_COLUMN));
+            invoice.setPeriodFrom(new DateTime(rs.getTimestamp(PERIOD_FROM_COLUMN)));
+            invoice.setPeriodTo(new DateTime(rs.getTimestamp(PERIOD_TO_COLUMN)));
+            invoice.setVatRate(rs.getInt(VAT_RATE_COLUMN));
+            invoice.setHashCode(rs.getString(HASH_CODE_COLUMN));
             // retrieve customer's symbol from customers table
-            String symbol = (String) template.queryForObject(CUSTOMERS_SYMBOL_SQL,
-                    new Object[]{invoice.getCustomerId()}, new RowMapper() {
-                        public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-                            return rs.getString(CUSTOMERS_SYMBOL_COLUMN);
-                        }
-                    });
+            String symbol = (String) template.queryForObject(CUSTOMERS_SYMBOL_SQL, new Object[] { invoice
+                    .getCustomerId() }, new RowMapper() {
+                public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+                    return rs.getString(CUSTOMERS_SYMBOL_COLUMN);
+                }
+            });
             invoice.setCustomerSymbol(symbol);
             // retrieve invoice items from database by invoice_id
-            template.query(ITEMS_SQL, new Object[]{invoice.getId()}, new RowMapper() {
+            template.query(ITEMS_SQL, new Object[] { invoice.getId() }, new RowMapper() {
                 public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
                     // result set contains row from invoice items table
-                    invoice.new Item(rs.getString(ITEMS_TEXT_COLUMN), rs.getFloat(ITEMS_NET_COLUMN));
+                    invoice.new Item(rs.getString(ITEMS_TEXT_COLUMN), rs.getFloat(ITEMS_AMOUNT_COLUMN), rs
+                            .getInt(ITEMS_PRICE_COLUMN), rs.getBoolean(ITEMS_DISPLAY_UNIT_COLUMN));
                     // just creating new Item automatically associates it with
                     // the invoice
                     // result is not read, null can be returned

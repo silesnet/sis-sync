@@ -31,7 +31,7 @@ public class JdbcInvoiceDaoTest extends AbstractDependencyInjectionSpringContext
 
     @Override
     protected String[] getConfigLocations() {
-        return new String[]{"classpath:sisInvoiceJob.xml"};
+        return new String[] { "classpath:sisInvoiceJob.xml" };
     }
 
     @Override
@@ -52,13 +52,28 @@ public class JdbcInvoiceDaoTest extends AbstractDependencyInjectionSpringContext
     public void testFind() {
         Invoice invoice = dao.find(ID);
         assertEquals(ID, invoice.getId());
-        assertEquals(new LocalDate("2009-01-05"), invoice.getDate().toLocalDate());
-        assertEquals(Invoice.INVOICE_TEXT, invoice.getText());
         assertEquals("200800005", invoice.getNumber());
+        assertEquals(new LocalDate("2009-01-05"), invoice.getDate().toLocalDate());
+        assertEquals(new LocalDate("2009-01-19"), invoice.getDueDate().toLocalDate());
         assertEquals(3, invoice.getCustomerId());
         assertEquals("1003", invoice.getCustomerSymbol());
+        assertEquals(2, invoice.getInvoicingId());
+        assertEquals("Old Test Customer3", invoice.getCustomerName());
+        assertEquals(new LocalDate("2009-01-01"), invoice.getPeriodFrom().toLocalDate());
+        assertEquals(new LocalDate("2009-01-31"), invoice.getPeriodTo().toLocalDate());
+        assertEquals(18, invoice.getVatRate());
+        assertEquals("#1234567895#", invoice.getHashCode());
+        assertEquals(Invoice.INVOICE_TEXT, invoice.getText());
         assertEquals(2, invoice.getItems().size());
         assertEquals(new BigDecimal("130.0"), BigDecimal.valueOf((double) invoice.getNet()));
+        assertEquals("Connectivity 1", invoice.getItems().get(0).getText());
+        assertEquals(2.0F, invoice.getItems().get(0).getAmount());
+        assertEquals(60, invoice.getItems().get(0).getPrice());
+        assertTrue(invoice.getItems().get(0).isDisplayUnit());
+        assertEquals("Connectivity 3", invoice.getItems().get(1).getText());
+        assertEquals(1.0F, invoice.getItems().get(1).getAmount());
+        assertEquals(10, invoice.getItems().get(1).getPrice());
+        assertFalse(invoice.getItems().get(1).isDisplayUnit());
     }
 
     @Test

@@ -26,14 +26,22 @@ CREATE TABLE bills (
     id BIGINT IDENTITY NOT NULL PRIMARY KEY,
     number VARCHAR(20),
     billing_date TIMESTAMP,
+    purge_date TIMESTAMP,
     customer_id BIGINT,
+    invoicing_id BIGINT,
+    customer_name VARCHAR(80),
+    period_from TIMESTAMP,
+    period_to TIMESTAMP,
+    vat INT     ,
+    hash_code VARCHAR(50),
     synchronized TIMESTAMP
 );
 
 CREATE TABLE bill_items (
-    id BIGINT IDENTITY NOT NULL PRIMARY KEY,
     bill_id BIGINT,
-    text VARCHAR(80),
-    net DOUBLE PRECISION 
+    text VARCHAR(100),
+    amount FLOAT, 
+    price INT,
+    is_display_unit BOOLEAN
 );
 
