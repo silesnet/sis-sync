@@ -60,7 +60,7 @@ public class SisInvoiceItemWriterTest {
         assertEquals(elBeg("inv:invoiceItem"), lines[index++]);
         assertEquals(elValue("inv:text", item.getText()), lines[index++]);
         assertEquals(elValue("inv:quantity", "1"), lines[index++]);
-        assertEquals(elValue("inv:unit", "m&#236;s."), lines[index++]);
+        assertEquals(elValue("inv:unit", SisInvoiceItemWriter.ITEM_UNIT), lines[index++]);
         assertEquals(elValue("inv:coefficient", "1.0"), lines[index++]);
         assertEquals(elBeg("inv:homeCurrency"), lines[index++]);
         assertEquals(elValue("typ:unitPrice", item.getNet()), lines[index++]);

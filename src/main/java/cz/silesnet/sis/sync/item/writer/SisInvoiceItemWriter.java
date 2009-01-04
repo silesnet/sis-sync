@@ -19,6 +19,7 @@ import cz.silesnet.sis.sync.domain.Invoice.Item;
 public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
 
     public static final String INVOICE_ELEMENT_VERSION = "1.3";
+    public static final String ITEM_UNIT = "m&#236;s.";
 
     public SisInvoiceItemWriter() {
         super();
@@ -54,7 +55,7 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
                 lines.add(elBeg("inv:invoiceItem"));
                 lines.add(elValue("inv:text", item.getText()));
                 lines.add(elValue("inv:quantity", "1"));
-                lines.add(elValue("inv:unit", "m&#236;s."));
+                lines.add(elValue("inv:unit", ITEM_UNIT));
                 lines.add(elValue("inv:coefficient", "1.0"));
                 lines.add(elBeg("inv:homeCurrency"));
                 lines.add(elValue("typ:unitPrice", item.getNet()));
