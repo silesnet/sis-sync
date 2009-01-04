@@ -1,5 +1,6 @@
 package cz.silesnet.sis.sync.item.writer;
 
+import static cz.silesnet.sis.sync.item.writer.AbstractDataPackItemWriter.*;
 import static org.junit.Assert.*;
 
 import org.apache.commons.logging.Log;
@@ -39,49 +40,50 @@ public class SisInvoiceItemWriterTest {
         Item item = invoice.getItems().get(0);
         int index = 0;
         String[] lines = writer.dataPackItemLines(invoice);
-        assertEquals("<inv:invoice version=\"" + SisInvoiceItemWriter.INVOICE_ELEMENT_VERSION + "\">", lines[index++]);
+        assertEquals(elBeg("inv:invoice version=\"" + SisInvoiceItemWriter.INVOICE_ELEMENT_VERSION + "\""),
+                lines[index++]);
         // Header
-        assertEquals("<inv:invoiceHeader>", lines[index++]);
-        assertEquals("<inv:invoiceType>issuedInvoice</inv:invoiceType>", lines[index++]);
-        assertEquals("<inv:number>", lines[index++]);
-        assertEquals("<typ:numberRequested>" + invoice.getNumber() + "</typ:numberRequested>", lines[index++]);
-        assertEquals("</inv:number>", lines[index++]);
-        assertEquals("<inv:date>" + invoice.getDate().toString("yyyy-MM-dd") + "</inv:date>", lines[index++]);
-        assertEquals("<inv:text>" + invoice.getText() + "</inv:text>", lines[index++]);
-        assertEquals("<inv:partnerIdentity>", lines[index++]);
+        assertEquals(elBeg("inv:invoiceHeader"), lines[index++]);
+        assertEquals(elValue("inv:invoiceType", "issuedInvoice"), lines[index++]);
+        assertEquals(elBeg("inv:number"), lines[index++]);
+        assertEquals(elValue("typ:numberRequested", invoice.getNumber()), lines[index++]);
+        assertEquals(elEnd("inv:number"), lines[index++]);
+        assertEquals(elValue("inv:date", invoice.getDate().toString("yyyy-MM-dd")), lines[index++]);
+        assertEquals(elValue("inv:text", invoice.getText()), lines[index++]);
+        assertEquals(elBeg("inv:partnerIdentity"), lines[index++]);
         // NOTE: SPS customer Id == SIS customer Symbol
-        assertEquals("<typ:id>" + invoice.getCustomerSymbol() + "</typ:id>", lines[index++]);
-        assertEquals("</inv:partnerIdentity>", lines[index++]);
-        assertEquals("</inv:invoiceHeader>", lines[index++]);
+        assertEquals(elValue("typ:id", invoice.getCustomerSymbol()), lines[index++]);
+        assertEquals(elEnd("inv:partnerIdentity"), lines[index++]);
+        assertEquals(elEnd("inv:invoiceHeader"), lines[index++]);
         // Detail
-        assertEquals("<inv:invoiceDetail>", lines[index++]);
-        assertEquals("<inv:invoiceItem>", lines[index++]);
-        assertEquals("<inv:text>" + item.getText() + "</inv:text>", lines[index++]);
-        assertEquals("<inv:quantity>" + "1" + "</inv:quantity>", lines[index++]);
-        assertEquals("<inv:unit>" + "m&#236;s." + "</inv:unit>", lines[index++]);
-        assertEquals("<inv:coefficient>" + "1.0" + "</inv:coefficient>", lines[index++]);
-        assertEquals("<inv:homeCurrency>", lines[index++]);
-        assertEquals("<typ:unitPrice>" + item.getNet() + "</typ:unitPrice>", lines[index++]);
-        assertEquals("<typ:price>" + item.getNet() + "</typ:price>", lines[index++]);
-        assertEquals("<typ:priceVAT>" + item.getVat() + "</typ:priceVAT>", lines[index++]);
-        assertEquals("<typ:priceSum>" + item.getBrt() + "</typ:priceSum>", lines[index++]);
-        assertEquals("</inv:homeCurrency>", lines[index++]);
-        assertEquals("</inv:invoiceItem>", lines[index++]);
-        assertEquals("</inv:invoiceDetail>", lines[index++]);
+        assertEquals(elBeg("inv:invoiceDetail"), lines[index++]);
+        assertEquals(elBeg("inv:invoiceItem"), lines[index++]);
+        assertEquals(elValue("inv:text", item.getText()), lines[index++]);
+        assertEquals(elValue("inv:quantity", "1"), lines[index++]);
+        assertEquals(elValue("inv:unit", "m&#236;s."), lines[index++]);
+        assertEquals(elValue("inv:coefficient", "1.0"), lines[index++]);
+        assertEquals(elBeg("inv:homeCurrency"), lines[index++]);
+        assertEquals(elValue("typ:unitPrice", item.getNet()), lines[index++]);
+        assertEquals(elValue("typ:price", item.getNet()), lines[index++]);
+        assertEquals(elValue("typ:priceVAT", item.getVat()), lines[index++]);
+        assertEquals(elValue("typ:priceSum", item.getBrt()), lines[index++]);
+        assertEquals(elEnd("inv:homeCurrency"), lines[index++]);
+        assertEquals(elEnd("inv:invoiceItem"), lines[index++]);
+        assertEquals(elEnd("inv:invoiceDetail"), lines[index++]);
         // Summary
-        assertEquals("<inv:invoiceSummary>", lines[index++]);
-        assertEquals("<inv:roundingDocument>math2one</inv:roundingDocument>", lines[index++]);
-        assertEquals("<inv:roundingVAT>none</inv:roundingVAT>", lines[index++]);
-        assertEquals("<inv:homeCurrency>", lines[index++]);
-        assertEquals("<typ:priceHigh>" + invoice.getNet() + "</typ:priceHigh>", lines[index++]);
-        assertEquals("<typ:priceHighVAT>" + invoice.getVat() + "</typ:priceHighVAT>", lines[index++]);
-        assertEquals("<typ:priceHighSum>" + invoice.getBrt() + "</typ:priceHighSum>", lines[index++]);
-        assertEquals("<typ:round>", lines[index++]);
-        assertEquals("<typ:priceRound>" + invoice.getRounding() + "</typ:priceRound>", lines[index++]);
-        assertEquals("</typ:round>", lines[index++]);
-        assertEquals("</inv:homeCurrency>", lines[index++]);
-        assertEquals("</inv:invoiceSummary>", lines[index++]);
-        assertEquals("</inv:invoice>", lines[index++]);
+        assertEquals(elBeg("inv:invoiceSummary"), lines[index++]);
+        assertEquals(elValue("inv:roundingDocument", "math2one"), lines[index++]);
+        assertEquals(elValue("inv:roundingVAT", "none"), lines[index++]);
+        assertEquals(elBeg("inv:homeCurrency"), lines[index++]);
+        assertEquals(elValue("typ:priceHigh", invoice.getNet()), lines[index++]);
+        assertEquals(elValue("typ:priceHighVAT", invoice.getVat()), lines[index++]);
+        assertEquals(elValue("typ:priceHighSum", invoice.getBrt()), lines[index++]);
+        assertEquals(elBeg("typ:round"), lines[index++]);
+        assertEquals(elValue("typ:priceRound", Float.valueOf(invoice.getRounding()).toString()), lines[index++]);
+        assertEquals(elEnd("typ:round"), lines[index++]);
+        assertEquals(elEnd("inv:homeCurrency"), lines[index++]);
+        assertEquals(elEnd("inv:invoiceSummary"), lines[index++]);
+        assertEquals(elEnd("inv:invoice"), lines[index++]);
         assertEquals(index, lines.length);
 
         if (log.isDebugEnabled()) {

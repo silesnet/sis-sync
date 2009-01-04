@@ -34,12 +34,12 @@ public class AbstractDataPackItemWriterTest {
 
             @Override
             protected String[] dataPackItemLines(Object item) {
-                return new String[]{item.toString()};
+                return new String[] { item.toString() };
             }
 
             @Override
             protected String[] nameSpaceLines() {
-                return new String[]{NAME_SPACE_1, NAME_SPACE_2};
+                return new String[] { NAME_SPACE_1, NAME_SPACE_2 };
             }
 
             @Override
@@ -170,6 +170,11 @@ public class AbstractDataPackItemWriterTest {
     }
 
     @Test
+    public void testElValueFloat() throws Exception {
+        assertEquals("<name>10.0</name>", AbstractDataPackItemWriter.elValue("name", 10.0F));
+    }
+
+    @Test
     public void testElValueNull() throws Exception {
         assertEquals("<name />", AbstractDataPackItemWriter.elValue("name", null));
     }
@@ -178,6 +183,7 @@ public class AbstractDataPackItemWriterTest {
     public void testElBeg() throws Exception {
         assertEquals("<name>", AbstractDataPackItemWriter.elBeg("name"));
     }
+
     @Test
     public void testElEnd() throws Exception {
         assertEquals("</name>", AbstractDataPackItemWriter.elEnd("name"));
