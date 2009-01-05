@@ -179,7 +179,7 @@ public class Invoice implements ItemIdentity {
             this.text = text;
             this.amount = amount;
             this.price = price;
-            this.net = amount * price;
+            this.net = amount * ((float) price);
             this.isDisplayUnit = isDisplayUnit;
             // automatically associates new item with the invoice
             addItem(this);
@@ -198,7 +198,7 @@ public class Invoice implements ItemIdentity {
         }
 
         public float getNet() {
-            return net;
+            return this.net;
         }
 
         public float getAmount() {

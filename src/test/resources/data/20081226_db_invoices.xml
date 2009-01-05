@@ -8,7 +8,7 @@
 	<bills id="2" number="200800002" billing_date="2008-12-03" purge_date="2008-12-17" customer_id="2" invoicing_id="1" customer_name="Old Test Customer2" period_from="2008-12-01" period_to="2008-12-31" vat="19" hash_code="#1234567892#" synchronized="2008-12-23 05:00:00" />
 	<bills id="3" number="200800003" billing_date="2009-01-05" purge_date="2009-01-19" customer_id="1" invoicing_id="2" customer_name="Old Test Customer1" period_from="2009-01-01" period_to="2009-01-31" vat="19" hash_code="#1234567893#" />
 	<bills id="4" number="200800004" billing_date="2009-01-05" purge_date="2009-01-19" customer_id="2" invoicing_id="2" customer_name="Old Test Customer2" period_from="2009-01-01" period_to="2009-01-31" vat="19" hash_code="#1234567894#" />
-	<bills id="5" number="200800005" billing_date="2009-01-05" purge_date="2009-01-19" customer_id="3" invoicing_id="2" customer_name="Old Test Customer3" period_from="2009-01-01" period_to="2009-01-31" vat="18" hash_code="#1234567895#" />
+	<bills id="5" number="200800005" billing_date="2009-01-05" purge_date="2009-01-19" customer_id="3" invoicing_id="2" customer_name="Old Test Customer3" period_from="2009-01-01" period_to="2009-01-31" vat="19" hash_code="#1234567895#" />
 	
 	<bill_items bill_id="3" text="Connectivity 1" amount="1.0" price="120" is_display_unit="true" />
 	<bill_items bill_id="4" text="Connectivity 2" amount="2.0" price="120" is_display_unit="true" />
