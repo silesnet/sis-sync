@@ -20,7 +20,7 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
 
     public static final String INVOICE_ELEMENT_VERSION = "1.3";
     public static final String DEFAULT_ACCOUNTING = "2Fv";
-    public static final String ITEM_UNIT = "m&#236;s.";
+    public static final String ITEM_UNIT = "m\u011Bs.";
     public static final String CLASSIFICATION_VAT_TYPE = "inland";
     public static final String SYM_CONST = "0308";
     public static final String DEFAULT_NOTE = "Printed note.";
