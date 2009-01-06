@@ -9,7 +9,7 @@
     <property name="locations">
       <list>
         <value>batch.properties</value>
-        <value>jbdc.properties</value>
+        <value>jdbc.properties</value>
       </list>
     </property>
   </bean>
