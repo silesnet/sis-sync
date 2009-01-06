@@ -19,27 +19,28 @@ public class SisInvoiceItemWriterTest {
     private static Log log = LogFactory.getLog(SisInvoiceItemWriterTest.class);
 
     private SisInvoiceItemWriter writer;
-
+    private Invoice invoice;
     @Before
     public void setUp() throws Exception {
         writer = new SisInvoiceItemWriter();
+        invoice = new Invoice();
     }
 
     @After
     public void tearDown() throws Exception {
         writer = null;
+        invoice = null;
     }
 
     @Test
     public void testInvoiceLines() throws Exception {
-        Invoice invoice = new Invoice();
         invoice.setNumber("1234567890");
         invoice.setDate(new DateTime("2009-01-01"));
         invoice.setDueDate(new DateTime("2009-01-15"));
         invoice.setPeriodFrom(new DateTime("2009-01-01"));
         invoice.setPeriodTo(new DateTime("2009-01-31"));
-        invoice.new Item("Item text", 1.0F, 10, true);
-        invoice.new Item("Item text", 1.0F, 20, false);
+        invoice.new Item("WIRELESSdirect", 1.0F, 10, true);
+        invoice.new Item("Aktivace", 1.0F, 20, false);
         Item item1 = invoice.getItems().get(0);
         Item item2 = invoice.getItems().get(1);
         Customer customer = new Customer();
@@ -59,13 +60,10 @@ public class SisInvoiceItemWriterTest {
         assertEquals(elValue("inv:symPar", invoice.getCustomer().getSymbol()), lines[index++]);
         assertEquals(elValue("inv:date", invoice.getDate().toString("yyyy-MM-dd")), lines[index++]);
         assertEquals(elValue("inv:dateDue", invoice.getDueDate().toString("yyyy-MM-dd")), lines[index++]);
-        assertEquals(elBeg("inv:accounting"), lines[index++]);
-        assertEquals(elValue("typ:ids", SisInvoiceItemWriter.DEFAULT_ACCOUNTING), lines[index++]);
-        assertEquals(elEnd("inv:accounting"), lines[index++]);
         assertEquals(elBeg("inv:classificationVAT"), lines[index++]);
         assertEquals(elValue("typ:classificationVATType", SisInvoiceItemWriter.CLASSIFICATION_VAT_TYPE), lines[index++]);
         assertEquals(elEnd("inv:classificationVAT"), lines[index++]);
-        assertEquals(elValue("inv:text", invoice.getText()), lines[index++]);
+        assertEquals(elValue("inv:text", SisInvoiceItemWriter.getInvoiceText(invoice)), lines[index++]);
         assertEquals(elBeg("inv:partnerIdentity"), lines[index++]);
         // NOTE: SPS customer Id == SIS customer Symbol
         assertEquals(elValue("typ:id", invoice.getCustomer().getSymbol()), lines[index++]);
@@ -89,6 +87,9 @@ public class SisInvoiceItemWriterTest {
         assertEquals(elValue("typ:priceVAT", item1.getVat()), lines[index++]);
         assertEquals(elValue("typ:priceSum", item1.getBrt()), lines[index++]);
         assertEquals(elEnd("inv:homeCurrency"), lines[index++]);
+        assertEquals(elBeg("inv:accounting"), lines[index++]);
+        assertEquals(elValue("typ:ids", SisInvoiceItemWriter.getItemAccounting(item1)), lines[index++]);
+        assertEquals(elEnd("inv:accounting"), lines[index++]);
         assertEquals(elEnd("inv:invoiceItem"), lines[index++]);
         // item #2
         assertEquals(elBeg("inv:invoiceItem"), lines[index++]);
@@ -101,6 +102,9 @@ public class SisInvoiceItemWriterTest {
         assertEquals(elValue("typ:priceVAT", item2.getVat()), lines[index++]);
         assertEquals(elValue("typ:priceSum", item2.getBrt()), lines[index++]);
         assertEquals(elEnd("inv:homeCurrency"), lines[index++]);
+        assertEquals(elBeg("inv:accounting"), lines[index++]);
+        assertEquals(elValue("typ:ids", SisInvoiceItemWriter.getItemAccounting(item2)), lines[index++]);
+        assertEquals(elEnd("inv:accounting"), lines[index++]);
         assertEquals(elEnd("inv:invoiceItem"), lines[index++]);
         assertEquals(elEnd("inv:invoiceDetail"), lines[index++]);
         // Summary
@@ -131,5 +135,4 @@ public class SisInvoiceItemWriterTest {
         assertEquals("xmlns:inv=\"http://www.stormware.cz/schema/invoice.xsd\"", lines[0]);
         assertEquals(1, lines.length);
     }
-
 }

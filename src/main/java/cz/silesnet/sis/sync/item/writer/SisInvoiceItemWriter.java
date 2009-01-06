@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import cz.silesnet.sis.sync.domain.Invoice;
 import cz.silesnet.sis.sync.domain.Invoice.Item;
 
@@ -19,7 +22,6 @@ import cz.silesnet.sis.sync.domain.Invoice.Item;
 public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
 
     public static final String INVOICE_ELEMENT_VERSION = "1.3";
-    public static final String DEFAULT_ACCOUNTING = "2Fv";
     public static final String ITEM_UNIT = "m\u011Bs.";
     public static final String CLASSIFICATION_VAT_TYPE = "inland";
     public static final String SYM_CONST = "0308";
@@ -28,7 +30,23 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
     public static final String RATE_VAT = "high";
     public static final String ROUNDING_DOCUMENT = "math2half";
     public static final String ROUNDING_VAT = "none";
+    public static final String INVOICE_TEXT = "Na z\u00e1klad\u011b smlouvy V\u00e1m fakturujeme poskytov\u00e1n\u00ed slu\u017eby";
+    public static final String INVOICE_TEXT_PERIOD = "za obdob\u00ed";
+    private static final DateTimeFormatter PERIOD_DATE_FORMATTER = DateTimeFormat.forPattern("dd.MM.yyyy");
+
     public static final String SERVICE_ITEM_TEXT_PREFIX = "Slu\u017eba - ";
+
+    public static final String ACCOUNTING_CONNECTIVITY = "konektivita";
+    public static final String ACCOUNTING_CONNECTIVITY_PREFIX1 = "LAN";
+    public static final String ACCOUNTING_CONNECTIVITY_PREFIX2 = "WIRELESS";
+    public static final String ACCOUNTING_CONNECTIVITY_PREFIX3 = "INTERNET";
+    public static final String ACCOUNTING_WEBHOSTING = "webhosting";
+    public static final String ACCOUNTING_WEBHOSTING_PREFIX = "WEBhosting";
+    public static final String ACCOUNTING_SERVERHOUSING = "serverhousing";
+    public static final String ACCOUNTING_SERVERHOUSING_PREFIX = "SERVERhousing";
+    public static final String ACCOUNTING_ACTIVATION = "aktivace";
+    public static final String ACCOUNTING_ACTIVATION_PREFIX = "Aktivace";
+    public static final String ACCOUNTING_DEFAULT = "ostatni";
 
     public SisInvoiceItemWriter() {
         super();
@@ -55,13 +73,10 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
         lines.add(elValue("inv:symPar", invoice.getCustomer().getSymbol()));
         lines.add(elValue("inv:date", ELEMENT_DATE_FORMAT.format(new Date(invoice.getDate().getMillis()))));
         lines.add(elValue("inv:dateDue", ELEMENT_DATE_FORMAT.format(new Date(invoice.getDueDate().getMillis()))));
-        lines.add(elBeg("inv:accounting"));
-        lines.add(elValue("typ:ids", DEFAULT_ACCOUNTING));
-        lines.add(elEnd("inv:accounting"));
         lines.add(elBeg("inv:classificationVAT"));
         lines.add(elValue("typ:classificationVATType", CLASSIFICATION_VAT_TYPE));
         lines.add(elEnd("inv:classificationVAT"));
-        lines.add(elValue("inv:text", invoice.getText()));
+        lines.add(elValue("inv:text", getInvoiceText(invoice)));
         lines.add(elBeg("inv:partnerIdentity"));
         // NOTE: SPS customer Id == SIS customer Symbol
         lines.add(elValue("typ:id", invoice.getCustomer().getSymbol()));
@@ -91,6 +106,9 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
                 lines.add(elValue("typ:priceVAT", item.getVat()));
                 lines.add(elValue("typ:priceSum", item.getBrt()));
                 lines.add(elEnd("inv:homeCurrency"));
+                lines.add(elBeg("inv:accounting"));
+                lines.add(elValue("typ:ids", getItemAccounting(item)));
+                lines.add(elEnd("inv:accounting"));
                 lines.add(elEnd("inv:invoiceItem"));
             }
             lines.add(elEnd("inv:invoiceDetail"));
@@ -120,4 +138,29 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
         return new String[]{"xmlns:inv=\"http://www.stormware.cz/schema/invoice.xsd\""};
     }
 
+    protected static String getInvoiceText(Invoice invoice) {
+        StringBuilder periodText = new StringBuilder(INVOICE_TEXT);
+        if (invoice.getPeriodFrom() == null || invoice.getPeriodTo() == null) {
+            return periodText.append(":").toString();
+        } else {
+            periodText.append(" ").append(INVOICE_TEXT_PERIOD).append(" ");
+            periodText.append(PERIOD_DATE_FORMATTER.print(invoice.getPeriodFrom())).append("-");
+            periodText.append(PERIOD_DATE_FORMATTER.print(invoice.getPeriodTo())).append(":");
+            return periodText.toString();
+        }
+    }
+
+    protected static String getItemAccounting(Invoice.Item item) {
+        String text = item.getText();
+        if (text.startsWith(ACCOUNTING_CONNECTIVITY_PREFIX1) || text.startsWith(ACCOUNTING_CONNECTIVITY_PREFIX2)
+                || text.startsWith(ACCOUNTING_CONNECTIVITY_PREFIX3))
+            return ACCOUNTING_CONNECTIVITY;
+        if (text.startsWith(ACCOUNTING_WEBHOSTING_PREFIX))
+            return ACCOUNTING_WEBHOSTING;
+        if (text.startsWith(ACCOUNTING_SERVERHOUSING_PREFIX))
+            return ACCOUNTING_SERVERHOUSING;
+        if (text.startsWith(ACCOUNTING_ACTIVATION_PREFIX))
+            return ACCOUNTING_ACTIVATION;
+        return ACCOUNTING_DEFAULT;
+    }
 }
