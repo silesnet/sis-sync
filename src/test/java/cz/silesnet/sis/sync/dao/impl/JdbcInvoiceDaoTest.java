@@ -31,7 +31,7 @@ public class JdbcInvoiceDaoTest extends AbstractDependencyInjectionSpringContext
 
     @Override
     protected String[] getConfigLocations() {
-        return new String[] { "classpath:sisInvoiceJob.xml" };
+        return new String[]{"classpath:sisInvoiceJob.xml"};
     }
 
     @Override
@@ -59,7 +59,7 @@ public class JdbcInvoiceDaoTest extends AbstractDependencyInjectionSpringContext
         assertEquals("Old Test Customer3", invoice.getCustomerName());
         assertEquals(new LocalDate("2009-01-01"), invoice.getPeriodFrom().toLocalDate());
         assertEquals(new LocalDate("2009-01-31"), invoice.getPeriodTo().toLocalDate());
-        assertEquals(18, invoice.getVatRate());
+        assertEquals(19, invoice.getVatRate());
         assertEquals("#1234567895#", invoice.getHashCode());
         assertEquals(Invoice.INVOICE_TEXT, invoice.getText());
         assertEquals(2, invoice.getItems().size());

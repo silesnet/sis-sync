@@ -28,6 +28,7 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
     public static final String RATE_VAT = "high";
     public static final String ROUNDING_DOCUMENT = "math2one";
     public static final String ROUNDING_VAT = "none";
+    public static final String SERVICE_ITEM_TEXT_PREFIX = "Slu\u017eba - ";
 
     public SisInvoiceItemWriter() {
         super();
@@ -74,7 +75,11 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
             lines.add(elBeg("inv:invoiceDetail"));
             for (Item item : invoice.getItems()) {
                 lines.add(elBeg("inv:invoiceItem"));
-                lines.add(elValue("inv:text", item.getText()));
+                if (item.isDisplayUnit()) {
+                    lines.add(elValue("inv:text", SERVICE_ITEM_TEXT_PREFIX + item.getText()));
+                } else {
+                    lines.add(elValue("inv:text", item.getText()));
+                }
                 lines.add(elValue("inv:quantity", item.getAmount()));
                 if (item.isDisplayUnit()) {
                     lines.add(elValue("inv:unit", ITEM_UNIT));
