@@ -26,7 +26,7 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
     public static final String DEFAULT_NOTE = null;
     public static final String DEFAULT_INTERNAL_NOTE = "Generov\u00e1no syst\u00e9mem SIS.";
     public static final String RATE_VAT = "high";
-    public static final String ROUNDING_DOCUMENT = "math2one";
+    public static final String ROUNDING_DOCUMENT = "math2half";
     public static final String ROUNDING_VAT = "none";
     public static final String SERVICE_ITEM_TEXT_PREFIX = "Slu\u017eba - ";
 
