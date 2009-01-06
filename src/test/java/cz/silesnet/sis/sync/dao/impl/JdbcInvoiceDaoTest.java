@@ -61,7 +61,6 @@ public class JdbcInvoiceDaoTest extends AbstractDependencyInjectionSpringContext
         assertEquals(new LocalDate("2009-01-31"), invoice.getPeriodTo().toLocalDate());
         assertEquals(19, invoice.getVatRate());
         assertEquals("#1234567895#", invoice.getHashCode());
-        assertEquals(Invoice.INVOICE_TEXT, invoice.getText());
         assertEquals(2, invoice.getItems().size());
         assertEquals(new BigDecimal("130.0"), BigDecimal.valueOf((double) invoice.getNet()));
         assertEquals("Connectivity 1", invoice.getItems().get(0).getText());

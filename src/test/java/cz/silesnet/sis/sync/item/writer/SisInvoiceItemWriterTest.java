@@ -36,7 +36,8 @@ public class SisInvoiceItemWriterTest {
         invoice.setNumber("1234567890");
         invoice.setDate(new DateTime("2009-01-01"));
         invoice.setDueDate(new DateTime("2009-01-15"));
-        invoice.setText("Invoice");
+        invoice.setPeriodFrom(new DateTime("2009-01-01"));
+        invoice.setPeriodTo(new DateTime("2009-01-31"));
         invoice.new Item("Item text", 1.0F, 10, true);
         invoice.new Item("Item text", 1.0F, 20, false);
         Item item1 = invoice.getItems().get(0);
@@ -77,7 +78,8 @@ public class SisInvoiceItemWriterTest {
         assertEquals(elBeg("inv:invoiceDetail"), lines[index++]);
         // item #1
         assertEquals(elBeg("inv:invoiceItem"), lines[index++]);
-        assertEquals(elValue("inv:text", SisInvoiceItemWriter.SERVICE_ITEM_TEXT_PREFIX + item1.getText()), lines[index++]);
+        assertEquals(elValue("inv:text", SisInvoiceItemWriter.SERVICE_ITEM_TEXT_PREFIX + item1.getText()),
+                lines[index++]);
         assertEquals(elValue("inv:quantity", item1.getAmount()), lines[index++]);
         assertEquals(elValue("inv:unit", SisInvoiceItemWriter.ITEM_UNIT), lines[index++]);
         assertEquals(elValue("inv:rateVAT", SisInvoiceItemWriter.RATE_VAT), lines[index++]);

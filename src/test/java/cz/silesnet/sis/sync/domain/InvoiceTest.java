@@ -2,6 +2,9 @@ package cz.silesnet.sis.sync.domain;
 
 import static org.junit.Assert.*;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.joda.time.DateTime;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +12,9 @@ import org.junit.Test;
 import cz.silesnet.sis.sync.domain.Invoice.Item;
 
 public class InvoiceTest {
+
+    private static Log log = LogFactory.getLog(InvoiceTest.class);
+
     private static final float AMOUNT = 1.025F;
     private static final int PRICE = 10;
     private static final float NET = 10.25F;
@@ -67,6 +73,22 @@ public class InvoiceTest {
         assertEquals(NET, item.getNet(), PRECISION);
         assertEquals(invoice.calculateVat(NET), item.getVat(), PRECISION);
         assertEquals(invoice.calculateBrt(NET), item.getBrt(), PRECISION);
+    }
+
+    @Test
+    public void testGetTextWithPeriod() throws Exception {
+        invoice.setPeriodFrom(new DateTime("2009-01-01"));
+        invoice.setPeriodTo(new DateTime("2009-01-31"));
+        String text = invoice.getText();
+        assertEquals(Invoice.INVOICE_TEXT + " " + Invoice.INVOICE_TEXT_PERIOD + " 01.01.2009-31.01.2009:", text);
+        log.debug(text);
+    }
+
+    @Test
+    public void testGetTextWithoutPeriod() throws Exception {
+        String text = invoice.getText();
+        assertEquals(Invoice.INVOICE_TEXT + ":", text);
+        log.debug(text);
     }
 
 }

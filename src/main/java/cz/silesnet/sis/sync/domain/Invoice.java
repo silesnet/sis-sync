@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import edu.emory.mathcs.backport.java.util.Collections;
 
@@ -19,8 +21,13 @@ import edu.emory.mathcs.backport.java.util.Collections;
  */
 public class Invoice implements ItemIdentity {
 
-    public static final String INVOICE_TEXT = "Invoice text";
+    /**
+     * 
+     */
+    protected static final String INVOICE_TEXT = "Na z\u00e1klad\u011b smlouvy V\u00e1m fakturujeme poskytov\u00e1n\u00ed slu\u017eby";
+    protected static final String INVOICE_TEXT_PERIOD = "za obdob\u00ed";
     private static final int DEFAULT_VAT_RATE = 19;
+    private static final DateTimeFormatter PERIOD_DATE_FORMATTER = DateTimeFormat.forPattern("dd.MM.yyyy");
 
     private long id;
     private String number;
@@ -92,13 +99,16 @@ public class Invoice implements ItemIdentity {
     }
 
     public String getText() {
-        return text;
+        if (periodFrom == null || periodTo == null) {
+            return text + ":";
+        } else {
+            StringBuilder periodText = new StringBuilder(text);
+            periodText.append(" ").append(INVOICE_TEXT_PERIOD).append(" ");
+            periodText.append(PERIOD_DATE_FORMATTER.print(periodFrom)).append("-");
+            periodText.append(PERIOD_DATE_FORMATTER.print(periodTo)).append(":");
+            return periodText.toString();
+        }
     }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
     public DateTime getDueDate() {
         return dueDate;
     }

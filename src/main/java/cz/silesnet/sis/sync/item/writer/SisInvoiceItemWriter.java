@@ -23,8 +23,8 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
     public static final String ITEM_UNIT = "m\u011Bs.";
     public static final String CLASSIFICATION_VAT_TYPE = "inland";
     public static final String SYM_CONST = "0308";
-    public static final String DEFAULT_NOTE = "Printed note.";
-    public static final String DEFAULT_INTERNAL_NOTE = "Internal not printed note.";
+    public static final String DEFAULT_NOTE = null;
+    public static final String DEFAULT_INTERNAL_NOTE = "Generov\u00e1no syst\u00e9mem SIS.";
     public static final String RATE_VAT = "high";
     public static final String ROUNDING_DOCUMENT = "math2one";
     public static final String ROUNDING_VAT = "none";
