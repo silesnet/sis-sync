@@ -63,7 +63,7 @@ public class JdbcInvoiceDaoTest extends AbstractDependencyInjectionSpringContext
         assertEquals("#1234567895#", invoice.getHashCode());
         assertEquals(2, invoice.getItems().size());
         assertEquals(new BigDecimal("130.0"), BigDecimal.valueOf((double) invoice.getNet()));
-        assertEquals("Connectivity 1", invoice.getItems().get(0).getText());
+        assertEquals("Connectivity 1 256/126 kbps FUP", invoice.getItems().get(0).getText());
         assertEquals(2.0F, invoice.getItems().get(0).getAmount());
         assertEquals(60, invoice.getItems().get(0).getPrice());
         assertTrue(invoice.getItems().get(0).isDisplayUnit());
