@@ -10,9 +10,9 @@
 	<bills id="4" number="200800004" billing_date="2009-01-05" purge_date="2009-01-19" customer_id="2" invoicing_id="2" customer_name="Old Test Customer2" period_from="2009-01-01" period_to="2009-01-31" vat="19" hash_code="#1234567894#" />
 	<bills id="5" number="200800005" billing_date="2009-01-05" purge_date="2009-01-19" customer_id="3" invoicing_id="2" customer_name="Old Test Customer3" period_from="2009-01-01" period_to="2009-01-31" vat="19" hash_code="#1234567895#" />
 	
-	<bill_items bill_id="3" text="Connectivity 1" amount="1.0" price="120" is_display_unit="true" />
+	<bill_items bill_id="3" text="Connectivity 1 1024/512 kbps" amount="1.0" price="120" is_display_unit="true" />
 	<bill_items bill_id="4" text="Connectivity 2" amount="2.0" price="120" is_display_unit="true" />
-	<bill_items bill_id="5" text="Connectivity 1" amount="2.0" price="60" is_display_unit="true" />
+	<bill_items bill_id="5" text="Connectivity 1 256/126 kbps FUP" amount="2.0" price="60" is_display_unit="true" />
 	<bill_items bill_id="5" text="Connectivity 3" amount="1.0" price="10" is_display_unit="false" />
 
 </dataset>

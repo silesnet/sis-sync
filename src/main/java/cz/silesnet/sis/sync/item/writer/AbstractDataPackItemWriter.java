@@ -19,6 +19,7 @@ import cz.silesnet.sis.sync.domain.ItemIdentity;
  */
 public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFileItemWriter {
 
+    public static final String FILE_ENCODING = "Cp1250";
     public static final String XML_ENCODING = "Windows-1250";
     public static final String DATA_PACK_APPLICATION = "SIS";
     public static final String DATA_PACK_VERSION = "1.0";
@@ -33,6 +34,7 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
 
     public AbstractDataPackItemWriter() {
         super();
+        super.setEncoding(FILE_ENCODING);
     }
 
     public void setIco(String ico) {

@@ -36,6 +36,10 @@ public abstract class AbstractHeaderTrailerFileItemWriter implements ItemWriter,
         itemWriter.setResource(resource);
     }
 
+    public void setEncoding(String encoding) {
+        itemWriter.setEncoding(encoding);
+    }
+
     public final void open(ExecutionContext executionContext) throws ItemStreamException {
         itemWriter.open(executionContext);
         writeLines(headerLines());
