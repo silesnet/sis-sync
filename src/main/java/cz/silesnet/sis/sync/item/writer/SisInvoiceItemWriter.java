@@ -23,13 +23,11 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
 
     public static final String INVOICE_ELEMENT_VERSION = "1.3";
     public static final String ITEM_UNIT = "m\u011Bs.";
-    public static final String CLASSIFICATION_VAT_TYPE = "inland";
+    public static final String CLASSIFICATION_VAT_TYPE = "UD";
     public static final String SYM_CONST = "0308";
     public static final String DEFAULT_NOTE = null;
     public static final String DEFAULT_INTERNAL_NOTE = "Generov\u00e1no syst\u00e9mem SIS.";
     public static final String RATE_VAT = "high";
-    public static final String ROUNDING_DOCUMENT = "math2half";
-    public static final String ROUNDING_VAT = "none";
     public static final String INVOICE_TEXT = "Na z\u00e1klad\u011b smlouvy V\u00e1m fakturujeme poskytov\u00e1n\u00ed slu\u017eby";
     public static final String INVOICE_TEXT_PERIOD = "za obdob\u00ed";
     private static final DateTimeFormatter PERIOD_DATE_FORMATTER = DateTimeFormat.forPattern("dd.MM.yyyy");
@@ -69,11 +67,14 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
         lines.add(elValue("typ:numberRequested", invoice.getNumber()));
         lines.add(elEnd("inv:number"));
         lines.add(elValue("inv:symVar", invoice.getNumber()));
-        lines.add(elValue("inv:symPar", invoice.getCustomer().getSymbol()));
+        lines.add(elValue("inv:symPar", invoice.getCustomer().getId()));
         lines.add(elValue("inv:date", ELEMENT_DATE_FORMAT.format(new Date(invoice.getDate().getMillis()))));
         lines.add(elValue("inv:dateDue", ELEMENT_DATE_FORMAT.format(new Date(invoice.getDueDate().getMillis()))));
+        lines.add(elBeg("inv:accounting"));
+        lines.add(elValue("typ:ids", ACCOUNTING_CONNECTIVITY));
+        lines.add(elEnd("inv:accounting"));
         lines.add(elBeg("inv:classificationVAT"));
-        lines.add(elValue("typ:classificationVATType", CLASSIFICATION_VAT_TYPE));
+        lines.add(elValue("typ:ids", CLASSIFICATION_VAT_TYPE));
         lines.add(elEnd("inv:classificationVAT"));
         lines.add(elValue("inv:text", getInvoiceText(invoice)));
         lines.add(elBeg("inv:partnerIdentity"));
@@ -101,9 +102,6 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
                 lines.add(elValue("inv:rateVAT", RATE_VAT));
                 lines.add(elBeg("inv:homeCurrency"));
                 lines.add(elValue("typ:unitPrice", item.getPrice()));
-                lines.add(elValue("typ:price", item.getNet()));
-                lines.add(elValue("typ:priceVAT", item.getVat()));
-                lines.add(elValue("typ:priceSum", item.getBrt()));
                 lines.add(elEnd("inv:homeCurrency"));
                 lines.add(elBeg("inv:accounting"));
                 lines.add(elValue("typ:ids", getItemAccounting(item)));
@@ -112,19 +110,7 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
             }
             lines.add(elEnd("inv:invoiceDetail"));
         }
-        // Summary
-        lines.add(elBeg("inv:invoiceSummary"));
-        lines.add(elValue("inv:roundingDocument", ROUNDING_DOCUMENT));
-        lines.add(elValue("inv:roundingVAT", ROUNDING_VAT));
-        lines.add(elBeg("inv:homeCurrency"));
-        lines.add(elValue("typ:priceHigh", invoice.getNet()));
-        lines.add(elValue("typ:priceHighVAT", invoice.getVat()));
-        lines.add(elValue("typ:priceHighSum", invoice.getBrt()));
-        lines.add(elBeg("typ:round"));
-        lines.add(elValue("typ:priceRound", invoice.getRounding()));
-        lines.add(elEnd("typ:round"));
-        lines.add(elEnd("inv:homeCurrency"));
-        lines.add(elEnd("inv:invoiceSummary"));
+        // Trailer
         lines.add(elEnd("inv:invoice"));
         return lines.toArray(new String[lines.size()]);
     }

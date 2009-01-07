@@ -40,8 +40,8 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
     }
 
     /**
-     * Returns dataPack@id based on current time stamp. The time stamp is refreshed on
-     * {@link AbstractDataPackItemWriter#headerLines()} call.
+     * Returns dataPack@id based on current time stamp. The time stamp is
+     * refreshed on {@link AbstractDataPackItemWriter#headerLines()} call.
      * 
      * @return dataPack@id
      */
@@ -55,9 +55,10 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
     }
 
     /**
-     * Returns dataPackItem@id based on item identity, items written count and dataPack@id. If item does not implement
-     * {@link ItemIdentity} then hashCode() is used. This id is populated by SPS to responsePackItem@id, from which the
-     * original item identity can be parsed.
+     * Returns dataPackItem@id based on item identity, items written count and
+     * dataPack@id. If item does not implement {@link ItemIdentity} then
+     * hashCode() is used. This id is populated by SPS to responsePackItem@id,
+     * from which the original item identity can be parsed.
      * 
      * @param item
      *            dataPack content item
@@ -74,8 +75,8 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
     }
 
     /**
-     * Returns dataPack XML header lines. Additional name space lines are included from
-     * {@link AbstractDataPackItemWriter#nameSpaceLines()}.
+     * Returns dataPack XML header lines. Additional name space lines are
+     * included from {@link AbstractDataPackItemWriter#nameSpaceLines()}.
      */
     @Override
     protected String[] headerLines() {
@@ -101,12 +102,12 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
      */
     @Override
     protected String[] trailerLines() {
-        return new String[] { "</dat:dataPack>" };
+        return new String[]{"</dat:dataPack>"};
     }
 
     /**
-     * Returns dataPackItem lines. Actual content of dataPackItem is delegated to
-     * {@link AbstractDataPackItemWriter#dataPackItemLines(item)}
+     * Returns dataPackItem lines. Actual content of dataPackItem is delegated
+     * to {@link AbstractDataPackItemWriter#dataPackItemLines(item)}
      */
     @Override
     protected final String[] itemLines(Object item) {
@@ -119,9 +120,11 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
     }
 
     /**
-     * Returns additional name space definitions that will be added to dataPack element definition.
+     * Returns additional name space definitions that will be added to dataPack
+     * element definition.
      * 
-     * @return name space definition lines, for example xmlns:adb="http://www.stormware.cz/schema/addressbook.xsd"
+     * @return name space definition lines, for example
+     *         xmlns:adb="http://www.stormware.cz/schema/addressbook.xsd"
      */
     protected abstract String[] nameSpaceLines();
 
@@ -154,7 +157,8 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
     }
 
     /**
-     * Returns XML element with value, for example <name>value</value>. Convenience method for float values.
+     * Returns XML element with value, for example <name>value</value>.
+     * Convenience method for float values.
      * 
      * @param name
      *            element name
@@ -164,6 +168,20 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
      */
     protected static String elValue(String name, float value) {
         return elValue(name, Float.valueOf(value).toString());
+    }
+
+    /**
+     * Returns XML element with value, for example <name>value</value>.
+     * Convenience method for long values.
+     * 
+     * @param name
+     *            element name
+     * @param value
+     *            long element value
+     * @return XML element with value
+     */
+    protected static String elValue(String name, long value) {
+        return elValue(name, "" + value);
     }
 
     /**
