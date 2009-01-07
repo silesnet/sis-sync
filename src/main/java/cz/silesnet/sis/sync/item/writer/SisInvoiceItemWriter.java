@@ -37,16 +37,15 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
     public static final String SERVICE_ITEM_TEXT_PREFIX = "Slu\u017eba - ";
 
     public static final String ACCOUNTING_CONNECTIVITY = "konektivita";
-    public static final String ACCOUNTING_CONNECTIVITY_PREFIX1 = "LAN";
-    public static final String ACCOUNTING_CONNECTIVITY_PREFIX2 = "WIRELESS";
-    public static final String ACCOUNTING_CONNECTIVITY_PREFIX3 = "INTERNET";
+    public static final String ACCOUNTING_CONNECTIVITY_SUFFIX1 = "kbps";
+    public static final String ACCOUNTING_CONNECTIVITY_SUFFIX2 = "kbps FUP";
     public static final String ACCOUNTING_WEBHOSTING = "webhosting";
     public static final String ACCOUNTING_WEBHOSTING_PREFIX = "WEBhosting";
     public static final String ACCOUNTING_SERVERHOUSING = "serverhousing";
     public static final String ACCOUNTING_SERVERHOUSING_PREFIX = "SERVERhousing";
     public static final String ACCOUNTING_ACTIVATION = "aktivace";
     public static final String ACCOUNTING_ACTIVATION_PREFIX = "Aktivace";
-    public static final String ACCOUNTING_DEFAULT = "ostatni";
+    public static final String ACCOUNTING_DEFAULT = "servis";
 
     public SisInvoiceItemWriter() {
         super();
@@ -152,8 +151,7 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
 
     protected static String getItemAccounting(Invoice.Item item) {
         String text = item.getText();
-        if (text.startsWith(ACCOUNTING_CONNECTIVITY_PREFIX1) || text.startsWith(ACCOUNTING_CONNECTIVITY_PREFIX2)
-                || text.startsWith(ACCOUNTING_CONNECTIVITY_PREFIX3))
+        if (text.endsWith(ACCOUNTING_CONNECTIVITY_SUFFIX1) || text.endsWith(ACCOUNTING_CONNECTIVITY_SUFFIX2))
             return ACCOUNTING_CONNECTIVITY;
         if (text.startsWith(ACCOUNTING_WEBHOSTING_PREFIX))
             return ACCOUNTING_WEBHOSTING;
