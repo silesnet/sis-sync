@@ -185,6 +185,15 @@ public class AbstractDataPackItemWriterTest {
     }
 
     @Test
+    public void testElValueTrim() throws Exception {
+        assertEquals("<name>first last</name>", AbstractDataPackItemWriter.elValue("name", "\t\t  first last  \t\n"));
+    }
+
+    @Test
+    public void testElValueRemoveDoubleSpaces() throws Exception {
+        assertEquals("<name>a b c d e</name>", AbstractDataPackItemWriter.elValue("name", "a b  c   d    e"));
+    }
+    @Test
     public void testElValueNull() throws Exception {
         assertEquals("<name />", AbstractDataPackItemWriter.elValue("name", null));
     }

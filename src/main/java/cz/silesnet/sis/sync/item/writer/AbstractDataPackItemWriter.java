@@ -153,13 +153,13 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
         StringBuilder element = new StringBuilder("<");
         element.append(name);
         if (value != null) {
+            value = value.trim().replaceAll("(\\s){2,}", " ");
             element.append(">").append(StringEscapeUtils.escapeXml(value)).append("</").append(name).append(">");
         } else {
             element.append(" />");
         }
         return element.toString();
     }
-
     /**
      * Returns XML element with value, for example <name>value</value>.
      * Convenience method for float values.
