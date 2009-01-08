@@ -1,0 +1,1 @@
+@sync.bat sisInvoiceJob.xml sisInvoiceJob

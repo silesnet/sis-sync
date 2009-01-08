@@ -1,0 +1,1 @@
+@sync.bat sisCustomerJob.xml sisCustomerJob
