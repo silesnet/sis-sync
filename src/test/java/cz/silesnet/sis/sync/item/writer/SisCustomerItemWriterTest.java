@@ -64,7 +64,9 @@ public class SisCustomerItemWriterTest {
         assertEquals(elValue("adb:phone", customer.getPhone()), lines[index++]);
         assertEquals(elValue("adb:email", customer.getEmail()), lines[index++]);
         assertEquals(elValue("adb:adGroup", Customer.AD_GROUP_KEY), lines[index++]);
-        assertEquals(elValue("adb:contract", customer.getContract()), lines[index++]);
+        assertEquals(elValue("adb:p2", "true"), lines[index++]);
+        assertEquals(elValue("adb:note", SisCustomerItemWriter.CONTRACT_NUMBER_PREFIX + customer.getContract()),
+                lines[index++]);
         // duplicity check
         assertEquals(elBeg("adb:duplicityFields actualize=\"true\""), lines[index++]);
         assertEquals(elValue("adb:fieldICO", "true"), lines[index++]);

@@ -18,6 +18,7 @@ import cz.silesnet.sis.sync.domain.Customer;
 public class SisCustomerItemWriter extends AbstractDataPackItemWriter {
 
     public static final String ADDRESSBOOK_ELEMENT_VERSION = "1.3";
+    public static final String CONTRACT_NUMBER_PREFIX = "\u010c\u00edslo smlouvy: ";
 
     public SisCustomerItemWriter() {
         super();
@@ -50,7 +51,8 @@ public class SisCustomerItemWriter extends AbstractDataPackItemWriter {
         lines.add(elValue("adb:phone", customer.getPhone()));
         lines.add(elValue("adb:email", customer.getEmail()));
         lines.add(elValue("adb:adGroup", Customer.AD_GROUP_KEY));
-        lines.add(elValue("adb:contract", customer.getContract()));
+        lines.add(elValue("adb:p2", "true"));
+        lines.add(elValue("adb:note", CONTRACT_NUMBER_PREFIX + customer.getContract()));
         // duplicity check
         lines.add(elBeg("adb:duplicityFields actualize=\"true\""));
         lines.add(elValue("adb:fieldICO", "true"));
