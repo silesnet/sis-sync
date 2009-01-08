@@ -40,7 +40,7 @@ public class SisInvoiceItemWriterTest {
         invoice.setPeriodFrom(new DateTime("2009-01-01"));
         invoice.setPeriodTo(new DateTime("2009-01-31"));
         invoice.new Item("WIRELESSdirect 10/20 kbps", 1.0F, 10, true);
-        invoice.new Item("Aktivace", 1.0F, 20, false);
+        invoice.new Item("Aktivace&Servis", 1.0F, 20, false);
         Item item1 = invoice.getItems().get(0);
         Item item2 = invoice.getItems().get(1);
         Customer customer = new Customer();

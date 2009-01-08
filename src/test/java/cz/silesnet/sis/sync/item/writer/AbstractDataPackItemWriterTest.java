@@ -180,6 +180,11 @@ public class AbstractDataPackItemWriterTest {
     }
 
     @Test
+    public void testElValueEscape() throws Exception {
+        assertEquals("<name>&quot;&lt;&amp;&gt;&apos;</name>", AbstractDataPackItemWriter.elValue("name", "\"<&>'"));
+    }
+
+    @Test
     public void testElValueNull() throws Exception {
         assertEquals("<name />", AbstractDataPackItemWriter.elValue("name", null));
     }

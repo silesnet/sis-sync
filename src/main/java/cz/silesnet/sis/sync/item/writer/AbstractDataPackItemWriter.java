@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
+import org.apache.commons.lang.StringEscapeUtils;
+
 import cz.silesnet.sis.sync.domain.ItemIdentity;
 
 /**
@@ -151,7 +153,7 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
         StringBuilder element = new StringBuilder("<");
         element.append(name);
         if (value != null) {
-            element.append(">").append(value).append("</").append(name).append(">");
+            element.append(">").append(StringEscapeUtils.escapeXml(value)).append("</").append(name).append(">");
         } else {
             element.append(" />");
         }
