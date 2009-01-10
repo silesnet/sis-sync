@@ -1,3 +1,4 @@
+DROP TABLE invoicings IF EXISTS;
 DROP TABLE bill_items IF EXISTS;
 DROP TABLE bills IF EXISTS;
 DROP TABLE customers IF EXISTS;
@@ -45,3 +46,11 @@ CREATE TABLE bill_items (
     is_display_unit BOOLEAN
 );
 
+
+CREATE TABLE invoicings (
+  id BIGINT NOT NULL,
+  name varchar(80) NOT NULL,
+  country BIGINT,
+  numberingbase varchar(15),
+  invoicing_date timestamp
+);
