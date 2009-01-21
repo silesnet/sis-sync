@@ -3,6 +3,11 @@
  */
 package cz.silesnet.sis.sync.domain;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+
+import edu.emory.mathcs.backport.java.util.Collections;
+
 /**
  * Customer data object with no logic. It contains only fields needed for
  * synchronization.
@@ -134,4 +139,53 @@ public class Customer implements ItemIdentity {
         this.contract = contract;
     }
 
+    public String getSpsContract() {
+        if (getContract() == null)
+            return null;
+        // get all comma separated contract string's
+        String[] contractStrings = getContract().split(",");
+        ArrayList<Contract> contracs = new ArrayList<Contract>();
+        for (String contract : contractStrings) {
+            try {
+                contracs.add(new Contract(contract));
+            } catch (NumberFormatException e) {
+                /* Ignore numbers that can not be converted */
+            } catch (IndexOutOfBoundsException e) {
+                /* Ignore missing contract number parts */
+            }
+        }
+        // sort descending according contract numbers
+        Collections.sort(contracs, new Comparator<Contract>() {
+            public int compare(Contract o1, Contract o2) {
+                return o2.getNumber() - o1.getNumber();
+            }
+        });
+        return contracs.size() > 0 ? contracs.get(0).getSpsNumber() : null;
+    }
+
+    private class Contract {
+
+        private final int number;
+        private final int year;
+
+        public Contract(String contract) {
+            String[] parts = contract.split("/");
+            number = getInteger(parts[0]);
+            year = getInteger(parts[1]);
+        }
+
+        private int getInteger(String intString) {
+            // ignore spaces
+            return Integer.valueOf(intString.replace(" ", ""));
+        }
+
+        public int getNumber() {
+            return number;
+        }
+
+        public String getSpsNumber() {
+            return ("" + number) + year;
+        }
+
+    }
 }

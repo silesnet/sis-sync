@@ -67,7 +67,6 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
         lines.add(elValue("typ:numberRequested", invoice.getNumber()));
         lines.add(elEnd("inv:number"));
         lines.add(elValue("inv:symVar", invoice.getNumber()));
-        lines.add(elValue("inv:symPar", invoice.getCustomer().getId()));
         lines.add(elValue("inv:date", ELEMENT_DATE_FORMAT.format(new Date(invoice.getDate().getMillis()))));
         lines.add(elValue("inv:dateDue", ELEMENT_DATE_FORMAT.format(new Date(invoice.getDueDate().getMillis()))));
         lines.add(elBeg("inv:accounting"));
@@ -114,13 +113,14 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter {
         lines.add(elEnd("inv:invoice"));
         return lines.toArray(new String[lines.size()]);
     }
+
     /**
      * Returns name space definitions to be appended to the root element
      * (<dataPack>).
      */
     @Override
     protected String[] nameSpaceLines() {
-        return new String[]{"xmlns:inv=\"http://www.stormware.cz/schema/invoice.xsd\""};
+        return new String[] { "xmlns:inv=\"http://www.stormware.cz/schema/invoice.xsd\"" };
     }
 
     protected static String getInvoiceText(Invoice invoice) {

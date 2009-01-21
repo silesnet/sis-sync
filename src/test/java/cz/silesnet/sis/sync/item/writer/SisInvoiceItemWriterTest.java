@@ -1,7 +1,9 @@
 package cz.silesnet.sis.sync.item.writer;
 
-import static cz.silesnet.sis.sync.item.writer.AbstractDataPackItemWriter.*;
-import static org.junit.Assert.*;
+import static cz.silesnet.sis.sync.item.writer.AbstractDataPackItemWriter.elBeg;
+import static cz.silesnet.sis.sync.item.writer.AbstractDataPackItemWriter.elEnd;
+import static cz.silesnet.sis.sync.item.writer.AbstractDataPackItemWriter.elValue;
+import static org.junit.Assert.assertEquals;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -20,6 +22,7 @@ public class SisInvoiceItemWriterTest {
 
     private SisInvoiceItemWriter writer;
     private Invoice invoice;
+
     @Before
     public void setUp() throws Exception {
         writer = new SisInvoiceItemWriter();
@@ -58,7 +61,6 @@ public class SisInvoiceItemWriterTest {
         assertEquals(elValue("typ:numberRequested", invoice.getNumber()), lines[index++]);
         assertEquals(elEnd("inv:number"), lines[index++]);
         assertEquals(elValue("inv:symVar", invoice.getNumber()), lines[index++]);
-        assertEquals(elValue("inv:symPar", invoice.getCustomer().getId()), lines[index++]);
         assertEquals(elValue("inv:date", invoice.getDate().toString("yyyy-MM-dd")), lines[index++]);
         assertEquals(elValue("inv:dateDue", invoice.getDueDate().toString("yyyy-MM-dd")), lines[index++]);
         assertEquals(elBeg("inv:accounting"), lines[index++]);
@@ -115,10 +117,12 @@ public class SisInvoiceItemWriterTest {
             }
         }
     }
+
     @Test
     public void testNameSpaceLines() throws Exception {
         String[] lines = writer.nameSpaceLines();
         assertEquals("xmlns:inv=\"http://www.stormware.cz/schema/invoice.xsd\"", lines[0]);
         assertEquals(1, lines.length);
     }
+
 }

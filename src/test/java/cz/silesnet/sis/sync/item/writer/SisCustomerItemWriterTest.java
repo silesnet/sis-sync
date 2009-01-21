@@ -1,7 +1,9 @@
 package cz.silesnet.sis.sync.item.writer;
 
-import static cz.silesnet.sis.sync.item.writer.AbstractDataPackItemWriter.*;
-import static org.junit.Assert.*;
+import static cz.silesnet.sis.sync.item.writer.AbstractDataPackItemWriter.elBeg;
+import static cz.silesnet.sis.sync.item.writer.AbstractDataPackItemWriter.elEnd;
+import static cz.silesnet.sis.sync.item.writer.AbstractDataPackItemWriter.elValue;
+import static org.junit.Assert.assertEquals;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -52,7 +54,6 @@ public class SisCustomerItemWriterTest {
         assertEquals(elBeg("typ:address"), lines[index++]);
         assertEquals(elValue("typ:company", customer.getName()), lines[index++]);
         assertEquals(elValue("typ:division", customer.getSupplementaryName()), lines[index++]);
-        assertEquals(elValue("typ:name", customer.getContactName()), lines[index++]);
         assertEquals(elValue("typ:city", customer.getCity()), lines[index++]);
         assertEquals(elValue("typ:street", customer.getStreet()), lines[index++]);
         assertEquals(elValue("typ:zip", customer.getZip()), lines[index++]);
@@ -64,8 +65,9 @@ public class SisCustomerItemWriterTest {
         assertEquals(elValue("adb:phone", customer.getPhone()), lines[index++]);
         assertEquals(elValue("adb:email", customer.getEmail()), lines[index++]);
         assertEquals(elValue("adb:adGroup", Customer.AD_GROUP_KEY), lines[index++]);
+        assertEquals(elValue("adb:contract", customer.getSpsContract()), lines[index++]);
         assertEquals(elValue("adb:p2", "true"), lines[index++]);
-        assertEquals(elValue("adb:note", SisCustomerItemWriter.CONTRACT_NUMBER_PREFIX + customer.getContract()),
+        assertEquals(elValue("adb:note", SisCustomerItemWriter.CONTACT_NAME_PREFIX + customer.getContactName()),
                 lines[index++]);
         // duplicity check
         assertEquals(elBeg("adb:duplicityFields actualize=\"true\""), lines[index++]);
@@ -84,6 +86,7 @@ public class SisCustomerItemWriterTest {
             }
         }
     }
+
     @Test
     public void testNameSpaceLines() throws Exception {
         String[] lines = writer.nameSpaceLines();

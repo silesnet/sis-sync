@@ -18,7 +18,7 @@ import cz.silesnet.sis.sync.domain.Customer;
 public class SisCustomerItemWriter extends AbstractDataPackItemWriter {
 
     public static final String ADDRESSBOOK_ELEMENT_VERSION = "1.3";
-    public static final String CONTRACT_NUMBER_PREFIX = "\u010c\u00edslo smlouvy: ";
+    public static final String CONTACT_NAME_PREFIX = "Kontaktn\u00ed osoba: ";
 
     public SisCustomerItemWriter() {
         super();
@@ -39,7 +39,6 @@ public class SisCustomerItemWriter extends AbstractDataPackItemWriter {
         lines.add(elBeg("typ:address"));
         lines.add(elValue("typ:company", customer.getName()));
         lines.add(elValue("typ:division", customer.getSupplementaryName()));
-        lines.add(elValue("typ:name", customer.getContactName()));
         lines.add(elValue("typ:city", customer.getCity()));
         lines.add(elValue("typ:street", customer.getStreet()));
         lines.add(elValue("typ:zip", customer.getZip()));
@@ -51,8 +50,9 @@ public class SisCustomerItemWriter extends AbstractDataPackItemWriter {
         lines.add(elValue("adb:phone", customer.getPhone()));
         lines.add(elValue("adb:email", customer.getEmail()));
         lines.add(elValue("adb:adGroup", Customer.AD_GROUP_KEY));
+        lines.add(elValue("adb:contract", customer.getSpsContract()));
         lines.add(elValue("adb:p2", "true"));
-        lines.add(elValue("adb:note", CONTRACT_NUMBER_PREFIX + customer.getContract()));
+        lines.add(elValue("adb:note", CONTACT_NAME_PREFIX + customer.getContactName()));
         // duplicity check
         lines.add(elBeg("adb:duplicityFields actualize=\"true\""));
         lines.add(elValue("adb:fieldICO", "true"));
@@ -64,9 +64,10 @@ public class SisCustomerItemWriter extends AbstractDataPackItemWriter {
 
         return lines.toArray(new String[lines.size()]);
     }
+
     @Override
     protected String[] nameSpaceLines() {
-        return new String[]{"xmlns:adb=\"http://www.stormware.cz/schema/addressbook.xsd\""};
+        return new String[] { "xmlns:adb=\"http://www.stormware.cz/schema/addressbook.xsd\"" };
     }
 
 }
