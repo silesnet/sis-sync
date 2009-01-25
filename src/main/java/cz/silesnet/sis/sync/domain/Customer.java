@@ -16,8 +16,6 @@ import edu.emory.mathcs.backport.java.util.Collections;
  */
 public class Customer implements ItemIdentity {
 
-    public static final String AD_GROUP_KEY = "SIS";
-
     private long id;
     private String symbol;
     private String name;
@@ -31,6 +29,8 @@ public class Customer implements ItemIdentity {
     private String phone;
     private String email;
     private String contract;
+    private String accountNo;
+    private String bankCode;
 
     public Customer() {
     }
@@ -137,6 +137,22 @@ public class Customer implements ItemIdentity {
 
     public void setContract(String contract) {
         this.contract = contract;
+    }
+
+    public String getAccountNo() {
+        return accountNo;
+    }
+
+    public void setAccountNo(String accountNo) {
+        this.accountNo = accountNo;
+    }
+
+    public String getBankCode() {
+        return bankCode;
+    }
+
+    public void setBankCode(String bankCode) {
+        this.bankCode = bankCode;
     }
 
     public String getSpsContract() {

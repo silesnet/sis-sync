@@ -17,6 +17,8 @@ CREATE TABLE customers (
     phone VARCHAR(30),
     email VARCHAR(50),
     contract_no VARCHAR(50),
+    account_no VARCHAR(17),
+    bank_no VARCHAR(4),
     is_active BOOLEAN,
     country INT,
     updated TIMESTAMP NOT NULL,

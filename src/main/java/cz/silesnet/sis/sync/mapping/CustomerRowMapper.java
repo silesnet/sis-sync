@@ -31,6 +31,8 @@ public class CustomerRowMapper implements RowMapper {
     public static final String PHONE_COLUMN = "phone";
     public static final String EMAIL_COLUMN = "email";
     public static final String CONTRACT_COLUMN = "contract_no";
+    public static final String ACCOUNT_NO_COLUMN = "account_no";
+    public static final String BANK_CODE_COLUMN = "bank_no";
 
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
         Customer customer = new Customer();
@@ -47,6 +49,8 @@ public class CustomerRowMapper implements RowMapper {
         customer.setPhone(rs.getString(PHONE_COLUMN));
         customer.setEmail(rs.getString(EMAIL_COLUMN));
         customer.setContract(rs.getString(CONTRACT_COLUMN));
+        customer.setAccountNo(rs.getString(ACCOUNT_NO_COLUMN));
+        customer.setBankCode(rs.getString(BANK_CODE_COLUMN));
         return customer;
     }
 

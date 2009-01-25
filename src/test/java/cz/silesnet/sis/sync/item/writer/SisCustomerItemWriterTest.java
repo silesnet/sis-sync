@@ -42,12 +42,15 @@ public class SisCustomerItemWriterTest {
         customer.setDic("DIC12345679");
         customer.setPhone("+420123456789");
         customer.setEmail("contact@customer.cz");
-        customer.setContract("2008/007");
+        customer.setContract("1245/2008");
+        customer.setAccountNo("1234-567890");
+        customer.setBankCode("2400");
         String[] lines = writer.dataPackItemLines(customer);
         int index = 0;
         // header
         assertEquals(elBeg("adb:addressbook version=\"" + SisCustomerItemWriter.ADDRESSBOOK_ELEMENT_VERSION + "\""),
                 lines[index++]);
+        // address
         assertEquals(elBeg("adb:addressbookHeader"), lines[index++]);
         // identity
         assertEquals(elBeg("adb:identity"), lines[index++]);
@@ -64,22 +67,45 @@ public class SisCustomerItemWriterTest {
         // other
         assertEquals(elValue("adb:phone", customer.getPhone()), lines[index++]);
         assertEquals(elValue("adb:email", customer.getEmail()), lines[index++]);
-        assertEquals(elValue("adb:adGroup", Customer.AD_GROUP_KEY), lines[index++]);
+        assertEquals(elValue("adb:adGroup", SisCustomerItemWriter.AD_GROUP_KEY), lines[index++]);
+        assertEquals(elValue("adb:maturity", SisCustomerItemWriter.DUE_DAYS), lines[index++]);
         assertEquals(elValue("adb:contract", customer.getSpsContract()), lines[index++]);
         assertEquals(elValue("adb:p2", "true"), lines[index++]);
         assertEquals(elValue("adb:note", SisCustomerItemWriter.CONTACT_NAME_PREFIX + customer.getContactName()),
                 lines[index++]);
         // duplicity check
         assertEquals(elBeg("adb:duplicityFields actualize=\"true\""), lines[index++]);
-        assertEquals(elValue("adb:fieldICO", "true"), lines[index++]);
         assertEquals(elValue("adb:fieldFirma", "true"), lines[index++]);
+        assertEquals(elValue("adb:fieldICO", "true"), lines[index++]);
         assertEquals(elEnd("adb:duplicityFields"), lines[index++]);
-        // trailer
         assertEquals(elEnd("adb:addressbookHeader"), lines[index++]);
+        // bank account
+        assertEquals(elBeg("adb:addressbookAccount"), lines[index++]);
+        assertEquals(elBeg("adb:accountItem"), lines[index++]);
+        assertEquals(elValue("adb:accountNumber", customer.getAccountNo()), lines[index++]);
+        assertEquals(elValue("adb:bankCode", customer.getBankCode()), lines[index++]);
+        assertEquals(elValue("adb:defaultAccount", "true"), lines[index++]);
+        assertEquals(elEnd("adb:accountItem"), lines[index++]);
+        assertEquals(elEnd("adb:addressbookAccount"), lines[index++]);
+        // trailer
         assertEquals(elEnd("adb:addressbook"), lines[index++]);
 
         assertEquals(index, lines.length);
 
+        if (log.isDebugEnabled()) {
+            for (int i = 0; i < lines.length; i++) {
+                log.debug(lines[i]);
+            }
+        }
+    }
+
+    @Test
+    public void testNoBankAccount() throws Exception {
+        Customer customer = new Customer();
+        String[] lines = writer.dataPackItemLines(customer);
+        int length = lines.length;
+        assertEquals(elEnd("adb:addressbookHeader"), lines[length - 2]);
+        assertEquals(elEnd("adb:addressbook"), lines[length - 1]);
         if (log.isDebugEnabled()) {
             for (int i = 0; i < lines.length; i++) {
                 log.debug(lines[i]);

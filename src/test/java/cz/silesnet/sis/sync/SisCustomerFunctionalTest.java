@@ -58,11 +58,11 @@ public class SisCustomerFunctionalTest extends AbstractDependencyInjectionSpring
         JdbcTemplate template = new JdbcTemplate(dataSource);
         List<Customer> customers = template
                 .query("SELECT * FROM customers WHERE symbol <> ''", new CustomerRowMapper());
-        assertEquals(5, customers.size());
         for (Customer customer : customers) {
             assertTrue(Long.valueOf(customer.getSymbol()) > 0);
-            log.debug(customer.getSymbol());
+            log.debug(customer.getSymbol() + " [" + customer.getId() + "]");
         }
+        assertEquals(5, customers.size());
     }
 
     public static IDatabaseTester initializeDatabase(DataSource dataSource) throws Exception {

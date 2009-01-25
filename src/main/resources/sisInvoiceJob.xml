@@ -41,23 +41,23 @@
         </property>
         <property name="sql">
           <value><![CDATA[
-            SELECT id FROM bills
+            SELECT bills.id FROM bills
               INNER JOIN invoicings
                 ON bills.invoicing_id = invoicings.id
               WHERE synchronized IS NULL
                 AND invoicings.country = 10
-              ORDER BY id
+              ORDER BY bills.id
           ]]></value>
         </property>
         <property name="restartSql">
           <value><![CDATA[
-            SELECT id FROM bills
+            SELECT bills.id FROM bills
               INNER JOIN invoicings
                 ON bills.invoicing_id = invoicings.id
               WHERE synchronized IS NULL
                 AND invoicings.country = 10
                 AND id > ?
-              ORDER BY id
+              ORDER BY bills.id
           ]]></value>
         </property>
       </bean>

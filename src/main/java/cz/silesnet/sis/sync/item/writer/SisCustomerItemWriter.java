@@ -6,6 +6,8 @@ package cz.silesnet.sis.sync.item.writer;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import cz.silesnet.sis.sync.domain.Customer;
 
 /**
@@ -18,6 +20,8 @@ import cz.silesnet.sis.sync.domain.Customer;
 public class SisCustomerItemWriter extends AbstractDataPackItemWriter {
 
     public static final String ADDRESSBOOK_ELEMENT_VERSION = "1.3";
+    public static final String AD_GROUP_KEY = "SIS";
+    public static final int DUE_DAYS = 14;
     public static final String CONTACT_NAME_PREFIX = "Kontaktn\u00ed osoba: ";
 
     public SisCustomerItemWriter() {
@@ -33,6 +37,7 @@ public class SisCustomerItemWriter extends AbstractDataPackItemWriter {
         List<String> lines = new ArrayList<String>();
         // header
         lines.add(elBeg("adb:addressbook version=\"" + ADDRESSBOOK_ELEMENT_VERSION + "\""));
+        // address
         lines.add(elBeg("adb:addressbookHeader"));
         // identity
         lines.add(elBeg("adb:identity"));
@@ -49,17 +54,28 @@ public class SisCustomerItemWriter extends AbstractDataPackItemWriter {
         // other
         lines.add(elValue("adb:phone", customer.getPhone()));
         lines.add(elValue("adb:email", customer.getEmail()));
-        lines.add(elValue("adb:adGroup", Customer.AD_GROUP_KEY));
+        lines.add(elValue("adb:adGroup", AD_GROUP_KEY));
+        lines.add(elValue("adb:maturity", DUE_DAYS));
         lines.add(elValue("adb:contract", customer.getSpsContract()));
         lines.add(elValue("adb:p2", "true"));
         lines.add(elValue("adb:note", CONTACT_NAME_PREFIX + customer.getContactName()));
         // duplicity check
         lines.add(elBeg("adb:duplicityFields actualize=\"true\""));
-        lines.add(elValue("adb:fieldICO", "true"));
         lines.add(elValue("adb:fieldFirma", "true"));
+        lines.add(elValue("adb:fieldICO", "true"));
         lines.add(elEnd("adb:duplicityFields"));
-        // trailer
         lines.add(elEnd("adb:addressbookHeader"));
+        if (StringUtils.isNotBlank(customer.getAccountNo()) && StringUtils.isNotBlank(customer.getBankCode())) {
+            // bank account
+            lines.add(elBeg("adb:addressbookAccount"));
+            lines.add(elBeg("adb:accountItem"));
+            lines.add(elValue("adb:accountNumber", customer.getAccountNo()));
+            lines.add(elValue("adb:bankCode", customer.getBankCode()));
+            lines.add(elValue("adb:defaultAccount", "true"));
+            lines.add(elEnd("adb:accountItem"));
+            lines.add(elEnd("adb:addressbookAccount"));
+        }
+        // trailer
         lines.add(elEnd("adb:addressbook"));
 
         return lines.toArray(new String[lines.size()]);
