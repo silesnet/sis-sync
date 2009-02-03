@@ -5,24 +5,23 @@ package cz.silesnet.sis.sync.item.writer;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.Date;
 
 import org.springframework.batch.item.database.ItemPreparedStatementSetter;
 
-import cz.silesnet.sis.sync.domain.InvoiceResult;
+import cz.silesnet.sis.sync.domain.Invoice;
 
 /**
  * Sets Invoice parameters to SQL PreparedStatement.
  * 
  * @author Richard Sikora
+ * 
  */
-public class InvoiceUpdatePreparedStatementSetter implements ItemPreparedStatementSetter {
+public class SpsInvoiceUpdatePreparedStatementSetter implements ItemPreparedStatementSetter {
 
     /**
-     * Maps Invoice members to SQL update command.
+     * Maps Invoice SIS bank account to SPS SQL update command.
      * <p>
-     * UPDATE invoices SET synchronized = ? WHERE id = ?
+     * UPDATE FA SET account_number = ?, bank_code = ? WHERE id = ?
      * 
      * @param item
      *            Invoice
@@ -30,9 +29,10 @@ public class InvoiceUpdatePreparedStatementSetter implements ItemPreparedStateme
      *            SQL update command wrapped in PreparedStatement
      */
     public void setValues(Object item, PreparedStatement ps) throws SQLException {
-        InvoiceResult result = (InvoiceResult) item;
-        ps.setTimestamp(1, new Timestamp((new Date()).getTime()));
-        ps.setLong(2, result.getSisId());
+        Invoice invoice = (Invoice) item;
+        ps.setString(1, invoice.getCustomer().getAccountNo());
+        ps.setString(2, invoice.getCustomer().getBankCode());
+        ps.setInt(3, (int) invoice.getSpsId());
     }
 
 }

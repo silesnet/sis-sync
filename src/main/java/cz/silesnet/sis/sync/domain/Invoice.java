@@ -3,8 +3,6 @@
  */
 package cz.silesnet.sis.sync.domain;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,11 +15,10 @@ import edu.emory.mathcs.backport.java.util.Collections;
  * 
  * @author Richard Sikora
  */
-public class Invoice implements ItemIdentity {
-
-    private static final int DEFAULT_VAT_RATE = 19;
+public class Invoice implements ItemIdentity, Result {
 
     private long id;
+    private long spsId;
     private String number;
     private DateTime date;
     private DateTime dueDate;
@@ -29,31 +26,13 @@ public class Invoice implements ItemIdentity {
     private String customerName;
     private DateTime periodFrom;
     private DateTime periodTo;
-    private int vatRate = DEFAULT_VAT_RATE;
-    private String hashCode;
-    private List<Item> items = new ArrayList<Item>();
-    private float net;
-    private BigDecimal vatValue = BigDecimal.valueOf(vatRate, 2);
+    private final List<Item> items = new ArrayList<Item>();
     private Customer customer;
 
     private void addItem(Item item) {
         if (item == null)
             throw new IllegalArgumentException(new NullPointerException());
-        if (items.add(item)) {
-            net += item.getNet();
-        }
-    }
-
-    public float getVat() {
-        return calculateVat(net);
-    }
-
-    public float getBrt() {
-        return calculateBrt(net);
-    }
-
-    public float getRounding() {
-        return calculateRounding(net);
+        items.add(item);
     }
 
     @SuppressWarnings("unchecked")
@@ -61,11 +40,11 @@ public class Invoice implements ItemIdentity {
         return Collections.unmodifiableList(items);
     }
 
-    public float getNet() {
-        return net;
+    public long getId() {
+        return id;
     }
 
-    public long getId() {
+    public long getSisId() {
         return id;
     }
 
@@ -129,23 +108,6 @@ public class Invoice implements ItemIdentity {
         this.periodTo = periodTo;
     }
 
-    public int getVatRate() {
-        return vatRate;
-    }
-
-    public void setVatRate(int vatRate) {
-        this.vatRate = vatRate;
-        vatValue = BigDecimal.valueOf(vatRate, 2);
-    }
-
-    public String getHashCode() {
-        return hashCode;
-    }
-
-    public void setHashCode(String hashCode) {
-        this.hashCode = hashCode;
-    }
-
     public Customer getCustomer() {
         return customer;
     }
@@ -154,12 +116,19 @@ public class Invoice implements ItemIdentity {
         this.customer = customer;
     }
 
+    public long getSpsId() {
+        return spsId;
+    }
+
+    public void setSpsId(long spsId) {
+        this.spsId = spsId;
+    }
+
     public class Item {
-        private String text;
-        private float amount;
-        private int price;
-        private boolean isDisplayUnit;
-        private float net;
+        private final String text;
+        private final float amount;
+        private final int price;
+        private final boolean isDisplayUnit;
 
         public Item(String text, float amount, int price) {
             this(text, amount, price, true);
@@ -169,26 +138,13 @@ public class Invoice implements ItemIdentity {
             this.text = text;
             this.amount = amount;
             this.price = price;
-            this.net = amount * ((float) price);
             this.isDisplayUnit = isDisplayUnit;
             // automatically associates new item with the invoice
             addItem(this);
         }
 
-        public float getVat() {
-            return calculateVat(net);
-        }
-
-        public float getBrt() {
-            return calculateBrt(net);
-        }
-
         public String getText() {
             return this.text;
-        }
-
-        public float getNet() {
-            return this.net;
         }
 
         public float getAmount() {
@@ -205,18 +161,4 @@ public class Invoice implements ItemIdentity {
 
     }
 
-    protected float calculateVat(float net) {
-        BigDecimal vB = BigDecimal.valueOf(net).multiply(vatValue);
-        return vB.setScale(2, RoundingMode.HALF_UP).floatValue();
-    }
-
-    protected float calculateBrt(float net) {
-        return net + calculateVat(net);
-    }
-
-    protected float calculateRounding(float net) {
-        BigDecimal bB = BigDecimal.valueOf(calculateBrt(net));
-        BigDecimal rB = bB.setScale(0, RoundingMode.HALF_UP).subtract(bB);
-        return rB.setScale(2, RoundingMode.HALF_UP).floatValue();
-    }
 }

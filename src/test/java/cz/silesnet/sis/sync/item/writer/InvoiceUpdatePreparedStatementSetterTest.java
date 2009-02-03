@@ -8,20 +8,17 @@ import java.sql.Timestamp;
 
 import org.junit.Test;
 
-import cz.silesnet.sis.sync.domain.Invoice;
+import cz.silesnet.sis.sync.domain.InvoiceResult;
 
 public class InvoiceUpdatePreparedStatementSetterTest {
 
-    /**
-     * 
-     */
     private static final long ID = 1234L;
 
     @Test
     public void testSetValues() throws SQLException {
         // invoice to update
-        Invoice invoice = new Invoice();
-        invoice.setId(ID);
+        InvoiceResult result = new InvoiceResult();
+        result.setSisId(ID);
         // mock PreparedStatement
         // SQL: UPDATE invoices SET synchronized = ? WHERE id = ?
         PreparedStatement ps = createStrictMock(PreparedStatement.class);
@@ -29,7 +26,7 @@ public class InvoiceUpdatePreparedStatementSetterTest {
         ps.setLong(2, ID);
         replay(ps);
         InvoiceUpdatePreparedStatementSetter psSetter = new InvoiceUpdatePreparedStatementSetter();
-        psSetter.setValues(invoice, ps);
+        psSetter.setValues(result, ps);
         verify(ps);
     }
 }

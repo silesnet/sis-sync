@@ -42,7 +42,8 @@ public class JdbcInvoiceDao implements InvoiceDao {
     }
 
     /**
-     * Maps result set to Invoice object. Uses JdbcTemplate to extract invoice items.
+     * Maps result set to Invoice object. Uses JdbcTemplate to extract invoice
+     * items.
      * 
      * @author sikorric
      * 
@@ -58,8 +59,6 @@ public class JdbcInvoiceDao implements InvoiceDao {
         private static final String CUSTOMER_NAME_COLUMN = "customer_name";
         private static final String PERIOD_FROM_COLUMN = "period_from";
         private static final String PERIOD_TO_COLUMN = "period_to";
-        private static final String VAT_RATE_COLUMN = "vat";
-        private static final String HASH_CODE_COLUMN = "hash_code";
         private static final String ITEMS_SQL = "SELECT * FROM bill_items WHERE bill_id = ?";
         private static final String ITEMS_TEXT_COLUMN = "text";
         private static final String ITEMS_AMOUNT_COLUMN = "amount";
@@ -68,7 +67,8 @@ public class JdbcInvoiceDao implements InvoiceDao {
         private static final String CUSTOMERS_SYMBOL_SQL = "SELECT * FROM customers WHERE id = ?";
 
         /**
-         * Maps result set to Invoice object. Retrieves invoice items and associates them with the invoice.
+         * Maps result set to Invoice object. Retrieves invoice items and
+         * associates them with the invoice.
          */
         public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
             final Invoice invoice = new Invoice();
@@ -80,8 +80,6 @@ public class JdbcInvoiceDao implements InvoiceDao {
             invoice.setCustomerName(rs.getString(CUSTOMER_NAME_COLUMN));
             invoice.setPeriodFrom(new DateTime(rs.getTimestamp(PERIOD_FROM_COLUMN)));
             invoice.setPeriodTo(new DateTime(rs.getTimestamp(PERIOD_TO_COLUMN)));
-            invoice.setVatRate(rs.getInt(VAT_RATE_COLUMN));
-            invoice.setHashCode(rs.getString(HASH_CODE_COLUMN));
             // retrieve the customer
             Customer customer = (Customer) template.queryForObject(CUSTOMERS_SYMBOL_SQL, new Object[] { rs
                     .getLong(CUSTOMER_ID_COLUMN) }, new CustomerRowMapper());

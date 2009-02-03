@@ -39,13 +39,22 @@ public class SisInvoiceFunctionalTest extends AbstractDependencyInjectionSpringC
         this.job = job;
     }
 
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
+    @Override
+    protected String[] getConfigLocations() {
+        return new String[] { "classpath:sisInvoiceJob.xml" };
     }
 
     @Override
-    protected String[] getConfigLocations() {
-        return new String[]{"classpath:sisInvoiceJob.xml"};
+    protected void onSetUp() throws Exception {
+        super.onSetUp();
+        dataSource = (DataSource) applicationContext.getBean("dataSource");
+        dbTester = SisInvoiceFunctionalTest.initializeDatabase(dataSource);
+    }
+
+    @Override
+    protected void onTearDown() throws Exception {
+        super.onTearDown();
+        dbTester.onTearDown();
     }
 
     @Test

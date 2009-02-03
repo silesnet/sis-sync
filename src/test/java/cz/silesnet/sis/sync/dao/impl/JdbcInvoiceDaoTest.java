@@ -1,7 +1,5 @@
 package cz.silesnet.sis.sync.dao.impl;
 
-import java.math.BigDecimal;
-
 import javax.sql.DataSource;
 
 import org.dbunit.IDatabaseTester;
@@ -21,24 +19,18 @@ public class JdbcInvoiceDaoTest extends AbstractDependencyInjectionSpringContext
     private DataSource dataSource;
     private IDatabaseTester dbTester;
 
-    public void setTemplate(JdbcTemplate template) {
-        this.template = template;
-    }
-
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-
     @Override
     protected String[] getConfigLocations() {
-        return new String[]{"classpath:sisInvoiceJob.xml"};
+        return new String[] { "classpath:sisInvoiceJob.xml" };
     }
 
     @Override
     protected void onSetUp() throws Exception {
         super.onSetUp();
         dao = new JdbcInvoiceDao();
+        template = (JdbcTemplate) applicationContext.getBean("jdbcTemplate");
         dao.setTemplate(template);
+        dataSource = (DataSource) applicationContext.getBean("dataSource");
         dbTester = SisInvoiceFunctionalTest.initializeDatabase(dataSource);
     }
 
@@ -59,10 +51,7 @@ public class JdbcInvoiceDaoTest extends AbstractDependencyInjectionSpringContext
         assertEquals("Old Test Customer3", invoice.getCustomerName());
         assertEquals(new LocalDate("2009-01-01"), invoice.getPeriodFrom().toLocalDate());
         assertEquals(new LocalDate("2009-01-31"), invoice.getPeriodTo().toLocalDate());
-        assertEquals(19, invoice.getVatRate());
-        assertEquals("#1234567895#", invoice.getHashCode());
         assertEquals(2, invoice.getItems().size());
-        assertEquals(new BigDecimal("130.0"), BigDecimal.valueOf((double) invoice.getNet()));
         assertEquals("Connectivity 1 256/126 kbps FUP", invoice.getItems().get(0).getText());
         assertEquals(2.0F, invoice.getItems().get(0).getAmount());
         assertEquals(60, invoice.getItems().get(0).getPrice());
@@ -73,6 +62,8 @@ public class JdbcInvoiceDaoTest extends AbstractDependencyInjectionSpringContext
         assertFalse(invoice.getItems().get(1).isDisplayUnit());
         assertEquals(3, invoice.getCustomer().getId());
         assertEquals("1003", invoice.getCustomer().getSymbol());
+        assertEquals("1234567893", invoice.getCustomer().getAccountNo());
+        assertEquals("2403", invoice.getCustomer().getBankCode());
     }
 
     @Test
@@ -83,5 +74,4 @@ public class JdbcInvoiceDaoTest extends AbstractDependencyInjectionSpringContext
             // expected
         }
     }
-
 }

@@ -17,10 +17,6 @@ public class InvoiceItemReaderIntegrationTest extends AbstractDependencyInjectio
     private DrivingQueryItemReader itemReader;
     private ExecutionContext executionContext;
 
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-
     public void setInvoiceItemReader(DrivingQueryItemReader invoiceItemReader) {
         this.itemReader = invoiceItemReader;
     }
@@ -33,6 +29,7 @@ public class InvoiceItemReaderIntegrationTest extends AbstractDependencyInjectio
     @Override
     protected void onSetUp() throws Exception {
         super.onSetUp();
+        dataSource = (DataSource) applicationContext.getBean("dataSource");
         dbTester = SisInvoiceFunctionalTest.initializeDatabase(dataSource);
         executionContext = new ExecutionContext();
         itemReader.open(executionContext);

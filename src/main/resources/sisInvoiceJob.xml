@@ -4,13 +4,14 @@
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
   <import resource="job-launcher-context.xml" />
-  
+
   <bean id="sisInvoiceJob" parent="simpleJob">
     <property name="steps">
       <list>
         <ref bean="sisInvoiceStep" />
         <ref bean="spsInvoiceImportTaskletStep" />
         <ref bean="spsInvoiceUpdateStep" />
+        <ref bean="spsSpsInvoiceUpdateStep" />
       </list>
     </property>
   </bean>
@@ -32,12 +33,7 @@
         class="org.springframework.batch.item.database.support.SingleColumnJdbcKeyCollector"
         p:jdbcTemplate-ref="jdbcTemplate">
         <property name="keyMapper">
-          <bean class="cz.silesnet.sis.sync.mapping.InvoiceRowMapper">
-            <property name="dao">
-              <bean class="cz.silesnet.sis.sync.dao.impl.JdbcInvoiceDao"
-                p:template-ref="jdbcTemplate" />
-            </property>
-          </bean>
+          <bean class="cz.silesnet.sis.sync.mapping.InvoiceRowMapper" p:dao-ref="invoiceDao" />
         </property>
         <property name="sql">
           <value><![CDATA[
@@ -63,6 +59,9 @@
       </bean>
     </property>
   </bean>
+
+  <bean id="invoiceDao" class="cz.silesnet.sis.sync.dao.impl.JdbcInvoiceDao"
+    p:template-ref="jdbcTemplate" />
 
   <bean id="spsInvoiceImportTaskletStep" parent="taskletStep">
     <property name="tasklet">
@@ -97,5 +96,39 @@
       </bean>
     </property>
   </bean>
-  
+
+  <bean id="spsSpsInvoiceUpdateStep" parent="simpleStep">
+    <property name="itemReader">
+      <bean
+        class="cz.silesnet.sis.sync.item.reader.SpsInvoiceBankAccountItemReader"
+        p:resource="${sps.invoices.resource}" p:dao-ref="invoiceDao" />
+    </property>
+    <property name="itemWriter">
+      <bean
+        class="org.springframework.batch.item.database.BatchSqlUpdateItemWriter"
+        p:jdbcTemplate-ref="spsJdbcTemplate">
+        <property name="itemPreparedStatementSetter">
+          <bean
+            class="cz.silesnet.sis.sync.item.writer.SpsInvoiceUpdatePreparedStatementSetter" />
+        </property>
+        <property name="sql">
+          <value><![CDATA[
+            UPDATE FA
+              SET
+                Ucet = ?,
+                KodBanky = ?
+              WHERE ID = ?
+          ]]></value>
+        </property>
+      </bean>
+    </property>
+  </bean>
+
+  <bean id="spsJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"
+    p:dataSource-ref="spsDataSource" />
+
+  <bean id="spsDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+    p:driverClassName="${sps.jdbc.driver}" p:url="${sps.jdbc.url}"
+    p:username="${sps.jdbc.user}" p:password="${sps.jdbc.password}" />
+
 </beans>
