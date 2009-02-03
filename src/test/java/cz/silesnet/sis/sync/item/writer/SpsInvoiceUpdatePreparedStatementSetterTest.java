@@ -30,7 +30,7 @@ public class SpsInvoiceUpdatePreparedStatementSetterTest {
         PreparedStatement ps = createStrictMock(PreparedStatement.class);
         ps.setString(1, ACCOUNT_NUMBER);
         ps.setString(2, BANK_CODE);
-        ps.setLong(3, ID);
+        ps.setInt(3, (int) ID);
         replay(ps);
         SpsInvoiceUpdatePreparedStatementSetter psSetter = new SpsInvoiceUpdatePreparedStatementSetter();
         psSetter.setValues(invoice, ps);

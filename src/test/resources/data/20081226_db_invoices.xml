@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
 	<customers id='1' name='Test Customer1' symbol="1001" city="Test City"	account_no="1234567891" bank_no="2401" updated="2008-12-23 05:00:00" />
-	<customers id='2' name='Test Customer2' symbol="1002" city="Test City"	updated="2008-12-23 05:00:00" />
+	<customers id='2' name='Test Customer2' symbol="1002" city="Test City"	account_no="1234567892" bank_no="2402" updated="2008-12-23 05:00:00" />
 	<customers id='3' name='Test Customer3' symbol="1003" city="Test City"	account_no="1234567893" bank_no="2403" updated="2008-12-23 05:00:00" />
 	
 	<bills id="1" number="200800001" billing_date="2008-12-03" purge_date="2008-12-17" customer_id="1" invoicing_id="1" customer_name="Old Test Customer1" period_from="2008-12-01" period_to="2008-12-31" vat="19" hash_code="#1234567891#" synchronized="2008-12-23 05:00:00" />
