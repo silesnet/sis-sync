@@ -16,7 +16,7 @@
 	<bean id="duoAddressStep" parent="simpleStep">
 		<property name="itemReader">
 			<bean class="org.springframework.batch.item.file.FlatFileItemReader"
-				p:resource="data/20090205_duo_address.csv">
+				p:resource="data/20090205_duo_address.csv" p:encoding="UTF-8">
 				<property name="lineTokenizer">
 					<bean
 						class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer" p:delimiter="|">
