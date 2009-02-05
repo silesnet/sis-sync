@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<import resource="job-launcher-context.xml" />
+
+	<bean id="duoAddressJob" parent="simpleJob">
+		<property name="steps">
+			<list>
+				<ref bean="duoAddressStep" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="duoAddressStep" parent="simpleStep">
+		<property name="itemReader">
+			<bean class="org.springframework.batch.item.file.FlatFileItemReader"
+				p:resource="data/20090205_duo_address.csv">
+				<property name="lineTokenizer">
+					<bean
+						class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer" p:delimiter="|">
+						<property name="names" value="ico,dic,company,street,city,zip" />
+					</bean>
+				</property>
+				<property name="fieldSetMapper">
+					<bean
+						class="org.springframework.batch.item.file.mapping.PassThroughFieldSetMapper" />
+				</property>
+			</bean>
+		</property>
+		<property name="itemWriter">
+			<bean class="cz.silesnet.sis.sync.item.writer.DuoAddressItemWriter"
+				p:ico="25392280" p:resource="file:target/20090205_duo_address.xml" />
+		</property>
+	</bean>
+
+</beans>

@@ -34,12 +34,12 @@ public class AbstractDataPackItemWriterTest {
 
             @Override
             protected String[] dataPackItemLines(Object item) {
-                return new String[]{item.toString()};
+                return new String[] { item.toString() };
             }
 
             @Override
             protected String[] nameSpaceLines() {
-                return new String[]{NAME_SPACE_1, NAME_SPACE_2};
+                return new String[] { NAME_SPACE_1, NAME_SPACE_2 };
             }
 
             @Override
@@ -143,6 +143,17 @@ public class AbstractDataPackItemWriterTest {
     }
 
     @Test
+    public final void testGetDataPackItemIdNegativeHashCode() {
+        itemWriter.headerLines();
+        String dataPackId = itemWriter.getDataPackId();
+        String itemsWritten = itemWriter.getItemsWrittenString();
+        String dataPackItemId = itemWriter.getDataPackItemId((int) -ID);
+        log.debug(dataPackItemId);
+        assertEquals(dataPackId + "_" + itemsWritten + "_" + ID, dataPackItemId);
+        assertTrue(dataPackItemId.length() <= MAX_ID_LENGTH);
+    }
+
+    @Test
     public final void testGetDataPackItemIdIdentity() {
         itemWriter.headerLines();
         String dataPackId = itemWriter.getDataPackId();
@@ -193,6 +204,7 @@ public class AbstractDataPackItemWriterTest {
     public void testElValueRemoveDoubleSpaces() throws Exception {
         assertEquals("<name>a b c d e</name>", AbstractDataPackItemWriter.elValue("name", "a b  c   d    e"));
     }
+
     @Test
     public void testElValueNull() throws Exception {
         assertEquals("<name />", AbstractDataPackItemWriter.elValue("name", null));
