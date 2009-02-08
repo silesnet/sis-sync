@@ -1,0 +1,33 @@
+<adb:addressbook version="1.3">
+  <adb:addressbookHeader>
+    <adb:identity>
+      <typ:address>
+        <typ:company>Customer Name</typ:company>
+        <typ:division>Supplementary name</typ:division>
+        <typ:city>Test City</typ:city>
+        <typ:street>Street 1234</typ:street>
+        <typ:zip>12345</typ:zip>
+        <typ:ico>12345679</typ:ico>
+        <typ:dic>DIC12345679</typ:dic>
+      </typ:address>
+    </adb:identity>
+    <adb:phone>+420123456789</adb:phone>
+    <adb:email>contact@customer.cz</adb:email>
+    <adb:adGroup>SIS</adb:adGroup>
+    <adb:maturity>14</adb:maturity>
+    <adb:contract>12452008</adb:contract>
+    <adb:p2>true</adb:p2>
+    <adb:note>Kontaktn&#237; osoba: Contact Name</adb:note>
+<adb:duplicityFields actualize="true">
+<adb:fieldFirma>true</adb:fieldFirma>
+<adb:fieldICO>true</adb:fieldICO>
+</adb:duplicityFields>
+</adb:addressbookHeader>
+<adb:addressbookAccount>
+<adb:accountItem>
+<adb:accountNumber>1234-567890</adb:accountNumber>
+<adb:bankCode>2400</adb:bankCode>
+<adb:defaultAccount>true</adb:defaultAccount>
+</adb:accountItem>
+</adb:addressbookAccount>
+</adb:addressbook>
