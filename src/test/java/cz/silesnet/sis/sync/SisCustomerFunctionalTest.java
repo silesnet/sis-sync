@@ -37,10 +37,6 @@ public class SisCustomerFunctionalTest extends AbstractDependencyInjectionSpring
         this.job = job;
     }
 
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-
     @Override
     protected String[] getConfigLocations() {
         return new String[] { "classpath:sisCustomerJob.xml" };
@@ -49,6 +45,7 @@ public class SisCustomerFunctionalTest extends AbstractDependencyInjectionSpring
     @SuppressWarnings("unchecked")
     @Test
     public void testSisCustomerJob() throws Exception {
+        dataSource = (DataSource) applicationContext.getBean("dataSource");
         dbTester = initializeDatabase(dataSource);
         jobParameters = new JobParameters();
         JobExecution jobExecution = launcher.run(job, jobParameters);

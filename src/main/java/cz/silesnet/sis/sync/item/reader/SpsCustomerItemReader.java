@@ -1,51 +1,34 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2009 the original author or authors.
  */
+
 package cz.silesnet.sis.sync.item.reader;
 
-import java.util.regex.Pattern;
-
+import cz.silesnet.sis.sync.dao.CustomerDao;
 import cz.silesnet.sis.sync.domain.Customer;
-import cz.silesnet.sis.util.RegExpUtils;
+import cz.silesnet.sis.sync.domain.CustomerResult;
 
 /**
- * ItemReader implementation, that reads SPS generated customers import result
- * XML file.
+ * Customer ItemReader that reads SPS Customer import result XML and retrieves
+ * SIS Customer using Dao.
  * 
- * @author Richard Sikora
+ * @author rsi
+ * 
  */
-public class SpsCustomerItemReader extends AbstractSpsResponseItemReader {
+public class SpsCustomerItemReader extends SpsCustomerResultItemReader {
 
-    private final static Pattern ID_LINE_PATTERN = Pattern.compile("<rdc:id>(\\d+)</rdc:id>");
-    private final static Pattern CODE_LINE_PATTERN = Pattern.compile("<rdc:code>(.+)</rdc:code>");
+    CustomerDao dao;
+
+    public void setDao(CustomerDao dao) {
+        this.dao = dao;
+    }
 
     @Override
     protected Object mapLines(long id, String[] lines) {
-        Customer customer = new Customer();
-        customer.setId(id);
-        boolean idFound = false;
-        boolean codeFound = false;
-        for (String line : lines) {
-            if (idFound && codeFound) {
-                break;
-            }
-            if (!idFound) {
-                String idValue = RegExpUtils.getFirstMatcherGroup(ID_LINE_PATTERN.matcher(line));
-                if (idValue != null) {
-                    customer.setSymbol(idValue);
-                    idFound = true;
-                    continue;
-                }
-            }
-            if (!codeFound) {
-                String codeValue = RegExpUtils.getFirstMatcherGroup(CODE_LINE_PATTERN.matcher(line));
-                if (codeValue != null) {
-                    customer.setName(codeValue);
-                    codeFound = true;
-                    continue;
-                }
-            }
-        }
+        CustomerResult result = (CustomerResult) super.mapLines(id, lines);
+        // find SIS customer
+        Customer customer = dao.find(result.getSisId());
         return customer;
     }
+
 }

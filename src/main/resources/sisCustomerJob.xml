@@ -11,6 +11,7 @@
         <ref bean="sisCustomerStep" />
         <ref bean="spsCustomerImportTaskletStep" />
         <ref bean="spsCustomerIdStep" />
+        <ref bean="spsInvoicesUpdateStep" />
       </list>
     </property>
   </bean>
@@ -54,7 +55,8 @@
 
   <bean id="spsCustomerIdStep" parent="simpleStep">
     <property name="itemReader">
-      <bean class="cz.silesnet.sis.sync.item.reader.SpsCustomerItemReader"
+      <bean
+        class="cz.silesnet.sis.sync.item.reader.SpsCustomerResultItemReader"
         p:resource="${sps.customers.resource}" />
     </property>
     <property name="itemWriter">
@@ -76,5 +78,35 @@
       </bean>
     </property>
   </bean>
+
+  <bean id="spsInvoicesUpdateStep" parent="simpleStep">
+    <property name="itemReader">
+      <bean class="cz.silesnet.sis.sync.item.reader.SpsCustomerItemReader"
+        p:resource="${sps.customers.resource}" p:dao-ref="customerDao" />
+    </property>
+    <property name="itemWriter">
+      <bean
+        class="org.springframework.batch.item.database.BatchSqlUpdateItemWriter"
+        p:jdbcTemplate-ref="spsJdbcTemplate" p:assertUpdates="false" >
+        <property name="itemPreparedStatementSetter">
+          <bean
+            class="cz.silesnet.sis.sync.item.writer.CustomerSpsInvoicesUpdatePreparedStatementSetter" />
+        </property>
+        <property name="sql">
+          <value><![CDATA[
+            UPDATE FA
+              SET
+                Ucet = ?,
+                KodBanky = ?
+              WHERE RefAD = ?
+                AND DatLikv IS NULL
+          ]]></value>
+        </property>
+      </bean>
+    </property>
+  </bean>
+
+  <bean id="customerDao" class="cz.silesnet.sis.sync.dao.impl.JdbcCustomerDao"
+    p:jdbcTemplate-ref="jdbcTemplate" />
 
 </beans>

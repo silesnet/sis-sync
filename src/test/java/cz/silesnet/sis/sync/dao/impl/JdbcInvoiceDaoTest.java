@@ -29,7 +29,7 @@ public class JdbcInvoiceDaoTest extends AbstractDependencyInjectionSpringContext
         super.onSetUp();
         dao = new JdbcInvoiceDao();
         template = (JdbcTemplate) applicationContext.getBean("jdbcTemplate");
-        dao.setTemplate(template);
+        dao.setJdbcTemplate(template);
         dataSource = (DataSource) applicationContext.getBean("dataSource");
         dbTester = SisInvoiceFunctionalTest.initializeDatabase(dataSource);
     }

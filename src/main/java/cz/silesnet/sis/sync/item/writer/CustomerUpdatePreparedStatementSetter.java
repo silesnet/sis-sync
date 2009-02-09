@@ -10,7 +10,7 @@ import java.util.Date;
 
 import org.springframework.batch.item.database.ItemPreparedStatementSetter;
 
-import cz.silesnet.sis.sync.domain.Customer;
+import cz.silesnet.sis.sync.domain.CustomerResult;
 
 /**
  * Sets parameters for Customer update SQL.
@@ -30,9 +30,9 @@ public class CustomerUpdatePreparedStatementSetter implements ItemPreparedStatem
      *            SQL wrapped in PreparedStatement
      */
     public void setValues(Object item, PreparedStatement ps) throws SQLException {
-        Customer customer = (Customer) item;
-        ps.setString(1, customer.getSymbol());
+        CustomerResult customer = (CustomerResult) item;
+        ps.setString(1, "" + customer.getSpsId());
         ps.setTimestamp(2, new Timestamp((new Date()).getTime()));
-        ps.setLong(3, customer.getId());
+        ps.setLong(3, customer.getSisId());
     }
 }

@@ -27,7 +27,7 @@ public class JdbcInvoiceDao implements InvoiceDao {
     private static final String INVOICE_SQL = "SELECT * FROM bills WHERE id = ?";
     private JdbcTemplate template;
 
-    public void setTemplate(JdbcTemplate template) {
+    public void setJdbcTemplate(JdbcTemplate template) {
         this.template = template;
     }
 
