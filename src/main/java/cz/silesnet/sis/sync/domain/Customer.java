@@ -173,7 +173,11 @@ public class Customer implements ItemIdentity {
         // sort descending according contract numbers
         Collections.sort(contracs, new Comparator<Contract>() {
             public int compare(Contract o1, Contract o2) {
-                return o2.getNumber() - o1.getNumber();
+                if (o1.getNumber() != o2.getNumber()) {
+                    return o2.getNumber() - o1.getNumber();
+                } else {
+                    return o2.getYear() - o1.getYear();
+                }
             }
         });
         return contracs.size() > 0 ? contracs.get(0).getSpsNumber() : null;
@@ -203,5 +207,8 @@ public class Customer implements ItemIdentity {
             return ("" + number) + year;
         }
 
+        public int getYear() {
+            return year;
+        }
     }
 }

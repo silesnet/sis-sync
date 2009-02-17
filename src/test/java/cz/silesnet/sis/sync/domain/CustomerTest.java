@@ -1,7 +1,6 @@
 package cz.silesnet.sis.sync.domain;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
@@ -60,5 +59,11 @@ public class CustomerTest {
     public void testGetEmptySpsContract() {
         customer.setContract("/,/");
         assertNull(customer.getSpsContract());
+    }
+
+    @Test
+    public void testGetTrickySpsConract() {
+        customer.setContract("123/2008, 123/2009, 123/2010");
+        assertEquals("1232010", customer.getSpsContract());
     }
 }
