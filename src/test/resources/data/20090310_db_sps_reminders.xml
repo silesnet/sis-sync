@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+     
+    <AD ID='1' Firma='Test Customer1' Email="contact@customer1.cz" ADSplat="10" /> <!-- N -->
+    <AD ID='2' Firma='Test Customer2' Email="contact@customer2.cz" ADSplat="10" /> <!-- Y -->
+    <AD ID='3' Firma='Test Customer3' Email="contact@customer3.cz" ADSplat="10" /> <!-- Y -->
+    <AD ID='4' Firma='Test Customer4' Email="contact@customer4.cz" ADSplat="10" /> <!-- Y -->
+    <AD ID='5' Firma='Test Customer5' Email="contact@customer5.cz" ADSplat="11" /> <!-- N, bigger grace period  -->
+
+    <FA ID="1" Cislo="200900001" VarSym="200900001" DatSplat="2009-02-15" KcCelkem="100" KcLikv="0" RefAD="1" /> <!-- N -->
+    <FA ID="2" Cislo="200900002" VarSym="200900002" DatSplat="2009-02-15" KcCelkem="100" KcLikv="4" RefAD="1" /> <!-- N -->
+    <FA ID="3" Cislo="200900003" VarSym="200900003" DatSplat="2009-02-15" KcCelkem="100" KcLikv="5" RefAD="2" /> <!-- Y -->
+    <FA ID="4" Cislo="200900004" VarSym="200900004" DatSplat="2009-02-15" KcCelkem="100" KcLikv="0" RefAD="3" /> <!-- N -->
+    <FA ID="5" Cislo="200900005" VarSym="200900005" DatSplat="2009-02-15" KcCelkem="100" KcLikv="100" RefAD="3" /> <!-- Y -->
+    <FA ID="6" Cislo="200900006" VarSym="200900006" DatSplat="2009-02-15" KcCelkem="100" KcLikv="100" RefAD="4" /> <!-- Y -->
+    <FA ID="7" Cislo="200900007" VarSym="200900007" DatSplat="2009-02-15" KcCelkem="100" KcLikv="100" RefAD="4" /> <!-- Y -->
+    <FA ID="8" Cislo="200900008" VarSym="200900008" DatSplat="2009-02-15" KcCelkem="100" KcLikv="100" RefAD="5" /> <!-- N -->
+
+</dataset>
