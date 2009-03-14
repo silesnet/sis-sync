@@ -18,8 +18,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 
-public class RemindersFunctionalTest extends AbstractDependencyInjectionSpringContextTests {
-    private static Log log = LogFactory.getLog(RemindersFunctionalTest.class);
+public class SpsRemindersFunctionalTest extends AbstractDependencyInjectionSpringContextTests {
+    private static Log log = LogFactory.getLog(SpsRemindersFunctionalTest.class);
 
     private JobLauncher launcher;
     private Job job;
@@ -38,7 +38,7 @@ public class RemindersFunctionalTest extends AbstractDependencyInjectionSpringCo
     @Override
     protected String[] getConfigLocations() {
         // FIXME get correct job
-        return new String[] { "classpath:sisCustomerJob.xml" };
+        return new String[] { "classpath:spsReminderJob.xml" };
     }
 
     @SuppressWarnings("unchecked")
@@ -52,7 +52,9 @@ public class RemindersFunctionalTest extends AbstractDependencyInjectionSpringCo
         dbTester.onTearDown();
         // test synchronized customers
         JdbcTemplate template = new JdbcTemplate(dataSource);
-        String sql = "SELECT DISTINCT ID FROM AD INNER JOIN FA ON AD.ID = FA.RefAD WHERE KcLikv >= 5";
+        String sql = "SELECT DISTINCT AD.ID FROM AD INNER JOIN FA ON AD.ID = FA.RefAD WHERE DATEDIFF('dd', FA.DatSplat, '2009-02-25') >= AD.ADSplat AND KcLikv >= 5 ORDER BY AD.ID";
+        // sql =
+        // "SELECT DISTINCT AD.ID FROM AD INNER JOIN FA ON AD.ID = FA.RefAD WHERE DATEDIFF('dd', FA.DatSplat, CURRENT_DATE) >= AD.ADSplat AND KcLikv >= 5";
         List<String> customers = template.query(sql, new RowMapper() {
 
             public Object mapRow(ResultSet rs, int rowNum) throws SQLException {

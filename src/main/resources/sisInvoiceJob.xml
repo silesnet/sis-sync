@@ -53,7 +53,7 @@
                 ON bills.invoicing_id = invoicings.id
               WHERE synchronized IS NULL
                 AND invoicings.country = 10
-                AND id > ?
+                AND bills.id > ?
               ORDER BY bills.id
           ]]></value>
         </property>
