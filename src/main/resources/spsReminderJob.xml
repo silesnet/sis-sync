@@ -18,6 +18,7 @@
       <ref bean="reminderItemReader" />
     </property>
     <property name="itemWriter">
+      <ref bean="reminderItemWriter" />
     </property>
   </bean>
 

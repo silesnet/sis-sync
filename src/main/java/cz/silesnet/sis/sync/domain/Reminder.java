@@ -7,6 +7,7 @@ package cz.silesnet.sis.sync.domain;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.joda.time.LocalDate;
@@ -40,6 +41,22 @@ public class Reminder {
                     + " does not belong to the customer " + customer.getName() + ".");
         }
         invoices.add(invoice);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder reminder = new StringBuilder();
+        reminder.append(getCustomer().getId()).append(": ").append(getCustomer().getName());
+        reminder.append(" <").append(getCustomer().getEmail()).append("> [");
+        for (Iterator<Invoice> invoiceIterator = getInvoices().iterator(); invoiceIterator.hasNext();) {
+            Invoice invoice = invoiceIterator.next();
+            reminder.append(invoice.getNumber()).append(": ").append(invoice.getDueAmount());
+            if (invoiceIterator.hasNext()) {
+                reminder.append(", ");
+            }
+        }
+        reminder.append("]");
+        return reminder.toString();
     }
 
     public class Customer {

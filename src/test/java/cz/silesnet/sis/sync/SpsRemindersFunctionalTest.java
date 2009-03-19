@@ -11,11 +11,13 @@ import org.apache.commons.logging.LogFactory;
 import org.dbunit.IDatabaseTester;
 import org.junit.Test;
 import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemStream;
+import org.springframework.batch.repeat.ExitStatus;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -50,9 +52,6 @@ public class SpsRemindersFunctionalTest extends AbstractDependencyInjectionSprin
     public void testRemindersSelectSQL() throws Exception {
         dataSource = (DataSource) applicationContext.getBean("spsDataSource");
         dbTester = initializeDatabase(dataSource);
-        // jobParameters = new JobParameters();
-        // JobExecution jobExecution = launcher.run(job, jobParameters);
-        // assertEquals(ExitStatus.FINISHED, jobExecution.getExitStatus());
         dbTester.onTearDown();
         // test selected SPS customers
         JdbcTemplate template = new JdbcTemplate(dataSource);
@@ -80,17 +79,30 @@ public class SpsRemindersFunctionalTest extends AbstractDependencyInjectionSprin
         // read 3 reminders
         Reminder reminder;
         reminder = (Reminder) reader.read();
+        log.debug(reminder);
         assertEquals(2, reminder.getCustomer().getId());
         assertEquals(1, reminder.getInvoices().size());
         reminder = (Reminder) reader.read();
+        log.debug(reminder);
         assertEquals(3, reminder.getCustomer().getId());
         assertEquals(1, reminder.getInvoices().size());
         reminder = (Reminder) reader.read();
+        log.debug(reminder);
         assertEquals(4, reminder.getCustomer().getId());
         assertEquals(2, reminder.getInvoices().size());
         reminder = (Reminder) reader.read();
+        log.debug(reminder);
         assertNull(reminder);
         ((ItemStream) reader).close(executionContext);
+    }
+
+    public void testReminderJob() throws Exception {
+        dataSource = (DataSource) applicationContext.getBean("spsDataSource");
+        dbTester = initializeDatabase(dataSource);
+        jobParameters = new JobParameters();
+        JobExecution jobExecution = launcher.run(job, jobParameters);
+        assertEquals(ExitStatus.FINISHED, jobExecution.getExitStatus());
+        dbTester.onTearDown();
     }
 
     public static IDatabaseTester initializeDatabase(DataSource dataSource) throws Exception {
