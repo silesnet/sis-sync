@@ -8,57 +8,62 @@
   <bean id="spsReminderJob" parent="simpleJob">
     <property name="steps">
       <list>
-        <ref bean="sisInvoiceStep" />
+        <ref bean="reminderStep" />
       </list>
     </property>
   </bean>
 
-  <bean id="sisInvoiceStep" parent="simpleStep">
+  <bean id="reminderStep" parent="simpleStep">
     <property name="itemReader">
-      <ref bean="sisInvoiceItemReader" />
+      <ref bean="reminderItemReader" />
     </property>
     <property name="itemWriter">
-      <bean class="cz.silesnet.sis.sync.item.writer.SisInvoiceItemWriter"
-        p:ico="${sps.silesnet.ico}" p:resource="${sis.invoices.resource}" />
     </property>
   </bean>
 
-  <bean name="sisInvoiceItemReader"
+  <bean name="reminderItemReader"
     class="org.springframework.batch.item.database.DrivingQueryItemReader">
     <property name="keyCollector">
       <bean
         class="org.springframework.batch.item.database.support.SingleColumnJdbcKeyCollector"
-        p:jdbcTemplate-ref="jdbcTemplate">
+        p:jdbcTemplate-ref="spsJdbcTemplate">
         <property name="keyMapper">
-          <bean class="cz.silesnet.sis.sync.mapping.InvoiceRowMapper"
-            p:dao-ref="invoiceDao" />
+          <bean class="cz.silesnet.sis.sync.mapping.ReminderRowMapper"
+            p:dao-ref="reminderDao" />
         </property>
         <property name="sql">
           <value><![CDATA[
-            SELECT bills.id FROM bills
-              INNER JOIN invoicings
-                ON bills.invoicing_id = invoicings.id
-              WHERE synchronized IS NULL
-                AND invoicings.country = 10
-              ORDER BY bills.id
+            SELECT DISTINCT AD.ID
+              FROM AD
+                INNER JOIN FA
+                  ON AD.ID = FA.RefAD
+              WHERE
+                DATEDIFF(${sps.sql.daypart}, FA.DatSplat, ${sps.sql.current.date}) >= AD.ADSplat
+                  AND KcLikv >= ${reminder.minimal.due.amount}
+              ORDER BY AD.ID
           ]]></value>
         </property>
         <property name="restartSql">
           <value><![CDATA[
-            SELECT bills.id FROM bills
-              INNER JOIN invoicings
-                ON bills.invoicing_id = invoicings.id
-              WHERE synchronized IS NULL
-                AND invoicings.country = 10
-                AND bills.id > ?
-              ORDER BY bills.id
+            SELECT DISTINCT AD.ID
+              FROM AD
+                INNER JOIN FA
+                  ON AD.ID = FA.RefAD
+              WHERE
+                DATEDIFF(${sps.sql.daypart}, FA.DatSplat, ${sps.sql.current.date}) >= AD.ADSplat
+                  AND KcLikv >= ${reminder.minimal.due.amount}
+                  AND AD.ID > ?
+              ORDER BY AD.ID
           ]]></value>
         </property>
       </bean>
     </property>
   </bean>
 
-  <bean id="invoiceDao" class="cz.silesnet.sis.sync.dao.impl.JdbcInvoiceDao"
-    p:jdbcTemplate-ref="jdbcTemplate" />
+  <bean id="reminderDao" class="cz.silesnet.sis.sync.dao.impl.JdbcReminderDao"
+    p:jdbcTemplate-ref="spsJdbcTemplate" p:dayPartName="${sps.sql.daypart}"
+    p:currentDateFunction="${sps.sql.current.date}" p:minimalDueAmount="${reminder.minimal.due.amount}" />
+
+  <bean id="reminderItemWriter" class="cz.silesnet.sis.sync.item.writer.ReminderItemWriter" />
 
 </beans>

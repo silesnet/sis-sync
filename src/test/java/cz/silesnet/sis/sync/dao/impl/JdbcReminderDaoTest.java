@@ -32,10 +32,10 @@ public class JdbcReminderDaoTest extends AbstractDependencyInjectionSpringContex
         // adjust DAO to work with HSQLDB for testing
         dao.setDayPartName("'dd'");
         dao.setCurrentDateFunction("'2009-02-25'"); // CURRENT_DATE for HSQLDB
-
-        template = (JdbcTemplate) applicationContext.getBean("jdbcTemplate");
+        dao.setMinimalDueAmount(5);
+        template = (JdbcTemplate) applicationContext.getBean("spsJdbcTemplate");
         dao.setJdbcTemplate(template);
-        dataSource = (DataSource) applicationContext.getBean("dataSource");
+        dataSource = (DataSource) applicationContext.getBean("spsDataSource");
         dbTester = SpsRemindersFunctionalTest.initializeDatabase(dataSource);
     }
 

@@ -33,7 +33,6 @@ public class JdbcReminderDao implements ReminderDao {
     private static final String GRACE_DAYS_COLUMN = "ADSplat";
     private static final String INVOICES_SQL_TEMPLATE = "SELECT ID, Cislo, VarSym, DatSplat, KcCelkem, KcLikv, RefAD "
             + "FROM FA WHERE RefAd = ? AND DATEDIFF(${dayPartName}, DatSplat, ${currentDateFunction}) >= ? AND KcLikv >= ?";
-    private static final int MINIMAL_DUE_AMOUNT = 5;
     private static final String NUMBER_COLUMN = "Cislo";
     private static final String REFERENCE_NUMBER_COLUMN = "VarSym";
     private static final String DUE_DATE_COLUMN = "DatSplat";
@@ -43,11 +42,13 @@ public class JdbcReminderDao implements ReminderDao {
 
     private static final String SQL_SERVER_DAY_PART_NAME = "dd";
     private static final String SQL_SERVER_CURRENT_DATE_FUNCTION = "GETDATE()";
+    private static final int DEFAULT_MINIMAL_DUE_AMOUNT = 5;
 
     private JdbcTemplate template;
 
     private String dayPartName = SQL_SERVER_DAY_PART_NAME;
     private String currentDateFunction = SQL_SERVER_CURRENT_DATE_FUNCTION;
+    private int minimalDueAmount = DEFAULT_MINIMAL_DUE_AMOUNT;
 
     public JdbcReminderDao() {
     }
@@ -56,12 +57,16 @@ public class JdbcReminderDao implements ReminderDao {
         this.template = template;
     }
 
-    protected void setCurrentDateFunction(String currentDateFunction) {
+    public void setCurrentDateFunction(String currentDateFunction) {
         this.currentDateFunction = currentDateFunction;
     }
 
-    protected void setDayPartName(String dayPartName) {
+    public void setDayPartName(String dayPartName) {
         this.dayPartName = dayPartName;
+    }
+
+    public void setMinimalDueAmount(int minimalDueAmount) {
+        this.minimalDueAmount = minimalDueAmount;
     }
 
     @SuppressWarnings("unchecked")
@@ -73,7 +78,7 @@ public class JdbcReminderDao implements ReminderDao {
                 (String) customerMap.get(EMAIL_COLUMN), (Integer) customerMap.get(GRACE_DAYS_COLUMN));
         // find invoices to remind the customer for
         List invoiceMaps = template.query(composeInvoicesSql(), new Object[] { customerId,
-                reminder.getCustomer().getGraceDays(), MINIMAL_DUE_AMOUNT }, new ColumnMapRowMapper());
+                reminder.getCustomer().getGraceDays(), minimalDueAmount }, new ColumnMapRowMapper());
         // add invoices to the reminder
         for (Object rawInvoiceMap : invoiceMaps) {
             Map<String, Object> im = (Map<String, Object>) rawInvoiceMap;
