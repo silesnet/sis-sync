@@ -14,6 +14,6 @@ import cz.silesnet.sis.sync.domain.Reminder;
  */
 public interface ReminderDao {
 
-    Reminder get(long customerId);
+    Reminder find(long customerId);
 
 }

@@ -37,7 +37,6 @@ public class SpsRemindersFunctionalTest extends AbstractDependencyInjectionSprin
 
     @Override
     protected String[] getConfigLocations() {
-        // FIXME get correct job
         return new String[] { "classpath:spsReminderJob.xml" };
     }
 
@@ -53,8 +52,6 @@ public class SpsRemindersFunctionalTest extends AbstractDependencyInjectionSprin
         // test synchronized customers
         JdbcTemplate template = new JdbcTemplate(dataSource);
         String sql = "SELECT DISTINCT AD.ID FROM AD INNER JOIN FA ON AD.ID = FA.RefAD WHERE DATEDIFF('dd', FA.DatSplat, '2009-02-25') >= AD.ADSplat AND KcLikv >= 5 ORDER BY AD.ID";
-        // sql =
-        // "SELECT DISTINCT AD.ID FROM AD INNER JOIN FA ON AD.ID = FA.RefAD WHERE DATEDIFF('dd', FA.DatSplat, CURRENT_DATE) >= AD.ADSplat AND KcLikv >= 5";
         List<String> customers = template.query(sql, new RowMapper() {
 
             public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
