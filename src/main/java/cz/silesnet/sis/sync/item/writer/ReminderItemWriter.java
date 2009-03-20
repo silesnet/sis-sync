@@ -12,8 +12,7 @@ import org.springframework.batch.item.support.AbstractItemWriter;
 import cz.silesnet.sis.sync.domain.Reminder;
 
 /**
- * Reminder ItemWriter implementation that sends reminders to the customer by
- * email.
+ * Reminder ItemWriter implementation that sends reminders to the customer by email.
  * 
  * @author rsi
  * 
@@ -21,13 +20,19 @@ import cz.silesnet.sis.sync.domain.Reminder;
 public class ReminderItemWriter extends AbstractItemWriter implements ItemWriter {
 
     private static Log log = LogFactory.getLog(ReminderItemWriter.class);
+    private ReminderSender sender;
 
     public ReminderItemWriter() {
     }
 
+    public void setSender(ReminderSender sender) {
+        this.sender = sender;
+    }
+
     public void write(Object item) throws Exception {
         Reminder reminder = (Reminder) item;
-        log.debug(reminder);
+        log.debug("Sendig reminder: " + reminder);
+        sender.send(reminder);
     }
 
 }
