@@ -65,13 +65,17 @@
 		p:jdbcTemplate-ref="spsJdbcTemplate" p:dayPartName="${sps.sql.daypart}"
 		p:currentDateFunction="${sps.sql.current.date}" p:minimalDueAmount="${reminder.minimal.due.amount}" />
 
-	<bean id="reminderItemWriter" class="cz.silesnet.sis.sync.item.writer.ReminderItemWriter" p:sender-ref="reminderSender" />
+	<bean id="reminderItemWriter" class="cz.silesnet.sis.sync.item.writer.ReminderItemWriter"
+		p:sender-ref="reminderSender" />
 
 	<bean id="reminderSender"
-		class="cz.silesnet.sis.sync.item.writer.SimpleEmailReminderSender"
-		p:mailSender-ref="mailSender" />
+		class="cz.silesnet.sis.sync.item.writer.SimpleMailReminderSender"
+		p:mailSender-ref="mailSender" p:preparator-ref="mailPreparator" />
 
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"
+	<bean id="mailSender" class="${email.sender.implementation.class}"
 		p:host="${email.smtp}" />
+
+	<bean id="mailPreparator"
+		class="cz.silesnet.sis.sync.item.writer.SimpleReminderMailPreparator" />
 
 </beans>

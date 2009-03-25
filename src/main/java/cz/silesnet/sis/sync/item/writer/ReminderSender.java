@@ -3,6 +3,8 @@
  */
 package cz.silesnet.sis.sync.item.writer;
 
+import javax.mail.MessagingException;
+
 import cz.silesnet.sis.sync.domain.Reminder;
 
 /**
@@ -18,6 +20,7 @@ public interface ReminderSender {
      * 
      * @param reminder
      *            delayed invoices reminder to be send
+     * @throws MessagingException
      */
-    void send(Reminder reminder);
+    void send(Reminder reminder) throws MessagingException;
 }
