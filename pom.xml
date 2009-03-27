@@ -94,6 +94,11 @@
       <version>1.2</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+    	<groupId>org.freemarker</groupId>
+    	<artifactId>freemarker</artifactId>
+    	<version>2.3.15</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>

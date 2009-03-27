@@ -76,6 +76,8 @@
 		p:host="${email.smtp}" />
 
 	<bean id="mailPreparator"
-		class="cz.silesnet.sis.sync.item.writer.SimpleReminderMailPreparator" />
+		class="cz.silesnet.sis.sync.item.writer.SimpleReminderMailPreparator"
+		p:templateResource="classpath:flt/simple-notice.flt" 
+		p:from="${email.reminder.from}" p:subject="${email.reminder.subject}"/>
 
 </beans>

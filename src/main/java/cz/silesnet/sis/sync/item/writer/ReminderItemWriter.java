@@ -21,6 +21,7 @@ public class ReminderItemWriter extends AbstractItemWriter implements ItemWriter
 
     private static Log log = LogFactory.getLog(ReminderItemWriter.class);
     private ReminderSender sender;
+    private int delay = 0;
 
     public ReminderItemWriter() {
     }
@@ -29,10 +30,15 @@ public class ReminderItemWriter extends AbstractItemWriter implements ItemWriter
         this.sender = sender;
     }
 
+    public void setDelay(int delay) {
+        this.delay = delay;
+    }
+
     public void write(Object item) throws Exception {
         Reminder reminder = (Reminder) item;
         log.debug("Sendig reminder: " + reminder);
         sender.send(reminder);
+        Thread.sleep(delay * 1000);
     }
 
 }
