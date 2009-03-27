@@ -11,8 +11,7 @@ import java.util.Map;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
@@ -29,28 +28,35 @@ import freemarker.template.TemplateException;
  * @author sikorric
  * 
  */
-public class SimpleReminderMailPreparator implements ReminderMailPreparator {
+public class SimpleReminderMailPreparator implements ReminderMailPreparator, InitializingBean {
 
-    private static Log log = LogFactory.getLog(SimpleReminderMailPreparator.class);
     private static final String REMINDER_KEY = "reminder";
 
     private Configuration cfg;
-    private Resource templateResource;
-    private Template template;
+    private Resource textTemplateResource;
+    private Resource htmlTemplateResource;
+    private Template textTemplate;
+    private Template htmlTemplate;
     private String from;
     private String subject;
 
     public SimpleReminderMailPreparator() throws IOException {
-        super();
-        cfg = new Configuration();
-        cfg.setObjectWrapper(new DefaultObjectWrapper());
     }
 
-    public void setTemplateResource(Resource templateResource) throws IOException {
-        this.templateResource = templateResource;
-        log.debug(this.templateResource.getFilename());
-        cfg.setTemplateLoader(new FileTemplateLoader(this.templateResource.getFile().getParentFile()));
-        template = cfg.getTemplate(this.templateResource.getFilename());
+    public void setTextTemplateResource(Resource textTemplateResource) {
+        this.textTemplateResource = textTemplateResource;
+    }
+
+    public void setHtmlTemplateResource(Resource htmlTemplateResource) {
+        this.htmlTemplateResource = htmlTemplateResource;
+    }
+
+    public void afterPropertiesSet() throws Exception {
+        cfg = new Configuration();
+        cfg.setObjectWrapper(new DefaultObjectWrapper());
+        cfg.setTemplateLoader(new FileTemplateLoader(this.textTemplateResource.getFile().getParentFile()));
+        textTemplate = cfg.getTemplate(this.textTemplateResource.getFilename());
+        htmlTemplate = cfg.getTemplate(this.htmlTemplateResource.getFilename());
     }
 
     public void setFrom(String from) {
@@ -62,22 +68,24 @@ public class SimpleReminderMailPreparator implements ReminderMailPreparator {
     }
 
     public void prepare(Reminder reminder, MimeMessage message) throws MessagingException {
-        MimeMessageHelper email = new MimeMessageHelper(message);
+        MimeMessageHelper email = new MimeMessageHelper(message, true);
         email.setFrom(from);
         email.setTo(reminder.getCustomer().getEmail());
         email.setSubject(subject);
         // render body text
         Map<String, Object> model = new HashMap<String, Object>();
         model.put(REMINDER_KEY, reminder);
-        StringWriter body = new StringWriter();
+        StringWriter text = new StringWriter();
+        StringWriter html = new StringWriter();
         try {
-            template.process(model, body);
+            textTemplate.process(model, text);
+            htmlTemplate.process(model, html);
         } catch (TemplateException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        email.setText(body.toString());
+        email.setText(text.toString(), html.toString());
     }
 
 }

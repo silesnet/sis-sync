@@ -1,0 +1,50 @@
+<html>
+  <head></head>
+<body>
+<p>Dobry den,<br/>
+zasilame Vam upominku k fakture.</p>
+
+<table border="1" cellpadding="4">
+  <tr>
+    <th>Cislo faktury</th>
+    <th>Variabilni symbol</th>
+    <th>Datum splatnosti</th>
+    <th>Celkem/Kc</th>
+    <th>K zaplaceni/Kc</th>
+  </th>
+<#list reminder.invoices as invoice>
+      <tr>
+        <td>${invoice.number}</td>
+        <td>${invoice.referenceNumber}</td>
+        <td>${invoice.dueDate}</td>
+        <td>${invoice.totalAmount}</td>
+        <td>${invoice.dueAmount}</td>
+      </tr>
+</#list>
+</table>
+
+<p>Pokud jste fakturu zaplatili po terminu splatnosti, povazujte tuto upominku za bezpredmetnou.</p>
+
+<p>Dodrzujte prosim terminy splatnosti faktur.
+U platby uvadejte spravny variabilni symbol, ktery je nutny k identifikaci Vasi platby.</p>
+
+<p>Pokud nebude faktura zaplacena, muze dojit k docasnemu preruseni sluzby az do uhrady vsech dluznych faktur v plne vysi.<br/>
+Za naslednou aktivaci sluzby uctujeme jednorazove 100,-Kc bez DPH.</p>
+
+<p>Pro vice informaci ohledne plateb volejte prosim nasi zakaznickou linku: 558 711 585 nebo 777 27 28 28.</p>
+
+<p>--<br/>
+S pozdravem,</p>
+
+<p>Grazyna Hlinstakova<br/>
+SilesNet s.r.o.</p>
+
+<p>e-mail: hlinstakova@silesnet.cz<br/>
+e-site: www.silesnet.cz<br/>
+telefon: 558 711 585, 777 27 28 28</p>
+
+<p>Ostravska 12</br>
+737 01 Cesky Tesin</p>
+
+</body>
+</html>

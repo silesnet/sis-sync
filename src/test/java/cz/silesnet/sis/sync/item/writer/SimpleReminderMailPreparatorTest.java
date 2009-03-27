@@ -29,9 +29,11 @@ public class SimpleReminderMailPreparatorTest {
     public void setUp() throws Exception {
         // configure preparator
         preparator = new SimpleReminderMailPreparator();
-        preparator.setTemplateResource(new ClassPathResource("/flt/simple-notice.flt"));
+        preparator.setTextTemplateResource(new ClassPathResource("/flt/text-notice.flt"));
+        preparator.setHtmlTemplateResource(new ClassPathResource("/flt/html-notice.flt"));
         preparator.setFrom("from@address");
         preparator.setSubject("Test Reminder");
+        preparator.afterPropertiesSet();
         // prepare sample reminder
         reminder = new Reminder(1, "Reminded Customer", "fido@dido", 10);
         reminder.addInvoice(reminder.new Invoice(1, 1, "001", "001", new LocalDate("2009-02-15"), new BigDecimal(
