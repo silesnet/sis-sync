@@ -74,8 +74,9 @@ public class JdbcReminderDao implements ReminderDao {
         // find the customer
         Map<String, Object> customerMap = template.queryForMap(CUSTOMER_SQL, new Object[] { customerId });
         // create new reminder
-        Reminder reminder = new Reminder((Long) customerMap.get(ID_COLUMN), (String) customerMap.get(COMPANY_COLUMN),
-                (String) customerMap.get(EMAIL_COLUMN), (Integer) customerMap.get(GRACE_DAYS_COLUMN));
+        Reminder reminder = new Reminder(Long.valueOf(customerMap.get(ID_COLUMN).toString()), (String) customerMap
+                .get(COMPANY_COLUMN), (String) customerMap.get(EMAIL_COLUMN), (Integer) customerMap
+                .get(GRACE_DAYS_COLUMN));
         // find invoices to remind the customer for
         List invoiceMaps = template.query(composeInvoicesSql(), new Object[] { customerId,
                 reminder.getCustomer().getGraceDays(), minimalDueAmount }, new ColumnMapRowMapper());
@@ -83,9 +84,10 @@ public class JdbcReminderDao implements ReminderDao {
         for (Object rawInvoiceMap : invoiceMaps) {
             Map<String, Object> im = (Map<String, Object>) rawInvoiceMap;
             LocalDate dueDate = LocalDate.fromDateFields((Date) im.get(DUE_DATE_COLUMN));
-            Invoice invoice = reminder.new Invoice((Long) im.get(ID_COLUMN), (Long) im.get(CUSTOMER_ID_COLUMN),
-                    (String) im.get(NUMBER_COLUMN), (String) im.get(REFERENCE_NUMBER_COLUMN), dueDate, (BigDecimal) im
-                            .get(TOTOAL_AMOUNT_COLUMN), (BigDecimal) im.get(DUE_AMOUNT_COLUMN));
+            Invoice invoice = reminder.new Invoice(Long.valueOf(im.get(ID_COLUMN).toString()), Long.valueOf(im.get(
+                    CUSTOMER_ID_COLUMN).toString()), (String) im.get(NUMBER_COLUMN), (String) im
+                    .get(REFERENCE_NUMBER_COLUMN), dueDate, (BigDecimal) im.get(TOTOAL_AMOUNT_COLUMN), (BigDecimal) im
+                    .get(DUE_AMOUNT_COLUMN));
             reminder.addInvoice(invoice);
         }
         return reminder;

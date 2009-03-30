@@ -4,6 +4,8 @@
 
 package cz.silesnet.sis.sync.item.writer;
 
+import javax.mail.MessagingException;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.batch.item.ItemWriter;
@@ -12,7 +14,8 @@ import org.springframework.batch.item.support.AbstractItemWriter;
 import cz.silesnet.sis.sync.domain.Reminder;
 
 /**
- * Reminder ItemWriter implementation that sends reminders to the customer by email.
+ * Reminder ItemWriter implementation that sends reminders to the customer by
+ * email.
  * 
  * @author rsi
  * 
@@ -37,8 +40,15 @@ public class ReminderItemWriter extends AbstractItemWriter implements ItemWriter
     public void write(Object item) throws Exception {
         Reminder reminder = (Reminder) item;
         log.debug("Sendig reminder: " + reminder);
-        sender.send(reminder);
+        try {
+            sender.send(reminder);
+        } catch (MessagingException e) {
+            log.error("Can not send reminder! [" + reminder.getCustomer().getName() + ", "
+                    + reminder.getCustomer().getEmail() + "]", e);
+        } catch (RuntimeException e) {
+            log.error("Can not send reminder! [" + reminder.getCustomer().getName() + ", "
+                    + reminder.getCustomer().getEmail() + "]", e);
+        }
         Thread.sleep(delay * 1000);
     }
-
 }
