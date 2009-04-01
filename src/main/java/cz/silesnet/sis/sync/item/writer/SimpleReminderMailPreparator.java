@@ -23,7 +23,8 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 /**
- * {@link ReminderMailPreparator} that prepares plain email message. It utilizes {@link MimeMessageHelper}.
+ * {@link ReminderMailPreparator} that prepares plain email message based on Freemarker template. It utilizes
+ * {@link MimeMessageHelper} for accessing message fields.
  * 
  * @author sikorric
  * 
@@ -31,32 +32,37 @@ import freemarker.template.TemplateException;
 public class SimpleReminderMailPreparator implements ReminderMailPreparator, InitializingBean {
 
     private static final String REMINDER_KEY = "reminder";
+    private static final String DEFAULT_TEMPLATE_ENCODING = "UTF-8";
 
     private Configuration cfg;
-    private Resource textTemplateResource;
-    private Resource htmlTemplateResource;
-    private Template textTemplate;
-    private Template htmlTemplate;
+    private Resource templateResource;
+    private String encodig = DEFAULT_TEMPLATE_ENCODING;
+    private Template template;
+    private boolean isHtml = false;
     private String from;
     private String subject;
 
     public SimpleReminderMailPreparator() throws IOException {
     }
 
-    public void setTextTemplateResource(Resource textTemplateResource) {
-        this.textTemplateResource = textTemplateResource;
-    }
-
-    public void setHtmlTemplateResource(Resource htmlTemplateResource) {
-        this.htmlTemplateResource = htmlTemplateResource;
-    }
-
     public void afterPropertiesSet() throws Exception {
         cfg = new Configuration();
         cfg.setObjectWrapper(new DefaultObjectWrapper());
-        cfg.setTemplateLoader(new FileTemplateLoader(this.textTemplateResource.getFile().getParentFile()));
-        textTemplate = cfg.getTemplate(this.textTemplateResource.getFilename());
-        htmlTemplate = cfg.getTemplate(this.htmlTemplateResource.getFilename());
+        cfg.setTemplateLoader(new FileTemplateLoader(this.templateResource.getFile().getParentFile()));
+        cfg.setDefaultEncoding(encodig);
+        template = cfg.getTemplate(this.templateResource.getFilename());
+    }
+
+    public void setTemplate(Resource templateResource) {
+        this.templateResource = templateResource;
+    }
+
+    public void setEncodig(String encodig) {
+        this.encodig = encodig;
+    }
+
+    public void setHtml(boolean isHtml) {
+        this.isHtml = isHtml;
     }
 
     public void setFrom(String from) {
@@ -75,17 +81,15 @@ public class SimpleReminderMailPreparator implements ReminderMailPreparator, Ini
         // render body text
         Map<String, Object> model = new HashMap<String, Object>();
         model.put(REMINDER_KEY, reminder);
-        StringWriter text = new StringWriter();
-        StringWriter html = new StringWriter();
+        StringWriter body = new StringWriter();
         try {
-            textTemplate.process(model, text);
-            htmlTemplate.process(model, html);
+            template.process(model, body);
         } catch (TemplateException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        email.setText(text.toString(), html.toString());
+        email.setText(body.toString(), isHtml);
     }
 
 }

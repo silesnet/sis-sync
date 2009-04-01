@@ -66,20 +66,18 @@
 		p:currentDateFunction="${sps.sql.current.date}" p:minimalDueAmount="${reminder.minimal.due.amount}" />
 
 	<bean id="reminderItemWriter" class="cz.silesnet.sis.sync.item.writer.ReminderItemWriter"
-		p:sender-ref="reminderSender"
-		p:delay="${email.reminder.delay}" />
+		p:sender-ref="reminderSender" p:delay="${email.reminder.delay}" />
 
 	<bean id="reminderSender"
 		class="cz.silesnet.sis.sync.item.writer.SimpleMailReminderSender"
 		p:mailSender-ref="mailSender" p:preparator-ref="mailPreparator" />
 
-	<bean id="mailSender" class="${email.sender.implementation.class}"
-		p:host="${email.smtp}" />
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"
+		p:host="${email.smtp}" p:defaultEncoding="${email.encoding}" />
 
 	<bean id="mailPreparator"
 		class="cz.silesnet.sis.sync.item.writer.SimpleReminderMailPreparator"
-		p:textTemplateResource="classpath:flt/text-notice.flt" 
-		p:htmlTemplateResource="classpath:flt/html-notice.flt" 
-		p:from="${email.reminder.from}" p:subject="${email.reminder.subject}"/>
+		p:template="classpath:flt/html-notice.flt" p:encodig="${email.encoding}"
+		p:html="true" p:from="${email.reminder.from}" p:subject="${email.reminder.subject}" />
 
 </beans>

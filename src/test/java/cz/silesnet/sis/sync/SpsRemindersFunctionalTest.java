@@ -22,6 +22,8 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
+import org.subethamail.wiser.Wiser;
+import org.subethamail.wiser.WiserMessage;
 
 import cz.silesnet.sis.sync.domain.Reminder;
 
@@ -99,9 +101,17 @@ public class SpsRemindersFunctionalTest extends AbstractDependencyInjectionSprin
     public void testReminderJob() throws Exception {
         dataSource = (DataSource) applicationContext.getBean("spsDataSource");
         dbTester = initializeDatabase(dataSource);
+        // start SMTP server
+        Wiser smtp = new Wiser();
+        smtp.start();
         jobParameters = new JobParameters();
         JobExecution jobExecution = launcher.run(job, jobParameters);
         assertEquals(ExitStatus.FINISHED, jobExecution.getExitStatus());
+        for (WiserMessage message : smtp.getMessages()) {
+            log.debug("Email received for: " + message.getEnvelopeReceiver());
+        }
+        assertEquals(3, smtp.getMessages().size());
+        smtp.stop();
         dbTester.onTearDown();
     }
 

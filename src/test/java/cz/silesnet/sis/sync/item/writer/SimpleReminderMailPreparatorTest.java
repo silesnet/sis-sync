@@ -29,8 +29,8 @@ public class SimpleReminderMailPreparatorTest {
     public void setUp() throws Exception {
         // configure preparator
         preparator = new SimpleReminderMailPreparator();
-        preparator.setTextTemplateResource(new ClassPathResource("/flt/text-notice.flt"));
-        preparator.setHtmlTemplateResource(new ClassPathResource("/flt/html-notice.flt"));
+        preparator.setTemplate(new ClassPathResource("/flt/html-notice.flt"));
+        preparator.setHtml(true);
         preparator.setFrom("from@address");
         preparator.setSubject("Test Reminder");
         preparator.afterPropertiesSet();

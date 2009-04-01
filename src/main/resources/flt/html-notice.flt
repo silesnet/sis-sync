@@ -6,7 +6,7 @@ zasilame Vam upominku k fakture.</p>
 
 <table border="1" cellpadding="4">
   <tr>
-    <th>Cislo faktury</th>
+    <th>Číslo faktury</th>
     <th>Variabilni symbol</th>
     <th>Datum splatnosti</th>
     <th>Celkem/Kc</th>
