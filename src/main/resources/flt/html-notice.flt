@@ -1,16 +1,18 @@
 <html>
   <head></head>
 <body>
-<p>Dobry den,<br/>
-zasilame Vam upominku k fakture.</p>
-
-<table border="1" cellpadding="4">
+<div class="intro">
+<p>Dobrý den,<br/>
+zasíláme Vám upomínku k faktuře.</p>
+<p class="name">Karenl Novák, Tovární 18, 739 01 Český Těšín</p>
+</div>
+<table class="notices" border="1" cellpadding="4">
   <tr>
     <th>Číslo faktury</th>
-    <th>Variabilni symbol</th>
+    <th>Variabilní symbol</th>
     <th>Datum splatnosti</th>
-    <th>Celkem/Kc</th>
-    <th>K zaplaceni/Kc</th>
+    <th>Celkem/Kč</th>
+    <th>K zaplacení/Kč</th>
   </th>
 <#list reminder.invoices as invoice>
       <tr>
@@ -22,29 +24,30 @@ zasilame Vam upominku k fakture.</p>
       </tr>
 </#list>
 </table>
+<div class="info">
+<p>Pokud jste fakturu zaplatili po termínu splatnosti, považujte tuto upomínku za bezpředmětnou.</p>
 
-<p>Pokud jste fakturu zaplatili po terminu splatnosti, povazujte tuto upominku za bezpredmetnou.</p>
+<p>Dodržujte prosím termíny splatnosti faktur. U platby uvadějte správný variabilní symbol, který je nutný k identifikaci Vaší platby.</p>
 
-<p>Dodrzujte prosim terminy splatnosti faktur.
-U platby uvadejte spravny variabilni symbol, ktery je nutny k identifikaci Vasi platby.</p>
+<p>Pokud nebude faktura zaplacena, může dojit k dočasnému přerušeni služby až do úhrady všech dlužných faktur v plné výši.<br/>
+Za následnou aktivaci služby účtujeme jednorázově 100,-Kč bez DPH.</p>
 
-<p>Pokud nebude faktura zaplacena, muze dojit k docasnemu preruseni sluzby az do uhrady vsech dluznych faktur v plne vysi.<br/>
-Za naslednou aktivaci sluzby uctujeme jednorazove 100,-Kc bez DPH.</p>
-
-<p>Pro vice informaci ohledne plateb volejte prosim nasi zakaznickou linku: 558 711 585 nebo 777 27 28 28.</p>
-
+<p>Pro více informací ohledně plateb volejte prosím naši zákaznickou linku: 558 711 585 nebo 777 27 28 28.</p>
+</div>
+<div class="signature">
 <p>--<br/>
 S pozdravem,</p>
 
-<p>Grazyna Hlinstakova<br/>
+<p>Gražyna Hlinšťáková<br/>
 SilesNet s.r.o.</p>
 
 <p>e-mail: hlinstakova@silesnet.cz<br/>
 e-site: www.silesnet.cz<br/>
 telefon: 558 711 585, 777 27 28 28</p>
 
-<p>Ostravska 12</br>
-737 01 Cesky Tesin</p>
+<p>Ostravská 12</br>
+737 01 Český Těšín</p>
+</div>
 
 </body>
 </html>
