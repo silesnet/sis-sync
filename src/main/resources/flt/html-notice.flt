@@ -1,30 +1,56 @@
 <html>
-  <head></head>
+  <head>
+    <title>Upomínka, SilesNet s.r.o.</title>
+    <style type="text/css">
+      body, table {
+        font: 0.9em/1.2 Calibri,Arial,sans-serif;
+      }
+      .address {
+        font-weight: bold;
+      }
+      .signature {
+        color: gray;
+      }
+      .notices_header {
+        color: white;
+        background-color: #44b;
+      }
+      .notices_line_a {
+        background-color: #88c;
+      }
+      .notices_line_b {
+        background-color: #bbc;
+      }
+    </style>
+  </head>
 <body>
 <div class="intro">
 <p>Dobrý den,<br/>
 zasíláme Vám upomínku k faktuře.</p>
-<p class="name">Karenl Novák, Tovární 18, 739 01 Český Těšín</p>
+<p class="address">Karel Novák, Tovární 18, 739 01 Český Těšín</p>
 </div>
-<table class="notices" border="1" cellpadding="4">
-  <tr>
+<table class="notices" border="1" cellpadding="2" cellspacing="0">
+  <tr class="notices_header">
     <th>Číslo faktury</th>
     <th>Variabilní symbol</th>
     <th>Datum splatnosti</th>
     <th>Celkem/Kč</th>
     <th>K zaplacení/Kč</th>
   </th>
+<#assign row = 0>
 <#list reminder.invoices as invoice>
-      <tr>
+      <tr class="<#if (row % 2) == 0>notices_line_a<#else>notices_line_b</#if>">
         <td>${invoice.number}</td>
         <td>${invoice.referenceNumber}</td>
         <td>${invoice.dueDate}</td>
         <td>${invoice.totalAmount}</td>
         <td>${invoice.dueAmount}</td>
       </tr>
+<#assign row = row + 1>
 </#list>
 </table>
 <div class="info">
+<p>Číslo účtu SilesNet: <b>75583001/5500</b></p>
 <p>Pokud jste fakturu zaplatili po termínu splatnosti, považujte tuto upomínku za bezpředmětnou.</p>
 
 <p>Dodržujte prosím termíny splatnosti faktur. U platby uvadějte správný variabilní symbol, který je nutný k identifikaci Vaší platby.</p>
@@ -33,16 +59,16 @@ zasíláme Vám upomínku k faktuře.</p>
 Za následnou aktivaci služby účtujeme jednorázově 100,-Kč bez DPH.</p>
 
 <p>Pro více informací ohledně plateb volejte prosím naši zákaznickou linku: 558 711 585 nebo 777 27 28 28.</p>
-</div>
-<div class="signature">
-<p>--<br/>
-S pozdravem,</p>
+<p>S pozdravem,</p>
 
 <p>Gražyna Hlinšťáková<br/>
 SilesNet s.r.o.</p>
+</div>
 
-<p>e-mail: hlinstakova@silesnet.cz<br/>
-e-site: www.silesnet.cz<br/>
+<div class="signature">
+<p>--<br/>
+e-mail: <a href="mailto:hlinstakova@silesnet.cz">hlinstakova@silesnet.cz</a><br/>
+e-site: <a href="http://silesnet.cz">www.silesnet.cz</a><br/>
 telefon: 558 711 585, 777 27 28 28</p>
 
 <p>Ostravská 12</br>
