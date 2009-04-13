@@ -51,6 +51,7 @@ public class JdbcReminderDaoTest extends AbstractDependencyInjectionSpringContex
         assertNotNull(reminder);
         assertEquals(ID, reminder.getCustomer().getId());
         assertEquals("Test Customer4", reminder.getCustomer().getName());
+        assertEquals("Street 4, 123 04 Town 4", reminder.getCustomer().getAddress());
         assertEquals("contact@customer4.cz", reminder.getCustomer().getEmail());
         assertEquals(10, reminder.getCustomer().getGraceDays());
         assertEquals(2, reminder.getInvoices().size());

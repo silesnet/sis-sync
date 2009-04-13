@@ -30,7 +30,7 @@ public class JdbcReminderDao implements ReminderDao {
     private static final String ID_COLUMN = "ID";
     private static final String COMPANY_COLUMN = "Firma";
     private static final String STREET_COLUMN = "Ulice";
-    private static final String ZIP_COLUMN = "PCS";
+    private static final String ZIP_COLUMN = "PSC";
     private static final String TOWN_COLUMN = "Obec";
     private static final String EMAIL_COLUMN = "Email";
     private static final String GRACE_DAYS_COLUMN = "ADSplat";
