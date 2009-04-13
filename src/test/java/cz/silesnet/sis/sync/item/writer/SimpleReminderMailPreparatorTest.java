@@ -35,7 +35,7 @@ public class SimpleReminderMailPreparatorTest {
         preparator.setSubject("Test Reminder");
         preparator.afterPropertiesSet();
         // prepare sample reminder
-        reminder = new Reminder(1, "Reminded Customer", "fido@dido", 10);
+        reminder = new Reminder(1, "Reminded Customer", "fido@dido", "Street 123", 10);
         reminder.addInvoice(reminder.new Invoice(1, 1, "001", "001", new LocalDate("2009-02-15"), new BigDecimal(
                 "120.00"), new BigDecimal("100.00")));
         reminder.addInvoice(reminder.new Invoice(2, 1, "002", "002", new LocalDate("2009-03-15"), new BigDecimal(

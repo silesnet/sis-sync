@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
      
-    <AD ID='1' Firma='Test Customer1' Email="contact@customer1.cz" ADSplat="10" /> <!-- N -->
-    <AD ID='2' Firma='Test Customer2' Email="contact@customer2.cz" ADSplat="10" /> <!-- Y -->
-    <AD ID='3' Firma='Test Customer3' Email="contact@customer3.cz" ADSplat="10" /> <!-- Y -->
-    <AD ID='4' Firma='Test Customer4' Email="contact@customer4.cz" ADSplat="10" /> <!-- Y -->
-    <AD ID='5' Firma='Test Customer5' Email="contact@customer5.cz" ADSplat="11" /> <!-- N, bigger grace period  -->
+    <AD ID='1' Firma='Test Customer1' Ulice="Street 1" PSC="123 01" Obec="Town 1" Email="contact@customer1.cz" ADSplat="10" /> <!-- N -->
+    <AD ID='2' Firma='Test Customer2' Ulice="Street 2" PSC="123 02" Obec="Town 2" Email="contact@customer2.cz" ADSplat="10" /> <!-- Y -->
+    <AD ID='3' Firma='Test Customer3' Ulice="Street 3" PSC="123 03" Obec="Town 3" Email="contact@customer3.cz" ADSplat="10" /> <!-- Y -->
+    <AD ID='4' Firma='Test Customer4' Ulice="Street 4" PSC="123 04" Obec="Town 4" Email="contact@customer4.cz" ADSplat="10" /> <!-- Y -->
+    <AD ID='5' Firma='Test Customer5' Ulice="Street 5" PSC="123 05" Obec="Town 5" Email="contact@customer5.cz" ADSplat="11" /> <!-- N, bigger grace period  -->
 
     <FA ID="1" Cislo="200900001" VarSym="200900001" DatSplat="2009-02-15" KcCelkem="100" KcLikv="0" RefAD="1" /> <!-- N -->
     <FA ID="2" Cislo="200900002" VarSym="200900002" DatSplat="2009-02-15" KcCelkem="100" KcLikv="4" RefAD="1" /> <!-- N -->

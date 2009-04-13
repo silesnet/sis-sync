@@ -26,9 +26,12 @@ import cz.silesnet.sis.sync.domain.Reminder.Invoice;
  */
 public class JdbcReminderDao implements ReminderDao {
 
-    private static final String CUSTOMER_SQL = "SELECT ID, Firma, Email, ADSplat FROM AD WHERE ID = ?";
+    private static final String CUSTOMER_SQL = "SELECT ID, Firma, Ulice, PSC, Obec, Email, ADSplat FROM AD WHERE ID = ?";
     private static final String ID_COLUMN = "ID";
     private static final String COMPANY_COLUMN = "Firma";
+    private static final String STREET_COLUMN = "Ulice";
+    private static final String ZIP_COLUMN = "PCS";
+    private static final String TOWN_COLUMN = "Obec";
     private static final String EMAIL_COLUMN = "Email";
     private static final String GRACE_DAYS_COLUMN = "ADSplat";
     private static final String INVOICES_SQL_TEMPLATE = "SELECT ID, Cislo, VarSym, DatSplat, KcCelkem, KcLikv, RefAD "
@@ -74,8 +77,10 @@ public class JdbcReminderDao implements ReminderDao {
         // find the customer
         Map<String, Object> customerMap = template.queryForMap(CUSTOMER_SQL, new Object[] { customerId });
         // create new reminder
+        String address = composeAddressLine((String) customerMap.get(STREET_COLUMN), (String) customerMap
+                .get(ZIP_COLUMN), (String) customerMap.get(TOWN_COLUMN));
         Reminder reminder = new Reminder(Long.valueOf(customerMap.get(ID_COLUMN).toString()), (String) customerMap
-                .get(COMPANY_COLUMN), (String) customerMap.get(EMAIL_COLUMN), (Integer) customerMap
+                .get(COMPANY_COLUMN), (String) customerMap.get(EMAIL_COLUMN), address, (Integer) customerMap
                 .get(GRACE_DAYS_COLUMN));
         // find invoices to remind the customer for
         List invoiceMaps = template.query(composeInvoicesSql(), new Object[] { customerId,
@@ -97,5 +102,16 @@ public class JdbcReminderDao implements ReminderDao {
         // replace variables in SQL template with their values
         String sql = StringUtils.replace(INVOICES_SQL_TEMPLATE, "${dayPartName}", dayPartName);
         return StringUtils.replace(sql, "${currentDateFunction}", currentDateFunction);
+    }
+
+    protected String composeAddressLine(String street, String zip, String town) {
+        StringBuffer address = new StringBuffer();
+        if (street != null) {
+            address.append(street);
+            if (StringUtils.hasText(zip) && StringUtils.hasText(town)) {
+                address.append(", ").append(zip).append(" ").append(town);
+            }
+        }
+        return address.toString();
     }
 }
