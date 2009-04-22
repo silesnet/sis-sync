@@ -101,4 +101,14 @@ public class JdbcReminderDaoTest extends AbstractDependencyInjectionSpringContex
     public void testComposeAddressLineStreetOnly() {
         assertEquals("street", dao.composeAddressLine("street", "", ""));
     }
+
+    @Test
+    public void testComposeAddressLineTownOnly() {
+        assertEquals("12345 town", dao.composeAddressLine(null, "12345", "town"));
+    }
+
+    @Test
+    public void testComposeAddressLineTownOnly2() {
+        assertEquals("town", dao.composeAddressLine(null, null, "town"));
+    }
 }

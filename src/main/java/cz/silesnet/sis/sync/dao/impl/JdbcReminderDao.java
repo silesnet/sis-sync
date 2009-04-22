@@ -106,11 +106,17 @@ public class JdbcReminderDao implements ReminderDao {
 
     protected String composeAddressLine(String street, String zip, String town) {
         StringBuffer address = new StringBuffer();
-        if (street != null) {
+        if (StringUtils.hasText(street)) {
             address.append(street);
             if (StringUtils.hasText(zip) && StringUtils.hasText(town)) {
-                address.append(", ").append(zip).append(" ").append(town);
+                address.append(", ");
             }
+        }
+        if (StringUtils.hasText(zip)) {
+            address.append(zip).append(" ");
+        }
+        if (StringUtils.hasText(town)) {
+            address.append(town);
         }
         return address.toString();
     }
