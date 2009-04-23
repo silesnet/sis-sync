@@ -66,11 +66,9 @@ public class SisInvoiceFunctionalTest extends AbstractDependencyInjectionSpringC
         jobParameters = new JobParameters();
         JobExecution jobExecution = launcher.run(job, jobParameters);
         assertEquals(ExitStatus.FINISHED, jobExecution.getExitStatus());
-        dbTester.onTearDown();
         /*
-         * Can not check results against database because SPS duplicity
-         * checking. At least we will check against SPS response file for
-         * correct number of processed invoices. Last writer is thus not tested.
+         * Can not check results against database because SPS duplicity checking. At least we will check against SPS
+         * response file for correct number of processed invoices. Last writer is thus not tested.
          */
         BufferedReader reader = new BufferedReader(new FileReader((new FileSystemResource(
                 "target/20081226_sps_invoices.TEMP.xml")).getFile()));
