@@ -1,9 +1,7 @@
 package cz.silesnet.sis.sync.item.writer;
 
-import static cz.silesnet.sis.sync.item.writer.AbstractDataPackItemWriter.elBeg;
-import static cz.silesnet.sis.sync.item.writer.AbstractDataPackItemWriter.elEnd;
-import static cz.silesnet.sis.sync.item.writer.AbstractDataPackItemWriter.elValue;
-import static org.junit.Assert.assertEquals;
+import static cz.silesnet.sis.sync.item.writer.AbstractDataPackItemWriter.*;
+import static org.junit.Assert.*;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -69,7 +67,7 @@ public class SisCustomerItemWriterTest {
         assertEquals(elValue("adb:email", customer.getEmail()), lines[index++]);
         assertEquals(elValue("adb:adGroup", SisCustomerItemWriter.AD_GROUP_KEY), lines[index++]);
         assertEquals(elValue("adb:maturity", SisCustomerItemWriter.DUE_DAYS), lines[index++]);
-        assertEquals(elValue("adb:contract", customer.getSpsContract()), lines[index++]);
+        assertEquals(elValue("adb:agreement", customer.getSpsContract()), lines[index++]);
         assertEquals(elValue("adb:p2", "true"), lines[index++]);
         assertEquals(elValue("adb:note", SisCustomerItemWriter.CONTACT_NAME_PREFIX + customer.getContactName()),
                 lines[index++]);

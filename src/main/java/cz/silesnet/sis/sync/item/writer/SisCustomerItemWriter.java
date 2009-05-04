@@ -56,7 +56,7 @@ public class SisCustomerItemWriter extends AbstractDataPackItemWriter {
         lines.add(elValue("adb:email", customer.getEmail()));
         lines.add(elValue("adb:adGroup", AD_GROUP_KEY));
         lines.add(elValue("adb:maturity", DUE_DAYS));
-        lines.add(elValue("adb:contract", customer.getSpsContract()));
+        lines.add(elValue("adb:agreement", customer.getSpsContract()));
         lines.add(elValue("adb:p2", "true"));
         lines.add(elValue("adb:note", CONTACT_NAME_PREFIX + customer.getContactName()));
         // duplicity check
