@@ -30,6 +30,7 @@ public class SisCustomerItemWriterTest {
     @Test
     public void testItemLines() {
         Customer customer = new Customer();
+        customer.setSymbol("1234");
         customer.setName("Customer Name");
         customer.setSupplementaryName("Supplementary name");
         customer.setContactName("Contact Name");
@@ -73,8 +74,7 @@ public class SisCustomerItemWriterTest {
                 lines[index++]);
         // duplicity check
         assertEquals(elBeg("adb:duplicityFields actualize=\"true\""), lines[index++]);
-        assertEquals(elValue("adb:fieldFirma", "true"), lines[index++]);
-        assertEquals(elValue("adb:fieldICO", "true"), lines[index++]);
+        assertEquals(elValue("adb:id", customer.getSymbol()), lines[index++]);
         assertEquals(elEnd("adb:duplicityFields"), lines[index++]);
         assertEquals(elEnd("adb:addressbookHeader"), lines[index++]);
         // bank account
@@ -98,10 +98,12 @@ public class SisCustomerItemWriterTest {
     }
 
     @Test
-    public void testNoBankAccount() throws Exception {
+    public void testNoBankAccountNoSymbol() throws Exception {
         Customer customer = new Customer();
         String[] lines = writer.dataPackItemLines(customer);
         int length = lines.length;
+        assertEquals(elValue("adb:note", SisCustomerItemWriter.CONTACT_NAME_PREFIX + customer.getContactName()),
+                lines[length - 3]);
         assertEquals(elEnd("adb:addressbookHeader"), lines[length - 2]);
         assertEquals(elEnd("adb:addressbook"), lines[length - 1]);
         if (log.isDebugEnabled()) {

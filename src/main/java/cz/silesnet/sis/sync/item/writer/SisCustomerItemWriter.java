@@ -19,7 +19,7 @@ import cz.silesnet.sis.sync.domain.Customer;
  */
 public class SisCustomerItemWriter extends AbstractDataPackItemWriter {
 
-    public static final String ADDRESSBOOK_ELEMENT_VERSION = "1.3";
+    public static final String ADDRESSBOOK_ELEMENT_VERSION = "1.5";
     public static final String AD_GROUP_KEY = "SIS";
     public static final int DUE_DAYS = 14;
     public static final String CONTACT_NAME_PREFIX = "Kontaktn\u00ed osoba: ";
@@ -59,11 +59,12 @@ public class SisCustomerItemWriter extends AbstractDataPackItemWriter {
         lines.add(elValue("adb:agreement", customer.getSpsContract()));
         lines.add(elValue("adb:p2", "true"));
         lines.add(elValue("adb:note", CONTACT_NAME_PREFIX + customer.getContactName()));
-        // duplicity check
-        lines.add(elBeg("adb:duplicityFields actualize=\"true\""));
-        lines.add(elValue("adb:fieldFirma", "true"));
-        lines.add(elValue("adb:fieldICO", "true"));
-        lines.add(elEnd("adb:duplicityFields"));
+        // update if already exists in SPS
+        if (StringUtils.isNotBlank(customer.getSymbol())) {
+            lines.add(elBeg("adb:duplicityFields actualize=\"true\""));
+            lines.add(elValue("adb:id", customer.getSymbol()));
+            lines.add(elEnd("adb:duplicityFields"));
+        }
         lines.add(elEnd("adb:addressbookHeader"));
         if (StringUtils.isNotBlank(customer.getAccountNo()) && StringUtils.isNotBlank(customer.getBankCode())) {
             // bank account
