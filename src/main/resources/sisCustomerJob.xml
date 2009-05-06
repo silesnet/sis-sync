@@ -33,6 +33,7 @@
                     synchronized IS NULL
                     OR synchronized <= updated
                 )
+                AND public_id != '9999999'                
 		  ]]></value>
         </property>
       </bean>
