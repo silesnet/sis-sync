@@ -192,7 +192,12 @@ public class AbstractDataPackItemWriterTest {
 
     @Test
     public void testElValueEscape() throws Exception {
-        assertEquals("<name>&quot;&lt;&amp;&gt;&apos;</name>", AbstractDataPackItemWriter.elValue("name", "\"<&>'"));
+        assertEquals("<name>a&amp;b</name>", AbstractDataPackItemWriter.elValue("name", "a&b"));
+    }
+
+    @Test
+    public void testElValueNoEscape() throws Exception {
+        assertEquals("<name>\u0161</name>", AbstractDataPackItemWriter.elValue("name", "\u0161"));
     }
 
     @Test
@@ -223,5 +228,10 @@ public class AbstractDataPackItemWriterTest {
     @Test
     public void testElEnd() throws Exception {
         assertEquals("</name>", AbstractDataPackItemWriter.elEnd("name"));
+    }
+
+    @Test
+    public void testXmlEscape() {
+        assertEquals("a&quot;&lt;&amp;&gt;&apos;z", AbstractDataPackItemWriter.escapeXml("a\"<&>'z"));
     }
 }

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
-import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.util.StringUtils;
 
 import cz.silesnet.sis.sync.domain.ItemIdentity;
@@ -153,7 +152,7 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
         element.append(name);
         if (StringUtils.hasText(value)) {
             value = value.trim().replaceAll("(\\s){2,}", " ");
-            element.append(">").append(StringEscapeUtils.escapeXml(value)).append("</").append(name).append(">");
+            element.append(">").append(escapeXml(value)).append("</").append(name).append(">");
         } else {
             element.append(" />");
         }
@@ -208,4 +207,38 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
         return "</" + name + ">";
     }
 
+    /**
+     * Return string with special XML characters escaped with entities. Only five character will be escaped {"<&>'} =>
+     * {&quot; &lt; &amp; &gt; &apos;}
+     * 
+     * @param str
+     *            input string
+     * @return XML escaped input string
+     */
+    protected static String escapeXml(String str) {
+        StringBuffer result = new StringBuffer(str.length() * 2);
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            switch (ch) {
+            case '"':
+                result.append("&quot;");
+                break;
+            case '<':
+                result.append("&lt;");
+                break;
+            case '&':
+                result.append("&amp;");
+                break;
+            case '>':
+                result.append("&gt;");
+                break;
+            case '\'':
+                result.append("&apos;");
+                break;
+            default:
+                result.append(ch);
+            }
+        }
+        return result.toString();
+    }
 }
