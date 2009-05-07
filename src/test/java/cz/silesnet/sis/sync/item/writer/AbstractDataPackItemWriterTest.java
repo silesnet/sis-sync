@@ -211,6 +211,11 @@ public class AbstractDataPackItemWriterTest {
     }
 
     @Test
+    public void testElValueEmpty() throws Exception {
+        assertEquals("<name />", AbstractDataPackItemWriter.elValue("name", ""));
+    }
+
+    @Test
     public void testElBeg() throws Exception {
         assertEquals("<name>", AbstractDataPackItemWriter.elBeg("name"));
     }

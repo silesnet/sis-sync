@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 import org.apache.commons.lang.StringEscapeUtils;
+import org.springframework.util.StringUtils;
 
 import cz.silesnet.sis.sync.domain.ItemIdentity;
 
@@ -150,7 +151,7 @@ public abstract class AbstractDataPackItemWriter extends AbstractHeaderTrailerFi
     protected static String elValue(String name, String value) {
         StringBuilder element = new StringBuilder("<");
         element.append(name);
-        if (value != null) {
+        if (StringUtils.hasText(value)) {
             value = value.trim().replaceAll("(\\s){2,}", " ");
             element.append(">").append(StringEscapeUtils.escapeXml(value)).append("</").append(name).append(">");
         } else {

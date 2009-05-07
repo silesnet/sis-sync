@@ -11,8 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import cz.silesnet.sis.sync.domain.Customer;
 
 /**
- * Implementation of {@link AbstractDataPackItemWriter} that writes Customer
- * into SPS XML import format.
+ * Implementation of {@link AbstractDataPackItemWriter} that writes Customer into SPS XML import format.
  * 
  * @author sikorric
  * 
@@ -21,7 +20,7 @@ public class SisCustomerItemWriter extends AbstractDataPackItemWriter {
 
     public static final String ADDRESSBOOK_ELEMENT_VERSION = "1.5";
     public static final String AD_GROUP_KEY = "SIS";
-    public static final int DUE_DAYS = 14;
+    public static final int DUE_DAYS = 7;
     public static final String CONTACT_NAME_PREFIX = "Kontaktn\u00ed osoba: ";
 
     public SisCustomerItemWriter() {
