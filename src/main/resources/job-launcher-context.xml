@@ -16,7 +16,11 @@
 
   <bean id="jobLancher"
     class="org.springframework.batch.core.launch.support.SimpleJobLauncher"
-    p:jobRepository-ref="jobRepository" />
+    p:jobRepository-ref="jobRepository">
+    <property name="taskExecutor">
+      <bean class="org.springframework.core.task.SyncTaskExecutor" />
+    </property>
+  </bean>
 
   <bean id="jobRepository"
     class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean"

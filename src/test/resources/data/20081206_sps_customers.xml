@@ -16,6 +16,14 @@
         </rdc:producedDetails>
     </adb:addressbookResponse>
 </rsp:responsePackItem>
+<rsp:responsePackItem version="1.0" id="11E6F9FA0F6_00000000_123456" state="error">
+    <adb:addressbookResponse version="1.4" state="ok">
+        <rdc:producedDetails>
+            <rdc:id>62</rdc:id>
+            <rdc:code>Test Customer 0</rdc:code>
+        </rdc:producedDetails>
+    </adb:addressbookResponse>
+</rsp:responsePackItem>
 <rsp:responsePackItem version="1.0" id="11E6F9FA0F6_00000001_123457" state="ok">
 	<adb:addressbookResponse version="1.4" state="ok">
 		<rdc:producedDetails>

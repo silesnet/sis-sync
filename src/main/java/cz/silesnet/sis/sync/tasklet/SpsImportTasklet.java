@@ -69,7 +69,7 @@ public class SpsImportTasklet implements Tasklet {
         // prepare
         createIniFile();
         String cli = createCommandLine();
-        log.debug("Executing: " + cli);
+        log.info("Executing Pohoda import [" + ini.getFile().getCanonicalPath() + "]");
         // run the command
         CommandThread commandThread = new CommandThread(cli);
         commandThread.start();

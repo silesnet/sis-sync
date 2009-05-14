@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemStream;
@@ -34,16 +36,22 @@ import org.springframework.core.io.Resource;
  */
 public abstract class AbstractSpsResponseItemReader implements ItemReader, ItemStream {
 
-    /**
-     * 
-     */
+    private static final Log log = LogFactory.getLog(AbstractSpsResponseItemReader.class);
+
+    private static final Pattern ITEM_BEGIN_PATTERN = Pattern
+            .compile("<rsp:responsePackItem.* id=\".+_\\d+_(\\d+)\".* state=\"(.+)\".*>");
+    private static final Pattern ELEMENT_STATE_OK_PATTERN = Pattern.compile("<.+ state=\"ok\".*>");
+    private static final String STATUS_OK = "ok";
     private static final String ITEM_END_LINE = "</rsp:responsePackItem>";
     private static final int UNDEFINED_ITEM_ID = -1;
-    private static final Pattern ITEM_BEGIN_PATTERN = Pattern
-            .compile("<rsp:responsePackItem.* id=\".+_\\d+_(\\d+)\".* state=\"ok\".*>");
-    private static final Pattern ELEMENT_STATE_OK_PATTERN = Pattern.compile("<.+ state=\"ok\".*>");
 
-    private FlatFileItemReader itemReader;
+    private final FlatFileItemReader itemReader;
+
+    private boolean logImportErrors = true;
+
+    public void setLogImportErrors(boolean logImportErrors) {
+        this.logImportErrors = logImportErrors;
+    }
 
     public final Object read() throws Exception, UnexpectedInputException, NoWorkFoundException, ParseException {
         List<String> itemLines = null;
@@ -52,23 +60,31 @@ public abstract class AbstractSpsResponseItemReader implements ItemReader, ItemS
         boolean itemEndFound = false;
         String line = null;
         while ((line = readTrimmed()) != null) {
-            line = line.trim();
             // find item beginning and store its id
             if (!itemBeginFound) {
                 Matcher itemBeginMatcher = ITEM_BEGIN_PATTERN.matcher(line);
                 if (itemBeginMatcher.matches()) {
-                    /*
-                     * read ahead and check if contained element has state="ok",
-                     * skip the responsePackItem otherwise
-                     */
+                    // found response item, get response id and status
+                    itemId = Long.valueOf(itemBeginMatcher.group(1));
+                    String itemStatus = itemBeginMatcher.group(2);
+                    if (!STATUS_OK.equalsIgnoreCase(itemStatus)) {
+                        // not imported item, continue searching for next one
+                        if (logImportErrors) {
+                            log.warn("Item import failed [" + itemId + "]: " + line);
+                        }
+                        continue;
+                    }
+                    // read ahead for contained element
                     String containedLine = readTrimmed();
                     if (containedLine == null)
                         return null; // EOF
                     if (!ELEMENT_STATE_OK_PATTERN.matcher(containedLine).matches()) {
-                        // item was not imported correctly to SPS, skip it then
+                        // element not imported, continue search for next item
+                        if (logImportErrors) {
+                            log.warn("Element import failed [" + itemId + "]" + containedLine);
+                        }
                         continue;
                     }
-                    itemId = Long.valueOf(itemBeginMatcher.group(1));
                     itemLines = new ArrayList<String>();
                     // add eagerly read line to item lines
                     itemLines.add(containedLine);
@@ -84,8 +100,7 @@ public abstract class AbstractSpsResponseItemReader implements ItemReader, ItemS
                 itemLines.add(line);
             }
         }
-        return (itemBeginFound && itemEndFound)
-                ? mapLines(itemId, itemLines.toArray(new String[itemLines.size()]))
+        return (itemBeginFound && itemEndFound) ? mapLines(itemId, itemLines.toArray(new String[itemLines.size()]))
                 : null;
     }
 
@@ -107,7 +122,7 @@ public abstract class AbstractSpsResponseItemReader implements ItemReader, ItemS
         // set tokenizer that puts the line into one token of a FieldSet
         itemReader.setLineTokenizer(new LineTokenizer() {
             public FieldSet tokenize(String line) {
-                return new DefaultFieldSet(new String[]{line});
+                return new DefaultFieldSet(new String[] { line });
             }
         });
         // set mapper that returns the first value of the FieldSet

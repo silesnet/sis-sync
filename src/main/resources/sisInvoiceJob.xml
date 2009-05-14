@@ -96,7 +96,8 @@
     <property name="itemReader">
       <bean
         class="cz.silesnet.sis.sync.item.reader.SpsInvoiceBankAccountItemReader"
-        p:resource-ref="invoicesResponseFile" p:dao-ref="invoiceDao" />
+        p:resource-ref="invoicesResponseFile" p:dao-ref="invoiceDao"
+        p:logImportErrors="false" />
     </property>
     <property name="itemWriter">
       <bean

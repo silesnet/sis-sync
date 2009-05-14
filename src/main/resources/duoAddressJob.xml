@@ -31,7 +31,7 @@
 		</property>
 		<property name="itemWriter">
 			<bean class="cz.silesnet.sis.sync.item.writer.DuoAddressItemWriter"
-				p:ico="25392280" p:resource="file:target/20090205_duo_address.xml" />
+				p:ico="${pohoda.ico}" p:resource="file:target/20090205_duo_address.xml" />
 		</property>
 	</bean>
 

@@ -43,11 +43,9 @@ public class ReminderItemWriter extends AbstractItemWriter implements ItemWriter
         try {
             sender.send(reminder);
         } catch (MessagingException e) {
-            log.error("Can not send reminder! [" + reminder.getCustomer().getName() + ", "
-                    + reminder.getCustomer().getEmail() + "]", e);
+            log.error("Can not send reminder! [" + reminder + "]: " + e.getMessage());
         } catch (RuntimeException e) {
-            log.error("Can not send reminder! [" + reminder.getCustomer().getName() + ", "
-                    + reminder.getCustomer().getEmail() + "]", e);
+            log.error("Can not send reminder! [" + reminder + "]: " + e.getMessage());
         }
         Thread.sleep(delay * 1000);
     }

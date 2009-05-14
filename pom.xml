@@ -4,7 +4,7 @@
 	<groupId>cz.silesnet.sis</groupId>
 	<artifactId>sync</artifactId>
 	<name>SilesNet Information System Synchronizer</name>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<description>Set of stand alone synchronization batches that import, export and update SIS databases.</description>
 	<dependencies>
 		<dependency>
