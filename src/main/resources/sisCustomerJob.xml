@@ -8,15 +8,15 @@
   <bean id="sisCustomerJob" parent="simpleJob">
     <property name="steps">
       <list>
-        <ref bean="sisCustomerStep" />
-        <ref bean="spsCustomerImportTaskletStep" />
-        <ref bean="spsCustomerIdStep" />
-        <ref bean="spsInvoicesUpdateStep" />
+        <ref bean="prepareCustomers" />
+        <ref bean="importCustomers" />
+        <ref bean="confirmCustomersImport" />
+        <ref bean="updateInvoiceAccounts" />
       </list>
     </property>
   </bean>
 
-  <bean id="sisCustomerStep" parent="simpleStep">
+  <bean id="prepareCustomers" parent="simpleStep">
     <property name="itemReader">
       <bean
         class="org.springframework.batch.item.database.JdbcCursorItemReader"
@@ -40,25 +40,22 @@
     </property>
     <property name="itemWriter">
       <bean class="cz.silesnet.sis.sync.item.writer.SisCustomerItemWriter"
-        p:ico="${sps.silesnet.ico}" p:resource="${sis.customers.resource}" />
+        p:ico="${pohoda.ico}" p:resource-ref="customersImportFile" />
     </property>
   </bean>
 
-  <bean id="spsCustomerImportTaskletStep" parent="taskletStep">
+  <bean id="importCustomers" parent="taskletStep">
     <property name="tasklet">
-      <bean class="cz.silesnet.sis.sync.tasklet.SpsImportTasklet"
-        p:input="${sis.customers.resource}" p:output="${sps.customers.resource}"
-        p:spsExecutable="${sps.executable.resource}" p:login="${sps.login}"
-        p:password="${sps.password}" p:database="${sps.database}"
-        p:iniFileName="${sps.ini.filename}" />
+      <bean parent="importTasklet" p:input-ref="customersImportFile"
+        p:output-ref="customersResponseFile" p:ini-ref="customersIniFile" />
     </property>
   </bean>
 
-  <bean id="spsCustomerIdStep" parent="simpleStep">
+  <bean id="confirmCustomersImport" parent="simpleStep">
     <property name="itemReader">
       <bean
         class="cz.silesnet.sis.sync.item.reader.SpsCustomerResultItemReader"
-        p:resource="${sps.customers.resource}" />
+        p:resource-ref="customersResponseFile" />
     </property>
     <property name="itemWriter">
       <bean
@@ -80,15 +77,15 @@
     </property>
   </bean>
 
-  <bean id="spsInvoicesUpdateStep" parent="simpleStep">
+  <bean id="updateInvoiceAccounts" parent="simpleStep">
     <property name="itemReader">
       <bean class="cz.silesnet.sis.sync.item.reader.SpsCustomerItemReader"
-        p:resource="${sps.customers.resource}" p:dao-ref="customerDao" />
+        p:resource-ref="customersResponseFile" p:dao-ref="customerDao" />
     </property>
     <property name="itemWriter">
       <bean
         class="org.springframework.batch.item.database.BatchSqlUpdateItemWriter"
-        p:jdbcTemplate-ref="spsJdbcTemplate" p:assertUpdates="false" >
+        p:jdbcTemplate-ref="spsJdbcTemplate" p:assertUpdates="false">
         <property name="itemPreparedStatementSetter">
           <bean
             class="cz.silesnet.sis.sync.item.writer.CustomerSpsInvoicesUpdatePreparedStatementSetter" />
@@ -105,6 +102,18 @@
         </property>
       </bean>
     </property>
+  </bean>
+
+  <bean id="customersImportFile" parent="resource">
+    <constructor-arg value="${customers.import.file.suffix}" />
+  </bean>
+
+  <bean id="customersResponseFile" parent="resource">
+    <constructor-arg value="${customers.response.file.suffix}" />
+  </bean>
+
+  <bean id="customersIniFile" parent="resource">
+    <constructor-arg value="${customers.ini.file.suffix}" />
   </bean>
 
   <bean id="customerDao" class="cz.silesnet.sis.sync.dao.impl.JdbcCustomerDao"

@@ -8,21 +8,21 @@
   <bean id="sisInvoiceJob" parent="simpleJob">
     <property name="steps">
       <list>
-        <ref bean="sisInvoiceStep" />
-        <ref bean="spsInvoiceImportTaskletStep" />
-        <ref bean="spsInvoiceUpdateStep" />
-        <ref bean="spsSpsInvoiceUpdateStep" />
+        <ref bean="prepareInvoices" />
+        <ref bean="importInvoices" />
+        <ref bean="confirmInvoicesImport" />
+        <ref bean="updateInvoiceAccounts" />
       </list>
     </property>
   </bean>
 
-  <bean id="sisInvoiceStep" parent="simpleStep">
+  <bean id="prepareInvoices" parent="simpleStep">
     <property name="itemReader">
       <ref bean="sisInvoiceItemReader" />
     </property>
     <property name="itemWriter">
       <bean class="cz.silesnet.sis.sync.item.writer.SisInvoiceItemWriter"
-        p:ico="${sps.silesnet.ico}" p:resource="${sis.invoices.resource}" />
+        p:ico="${pohoda.ico}" p:resource-ref="invoicesImportFile" />
     </property>
   </bean>
 
@@ -61,23 +61,17 @@
     </property>
   </bean>
 
-  <bean id="invoiceDao" class="cz.silesnet.sis.sync.dao.impl.JdbcInvoiceDao"
-    p:jdbcTemplate-ref="jdbcTemplate" />
-
-  <bean id="spsInvoiceImportTaskletStep" parent="taskletStep">
+  <bean id="importInvoices" parent="taskletStep">
     <property name="tasklet">
-      <bean class="cz.silesnet.sis.sync.tasklet.SpsImportTasklet"
-        p:input="${sis.invoices.resource}" p:output="${sps.invoices.resource}"
-        p:spsExecutable="${sps.executable.resource}" p:login="${sps.login}"
-        p:password="${sps.password}" p:database="${sps.database}"
-        p:iniFileName="${sps.ini.filename}" />
+      <bean parent="importTasklet" p:input-ref="invoicesImportFile"
+        p:output-ref="invoicesResponseFile" p:ini-ref="invoicesIniFile" />
     </property>
   </bean>
 
-  <bean id="spsInvoiceUpdateStep" parent="simpleStep">
+  <bean id="confirmInvoicesImport" parent="simpleStep">
     <property name="itemReader">
       <bean class="cz.silesnet.sis.sync.item.reader.SpsInvoiceItemReader"
-        p:resource="${sps.invoices.resource}" />
+        p:resource-ref="invoicesResponseFile" />
     </property>
     <property name="itemWriter">
       <bean
@@ -98,11 +92,11 @@
     </property>
   </bean>
 
-  <bean id="spsSpsInvoiceUpdateStep" parent="simpleStep">
+  <bean id="updateInvoiceAccounts" parent="simpleStep">
     <property name="itemReader">
       <bean
         class="cz.silesnet.sis.sync.item.reader.SpsInvoiceBankAccountItemReader"
-        p:resource="${sps.invoices.resource}" p:dao-ref="invoiceDao" />
+        p:resource-ref="invoicesResponseFile" p:dao-ref="invoiceDao" />
     </property>
     <property name="itemWriter">
       <bean
@@ -124,5 +118,20 @@
       </bean>
     </property>
   </bean>
+
+  <bean id="invoicesImportFile" parent="resource">
+    <constructor-arg value="${invoices.import.file.suffix}" />
+  </bean>
+
+  <bean id="invoicesResponseFile" parent="resource">
+    <constructor-arg value="${invoices.response.file.suffix}" />
+  </bean>
+
+  <bean id="invoicesIniFile" parent="resource">
+    <constructor-arg value="${invoices.ini.file.suffix}" />
+  </bean>
+
+  <bean id="invoiceDao" class="cz.silesnet.sis.sync.dao.impl.JdbcInvoiceDao"
+    p:jdbcTemplate-ref="jdbcTemplate" />
 
 </beans>

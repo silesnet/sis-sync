@@ -26,15 +26,15 @@
     class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
 
   <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-    p:driverClassName="${jdbc.driver}" p:url="${jdbc.url}" p:username="${jdbc.user}"
-    p:password="${jdbc.password}" />
+    p:driverClassName="${sis.jdbc.driver}" p:url="${sis.jdbc.url}"
+    p:username="${sis.jdbc.user}" p:password="${sis.jdbc.password}" />
 
   <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"
     p:dataSource-ref="dataSource" />
 
   <bean id="spsDataSource" class="org.apache.commons.dbcp.BasicDataSource"
-    p:driverClassName="${sps.jdbc.driver}" p:url="${sps.jdbc.url}"
-    p:username="${sps.jdbc.user}" p:password="${sps.jdbc.password}" />
+    p:driverClassName="${pohoda.jdbc.driver}" p:url="${pohoda.jdbc.url}"
+    p:username="${pohoda.jdbc.user}" p:password="${pohoda.jdbc.password}" />
 
   <bean id="spsJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"
     p:dataSource-ref="spsDataSource" />
@@ -50,5 +50,16 @@
   <bean id="taskletStep" abstract="true"
     class="org.springframework.batch.core.step.tasklet.TaskletStep"
     p:jobRepository-ref="jobRepository" />
-    
+
+  <bean id="resourceFactory" class="cz.silesnet.sis.util.TimestampWorkdirResourceFactory"
+    p:workDir="${work.dir}" />
+
+  <bean id="resource" abstract="true" factory-bean="resourceFactory"
+    factory-method="createInstance" />
+
+  <bean id="importTasklet" abstract="true"
+    class="cz.silesnet.sis.sync.tasklet.SpsImportTasklet" p:executable="${pohoda.executable}"
+    p:login="${pohoda.login}" p:password="${pohoda.password}"
+    p:database="${pohoda.database}" />
+
 </beans>

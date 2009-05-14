@@ -19,7 +19,7 @@ import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.repeat.ExitStatus;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 
 public class SisInvoiceFunctionalTest extends AbstractDependencyInjectionSpringContextTests {
@@ -67,11 +67,12 @@ public class SisInvoiceFunctionalTest extends AbstractDependencyInjectionSpringC
         JobExecution jobExecution = launcher.run(job, jobParameters);
         assertEquals(ExitStatus.FINISHED, jobExecution.getExitStatus());
         /*
-         * Can not check results against database because SPS duplicity checking. At least we will check against SPS
-         * response file for correct number of processed invoices. Last writer is thus not tested.
+         * Can not check results against database because SPS duplicity
+         * checking. At least we will check against SPS response file for
+         * correct number of processed invoices. Last writer is thus not tested.
          */
-        BufferedReader reader = new BufferedReader(new FileReader((new FileSystemResource(
-                "target/20081226_sps_invoices.TEMP.xml")).getFile()));
+        Resource responseResource = (Resource) getApplicationContext().getBean("invoicesResponseFile");
+        BufferedReader reader = new BufferedReader(new FileReader(responseResource.getFile()));
         Pattern itemPattern = Pattern.compile("<rsp:responsePackItem.* id=\".+_\\d+_(\\d+)\".* state=\"ok\".*>");
         int count = 0;
         String line;
