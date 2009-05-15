@@ -14,7 +14,6 @@ import org.joda.time.LocalDate;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.core.io.ClassPathResource;
 
 import cz.silesnet.sis.sync.domain.Reminder;
 
@@ -29,7 +28,7 @@ public class SimpleReminderMailPreparatorTest {
     public void setUp() throws Exception {
         // configure preparator
         preparator = new SimpleReminderMailPreparator();
-        preparator.setTemplate(new ClassPathResource("/flt/html-notice.flt"));
+        preparator.setTemplate("/flt/html-notice.flt");
         preparator.setHtml(true);
         preparator.setFrom("from@address");
         preparator.setSubject("Test Reminder");

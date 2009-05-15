@@ -78,7 +78,7 @@
 
   <bean id="mailPreparator"
     class="cz.silesnet.sis.sync.item.writer.SimpleReminderMailPreparator"
-    p:template="classpath:flt/html-notice.flt" p:encodig="${email.encoding}"
+    p:template="/flt/html-notice.flt" p:encodig="${email.encoding}"
     p:html="true" p:from="${reminder.email.from}" p:subject="${reminder.email.subject}" />
 
 </beans>

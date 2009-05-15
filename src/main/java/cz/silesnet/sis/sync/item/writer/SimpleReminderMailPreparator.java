@@ -12,11 +12,9 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.core.io.Resource;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
 import cz.silesnet.sis.sync.domain.Reminder;
-import freemarker.cache.FileTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
@@ -35,9 +33,9 @@ public class SimpleReminderMailPreparator implements ReminderMailPreparator, Ini
     private static final String DEFAULT_TEMPLATE_ENCODING = "UTF-8";
 
     private Configuration cfg;
-    private Resource templateResource;
+    private String template;
     private String encodig = DEFAULT_TEMPLATE_ENCODING;
-    private Template template;
+    private Template aTemplate;
     private boolean isHtml = false;
     private String from;
     private String subject;
@@ -48,13 +46,13 @@ public class SimpleReminderMailPreparator implements ReminderMailPreparator, Ini
     public void afterPropertiesSet() throws Exception {
         cfg = new Configuration();
         cfg.setObjectWrapper(new DefaultObjectWrapper());
-        cfg.setTemplateLoader(new FileTemplateLoader(this.templateResource.getFile().getParentFile()));
+        cfg.setClassForTemplateLoading(getClass(), "/");
         cfg.setDefaultEncoding(encodig);
-        template = cfg.getTemplate(this.templateResource.getFilename());
+        aTemplate = cfg.getTemplate(template);
     }
 
-    public void setTemplate(Resource templateResource) {
-        this.templateResource = templateResource;
+    public void setTemplate(String template) {
+        this.template = template;
     }
 
     public void setEncodig(String encodig) {
@@ -83,7 +81,7 @@ public class SimpleReminderMailPreparator implements ReminderMailPreparator, Ini
         model.put(REMINDER_KEY, reminder);
         StringWriter body = new StringWriter();
         try {
-            template.process(model, body);
+            aTemplate.process(model, body);
         } catch (TemplateException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
