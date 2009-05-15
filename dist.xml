@@ -42,12 +42,5 @@
         <include>*.properties</include>
       </includes>
     </fileSet>
-    <fileSet>
-      <directory>src/main/work</directory>
-      <outputDirectory>work</outputDirectory>
-      <includes>
-        <include>README.txt</include>
-      </includes>
-    </fileSet>
   </fileSets>
 </assembly>
