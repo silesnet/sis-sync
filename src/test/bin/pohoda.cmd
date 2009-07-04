@@ -1,0 +1,1 @@
+java -cp ./target/test-classes PohodaImportStub %1 %2 %3 %4

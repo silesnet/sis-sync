@@ -3,7 +3,9 @@ package cz.silesnet.sis.sync;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,6 +18,8 @@ import org.junit.Test;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.Step;
+import org.springframework.batch.core.job.SimpleJob;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.repeat.ExitStatus;
 import org.springframework.core.io.ClassPathResource;
@@ -57,19 +61,34 @@ public class SisInvoiceFunctionalTest extends AbstractDependencyInjectionSpringC
         dbTester.onTearDown();
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testSisInvoiceJob() throws Exception {
+        // FIXME
+        fail("FIXME");
         String nowTimeStamp = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date());
         log.debug(nowTimeStamp);
         dbTester = initializeDatabase(dataSource);
+        // stub Pohoda import step
+        List<Step> steps = new ArrayList<Step>();
+        for (Object o : job.getSteps()) {
+            Step step = (Step) o;
+            log.debug(step.getName());
+            if ("importInvoices".equals(step.getName())) {
+                // replace with stub
+                steps.add(step);
+            } else {
+                steps.add(step);
+            }
+        }
+        ((SimpleJob) job).setSteps(steps);
         // run the job
         jobParameters = new JobParameters();
         JobExecution jobExecution = launcher.run(job, jobParameters);
         assertEquals(ExitStatus.FINISHED, jobExecution.getExitStatus());
         /*
-         * Can not check results against database because SPS duplicity
-         * checking. At least we will check against SPS response file for
-         * correct number of processed invoices. Last writer is thus not tested.
+         * Can not check results against database because SPS duplicity checking. At least we will check against SPS
+         * response file for correct number of processed invoices. Last writer is thus not tested.
          */
         Resource responseResource = (Resource) getApplicationContext().getBean("invoicesResponseFile");
         BufferedReader reader = new BufferedReader(new FileReader(responseResource.getFile()));

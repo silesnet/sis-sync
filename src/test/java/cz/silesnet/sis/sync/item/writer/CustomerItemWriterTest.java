@@ -6,11 +6,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.custommonkey.xmlunit.DetailedDiff;
+import org.custommonkey.xmlunit.Diff;
+import org.custommonkey.xmlunit.SimpleNamespaceContext;
 import org.custommonkey.xmlunit.XMLTestCase;
+import org.custommonkey.xmlunit.XMLUnit;
+import org.custommonkey.xmlunit.exceptions.XpathException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,8 +45,9 @@ public class CustomerItemWriterTest extends XMLTestCase {
     }
 
     @Test
-    public void testItemLines() throws IOException, SAXException {
+    public void testItemLines() throws IOException, SAXException, XpathException {
         Customer customer = new Customer();
+        customer.setSymbol("12345");
         customer.setName("Customer Name");
         customer.setSupplementaryName("Supplementary name");
         customer.setContactName("Contact Name");
@@ -54,11 +62,19 @@ public class CustomerItemWriterTest extends XMLTestCase {
         customer.setAccountNo("1234-567890");
         customer.setBankCode("2400");
         String[] lines = writer.dataPackItemLines(customer);
-        Reader customerXml = new StringReader(StringUtils.join(lines, "\n"));
+
+        String xmlLines = "<test xmlns:adb=\"addressbook\" xmlns:typ=\"types\">" + StringUtils.join(lines, "\n")
+                + "</test>";
+        Reader customerXml = new StringReader(xmlLines);
         Reader expectedXml = new FileReader((new ClassPathResource("data/20090208_customers.xml")).getFile());
-        // new Diff(expectedXml, customerXml);
-        // assertEquals(expectedXml, customerXml);
-        log.debug("\n" + customerXml);
+        Map<String, String> ns = new HashMap<String, String>();
+        ns.put("adb", "addressbook");
+        ns.put("typ", "types");
+        XMLUnit.setXpathNamespaceContext(new SimpleNamespaceContext(ns));
+        XMLUnit.setIgnoreWhitespace(true);
+        Diff diff = new Diff(expectedXml, customerXml);
+        DetailedDiff detailedDiff = new DetailedDiff(diff);
+        assertTrue(detailedDiff.toString(), diff.identical());
     }
 
     @Test

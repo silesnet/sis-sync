@@ -45,6 +45,8 @@ public class SisCustomerFunctionalTest extends AbstractDependencyInjectionSpring
     @SuppressWarnings("unchecked")
     @Test
     public void testSisCustomerJob() throws Exception {
+        // FIXME
+        fail("FIXME");
         dataSource = (DataSource) applicationContext.getBean("dataSource");
         dbTester = initializeDatabase(dataSource);
         jobParameters = new JobParameters();
