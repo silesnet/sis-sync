@@ -26,14 +26,13 @@ import cz.silesnet.sis.sync.domain.Reminder.Invoice;
  */
 public class JdbcReminderDao implements ReminderDao {
 
-    private static final String CUSTOMER_SQL = "SELECT ID, Firma, Ulice, PSC, Obec, Email, ADSplat FROM AD WHERE ID = ?";
+    private static final String CUSTOMER_SQL = "SELECT ID, Firma, Ulice, PSC, Obec, Email FROM AD WHERE ID = ?";
     private static final String ID_COLUMN = "ID";
     private static final String COMPANY_COLUMN = "Firma";
     private static final String STREET_COLUMN = "Ulice";
     private static final String ZIP_COLUMN = "PSC";
     private static final String TOWN_COLUMN = "Obec";
     private static final String EMAIL_COLUMN = "Email";
-    private static final String GRACE_DAYS_COLUMN = "ADSplat";
     private static final String INVOICES_SQL_TEMPLATE = "SELECT ID, Cislo, VarSym, DatSplat, KcCelkem, KcLikv, RefAD "
             + "FROM FA WHERE RefAd = ? AND DATEDIFF(${dayPartName}, DatSplat, ${currentDateFunction}) >= ? AND KcLikv >= ?";
     private static final String NUMBER_COLUMN = "Cislo";
@@ -46,12 +45,14 @@ public class JdbcReminderDao implements ReminderDao {
     private static final String SQL_SERVER_DAY_PART_NAME = "dd";
     private static final String SQL_SERVER_CURRENT_DATE_FUNCTION = "GETDATE()";
     private static final int DEFAULT_MINIMAL_DUE_AMOUNT = 5;
+    private static final int DEFAULT_GRACE_DAYS = 14;
 
     private JdbcTemplate template;
 
     private String dayPartName = SQL_SERVER_DAY_PART_NAME;
     private String currentDateFunction = SQL_SERVER_CURRENT_DATE_FUNCTION;
     private int minimalDueAmount = DEFAULT_MINIMAL_DUE_AMOUNT;
+    private int graceDays = DEFAULT_GRACE_DAYS;
 
     public JdbcReminderDao() {
     }
@@ -72,6 +73,10 @@ public class JdbcReminderDao implements ReminderDao {
         this.minimalDueAmount = minimalDueAmount;
     }
 
+    public void setGraceDays(int graceDays) {
+        this.graceDays = graceDays;
+    }
+
     @SuppressWarnings("unchecked")
     public Reminder find(long customerId) {
         // find the customer
@@ -80,11 +85,10 @@ public class JdbcReminderDao implements ReminderDao {
         String address = composeAddressLine((String) customerMap.get(STREET_COLUMN), (String) customerMap
                 .get(ZIP_COLUMN), (String) customerMap.get(TOWN_COLUMN));
         Reminder reminder = new Reminder(Long.valueOf(customerMap.get(ID_COLUMN).toString()), (String) customerMap
-                .get(COMPANY_COLUMN), (String) customerMap.get(EMAIL_COLUMN), address, (Integer) customerMap
-                .get(GRACE_DAYS_COLUMN));
+                .get(COMPANY_COLUMN), (String) customerMap.get(EMAIL_COLUMN), address);
         // find invoices to remind the customer for
-        List invoiceMaps = template.query(composeInvoicesSql(), new Object[] { customerId,
-                reminder.getCustomer().getGraceDays(), minimalDueAmount }, new ColumnMapRowMapper());
+        List invoiceMaps = template.query(composeInvoicesSql(),
+                new Object[] { customerId, graceDays, minimalDueAmount }, new ColumnMapRowMapper());
         // add invoices to the reminder
         for (Object rawInvoiceMap : invoiceMaps) {
             Map<String, Object> im = (Map<String, Object>) rawInvoiceMap;

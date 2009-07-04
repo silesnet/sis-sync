@@ -16,7 +16,7 @@ import cz.silesnet.sis.sync.dao.ReminderDao;
  */
 public class ReminderRowMapper implements RowMapper {
 
-    public static final String ID_COLUMN = "id";
+    public static final String ID_COLUMN = "RefAD";
     private ReminderDao dao;
 
     public void setDao(ReminderDao dao) {

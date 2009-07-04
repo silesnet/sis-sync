@@ -13,7 +13,8 @@ import java.util.List;
 import org.joda.time.LocalDate;
 
 /**
- * Data class containing reminder for customer's delayed invoice payments. The Reminder is immutable.
+ * Data class containing reminder for customer's delayed invoice payments. The
+ * Reminder is immutable.
  * 
  * @author rsi
  * 
@@ -22,8 +23,8 @@ public class Reminder {
     private final Customer customer;
     private final List<Invoice> invoices = new ArrayList<Invoice>();
 
-    public Reminder(long id, String name, String email, String address, int graceDays) {
-        customer = new Customer(id, name, email, address, graceDays);
+    public Reminder(long id, String name, String email, String address) {
+        customer = new Customer(id, name, email, address);
     }
 
     public Customer getCustomer() {
@@ -63,15 +64,13 @@ public class Reminder {
         private final String name;
         private final String email;
         private final String address;
-        private final int graceDays;
 
-        public Customer(long id, String name, String email, String address, int graceDays) {
+        public Customer(long id, String name, String email, String address) {
             super();
             this.id = id;
             this.name = name;
             this.email = email;
             this.address = address;
-            this.graceDays = graceDays;
         }
 
         public long getId() {
@@ -89,11 +88,6 @@ public class Reminder {
         public String getAddress() {
             return address;
         }
-
-        public int getGraceDays() {
-            return graceDays;
-        }
-
     }
 
     public class Invoice {

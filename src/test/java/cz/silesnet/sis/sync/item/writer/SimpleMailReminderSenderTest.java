@@ -32,7 +32,7 @@ public class SimpleMailReminderSenderTest {
     @Test
     public final void testSend() throws MessagingException {
         // reminder to be sent
-        Reminder reminder = new Reminder(1, null, EMAIL_TO, null, 10);
+        Reminder reminder = new Reminder(1, null, EMAIL_TO, null);
         reminder.addInvoice(reminder.new Invoice(1, 1, null, null, null, null, null));
         // java sender mock
         javaSender = createMock(JavaMailSender.class);

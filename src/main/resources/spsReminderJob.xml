@@ -34,27 +34,23 @@
         </property>
         <property name="sql">
           <value><![CDATA[
-            SELECT DISTINCT AD.ID
-              FROM AD
-                INNER JOIN FA
-                  ON AD.ID = FA.RefAD
+            SELECT DISTINCT RefAD
+              FROM FA
               WHERE
-                DATEDIFF(${pohoda.sql.daypart}, FA.DatSplat, ${pohoda.sql.current.date}) >= AD.ADSplat
+                DATEDIFF(${pohoda.sql.daypart}, DatSplat, ${pohoda.sql.current.date}) >= ${reminder.grace.days}
                   AND KcLikv >= ${reminder.minimal.due.amount}
-              ORDER BY AD.ID
+              ORDER BY RefAD
           ]]></value>
         </property>
         <property name="restartSql">
           <value><![CDATA[
-            SELECT DISTINCT AD.ID
-              FROM AD
-                INNER JOIN FA
-                  ON AD.ID = FA.RefAD
+            SELECT DISTINCT RefAD
+              FROM FA
               WHERE
-                DATEDIFF(${pohoda.sql.daypart}, FA.DatSplat, ${pohoda.sql.current.date}) >= AD.ADSplat
+                DATEDIFF(${pohoda.sql.daypart}, DatSplat, ${pohoda.sql.current.date}) >= ${reminder.grace.days}
                   AND KcLikv >= ${reminder.minimal.due.amount}
-                  AND AD.ID > ?
-              ORDER BY AD.ID
+                  AND RefAD > ?
+              ORDER BY RefAD
           ]]></value>
         </property>
       </bean>
@@ -67,7 +63,8 @@
   <bean id="reminderDao" class="cz.silesnet.sis.sync.dao.impl.JdbcReminderDao"
     p:jdbcTemplate-ref="spsJdbcTemplate" p:dayPartName="${pohoda.sql.daypart}"
     p:currentDateFunction="${pohoda.sql.current.date}"
-    p:minimalDueAmount="${reminder.minimal.due.amount}" />
+    p:minimalDueAmount="${reminder.minimal.due.amount}"
+    p:graceDays="${reminder.grace.days}" />
 
   <bean id="reminderSender"
     class="cz.silesnet.sis.sync.item.writer.SimpleMailReminderSender"

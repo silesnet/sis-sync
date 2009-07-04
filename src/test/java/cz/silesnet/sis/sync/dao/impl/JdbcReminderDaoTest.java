@@ -33,6 +33,7 @@ public class JdbcReminderDaoTest extends AbstractDependencyInjectionSpringContex
         dao.setDayPartName("'dd'");
         dao.setCurrentDateFunction("'2009-02-25'"); // CURRENT_DATE for HSQLDB
         dao.setMinimalDueAmount(5);
+        dao.setGraceDays(10);
         template = (JdbcTemplate) applicationContext.getBean("spsJdbcTemplate");
         dao.setJdbcTemplate(template);
         dataSource = (DataSource) applicationContext.getBean("spsDataSource");
@@ -53,7 +54,6 @@ public class JdbcReminderDaoTest extends AbstractDependencyInjectionSpringContex
         assertEquals("Test Customer4", reminder.getCustomer().getName());
         assertEquals("Street 4, 123 04 Town 4", reminder.getCustomer().getAddress());
         assertEquals("contact@customer4.cz", reminder.getCustomer().getEmail());
-        assertEquals(10, reminder.getCustomer().getGraceDays());
         assertEquals(2, reminder.getInvoices().size());
         assertEquals(6, reminder.getInvoices().get(0).getId());
         assertEquals(7, reminder.getInvoices().get(1).getId());

@@ -57,11 +57,11 @@ public class SpsRemindersFunctionalTest extends AbstractDependencyInjectionSprin
         dbTester.onTearDown();
         // test selected SPS customers
         JdbcTemplate template = new JdbcTemplate(dataSource);
-        String sql = "SELECT DISTINCT AD.ID FROM AD INNER JOIN FA ON AD.ID = FA.RefAD WHERE DATEDIFF('dd', FA.DatSplat, '2009-02-25') >= AD.ADSplat AND KcLikv >= 5 ORDER BY AD.ID";
+        String sql = "SELECT DISTINCT RefAD FROM FA WHERE DATEDIFF('dd', DatSplat, '2009-02-25') >= 10 AND KcLikv >= 5 ORDER BY RefAD";
         List<String> customers = template.query(sql, new RowMapper() {
 
             public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-                return rs.getString("ID");
+                return rs.getString("RefAD");
             }
         });
         for (String number : customers) {
