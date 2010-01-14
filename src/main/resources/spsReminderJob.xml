@@ -39,6 +39,7 @@
               WHERE
                 DATEDIFF(${pohoda.sql.daypart}, DatSplat, ${pohoda.sql.current.date}) >= ${reminder.grace.days}
                   AND KcLikv >= ${reminder.minimal.due.amount}
+                  AND RefAD IS NOT NULL
               ORDER BY RefAD
           ]]></value>
         </property>
@@ -49,6 +50,7 @@
               WHERE
                 DATEDIFF(${pohoda.sql.daypart}, DatSplat, ${pohoda.sql.current.date}) >= ${reminder.grace.days}
                   AND KcLikv >= ${reminder.minimal.due.amount}
+                  AND RefAD IS NOT NULL
                   AND RefAD > ?
               ORDER BY RefAD
           ]]></value>
