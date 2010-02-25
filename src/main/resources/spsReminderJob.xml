@@ -40,6 +40,8 @@
                 DATEDIFF(${pohoda.sql.daypart}, DatSplat, ${pohoda.sql.current.date}) >= ${reminder.grace.days}
                   AND KcLikv >= ${reminder.minimal.due.amount}
                   AND RefAD IS NOT NULL
+                  AND RelTpFak = 1
+                  AND RefUcet = 2
               ORDER BY RefAD
           ]]></value>
         </property>
@@ -51,6 +53,8 @@
                 DATEDIFF(${pohoda.sql.daypart}, DatSplat, ${pohoda.sql.current.date}) >= ${reminder.grace.days}
                   AND KcLikv >= ${reminder.minimal.due.amount}
                   AND RefAD IS NOT NULL
+                  AND RelTpFak = 1
+                  AND RefUcet = 2
                   AND RefAD > ?
               ORDER BY RefAD
           ]]></value>
