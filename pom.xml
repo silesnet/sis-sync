@@ -131,6 +131,12 @@
 			<version>1.5.8</version>
 		</dependency>
 		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>net.java.dev.stax-utils</groupId>
 			<artifactId>stax-utils</artifactId>
 			<version>20060502</version>
