@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="Windows-1250"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			xmlns:typ="http://www.stormware.cz/schema/type.xsd"
+			xmlns:rdc="http://www.stormware.cz/schema/documentresponse.xsd"
+			xmlns:lst="http://www.stormware.cz/schema/list.xsd"
+			xmlns:adb="http://www.stormware.cz/schema/addressbook.xsd"
+			xmlns:inv="http://www.stormware.cz/schema/invoice.xsd"
+			xmlns="http://www.stormware.cz/schema/list.xsd"
+			targetNamespace="http://www.stormware.cz/schema/list.xsd"
+			elementFormDefault="qualified"
+>
+
+<xsd:import namespace="http://www.stormware.cz/schema/type.xsd" schemaLocation="type.xsd"/>
+<xsd:import namespace="http://www.stormware.cz/schema/documentresponse.xsd" schemaLocation="documentresponse.xsd"/>
+<xsd:import namespace="http://www.stormware.cz/schema/addressbook.xsd" schemaLocation="addressbook.xsd"/>
+<xsd:import namespace="http://www.stormware.cz/schema/invoice.xsd" schemaLocation="invoice.xsd"/>
+
+<!-- **************************************************************************
+		root element
+	 ************************************************************************** -->
+
+<!-- ************************************************************************** -->
+<!-- REQUEST -->
+<xsd:element name="listInvoiceRequest" type="lst:listInvoiceRequestType"/>
+<xsd:element name="listAddressBookRequest" type="lst:listAddressBookRequestType"/>
+
+<!-- ************************************************************************** -->
+<!-- RESPONSE -->
+<!--  odpověď - export seznamů -->
+<xsd:element name="listInvoice" type="lst:listInvoiceType"/>
+<xsd:element name="listAddressBook" type="lst:listAddressBookType"/>
+
+<!-- **************************************************************************
+		base types
+	 ************************************************************************** -->
+
+<xsd:complexType name="listRequestType">
+	<xsd:attribute name="version" type="xsd:string" use="required"/>
+</xsd:complexType>
+
+<xsd:complexType name="listAddressBookRequestType">
+	<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+		<xsd:element name="requestAddressBook" type="lst:requestAddressBookType"/>
+	</xsd:sequence>
+	<xsd:attribute name="version" type="lst:listAddressBookRequestVerType" use="required"/>
+	<xsd:attribute name="addressBookVersion" type="adb:adbVersionType" use="required">
+		<xsd:annotation>
+			<xsd:documentation>Požadovaná verze dokladu.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:attribute>
+	<xsd:attribute name="extSystem" type="typ:string64">
+		<xsd:annotation>
+			<xsd:documentation>Označení externího systému, pro který se vyexportují identifikátory.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:attribute>
+</xsd:complexType>
+
+<xsd:simpleType name="listAddressBookRequestVerType">
+	<xsd:annotation>
+		<xsd:documentation>Verze, které jsou dostupné k tomuto dokladu. Podrobnosti k jednotlivým verzím najdete na www.stormware.cz/xml</xsd:documentation>
+	</xsd:annotation>
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="1.0"/>
+		<xsd:enumeration value="1.1"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:complexType name="listInvoiceRequestType">
+	<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+		<xsd:element name="requestInvoice" type="lst:requestInvoiceType"/>
+	</xsd:sequence>
+	<xsd:attribute name="version" type="lst:listInvoiceRequestVerType" use="required"/>
+	<xsd:attribute name="invoiceType" type="inv:invoiceTypeType" use="required"/>
+	<xsd:attribute name="invoiceVersion" type="inv:invVersionType" use="required">
+  	<xsd:annotation>
+			<xsd:documentation>Požadovaná verze dokladu.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:attribute>
+	<xsd:attribute name="extSystem" type="typ:string64">
+		<xsd:annotation>
+			<xsd:documentation>Označení externího systému, pro který se vyexportují identifikátory.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:attribute>
+</xsd:complexType>
+
+<xsd:simpleType name="listInvoiceRequestVerType">
+	<xsd:annotation>
+		<xsd:documentation>Verze, které jsou dostupné k tomuto dokladu. Podrobnosti k jednotlivým verzím najdete na www.stormware.cz/xml</xsd:documentation>
+	</xsd:annotation>
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="1.0"/>
+		<xsd:enumeration value="1.1"/>
+		<xsd:enumeration value="1.2"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<!-- ****************************************************************************** -->
+
+<xsd:complexType name="listAddressBookType">
+	<xsd:complexContent>
+		<xsd:extension base="lst:listVersionType">
+			<xsd:choice>
+				<xsd:element name="addressbook" type="adb:addressbookType" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:choice>
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+<xsd:complexType name="listInvoiceType">
+	<xsd:complexContent>
+		<xsd:extension base="lst:listVersionType">
+			<xsd:choice>
+				<xsd:element name="invoice" type="inv:invoiceType" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:choice>
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+
+<!-- **************************************************************************
+		generic types
+	 ************************************************************************** -->
+
+<xsd:complexType name="listVersionType">
+	<xsd:sequence>
+	   <xsd:element name="importDetails"   type="rdc:importDetailsType"	minOccurs="0"/>
+	</xsd:sequence>
+  	<xsd:attribute name="version" type="xsd:string" use="required"/>
+  	<xsd:attribute name="dateTimeStamp" type="xsd:dateTime" use="required"/>
+  	<xsd:attribute name="dateValidFrom" type="xsd:date" use="required"/>
+  	<xsd:attribute name="state" type="typ:stavType2" use="required"/>
+</xsd:complexType>
+
+<xsd:complexType name="itemType">
+  	<xsd:attribute name="id" type="typ:idType" use="required"/>
+  	<xsd:attribute name="code" type="typ:idsType" use="required"/>
+</xsd:complexType>
+
+<!-- **************************************************************************
+		implementation
+	 ************************************************************************** -->
+
+<xsd:complexType name="itemNameType">
+	<xsd:complexContent>
+		<xsd:extension base="lst:itemType">
+	  		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+<!--  Typ ceny -->
+<xsd:simpleType name="priceTypeType">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="basicPrice">
+			<xsd:annotation>
+				<xsd:documentation>Základní cena. Zvolte při vkládání základní prodejní ceny.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:enumeration>
+		<xsd:enumeration value="accessoryPrice">
+			<xsd:annotation>
+				<xsd:documentation>Vedlejší cena. Zvolte při vkládání vedlejší slevy.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:enumeration>
+		<xsd:enumeration value="discount">
+			<xsd:annotation>
+				<xsd:documentation>Sleva. Zvolte při vkládání prodejní slevy.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:enumeration>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<!-- Výpočet ceny -->
+<xsd:simpleType name="calculationType">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="excludedVAT">
+			<xsd:annotation>
+				<xsd:documentation>Bez daně.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:enumeration>
+		<xsd:enumeration value="includedVAT">
+			<xsd:annotation>
+				<xsd:documentation>S daní.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:enumeration>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<!-- Zaokrouhlení -->
+<xsd:simpleType name="roundingType">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="0,0001"/>
+		<xsd:enumeration value="0,001"/>
+		<xsd:enumeration value="0,01"/>
+		<xsd:enumeration value="0,1"/>
+		<xsd:enumeration value="1"/>
+		<xsd:enumeration value="10"/>
+		<xsd:enumeration value="100"/>
+		<xsd:enumeration value="1000"/>
+	</xsd:restriction>
+</xsd:simpleType>
+<!-- End Prodejní ceny  -->
+
+<xsd:complexType name="itemNumericSeriesType">
+	<xsd:complexContent>
+		<xsd:extension base="lst:itemType">
+			<xsd:attribute name="name" type="xsd:string" use="required"/>
+	  		<xsd:attribute name="agenda" type="xsd:string" use="required"/>
+	  		<xsd:attribute name="year" type="xsd:gYear" use="required"/>
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+<xsd:complexType name="requestAddressBookType">
+	<xsd:sequence>
+		<xsd:element name="filterFields" type="lst:filterFieldsType" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>Seznam polí podle kterých se budou filtrovat adresy.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="userFilterName" type="xsd:string" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>Identifikátor uživatelského filtru v požadované agendě, který má být použit pro filtraci záznamů.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+	</xsd:sequence>
+	<xsd:attribute name="id" type="typ:idType"/>
+</xsd:complexType>
+
+<xsd:complexType name="filterFieldsType">
+	<xsd:all>
+		<xsd:element name="fieldCity" type="xsd:string" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>Filtr podle pole Obec.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="fieldRegion" type="xsd:string" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>Filtr podle pole Kraj.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="fieldKey" type="xsd:string" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>Filtr podle pole Klíče.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="fieldGroup" type="xsd:string" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>Filtr podle pole SKupiny.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="fieldP1" type="typ:boolean" minOccurs="0" default="false">
+			<xsd:annotation>
+				<xsd:documentation>Filtr podle pole P1.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="fieldP2" type="typ:boolean" minOccurs="0" default="false">
+			<xsd:annotation>
+				<xsd:documentation>Filtr podle pole P2.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="fieldP3" type="typ:boolean" minOccurs="0" default="false">
+			<xsd:annotation>
+				<xsd:documentation>Filtr podle pole P3.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="fieldP4" type="typ:boolean" minOccurs="0" default="false">
+			<xsd:annotation>
+				<xsd:documentation>Filtr podle pole P4.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="fieldP5" type="typ:boolean" minOccurs="0" default="false">
+			<xsd:annotation>
+				<xsd:documentation>Filtr podle pole P5.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="fieldP6" type="typ:boolean" minOccurs="0" default="false">
+			<xsd:annotation>
+				<xsd:documentation>Filtr podle pole P6.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+	</xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name="requestInvoiceType">
+	<xsd:sequence>
+		<xsd:element name="dateFrom" type="xsd:date" minOccurs="0">
+      	<xsd:annotation>
+				<xsd:documentation>Datum od.</xsd:documentation>
+			</xsd:annotation>
+    	</xsd:element>
+    	<xsd:element name="dateTill" type="xsd:date" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>Datum do.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="userFilterName" type="xsd:string" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>Identifikátor uživatelského filtru v požadované agendě, který má být použit pro filtraci záznamů.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="selectedNumbers" type="lst:selectedNumbersType" minOccurs="0"/>
+		<xsd:element name="selectedCompanys" type="lst:selectedCompanysType" minOccurs="0"/>
+		<xsd:element name="selectedIco" type="lst:selectedIcoType" minOccurs="0"/>
+  </xsd:sequence> 
+</xsd:complexType>
+
+<xsd:complexType name="selectedNumbersType">
+  <xsd:sequence>
+    <xsd:element name="number" type="typ:numberType" maxOccurs="unbounded">
+    	<xsd:annotation>
+    		<xsd:documentation>Evidenční číslo dokladu.</xsd:documentation>
+    	</xsd:annotation>
+  	</xsd:element>
+  </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="selectedCompanysType">
+  <xsd:sequence>
+    <xsd:element name="company" type="typ:stringCompany" maxOccurs="unbounded">
+    	<xsd:annotation>
+    		<xsd:documentation>Firma</xsd:documentation>
+    	</xsd:annotation>
+  	</xsd:element>
+  </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="selectedIcoType">
+  <xsd:sequence>
+    <xsd:element name="ico" type="typ:icoType" maxOccurs="unbounded">
+    	<xsd:annotation>
+    		<xsd:documentation>ICO</xsd:documentation>
+    	</xsd:annotation>
+  	</xsd:element>
+  </xsd:sequence>
+</xsd:complexType>
+
+</xsd:schema>

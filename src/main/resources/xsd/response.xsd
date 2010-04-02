@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="Windows-1250"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			xmlns:typ="http://www.stormware.cz/schema/type.xsd"
+			xmlns:lst="http://www.stormware.cz/schema/list.xsd"
+			xmlns:inv="http://www.stormware.cz/schema/invoice.xsd"
+			xmlns:rsp="http://www.stormware.cz/schema/response.xsd"
+			xmlns:adb="http://www.stormware.cz/schema/addressbook.xsd"
+			xmlns="http://www.stormware.cz/schema/response.xsd"
+			targetNamespace="http://www.stormware.cz/schema/response.xsd"
+			elementFormDefault="qualified"
+>
+
+<xsd:import namespace="http://www.stormware.cz/schema/type.xsd" 		schemaLocation="type.xsd"/>
+<xsd:import namespace="http://www.stormware.cz/schema/list.xsd" 		schemaLocation="list.xsd"/>
+<xsd:import namespace="http://www.stormware.cz/schema/invoice.xsd" 	schemaLocation="invoice.xsd"/>
+<xsd:import namespace="http://www.stormware.cz/schema/addressbook.xsd" 	schemaLocation="addressbook.xsd"/>
+
+<!-- **************************************************************************
+		root element must be <responsePack>
+     ************************************************************************** -->
+<xsd:element name="responsePack" type="rsp:responsePackType"/>
+
+<!-- **************************************************************************
+		responsePack
+	 ************************************************************************** -->
+
+<xsd:complexType name="responsePackType">
+	<xsd:sequence>
+		<xsd:element name="responsePackItem" type="rsp:responsePackItemType" minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:sequence>
+	<xsd:attribute name="version" type="xsd:string" use="required"/>
+   <xsd:attribute name="id" form="unqualified" type="xsd:string" use="required"/>
+   <xsd:attribute name="state" form="unqualified" type="typ:stavType2" use="required"/>
+<!--   <xsd:attribute name="errno" type="xsd:integer"/> -->
+   <xsd:attribute name="note" type="xsd:string"/>
+   <xsd:attribute name="programVersion" type="xsd:string"/>
+</xsd:complexType>
+
+<xsd:complexType name="responsePackItemType">
+	<xsd:choice minOccurs="0" maxOccurs="1">	
+	  <!-- odpověď na import -->
+		<xsd:element ref="inv:invoiceResponse"/>
+		<xsd:element ref="adb:addressbookResponse"/>	
+		<!-- export dat z programu -->
+		<xsd:element ref="lst:listInvoice"/>
+		<xsd:element ref="lst:listAddressBook"/>
+	</xsd:choice>
+	<xsd:attribute name="version" type="xsd:string" use="required"/>
+  	<xsd:attribute name="id" type="xsd:string" use="required"/>
+  	<xsd:attribute name="state" type="typ:stavType2" form="unqualified" use="required"/>
+<!--	<xsd:attribute name="errno" type="xsd:integer"/> -->
+  	<xsd:attribute name="note" type="xsd:string"/>
+</xsd:complexType>
+ 
+</xsd:schema>
