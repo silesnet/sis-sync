@@ -4,17 +4,12 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.stream.XMLEventReader;
 
 import org.junit.Test;
 import org.springframework.batch.item.ExecutionContext;
-import org.springframework.batch.item.xml.EventReaderDeserializer;
 import org.springframework.batch.item.xml.StaxEventItemReader;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
 import cz.stormware.schema.response.ResponsePackItemType;
 import cz.stormware.schema.type.StavType2;
@@ -28,31 +23,18 @@ public class XlmItemReaderFunctionalTest {
     Resource resource = new ClassPathResource("xml/invoices-response-20100313.xml");
     reader.setResource(resource);
 
-    final JAXBContext context = JAXBContext.newInstance("cz.stormware.schema.response");
-    final Unmarshaller unmarshaller = context.createUnmarshaller();
+    JAXBContext context = JAXBContext.newInstance("cz.stormware.schema.response");
+    JaxbPartialUnmarshaller<ResponsePackItemType> partialUnmarshaller = new JaxbPartialUnmarshaller<ResponsePackItemType>();
+    partialUnmarshaller.setContext(context);
+    partialUnmarshaller.setFragmentClass(ResponsePackItemType.class);
 
-    reader.setFragmentDeserializer(new EventReaderDeserializer() {
+    JaxbEventReaderDeserializer readerDeserializer = new JaxbEventReaderDeserializer();
+    readerDeserializer.setPartialUnmarshaller(partialUnmarshaller);
 
-      @Override
-      public Object deserializeFragment(XMLEventReader eventReader) {
-        try {
-          return unmarshaller.unmarshal(eventReader, ResponsePackItemType.class).getValue();
-        } catch (JAXBException e) {
-          throw new RuntimeException(e);
-        }
-      }
-    });
-
-    Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-    marshaller.setContextPath("cz.stormware.schema.response");
-    marshaller.afterPropertiesSet();
-    // reader.setFragmentDeserializer(new
-    // UnmarshallingEventReaderDeserializer(marshaller));
-
+    reader.setFragmentDeserializer(readerDeserializer);
     reader.afterPropertiesSet();
 
     reader.open(new ExecutionContext());
-
     Object object = reader.read();
     ResponsePackItemType item = (ResponsePackItemType) object;
     assertThat(item.getState(), is(StavType2.OK));
