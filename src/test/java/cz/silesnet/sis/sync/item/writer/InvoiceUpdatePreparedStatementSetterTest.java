@@ -1,32 +1,31 @@
 package cz.silesnet.sis.sync.item.writer;
 
-import static org.easymock.EasyMock.*;
+import static org.mockito.AdditionalMatchers.*;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Date;
 
 import org.junit.Test;
 
-import cz.silesnet.sis.sync.domain.InvoiceResult;
+import cz.stormware.schema.response.ResponsePackItemType;
 
 public class InvoiceUpdatePreparedStatementSetterTest {
 
-    private static final long ID = 1234L;
+  @Test
+  public void testId() throws Exception {
+    ResponsePackItemType responseItem = new ResponsePackItemType();
+    responseItem.setId("TIME_SEQ_01");
+    PreparedStatement statement = mock(PreparedStatement.class);
 
-    @Test
-    public void testSetValues() throws SQLException {
-        // invoice to update
-        InvoiceResult result = new InvoiceResult();
-        result.setSisId(ID);
-        // mock PreparedStatement
-        // SQL: UPDATE invoices SET synchronized = ? WHERE id = ?
-        PreparedStatement ps = createStrictMock(PreparedStatement.class);
-        ps.setTimestamp(eq(1), (Timestamp) geq(new Timestamp((new java.util.Date()).getTime())));
-        ps.setLong(2, ID);
-        replay(ps);
-        InvoiceUpdatePreparedStatementSetter psSetter = new InvoiceUpdatePreparedStatementSetter();
-        psSetter.setValues(result, ps);
-        verify(ps);
-    }
+    InvoiceUpdatePreparedStatementSetter statementSetter;
+    statementSetter = new InvoiceUpdatePreparedStatementSetter();
+    Timestamp now = new Timestamp(new Date().getTime());
+    statementSetter.setValues(responseItem, statement);
+
+    verify(statement).setLong(2, 1);
+    verify(statement).setTimestamp(eq(1), (Timestamp) geq(now));
+  }
 }

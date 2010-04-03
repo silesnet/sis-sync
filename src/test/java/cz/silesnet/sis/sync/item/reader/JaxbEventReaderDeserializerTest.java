@@ -10,11 +10,12 @@ import org.junit.Test;
 
 public class JaxbEventReaderDeserializerTest {
 
+  @SuppressWarnings("unchecked")
   @Test
   public void testDeserializeFragment() throws Exception {
     JaxbEventReaderDeserializer deserializer = new JaxbEventReaderDeserializer();
     XMLEventReader eventReader = mock(XMLEventReader.class);
-    JaxbPartialUnmarshaller unmarshaller = mock(JaxbPartialUnmarshaller.class);
+    JaxbPartialUnmarshaller<Object> unmarshaller = mock(JaxbPartialUnmarshaller.class);
     Object fragment = new Object();
     when(unmarshaller.unmarshal(eventReader)).thenReturn(fragment);
 

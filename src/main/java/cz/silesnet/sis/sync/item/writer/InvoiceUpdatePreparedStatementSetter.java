@@ -10,29 +10,33 @@ import java.util.Date;
 
 import org.springframework.batch.item.database.ItemPreparedStatementSetter;
 
-import cz.silesnet.sis.sync.domain.InvoiceResult;
+import cz.silesnet.sis.sync.item.reader.ResponseId;
+import cz.stormware.schema.response.ResponsePackItemType;
 
 /**
- * Sets Invoice parameters to SQL PreparedStatement.
+ * Sets Invoice response parameters to SQL {@link PreparedStatement}.
  * 
  * @author Richard Sikora
  */
 public class InvoiceUpdatePreparedStatementSetter implements ItemPreparedStatementSetter {
 
-    /**
-     * Maps Invoice members to SQL update command.
-     * <p>
-     * UPDATE invoices SET synchronized = ? WHERE id = ?
-     * 
-     * @param item
-     *            Invoice
-     * @param ps
-     *            SQL update command wrapped in PreparedStatement
-     */
-    public void setValues(Object item, PreparedStatement ps) throws SQLException {
-        InvoiceResult result = (InvoiceResult) item;
-        ps.setTimestamp(1, new Timestamp((new Date()).getTime()));
-        ps.setLong(2, result.getSisId());
-    }
+  /**
+   * Maps Invoice response to SQL update command.
+   * <p>
+   * UPDATE invoices SET synchronized = ? WHERE id = ?
+   * 
+   * @param item
+   *          {@link ResponsePackItemType}
+   * @param ps
+   *          {@link PreparedStatement}
+   */
+  public void setValues(Object item, PreparedStatement ps) throws SQLException {
+    Timestamp now = new Timestamp(new Date().getTime());
+    ps.setTimestamp(1, now);
+
+    ResponsePackItemType responseItem = (ResponsePackItemType) item;
+    ResponseId responseId = ResponseId.of(responseItem.getId());
+    ps.setLong(2, responseId.id());
+  }
 
 }
