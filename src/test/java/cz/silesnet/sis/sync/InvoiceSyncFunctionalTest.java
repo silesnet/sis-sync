@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 
 import javax.sql.DataSource;
 
+import org.junit.Test;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.job.SimpleJob;
 import org.springframework.batch.core.launch.JobLauncher;
@@ -34,4 +35,8 @@ public class InvoiceSyncFunctionalTest {
     assertThat(count, is(5));
   }
 
+  @Test
+  public void testName() throws Exception {
+    // FIXME remove
+  }
 }
