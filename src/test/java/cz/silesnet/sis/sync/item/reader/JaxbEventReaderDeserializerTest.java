@@ -4,6 +4,9 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.stream.XMLEventReader;
 
 import org.junit.Test;
@@ -12,17 +15,27 @@ public class JaxbEventReaderDeserializerTest {
 
   @SuppressWarnings("unchecked")
   @Test
-  public void testDeserializeFragment() throws Exception {
-    JaxbEventReaderDeserializer deserializer = new JaxbEventReaderDeserializer();
+  public void testUnmarshal() throws Exception {
+    JaxbEventReaderDeserializer unmarshaller = new JaxbEventReaderDeserializer();
+
+    // configure JAXB Unmarshaller
+    JAXBContext context = mock(JAXBContext.class);
+    Unmarshaller jaxbUnmarshaller = mock(Unmarshaller.class);
+    when(context.createUnmarshaller()).thenReturn(jaxbUnmarshaller);
+    unmarshaller.setContext(context);
+
+    // configure fragment class
+    Class<Object> fragmentClass = Object.class;
+    unmarshaller.setFragmentClass(fragmentClass);
+
+    // record behavior
     XMLEventReader eventReader = mock(XMLEventReader.class);
-    JaxbPartialUnmarshaller<Object> unmarshaller = mock(JaxbPartialUnmarshaller.class);
+    JAXBElement<Object> fragmentElement = mock(JAXBElement.class);
     Object fragment = new Object();
-    when(unmarshaller.unmarshal(eventReader)).thenReturn(fragment);
+    when(fragmentElement.getValue()).thenReturn(fragment);
+    when(jaxbUnmarshaller.unmarshal(eventReader, fragmentClass)).thenReturn(fragmentElement);
 
-    deserializer.setPartialUnmarshaller(unmarshaller);
-
-    Object deserializedFragment = deserializer.deserializeFragment(eventReader);
-
-    assertThat(deserializedFragment, is(sameInstance(fragment)));
+    // test
+    assertThat(unmarshaller.deserializeFragment(eventReader), is(sameInstance(fragment)));
   }
 }

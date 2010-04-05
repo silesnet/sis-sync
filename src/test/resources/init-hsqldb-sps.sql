@@ -18,5 +18,9 @@ CREATE TABLE FA (
     DatSplat datetime,
     KcCelkem DECIMAL,
     KcLikv DECIMAL,
-    RefAD BIGINT
+    RefAD BIGINT,
+    RelTpFak BIGINT,
+    RefUcet BIGINT,
+    Ucet varchar(34),
+    KodBanky varchar(11)
 );

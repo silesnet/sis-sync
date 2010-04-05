@@ -6,6 +6,8 @@ package cz.silesnet.sis.sync;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +20,7 @@ import org.springframework.beans.propertyeditors.StringArrayPropertyEditor;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceEditor;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 /**
  * Helper class providing database initialization and test data import.
@@ -97,6 +100,15 @@ public class DbUtils {
     tester.setDataSet(dataSet);
     tester.onSetup();
     return tester;
+  }
+
+  public static int queryCount(JdbcTemplate jdbc, String sql) {
+    return (Integer) jdbc.query(sql, new RowMapper() {
+      @Override
+      public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+        return rs.getInt(1);
+      }
+    }).get(0);
   }
 
 }

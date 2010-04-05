@@ -3,9 +3,11 @@
  */
 package cz.silesnet.sis.sync.item.reader;
 
+import org.springframework.util.Assert;
+
 import cz.silesnet.sis.sync.dao.InvoiceDao;
 import cz.silesnet.sis.sync.domain.Invoice;
-import cz.silesnet.sis.sync.domain.InvoiceResult;
+import cz.stormware.schema.response.ResponsePackItemType;
 
 /**
  * ItemReader that reads SPS invoice import result file and does lookup to SIS
@@ -14,21 +16,42 @@ import cz.silesnet.sis.sync.domain.InvoiceResult;
  * @author Richard Sikora
  * 
  */
-public class SpsInvoiceBankAccountItemReader extends SpsInvoiceItemReader {
+public class SpsInvoiceBankAccountItemReader extends ResponsePackItemReader {
 
-    private InvoiceDao dao;
+  private InvoiceDao dao;
 
-    public void setDao(InvoiceDao dao) {
-        this.dao = dao;
-    }
+  public SpsInvoiceBankAccountItemReader() {
+    super(); // initializing ResponsePackItemReader
+  }
 
-    @Override
-    protected Object mapLines(long id, String[] lines) {
-        InvoiceResult result = (InvoiceResult) super.mapLines(id, lines);
-        // find corresponding invoice in SIS
-        Invoice invoice = dao.find(result.getSisId());
-        // refresh SPS id in SIS invoice
-        invoice.setSpsId(result.getSpsId());
-        return invoice;
-    }
+  public void setDao(InvoiceDao dao) {
+    this.dao = dao;
+  }
+
+  @Override
+  protected Object doRead() throws Exception {
+    ResponsePackItemType responseItem = (ResponsePackItemType) readResponseItemInternal();
+    if (responseItem == null)
+      return null;
+    ResponseId sisId = ResponseId.of(responseItem.getId());
+    Invoice invoice = dao.find(sisId.id());
+
+    // add SPS id
+    String spsId = responseItem.getInvoiceResponse().getProducedDetails().getId();
+    invoice.setSpsId(Long.valueOf(spsId));
+
+    return invoice;
+  }
+
+  // externalized for testing
+  protected Object readResponseItemInternal() throws Exception {
+    return super.doRead();
+  }
+
+  @Override
+  public void afterPropertiesSet() throws Exception {
+    super.afterPropertiesSet();
+    Assert.notNull(dao, "The Dao must not be null.");
+  }
+
 }
