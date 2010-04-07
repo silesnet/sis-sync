@@ -66,7 +66,7 @@
 
   <bean id="confirmInvoicesImport" parent="simpleStep">
     <property name="itemReader">
-      <bean class="cz.silesnet.sis.sync.item.reader.ResponsePackItemReader" p:resource-ref="invoicesResponseFile" />
+      <bean class="cz.silesnet.sis.sync.item.reader.ResponsePackItemReader" p:resource="%response.file%" />
     </property>
     <property name="itemWriter">
       <bean class="org.springframework.batch.item.database.BatchSqlUpdateItemWriter" p:jdbcTemplate-ref="jdbcTemplate">

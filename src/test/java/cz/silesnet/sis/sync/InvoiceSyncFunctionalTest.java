@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 import javax.sql.DataSource;
 
 import org.junit.Test;
-import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.job.SimpleJob;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.context.ApplicationContext;
@@ -29,7 +29,9 @@ public class InvoiceSyncFunctionalTest {
     ContextUtil.trimSteps(job, "confirmInvoicesImport");
 
     // test
-    launcher.run(job, new JobParameters());
+    JobParametersBuilder parametersBuilder = new JobParametersBuilder();
+    parametersBuilder.addString("response.file", "xml/invoices-response-20100313.xml");
+    launcher.run(job, parametersBuilder.toJobParameters());
     int count = DbUtils.queryCount(jdbc,
         "SELECT count(*) FROM bills WHERE synchronized IS NOT NULL");
     assertThat(count, is(5));

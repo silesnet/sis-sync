@@ -3,20 +3,14 @@ package cz.silesnet.sis.sync.item.reader;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
-import java.io.InputStream;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.stream.EventFilter;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.events.XMLEvent;
 
-import nu.xom.Builder;
-import nu.xom.Document;
-
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
-import org.junit.Assume;
 import org.junit.Test;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.xml.EventReaderDeserializer;
@@ -97,35 +91,6 @@ public class XlmItemReaderFunctionalTest {
 
     reader.afterPropertiesSet();
     reader.open(new ExecutionContext());
-    reader.read();
-  }
-
-  @Test
-  public void testStaxXomIntegration() throws Exception {
-    StaxEventItemReader reader = new StaxEventItemReader();
-    reader.setFragmentRootElementName("responsePackItem");
-    Resource resource = new ClassPathResource("xml/invoices-response-20100313.xml");
-    reader.setResource(resource);
-    reader.setFragmentDeserializer(new EventReaderDeserializer() {
-
-      @Override
-      public Object deserializeFragment(XMLEventReader eventReader) {
-        StaxEventXmlReader saxReader = new StaxEventXmlReader(eventReader);
-        Builder parser = new Builder(saxReader);
-        Document doc;
-        try {
-          doc = parser.build((InputStream) null);
-        } catch (Exception e) {
-          throw new RuntimeException(e);
-        }
-        System.out.println(doc.toXML());
-        return doc;
-      }
-    });
-
-    reader.afterPropertiesSet();
-    reader.open(new ExecutionContext());
-    Assume.assumeTrue(false); // it does not work
     reader.read();
   }
 }
