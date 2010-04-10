@@ -71,7 +71,7 @@ public abstract class AbstractDataPackItemWriter<T> extends AbstractHeaderTraile
    *          dataPack content item
    * @return dataPackItem@id
    */
-  protected String getDataPackItemId(Object item) {
+  protected String getDataPackItemId(T item) {
     long id = 0;
     if (item instanceof ItemIdentity) {
       id = ((ItemIdentity) item).getId();

@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.List;
+import java.util.LinkedList;
 
 import org.junit.After;
 import org.junit.Before;
@@ -18,12 +18,12 @@ public class AbstractHeaderTrailerFileItemWriterTest {
   private static final String ITEM = "ITEM";
   private static final String HEADER = "HEADER";
   private static final String TRAILER = "TRAILER";
-  private AbstractHeaderTrailerFileItemWriter writer;
+  private AbstractHeaderTrailerFileItemWriter<String> writer;
   private ExecutionContext executionContext;
 
   @Before
   public void setUp() throws Exception {
-    writer = new AbstractHeaderTrailerFileItemWriter() {
+    writer = new AbstractHeaderTrailerFileItemWriter<String>() {
 
       @Override
       protected String[] headerLines() {
@@ -36,14 +36,8 @@ public class AbstractHeaderTrailerFileItemWriterTest {
       }
 
       @Override
-      protected String[] itemLines(Object item) {
-        return new String[]{item.toString()};
-      }
-
-      @Override
-      public void write(List<? extends String> items) throws Exception {
-        // TODO Auto-generated method stub
-
+      protected String[] itemLines(String item) {
+        return new String[]{item};
       }
 
     };
@@ -60,8 +54,10 @@ public class AbstractHeaderTrailerFileItemWriterTest {
   @Test
   public void testWriteItem() throws Exception {
     writer.open(executionContext);
-    writer.write(ITEM);
-    writer.close(executionContext);
+    LinkedList<String> items = new LinkedList<String>();
+    items.add(ITEM);
+    writer.write(items);
+    writer.close();
     // check results
     File result = (new FileSystemResource(RESOURCE_NAME).getFile());
     BufferedReader reader = new BufferedReader(new FileReader(result));
