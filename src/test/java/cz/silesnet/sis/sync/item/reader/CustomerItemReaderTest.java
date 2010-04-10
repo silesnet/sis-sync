@@ -8,19 +8,23 @@ import org.junit.Test;
 
 import cz.silesnet.sis.sync.dao.CustomerDao;
 import cz.silesnet.sis.sync.domain.Customer;
+import cz.stormware.schema.response.ResponsePackItemType;
 
-public class SpsCustomerItemReaderTest {
+public class CustomerItemReaderTest {
 
-  private final static long CUSTOMER_ID = 1234;
+  private final static String RESPONSE_ID = "TIME_SEQ_01";
 
   @Test
   public void testMapLines() {
-    SpsCustomerItemReader reader = new SpsCustomerItemReader();
+    CustomerItemReader reader = new CustomerItemReader();
     CustomerDao dao = mock(CustomerDao.class);
     Customer daoCustomer = new Customer();
-    when(dao.find(CUSTOMER_ID)).thenReturn(daoCustomer);
-    reader.setDao(dao);
-    Customer customer = (Customer) reader.mapLines(CUSTOMER_ID, null);
+    when(dao.find(1)).thenReturn(daoCustomer);
+
+    ResponsePackItemType item = new ResponsePackItemType();
+    item.setId(RESPONSE_ID);
+
+    Customer customer = reader.doReadWithDao(item, dao);
     assertThat(daoCustomer, is(sameInstance(customer)));
   }
 

@@ -10,13 +10,14 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.stream.XMLEventReader;
 
 import org.junit.Test;
+import org.springframework.xml.transform.StaxSource;
 
-public class JaxbEventReaderDeserializerTest {
+public class JaxbPartialUnmarshallerTest {
 
   @SuppressWarnings("unchecked")
   @Test
   public void testUnmarshal() throws Exception {
-    JaxbEventReaderDeserializer unmarshaller = new JaxbEventReaderDeserializer();
+    JaxbPartialUnmarshaller unmarshaller = new JaxbPartialUnmarshaller();
 
     // configure JAXB Unmarshaller
     JAXBContext context = mock(JAXBContext.class);
@@ -30,12 +31,14 @@ public class JaxbEventReaderDeserializerTest {
 
     // record behavior
     XMLEventReader eventReader = mock(XMLEventReader.class);
+    StaxSource source = mock(StaxSource.class);
+    when(source.getXMLEventReader()).thenReturn(eventReader);
     JAXBElement<Object> fragmentElement = mock(JAXBElement.class);
     Object fragment = new Object();
     when(fragmentElement.getValue()).thenReturn(fragment);
     when(jaxbUnmarshaller.unmarshal(eventReader, fragmentClass)).thenReturn(fragmentElement);
 
     // test
-    assertThat(unmarshaller.deserializeFragment(eventReader), is(sameInstance(fragment)));
+    assertThat(unmarshaller.unmarshal(source), is(sameInstance(fragment)));
   }
 }

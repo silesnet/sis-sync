@@ -3,14 +3,15 @@
  */
 package cz.silesnet.sis.sync.item.writer;
 
-import org.springframework.batch.item.ClearFailedException;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.springframework.batch.item.ExecutionContext;
-import org.springframework.batch.item.FlushFailedException;
-import org.springframework.batch.item.ItemStream;
 import org.springframework.batch.item.ItemStreamException;
-import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.file.FlatFileItemWriter;
-import org.springframework.batch.item.file.mapping.PassThroughFieldSetMapper;
+import org.springframework.batch.item.file.ResourceAwareItemWriterItemStream;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
 
 /**
@@ -20,77 +21,81 @@ import org.springframework.core.io.Resource;
  * @author sikorric
  * 
  */
-public abstract class AbstractHeaderTrailerFileItemWriter implements ItemWriter, ItemStream {
+public abstract class AbstractHeaderTrailerFileItemWriter<T>
+    implements
+      ResourceAwareItemWriterItemStream<T>,
+      InitializingBean {
 
-    private long itemsWritten = 0;
-    private FlatFileItemWriter itemWriter;
+  private long itemsWritten = 0;
+  private final FlatFileItemWriter<String> itemWriter;
 
-    public AbstractHeaderTrailerFileItemWriter() {
-        itemWriter = new FlatFileItemWriter();
-        itemWriter.setFieldSetCreator(new PassThroughFieldSetMapper());
-        itemWriter.setShouldDeleteIfExists(true);
-        itemWriter.setSaveState(false);
+  public AbstractHeaderTrailerFileItemWriter() {
+    itemWriter = new FlatFileItemWriter<String>();
+    itemWriter.setShouldDeleteIfExists(true);
+    itemWriter.setSaveState(false);
+  }
+
+  @Override
+  public void write(List<? extends T> items) throws Exception {
+    for (T item : items) {
+      writeLines(itemLines(item));
+      itemsWritten++;
     }
+  }
 
-    public final void setResource(Resource resource) {
-        itemWriter.setResource(resource);
+  protected abstract String[] itemLines(T item);
+
+  protected String[] headerLines() {
+    return new String[]{};
+  }
+
+  protected String[] trailerLines() {
+    return new String[]{};
+  }
+
+  private void writeLines(String[] lines) {
+    LinkedList<String> linesList = new LinkedList<String>(Arrays.asList(lines));
+    try {
+      itemWriter.write(linesList);
+    } catch (Exception e) {
+      throw new ItemStreamException(e);
     }
+  }
 
-    public void setEncoding(String encoding) {
-        itemWriter.setEncoding(encoding);
-    }
+  protected long getItemsWritten() {
+    return itemsWritten;
+  }
 
-    public final void open(ExecutionContext executionContext) throws ItemStreamException {
-        itemWriter.open(executionContext);
-        writeLines(headerLines());
-        itemsWritten = 0;
-    }
+  @Override
+  public void setResource(Resource resource) {
+    itemWriter.setResource(resource);
+  }
 
-    public final void close(ExecutionContext executionContext) throws ItemStreamException {
-        writeLines(trailerLines());
-        itemWriter.flush();
-        itemWriter.close(executionContext);
-    }
+  @Override
+  public void afterPropertiesSet() throws Exception {
+    itemWriter.afterPropertiesSet();
+  }
 
-    public final void write(Object item) throws Exception {
-        writeLines(itemLines(item));
-        itemsWritten++;
-    }
+  public void setEncoding(String encoding) {
+    itemWriter.setEncoding(encoding);
+  }
 
-    protected String[] headerLines() {
-        return new String[]{};
-    }
+  @Override
+  public final void open(ExecutionContext executionContext) throws ItemStreamException {
+    itemWriter.open(executionContext);
+    writeLines(headerLines());
+    itemsWritten = 0;
+  }
 
-    protected String[] trailerLines() {
-        return new String[]{};
-    }
+  @Override
+  public final void close() throws ItemStreamException {
+    writeLines(trailerLines());
+    itemWriter.close();
+  }
 
-    protected abstract String[] itemLines(Object item);
-
-    protected long getItemsWritten() {
-        return itemsWritten;
-    }
-
-    private void writeLines(String[] lines) {
-        for (String line : lines) {
-            try {
-                itemWriter.write(line);
-            } catch (Exception e) {
-                throw new ItemStreamException(e);
-            }
-        }
-    }
-
-    public final void clear() throws ClearFailedException {
-        itemWriter.clear();
-    }
-
-    public final void flush() throws FlushFailedException {
-        itemWriter.flush();
-    }
-
-    public final void update(ExecutionContext executionContext) throws ItemStreamException {
-        itemWriter.update(executionContext);
-    }
+  @Override
+  public final void update(ExecutionContext executionContext) throws ItemStreamException {
+    itemWriter.update(executionContext);
+  }
 
 }

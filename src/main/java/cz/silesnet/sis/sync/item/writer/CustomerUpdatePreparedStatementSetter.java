@@ -18,21 +18,22 @@ import cz.silesnet.sis.sync.domain.CustomerResult;
  * @author sikorric
  * 
  */
-public class CustomerUpdatePreparedStatementSetter implements ItemPreparedStatementSetter {
-    /**
-     * Maps Customer members to SQL update command.
-     * <p>
-     * UPDATE customers SET symbol = ?, synchronized = ? WHERE id = ?
-     * 
-     * @param item
-     *            Customer object
-     * @param ps
-     *            SQL wrapped in PreparedStatement
-     */
-    public void setValues(Object item, PreparedStatement ps) throws SQLException {
-        CustomerResult customer = (CustomerResult) item;
-        ps.setString(1, "" + customer.getSpsId());
-        ps.setTimestamp(2, new Timestamp((new Date()).getTime()));
-        ps.setLong(3, customer.getSisId());
-    }
+public class CustomerUpdatePreparedStatementSetter
+    implements
+      ItemPreparedStatementSetter<CustomerResult> {
+  /**
+   * Maps Customer members to SQL update command.
+   * <p>
+   * UPDATE customers SET symbol = ?, synchronized = ? WHERE id = ?
+   * 
+   * @param item
+   *          Customer object
+   * @param ps
+   *          SQL wrapped in PreparedStatement
+   */
+  public void setValues(CustomerResult customerResult, PreparedStatement ps) throws SQLException {
+    ps.setString(1, "" + customerResult.getSpsId());
+    ps.setTimestamp(2, new Timestamp((new Date()).getTime()));
+    ps.setLong(3, customerResult.getSisId());
+  }
 }

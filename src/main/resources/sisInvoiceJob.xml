@@ -86,7 +86,7 @@
 
   <bean id="updateInvoiceAccounts" parent="simpleStep">
     <property name="itemReader">
-      <bean class="cz.silesnet.sis.sync.item.reader.SpsInvoiceBankAccountItemReader" p:resource-ref="invoicesResponseFile"
+      <bean class="cz.silesnet.sis.sync.item.reader.InvoiceItemReader" p:resource-ref="invoicesResponseFile"
         p:dao-ref="invoiceDao" />
     </property>
     <property name="itemWriter">

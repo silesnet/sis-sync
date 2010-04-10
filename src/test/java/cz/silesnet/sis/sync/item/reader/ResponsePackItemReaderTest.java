@@ -21,7 +21,7 @@ public class ResponsePackItemReaderTest {
     itemReader.afterPropertiesSet();
 
     itemReader.open(new ExecutionContext());
-    ResponsePackItemType item = (ResponsePackItemType) itemReader.read();
+    ResponsePackItemType item = itemReader.read();
     assertThat(item.getState(), is(StavType2.OK));
     assertThat(item.getId(), is("2010-03-10T17:02:48.593_0000000000_134409"));
   }

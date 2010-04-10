@@ -3,21 +3,26 @@ package cz.silesnet.sis.sync.item.reader;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.stream.EventFilter;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.events.XMLEvent;
+import javax.xml.transform.Source;
 
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
 import org.junit.Test;
 import org.springframework.batch.item.ExecutionContext;
-import org.springframework.batch.item.xml.EventReaderDeserializer;
 import org.springframework.batch.item.xml.StaxEventItemReader;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.oxm.Unmarshaller;
+import org.springframework.oxm.XmlMappingException;
 import org.springframework.xml.stream.StaxEventXmlReader;
+import org.springframework.xml.transform.StaxSource;
 import org.xml.sax.InputSource;
 
 import cz.stormware.schema.response.ResponsePackItemType;
@@ -27,17 +32,17 @@ public class XlmItemReaderFunctionalTest {
 
   @Test
   public void testReadResponses() throws Exception {
-    StaxEventItemReader reader = new StaxEventItemReader();
+    StaxEventItemReader<ResponsePackItemType> reader = new StaxEventItemReader<ResponsePackItemType>();
     reader.setFragmentRootElementName("responsePackItem");
     Resource resource = new ClassPathResource("xml/invoices-response-20100313.xml");
     reader.setResource(resource);
 
     JAXBContext context = JAXBContext.newInstance("cz.stormware.schema.response");
-    JaxbEventReaderDeserializer deserializer = new JaxbEventReaderDeserializer();
+    JaxbPartialUnmarshaller deserializer = new JaxbPartialUnmarshaller();
     deserializer.setContext(context);
     deserializer.setFragmentClass(ResponsePackItemType.class);
 
-    reader.setFragmentDeserializer(deserializer);
+    reader.setUnmarshaller(deserializer);
     reader.afterPropertiesSet();
 
     reader.open(new ExecutionContext());
@@ -49,7 +54,7 @@ public class XlmItemReaderFunctionalTest {
 
   @Test
   public void testStaxFragmentToSaxIntegration() throws Exception {
-    StaxEventItemReader reader = new StaxEventItemReader();
+    StaxEventItemReader<ResponsePackItemType> reader = new StaxEventItemReader<ResponsePackItemType>();
     reader.setFragmentRootElementName("responsePackItem");
     Resource resource = new ClassPathResource("xml/invoices-response-20100313.xml");
     reader.setResource(resource);
@@ -62,12 +67,13 @@ public class XlmItemReaderFunctionalTest {
     serializer.setOutputFormat(format);
 
     final XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
-    reader.setFragmentDeserializer(new EventReaderDeserializer() {
+    reader.setUnmarshaller(new Unmarshaller() {
 
       @Override
-      public Object deserializeFragment(XMLEventReader eventReader) {
+      public Object unmarshal(Source source) throws XmlMappingException, IOException {
         // the filtering is needed for proper output formatting (indentation)
         // only
+        XMLEventReader eventReader = ((StaxSource) source).getXMLEventReader();
         try {
           XMLEventReader filteredReader = xmlInputFactory.createFilteredReader(eventReader,
               new EventFilter() {
@@ -86,6 +92,12 @@ public class XlmItemReaderFunctionalTest {
           throw new RuntimeException(e);
         }
         return new Object();
+      }
+
+      @SuppressWarnings("unchecked")
+      @Override
+      public boolean supports(Class clazz) {
+        return true;
       }
     });
 

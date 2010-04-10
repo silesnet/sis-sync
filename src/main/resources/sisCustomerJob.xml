@@ -79,7 +79,7 @@
 
   <bean id="updateInvoiceAccounts" parent="simpleStep">
     <property name="itemReader">
-      <bean class="cz.silesnet.sis.sync.item.reader.SpsCustomerItemReader"
+      <bean class="cz.silesnet.sis.sync.item.reader.CustomerItemReader"
         p:resource-ref="customersResponseFile" p:dao-ref="customerDao"
         p:logImportErrors="false" />
     </property>

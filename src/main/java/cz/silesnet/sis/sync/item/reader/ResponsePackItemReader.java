@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemStreamException;
 import org.springframework.batch.item.file.ResourceAwareItemReaderItemStream;
-import org.springframework.batch.item.support.AbstractBufferedItemReaderItemStream;
+import org.springframework.batch.item.support.AbstractItemCountingItemStreamItemReader;
 import org.springframework.batch.item.xml.StaxEventItemReader;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
@@ -15,9 +15,11 @@ import org.springframework.util.ClassUtils;
 
 import cz.stormware.schema.response.ResponsePackItemType;
 
-public class ResponsePackItemReader extends AbstractBufferedItemReaderItemStream
+public class ResponsePackItemReader
+    extends
+      AbstractItemCountingItemStreamItemReader<ResponsePackItemType>
     implements
-      ResourceAwareItemReaderItemStream,
+      ResourceAwareItemReaderItemStream<ResponsePackItemType>,
       InitializingBean {
   private static final Logger log = Logger.getLogger(ResponsePackItemReader.class);
 
@@ -30,18 +32,18 @@ public class ResponsePackItemReader extends AbstractBufferedItemReaderItemStream
     }
   }
 
-  private final StaxEventItemReader staxItemReader;
+  private final StaxEventItemReader<ResponsePackItemType> staxItemReader;
 
   public ResponsePackItemReader() {
     setName(ClassUtils.getShortName(ResponsePackItemReader.class));
 
-    JaxbEventReaderDeserializer deserializer = new JaxbEventReaderDeserializer();
-    deserializer.setContext(jaxbContext);
-    deserializer.setFragmentClass(ResponsePackItemType.class);
+    JaxbPartialUnmarshaller unmarshaller = new JaxbPartialUnmarshaller();
+    unmarshaller.setContext(jaxbContext);
+    unmarshaller.setFragmentClass(ResponsePackItemType.class);
 
-    staxItemReader = new StaxEventItemReader();
+    staxItemReader = new StaxEventItemReader<ResponsePackItemType>();
     staxItemReader.setFragmentRootElementName("responsePackItem");
-    staxItemReader.setFragmentDeserializer(deserializer);
+    staxItemReader.setUnmarshaller(unmarshaller);
   }
 
   @Override
@@ -56,14 +58,8 @@ public class ResponsePackItemReader extends AbstractBufferedItemReaderItemStream
   }
 
   @Override
-  protected Object doRead() throws Exception {
+  protected ResponsePackItemType doRead() throws Exception {
     return staxItemReader.read();
-  }
-
-  @Override
-  public void close(ExecutionContext executionContext) throws ItemStreamException {
-    super.close(executionContext);
-    staxItemReader.close(executionContext);
   }
 
   @Override
@@ -73,13 +69,13 @@ public class ResponsePackItemReader extends AbstractBufferedItemReaderItemStream
   }
 
   @Override
-  protected void doClose() throws Exception {
-    // NOP, we override close()
+  protected void doOpen() throws Exception {
+    // NOP, we are overriding open()
   }
 
   @Override
-  protected void doOpen() throws Exception {
-    // NOP, we override open()
+  protected void doClose() throws Exception {
+    staxItemReader.close();
   }
 
 }

@@ -18,7 +18,9 @@ import cz.stormware.schema.response.ResponsePackItemType;
  * 
  * @author Richard Sikora
  */
-public class InvoiceUpdatePreparedStatementSetter implements ItemPreparedStatementSetter {
+public class InvoiceUpdatePreparedStatementSetter
+    implements
+      ItemPreparedStatementSetter<ResponsePackItemType> {
 
   /**
    * Maps Invoice response to SQL update command.
@@ -30,11 +32,11 @@ public class InvoiceUpdatePreparedStatementSetter implements ItemPreparedStateme
    * @param ps
    *          {@link PreparedStatement}
    */
-  public void setValues(Object item, PreparedStatement ps) throws SQLException {
+  public void setValues(ResponsePackItemType responseItem, PreparedStatement ps)
+      throws SQLException {
     Timestamp now = new Timestamp(new Date().getTime());
     ps.setTimestamp(1, now);
 
-    ResponsePackItemType responseItem = (ResponsePackItemType) item;
     ResponseId responseId = ResponseId.of(responseItem.getId());
     ps.setLong(2, responseId.id());
   }

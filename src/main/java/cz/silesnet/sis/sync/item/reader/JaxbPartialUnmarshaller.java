@@ -1,38 +1,28 @@
 package cz.silesnet.sis.sync.item.reader;
 
+import java.io.IOException;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.stream.XMLEventReader;
+import javax.xml.transform.Source;
 
-import org.springframework.batch.item.xml.EventReaderDeserializer;
+import org.springframework.oxm.XmlMappingException;
+import org.springframework.xml.transform.StaxSource;
 
 /**
  * JAXB partial unmarshaller from StAX {@link XMLEventReader}. It is able to
  * unmarshal {@link JAXBElement} that is not declared as root in XSD. Suitable
  * for processing long batches of repeating elements.
  */
-public class JaxbEventReaderDeserializer implements EventReaderDeserializer {
+public class JaxbPartialUnmarshaller implements org.springframework.oxm.Unmarshaller {
 
   private Unmarshaller jaxbUnmarshaller;
   private Class<?> fragmentClass;
 
-  public JaxbEventReaderDeserializer() {
-  }
-
-  /**
-   * @see org.springframework.batch.item.xml.EventReaderDeserializer#deserializeFragment(javax.xml.stream.XMLEventReader)
-   */
-  @Override
-  public Object deserializeFragment(XMLEventReader eventReader) {
-    JAXBElement<?> element;
-    try {
-      element = jaxbUnmarshaller.unmarshal(eventReader, fragmentClass);
-    } catch (JAXBException e) {
-      throw new RuntimeException(e);
-    }
-    return element.getValue();
+  public JaxbPartialUnmarshaller() {
   }
 
   /**
@@ -58,6 +48,26 @@ public class JaxbEventReaderDeserializer implements EventReaderDeserializer {
    */
   public void setFragmentClass(Class<?> fragmentClass) {
     this.fragmentClass = fragmentClass;
+  }
+
+  @Override
+  public Object unmarshal(Source source) throws IOException, XmlMappingException {
+    if (!(source instanceof StaxSource))
+      throw new IllegalArgumentException("StAXSource expected.");
+    XMLEventReader reader = ((StaxSource) source).getXMLEventReader();
+    JAXBElement<?> element;
+    try {
+      element = jaxbUnmarshaller.unmarshal(reader, fragmentClass);
+    } catch (JAXBException e) {
+      throw new RuntimeException(e);
+    }
+    return element.getValue();
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public boolean supports(Class clazz) {
+    return fragmentClass.equals(clazz);
   }
 
 }
