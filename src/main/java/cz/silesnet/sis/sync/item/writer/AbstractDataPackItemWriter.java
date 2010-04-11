@@ -76,9 +76,10 @@ public abstract class AbstractDataPackItemWriter<T> extends AbstractHeaderTraile
     if (item instanceof ItemIdentity) {
       id = ((ItemIdentity) item).getId();
     } else {
-      int hash = item.hashCode();
-      id = hash < 0 ? -hash : hash;
+      id = item.hashCode();
     }
+    if (id < 0)
+      id = -id;
     return String.format("%s_%s_%d", getDataPackId(), getItemsWrittenString(), id);
   }
 

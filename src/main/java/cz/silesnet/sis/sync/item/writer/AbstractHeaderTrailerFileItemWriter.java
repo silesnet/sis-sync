@@ -3,7 +3,6 @@
  */
 package cz.silesnet.sis.sync.item.writer;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,6 +10,7 @@ import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemStreamException;
 import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.ResourceAwareItemWriterItemStream;
+import org.springframework.batch.item.file.transform.LineAggregator;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
 
@@ -31,6 +31,14 @@ public abstract class AbstractHeaderTrailerFileItemWriter<T>
 
   public AbstractHeaderTrailerFileItemWriter() {
     itemWriter = new FlatFileItemWriter<String>();
+    itemWriter.setLineAggregator(new LineAggregator<String>() {
+
+      @Override
+      public String aggregate(String item) {
+        return item;
+      }
+    });
+
     itemWriter.setShouldDeleteIfExists(true);
     itemWriter.setSaveState(false);
   }
@@ -54,7 +62,9 @@ public abstract class AbstractHeaderTrailerFileItemWriter<T>
   }
 
   private void writeLines(String[] lines) {
-    LinkedList<String> linesList = new LinkedList<String>(Arrays.asList(lines));
+    LinkedList<String> linesList = new LinkedList<String>();
+    for (String line : lines)
+      linesList.add(line);
     try {
       itemWriter.write(linesList);
     } catch (Exception e) {

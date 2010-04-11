@@ -85,21 +85,61 @@ public class AbstractDataPackItemWriterTest {
     assertEquals(7, headerLines.length);
   }
 
-  @Test
-  public final void testItemLines() {
-    // initialize data pack id
-    itemWriter.headerLines();
-    String[] itemLines = itemWriter.itemLines(new ItemIdentity() {
-      public long getId() {
-        return ID;
+  private class Item implements ItemIdentity {
+    private final long id;
+
+    public Item(long id) {
+      super();
+      this.id = id;
+    }
+
+    @Override
+    public long getId() {
+      return id;
+    }
+
+    @Override
+    public String toString() {
+      return ITEM;
+    }
+
+    @Override
+    public int hashCode() {
+      return new Long(id).hashCode();
+    }
+
+  }
+
+  // initialize data pack id
+  private static AbstractDataPackItemWriter<Item> createItemWriter() {
+    return new AbstractDataPackItemWriter<Item>() {
+
+      @Override
+      protected String[] dataPackItemLines(Item item) {
+        return new String[]{item.toString()};
       }
 
       @Override
-      public String toString() {
-        return ITEM;
+      protected String[] nameSpaceLines() {
+        return new String[]{NAME_SPACE_1, NAME_SPACE_2};
       }
-    });
-    assertEquals("<dat:dataPackItem id=\"" + itemWriter.getDataPackItemId(ID) + "\" version=\""
+
+      @Override
+      protected long getItemsWritten() {
+        return ITEMS_WRITTEN;
+      }
+    };
+  }
+  @Test
+  public final void testItemLines() {
+    // initialize data pack id
+    AbstractDataPackItemWriter<Item> itemWriter = createItemWriter();
+
+    Item item = new Item(ID);
+
+    itemWriter.headerLines();
+    String[] itemLines = itemWriter.itemLines(item);
+    assertEquals("<dat:dataPackItem id=\"" + itemWriter.getDataPackItemId(item) + "\" version=\""
         + AbstractDataPackItemWriter.DATA_PACK_ITEM_VERSION + "\">", itemLines[0]);
     log.debug(itemLines[0]);
     assertEquals(ITEM, itemLines[1]);
@@ -134,10 +174,11 @@ public class AbstractDataPackItemWriterTest {
 
   @Test
   public final void testGetDataPackItemIdHashCode() {
+    AbstractDataPackItemWriter<Item> itemWriter = createItemWriter();
     itemWriter.headerLines();
     String dataPackId = itemWriter.getDataPackId();
     String itemsWritten = itemWriter.getItemsWrittenString();
-    String dataPackItemId = itemWriter.getDataPackItemId(ID);
+    String dataPackItemId = itemWriter.getDataPackItemId(new Item(ID));
     log.debug(dataPackItemId);
     assertEquals(dataPackId + "_" + itemsWritten + "_" + ID, dataPackItemId);
     assertTrue(dataPackItemId.length() <= MAX_ID_LENGTH);
@@ -145,10 +186,11 @@ public class AbstractDataPackItemWriterTest {
 
   @Test
   public final void testGetDataPackItemIdNegativeHashCode() {
+    AbstractDataPackItemWriter<Item> itemWriter = createItemWriter();
     itemWriter.headerLines();
     String dataPackId = itemWriter.getDataPackId();
     String itemsWritten = itemWriter.getItemsWrittenString();
-    String dataPackItemId = itemWriter.getDataPackItemId((int) -ID);
+    String dataPackItemId = itemWriter.getDataPackItemId(new Item(-ID));
     log.debug(dataPackItemId);
     assertEquals(dataPackId + "_" + itemsWritten + "_" + ID, dataPackItemId);
     assertTrue(dataPackItemId.length() <= MAX_ID_LENGTH);
@@ -156,14 +198,11 @@ public class AbstractDataPackItemWriterTest {
 
   @Test
   public final void testGetDataPackItemIdIdentity() {
+    AbstractDataPackItemWriter<Item> itemWriter = createItemWriter();
     itemWriter.headerLines();
     String dataPackId = itemWriter.getDataPackId();
     String itemsWritten = itemWriter.getItemsWrittenString();
-    String dataPackItemId = itemWriter.getDataPackItemId(new ItemIdentity() {
-      public long getId() {
-        return ID2;
-      }
-    });
+    String dataPackItemId = itemWriter.getDataPackItemId(new Item(ID2));
     log.debug(dataPackItemId);
     assertEquals(dataPackId + "_" + itemsWritten + "_" + ID2, dataPackItemId);
     assertTrue(dataPackItemId.length() <= MAX_ID_LENGTH);
