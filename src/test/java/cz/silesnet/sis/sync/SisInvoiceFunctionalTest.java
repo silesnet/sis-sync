@@ -3,9 +3,7 @@ package cz.silesnet.sis.sync;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,13 +13,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dbunit.IDatabaseTester;
 import org.junit.Test;
-import org.springframework.batch.core.Job;
+import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
-import org.springframework.batch.core.Step;
 import org.springframework.batch.core.job.SimpleJob;
 import org.springframework.batch.core.launch.JobLauncher;
-import org.springframework.batch.repeat.ExitStatus;
 import org.springframework.core.io.Resource;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 
@@ -29,7 +25,7 @@ public class SisInvoiceFunctionalTest extends AbstractDependencyInjectionSpringC
   private static Log log = LogFactory.getLog(SisInvoiceFunctionalTest.class);
 
   private JobLauncher launcher;
-  private Job job;
+  private SimpleJob job;
   private JobParameters jobParameters;
   private DataSource dataSource;
   private IDatabaseTester dbTester;
@@ -38,7 +34,7 @@ public class SisInvoiceFunctionalTest extends AbstractDependencyInjectionSpringC
     this.launcher = launcher;
   }
 
-  public void setJob(Job job) {
+  public void setJob(SimpleJob job) {
     this.job = job;
   }
 
@@ -65,30 +61,17 @@ public class SisInvoiceFunctionalTest extends AbstractDependencyInjectionSpringC
     // FIXME remove
   }
 
-  @SuppressWarnings("deprecation")
   // @Test
   public void fixtestSisInvoiceJob() throws Exception {
     // FIXME
     String nowTimeStamp = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date());
     log.debug(nowTimeStamp);
     dbTester = initializeDatabase(dataSource);
-    // stub Pohoda import step
-    List<Step> steps = new ArrayList<Step>();
-    for (Object o : job.getSteps()) {
-      Step step = (Step) o;
-      log.debug(step.getName());
-      if ("importInvoices".equals(step.getName())) {
-        // replace with stub
-        steps.add(step);
-      } else {
-        steps.add(step);
-      }
-    }
-    ((SimpleJob) job).setSteps(steps);
+    ContextUtil.trimSteps(job, "importInvoices");
     // run the job
     jobParameters = new JobParameters();
     JobExecution jobExecution = launcher.run(job, jobParameters);
-    assertEquals(ExitStatus.FINISHED, jobExecution.getExitStatus());
+    assertEquals(ExitStatus.COMPLETED, jobExecution.getExitStatus());
     /*
      * Can not check results against database because SPS duplicity checking. At
      * least we will check against SPS response file for correct number of

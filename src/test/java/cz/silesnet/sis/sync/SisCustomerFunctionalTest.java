@@ -8,11 +8,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dbunit.IDatabaseTester;
 import org.junit.Test;
+import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.launch.JobLauncher;
-import org.springframework.batch.repeat.ExitStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 
@@ -54,7 +54,7 @@ public class SisCustomerFunctionalTest extends AbstractDependencyInjectionSpring
     dbTester = initializeDatabase(dataSource);
     jobParameters = new JobParameters();
     JobExecution jobExecution = launcher.run(job, jobParameters);
-    assertEquals(ExitStatus.FINISHED, jobExecution.getExitStatus());
+    assertEquals(ExitStatus.COMPLETED, jobExecution.getExitStatus());
     dbTester.onTearDown();
     // test synchronized customers
     JdbcTemplate template = new JdbcTemplate(dataSource);

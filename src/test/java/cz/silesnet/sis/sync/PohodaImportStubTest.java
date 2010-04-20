@@ -13,33 +13,36 @@ import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
+import javax.xml.transform.Source;
 
 import org.custommonkey.xmlunit.Diff;
 import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Test;
 import org.springframework.batch.item.ExecutionContext;
-import org.springframework.batch.item.NoWorkFoundException;
 import org.springframework.batch.item.ParseException;
 import org.springframework.batch.item.UnexpectedInputException;
-import org.springframework.batch.item.xml.EventReaderDeserializer;
 import org.springframework.batch.item.xml.StaxEventItemReader;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
+import org.springframework.oxm.Unmarshaller;
+import org.springframework.oxm.XmlMappingException;
+import org.springframework.xml.transform.StaxSource;
 import org.xml.sax.SAXException;
 
 public class PohodaImportStubTest {
 
   @Test
-  public void testSpringFragmentReader() throws UnexpectedInputException, NoWorkFoundException,
-      ParseException, Exception {
+  public void testSpringFragmentReader() throws UnexpectedInputException, ParseException, Exception {
     Resource input = new ClassPathResource("data/20081206_sis_customers.xml");
     StaxEventItemReader reader = new StaxEventItemReader();
     reader.setResource(input);
     reader.setFragmentRootElementName("dataPackItem");
-    reader.setFragmentDeserializer(new EventReaderDeserializer() {
+    reader.setUnmarshaller(new Unmarshaller() {
 
-      public Object deserializeFragment(XMLEventReader eventReader) {
+      @Override
+      public Object unmarshal(Source source) throws XmlMappingException, IOException {
+        XMLEventReader eventReader = ((StaxSource) source).getXMLEventReader();
         while (eventReader.hasNext()) {
           try {
             XMLEvent tag = eventReader.nextEvent();
@@ -56,6 +59,11 @@ public class PohodaImportStubTest {
         }
         return "OK";
       }
+
+      @Override
+      public boolean supports(Class clazz) {
+        return true;
+      }
     });
     Object item = null;
     ExecutionContext context = new ExecutionContext();
@@ -63,7 +71,7 @@ public class PohodaImportStubTest {
     while ((item = reader.read()) != null) {
       System.out.println(item);
     }
-    reader.close(context);
+    reader.close();
   }
 
   // FIXME

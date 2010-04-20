@@ -10,6 +10,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dbunit.IDatabaseTester;
 import org.junit.Test;
+import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
@@ -17,7 +18,6 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemStream;
-import org.springframework.batch.repeat.ExitStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
@@ -69,32 +69,34 @@ public class SpsRemindersFunctionalTest extends AbstractDependencyInjectionSprin
     assertEquals(3, customers.size());
   }
 
+  @SuppressWarnings("unchecked")
   @Test
   public void testReminderItemReader() throws Exception {
     dataSource = (DataSource) applicationContext.getBean("spsDataSource");
     dbTester = initializeDatabase(dataSource);
     dbTester.onTearDown();
-    ItemReader reader = (ItemReader) applicationContext.getBean("reminderItemReader");
+    ItemReader<Reminder> reader = (ItemReader<Reminder>) applicationContext
+        .getBean("reminderItemReader");
     ExecutionContext executionContext = new ExecutionContext();
     ((ItemStream) reader).open(executionContext);
     // read 3 reminders
     Reminder reminder;
-    reminder = (Reminder) reader.read();
+    reminder = reader.read();
     log.debug(reminder);
     assertEquals(2, reminder.getCustomer().getId());
     assertEquals(1, reminder.getInvoices().size());
-    reminder = (Reminder) reader.read();
+    reminder = reader.read();
     log.debug(reminder);
     assertEquals(3, reminder.getCustomer().getId());
     assertEquals(1, reminder.getInvoices().size());
-    reminder = (Reminder) reader.read();
+    reminder = reader.read();
     log.debug(reminder);
     assertEquals(4, reminder.getCustomer().getId());
     assertEquals(2, reminder.getInvoices().size());
-    reminder = (Reminder) reader.read();
+    reminder = reader.read();
     log.debug(reminder);
     assertNull(reminder);
-    ((ItemStream) reader).close(executionContext);
+    ((ItemStream) reader).close();
   }
 
   public void testReminderJob() throws Exception {
@@ -105,7 +107,7 @@ public class SpsRemindersFunctionalTest extends AbstractDependencyInjectionSprin
     smtp.start();
     jobParameters = new JobParameters();
     JobExecution jobExecution = launcher.run(job, jobParameters);
-    assertEquals(ExitStatus.FINISHED, jobExecution.getExitStatus());
+    assertEquals(ExitStatus.COMPLETED, jobExecution.getExitStatus());
     for (WiserMessage message : smtp.getMessages()) {
       log.debug("Email received for: " + message.getEnvelopeReceiver());
     }
