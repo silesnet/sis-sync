@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:p="http://www.springframework.org/schema/p" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
 
   <import resource="job-launcher-context.xml" />
 
@@ -22,18 +22,14 @@
     </property>
   </bean>
 
-  <bean name="reminderItemReader"
-    class="org.springframework.batch.item.database.DrivingQueryItemReader">
-    <property name="keyCollector">
-      <bean
-        class="org.springframework.batch.item.database.support.SingleColumnJdbcKeyCollector"
-        p:jdbcTemplate-ref="spsJdbcTemplate">
-        <property name="keyMapper">
-          <bean class="cz.silesnet.sis.sync.mapping.ReminderRowMapper"
-            p:dao-ref="reminderDao" />
-        </property>
-        <property name="sql">
-          <value><![CDATA[
+  <bean name="reminderItemReader" class="org.springframework.batch.item.database.JdbcCursorItemReader"
+    p:dataSource-ref="dataSource"
+  >
+    <property name="rowMapper">
+      <bean class="cz.silesnet.sis.sync.mapping.ReminderRowMapper" p:dao-ref="reminderDao" />
+    </property>
+    <property name="sql">
+      <value><![CDATA[
             SELECT DISTINCT RefAD
               FROM FA
               WHERE
@@ -44,44 +40,23 @@
                   AND RefUcet = 2
               ORDER BY RefAD
           ]]></value>
-        </property>
-        <property name="restartSql">
-          <value><![CDATA[
-            SELECT DISTINCT RefAD
-              FROM FA
-              WHERE
-                DATEDIFF(${pohoda.sql.daypart}, DatSplat, ${pohoda.sql.current.date}) >= ${reminder.grace.days}
-                  AND KcLikv >= ${reminder.minimal.due.amount}
-                  AND RefAD IS NOT NULL
-                  AND RelTpFak = 1
-                  AND RefUcet = 2
-                  AND RefAD > ?
-              ORDER BY RefAD
-          ]]></value>
-        </property>
-      </bean>
     </property>
   </bean>
 
-  <bean id="reminderItemWriter" class="cz.silesnet.sis.sync.item.writer.ReminderItemWriter"
-    p:sender-ref="reminderSender" p:delay="${email.delay}" />
+  <bean id="reminderItemWriter" class="cz.silesnet.sis.sync.item.writer.ReminderItemWriter" p:sender-ref="reminderSender"
+    p:delay="${email.delay}" />
 
-  <bean id="reminderDao" class="cz.silesnet.sis.sync.dao.impl.JdbcReminderDao"
-    p:jdbcTemplate-ref="spsJdbcTemplate" p:dayPartName="${pohoda.sql.daypart}"
-    p:currentDateFunction="${pohoda.sql.current.date}"
-    p:minimalDueAmount="${reminder.minimal.due.amount}"
+  <bean id="reminderDao" class="cz.silesnet.sis.sync.dao.impl.JdbcReminderDao" p:jdbcTemplate-ref="spsJdbcTemplate"
+    p:dayPartName="${pohoda.sql.daypart}" p:currentDateFunction="${pohoda.sql.current.date}" p:minimalDueAmount="${reminder.minimal.due.amount}"
     p:graceDays="${reminder.grace.days}" />
 
-  <bean id="reminderSender"
-    class="cz.silesnet.sis.sync.item.writer.SimpleMailReminderSender"
-    p:mailSender-ref="mailSender" p:preparator-ref="mailPreparator" />
+  <bean id="reminderSender" class="cz.silesnet.sis.sync.item.writer.SimpleMailReminderSender" p:mailSender-ref="mailSender"
+    p:preparator-ref="mailPreparator" />
 
-  <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"
-    p:host="${email.smtp}" p:defaultEncoding="${email.encoding}" />
+  <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl" p:host="${email.smtp}"
+    p:defaultEncoding="${email.encoding}" />
 
-  <bean id="mailPreparator"
-    class="cz.silesnet.sis.sync.item.writer.SimpleReminderMailPreparator"
-    p:template="/flt/html-notice.flt" p:encodig="${email.encoding}"
-    p:html="true" p:from="${reminder.email.from}" p:subject="${reminder.email.subject}" />
+  <bean id="mailPreparator" class="cz.silesnet.sis.sync.item.writer.SimpleReminderMailPreparator" p:template="/flt/html-notice.flt"
+    p:encodig="${email.encoding}" p:html="true" p:from="${reminder.email.from}" p:subject="${reminder.email.subject}" />
 
 </beans>

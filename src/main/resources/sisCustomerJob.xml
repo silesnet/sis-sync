@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:p="http://www.springframework.org/schema/p" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
 
   <import resource="job-launcher-context.xml" />
 
@@ -18,10 +18,8 @@
 
   <bean id="prepareCustomers" parent="simpleStep">
     <property name="itemReader">
-      <bean
-        class="org.springframework.batch.item.database.JdbcCursorItemReader"
-        p:dataSource-ref="dataSource">
-        <property name="mapper">
+      <bean class="org.springframework.batch.item.database.JdbcCursorItemReader" p:dataSource-ref="dataSource">
+        <property name="rowMapper">
           <bean class="cz.silesnet.sis.sync.mapping.CustomerRowMapper" />
         </property>
         <property name="sql">
@@ -39,31 +37,25 @@
       </bean>
     </property>
     <property name="itemWriter">
-      <bean class="cz.silesnet.sis.sync.item.writer.SisCustomerItemWriter"
-        p:ico="${pohoda.ico}" p:resource-ref="customersImportFile" />
+      <bean class="cz.silesnet.sis.sync.item.writer.SisCustomerItemWriter" p:ico="${pohoda.ico}" p:resource-ref="customersImportFile" />
     </property>
   </bean>
 
   <bean id="importCustomers" parent="taskletStep">
     <property name="tasklet">
-      <bean parent="importTasklet" p:input-ref="customersImportFile"
-        p:output-ref="customersResponseFile" p:ini-ref="customersIniFile" />
+      <bean parent="importTasklet" p:input-ref="customersImportFile" p:output-ref="customersResponseFile"
+        p:ini-ref="customersIniFile" />
     </property>
   </bean>
 
   <bean id="confirmCustomersImport" parent="simpleStep">
     <property name="itemReader">
-      <bean
-        class="cz.silesnet.sis.sync.item.reader.SpsCustomerResultItemReader"
-        p:resource-ref="customersResponseFile" />
+      <bean class="cz.silesnet.sis.sync.item.reader.ResponsePackItemReader" p:resource-ref="customersResponseFile" />
     </property>
     <property name="itemWriter">
-      <bean
-        class="org.springframework.batch.item.database.BatchSqlUpdateItemWriter"
-        p:jdbcTemplate-ref="jdbcTemplate">
+      <bean class="org.springframework.batch.item.database.JdbcBatchItemWriter" p:dataSource-ref="dataSource">
         <property name="itemPreparedStatementSetter">
-          <bean
-            class="cz.silesnet.sis.sync.item.writer.CustomerUpdatePreparedStatementSetter" />
+          <bean class="cz.silesnet.sis.sync.item.writer.CustomerUpdatePreparedStatementSetter" />
         </property>
         <property name="sql">
           <value><![CDATA[
@@ -79,17 +71,15 @@
 
   <bean id="updateInvoiceAccounts" parent="simpleStep">
     <property name="itemReader">
-      <bean class="cz.silesnet.sis.sync.item.reader.CustomerItemReader"
-        p:resource-ref="customersResponseFile" p:dao-ref="customerDao"
-        p:logImportErrors="false" />
+      <bean class="cz.silesnet.sis.sync.item.reader.CustomerItemReader" p:resource-ref="customersResponseFile"
+        p:dao-ref="customerDao" />
     </property>
     <property name="itemWriter">
-      <bean
-        class="org.springframework.batch.item.database.BatchSqlUpdateItemWriter"
-        p:jdbcTemplate-ref="spsJdbcTemplate" p:assertUpdates="false">
+      <bean class="org.springframework.batch.item.database.JdbcBatchItemWriter" p:dataSource-ref="spsDataSource"
+        p:assertUpdates="false"
+      >
         <property name="itemPreparedStatementSetter">
-          <bean
-            class="cz.silesnet.sis.sync.item.writer.CustomerSpsInvoicesUpdatePreparedStatementSetter" />
+          <bean class="cz.silesnet.sis.sync.item.writer.CustomerSpsInvoicesUpdatePreparedStatementSetter" />
         </property>
         <property name="sql">
           <value><![CDATA[
@@ -117,7 +107,6 @@
     <constructor-arg value="${customers.ini.file.suffix}" />
   </bean>
 
-  <bean id="customerDao" class="cz.silesnet.sis.sync.dao.impl.JdbcCustomerDao"
-    p:jdbcTemplate-ref="jdbcTemplate" />
+  <bean id="customerDao" class="cz.silesnet.sis.sync.dao.impl.JdbcCustomerDao" p:jdbcTemplate-ref="jdbcTemplate" />
 
 </beans>
