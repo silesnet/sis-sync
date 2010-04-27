@@ -15,8 +15,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 public class InvoiceSyncFunctionalTest {
 
-  // FIXME figure out how to inject test resource!
-  // @Test
+  @Test
   public void testConfirmInvoicesImportStep() throws Exception {
     ApplicationContext context = new ClassPathXmlApplicationContext("sisInvoiceJob.xml");
     DataSource dataSource = (DataSource) context.getBean("dataSource");
@@ -37,8 +36,4 @@ public class InvoiceSyncFunctionalTest {
     assertThat(count, is(5));
   }
 
-  @Test
-  public void testName() throws Exception {
-    // FIXME remove
-  }
 }
