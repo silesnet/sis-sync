@@ -1,1 +1,5 @@
+.idea
+*.iml
+.settings
+.project
 target
