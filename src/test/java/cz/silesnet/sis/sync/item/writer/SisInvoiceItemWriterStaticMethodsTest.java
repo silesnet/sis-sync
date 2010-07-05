@@ -59,6 +59,20 @@ public class SisInvoiceItemWriterStaticMethodsTest {
     }
 
     @Test
+    public void testAccountingConnectivityMbps() throws Exception {
+        invoice.new Item("Connectivity 1234/456 Mbps", 1, 10);
+        String accounting = SisInvoiceItemWriter.getItemAccounting(invoice.getItems().get(0));
+        assertEquals(SisInvoiceItemWriter.ACCOUNTING_CONNECTIVITY, accounting);
+        log.debug(accounting);
+    }
+    @Test
+    public void testAccountingConnectivityMbpsFup() throws Exception {
+        invoice.new Item("Connectivity 1234/456 Mbps FUP", 1, 10);
+        String accounting = SisInvoiceItemWriter.getItemAccounting(invoice.getItems().get(0));
+        assertEquals(SisInvoiceItemWriter.ACCOUNTING_CONNECTIVITY, accounting);
+        log.debug(accounting);
+    }
+    @Test
     public void testAccountingWebhosting() throws Exception {
         invoice.new Item("WEBhosting", 1, 10);
         String accounting = SisInvoiceItemWriter.getItemAccounting(invoice.getItems().get(0));

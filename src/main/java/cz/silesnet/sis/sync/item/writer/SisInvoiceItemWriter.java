@@ -36,8 +36,8 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter<Invoice> {
   public static final String SERVICE_ITEM_TEXT_PREFIX = "Slu\u017eba - ";
 
   public static final String ACCOUNTING_CONNECTIVITY = "konektivita";
-  public static final String ACCOUNTING_CONNECTIVITY_SUFFIX1 = "kbps";
-  public static final String ACCOUNTING_CONNECTIVITY_SUFFIX2 = "kbps FUP";
+  public static final String ACCOUNTING_CONNECTIVITY_SUFFIX1 = "bps";
+  public static final String ACCOUNTING_CONNECTIVITY_SUFFIX2 = "bps FUP";
   public static final String ACCOUNTING_WEBHOSTING = "webhosting";
   public static final String ACCOUNTING_WEBHOSTING_PREFIX = "WEBhosting";
   public static final String ACCOUNTING_SERVERHOUSING = "serverhousing";
