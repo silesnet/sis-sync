@@ -1,32 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:p="http://www.springframework.org/schema/p" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+    >
 
-  <import resource="job-launcher-context.xml" />
+  <import resource="job-launcher-context.xml"/>
 
   <bean id="spsReminderJob" parent="simpleJob">
     <property name="steps">
       <list>
-        <ref bean="sendReminders" />
+        <ref bean="sendReminders"/>
       </list>
     </property>
   </bean>
 
   <bean id="sendReminders" parent="simpleStep">
     <property name="itemReader">
-      <ref bean="reminderItemReader" />
+      <ref bean="reminderItemReader"/>
     </property>
     <property name="itemWriter">
-      <ref bean="reminderItemWriter" />
+      <ref bean="reminderItemWriter"/>
     </property>
   </bean>
 
   <bean name="reminderItemReader" class="org.springframework.batch.item.database.JdbcCursorItemReader"
-    p:dataSource-ref="dataSource"
-  >
+        p:dataSource-ref="dataSource"
+      >
     <property name="rowMapper">
-      <bean class="cz.silesnet.sis.sync.mapping.ReminderRowMapper" p:dao-ref="reminderDao" />
+      <bean class="cz.silesnet.sis.sync.mapping.ReminderRowMapper" p:dao-ref="reminderDao"/>
     </property>
     <property name="sql">
       <value><![CDATA[
@@ -43,20 +45,25 @@
     </property>
   </bean>
 
-  <bean id="reminderItemWriter" class="cz.silesnet.sis.sync.item.writer.ReminderItemWriter" p:sender-ref="reminderSender"
-    p:delay="${email.delay}" />
+  <bean id="reminderItemWriter" class="cz.silesnet.sis.sync.item.writer.ReminderItemWriter"
+        p:sender-ref="reminderSender"
+        p:delay="${email.delay}"/>
 
   <bean id="reminderDao" class="cz.silesnet.sis.sync.dao.impl.JdbcReminderDao" p:jdbcTemplate-ref="spsJdbcTemplate"
-    p:dayPartName="${pohoda.sql.daypart}" p:currentDateFunction="${pohoda.sql.current.date}" p:minimalDueAmount="${reminder.minimal.due.amount}"
-    p:graceDays="${reminder.grace.days}" />
+        p:dayPartName="${pohoda.sql.daypart}" p:currentDateFunction="${pohoda.sql.current.date}"
+        p:minimalDueAmount="${reminder.minimal.due.amount}"
+        p:graceDays="${reminder.grace.days}"/>
 
-  <bean id="reminderSender" class="cz.silesnet.sis.sync.item.writer.SimpleMailReminderSender" p:mailSender-ref="mailSender"
-    p:preparator-ref="mailPreparator" />
+  <bean id="reminderSender" class="cz.silesnet.sis.sync.item.writer.SimpleMailReminderSender"
+        p:mailSender-ref="mailSender"
+        p:preparator-ref="mailPreparator"/>
 
   <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl" p:host="${email.smtp}"
-    p:defaultEncoding="${email.encoding}" />
+        p:defaultEncoding="${email.encoding}"/>
 
-  <bean id="mailPreparator" class="cz.silesnet.sis.sync.item.writer.SimpleReminderMailPreparator" p:template="/flt/html-notice.flt"
-    p:encodig="${email.encoding}" p:html="true" p:from="${reminder.email.from}" p:subject="${reminder.email.subject}" />
+  <bean id="mailPreparator" class="cz.silesnet.sis.sync.item.writer.SimpleReminderMailPreparator"
+        p:template="/flt/html-notice.flt"
+        p:encodig="${email.encoding}" p:html="true" p:from="${reminder.email.from}"
+        p:subject="${reminder.email.subject}"/>
 
 </beans>
