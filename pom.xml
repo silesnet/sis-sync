@@ -174,7 +174,7 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>appassembler-maven-plugin</artifactId>
         <configuration>
-          <assembleDirectory>/target/appassembly</assembleDirectory>
+          <assembleDirectory>target/appassembly</assembleDirectory>
           <programs>
             <program>
               <mainClass>org.springframework.batch.core.launch.support.CommandLineJobRunner</mainClass>
