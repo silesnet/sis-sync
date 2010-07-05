@@ -25,7 +25,7 @@
   </bean>
 
   <bean name="reminderItemReader" class="org.springframework.batch.item.database.JdbcCursorItemReader"
-        p:dataSource-ref="dataSource"
+        p:dataSource-ref="spsDataSource"
       >
     <property name="rowMapper">
       <bean class="cz.silesnet.sis.sync.mapping.ReminderRowMapper" p:dao-ref="reminderDao"/>
