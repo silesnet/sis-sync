@@ -23,6 +23,8 @@ public class SisCustomerItemWriter extends AbstractDataPackItemWriter<Customer> 
   public static final String AD_GROUP_KEY = "SIS";
   public static final int DUE_DAYS = 7;
   public static final String CONTACT_NAME_PREFIX = "Kontaktn\u00ed osoba: ";
+  public static final int PHONE_SIZE = 40;
+  private static final int EMAIL_SIZE = 64;
 
   public SisCustomerItemWriter() {
     super();
@@ -46,14 +48,24 @@ public class SisCustomerItemWriter extends AbstractDataPackItemWriter<Customer> 
     lines.add(elValue("typ:division", customer.getSupplementaryName()));
     lines.add(elValue("typ:city", customer.getCity()));
     lines.add(elValue("typ:street", customer.getStreet()));
-    lines.add(elValue("typ:zip", customer.getZip()));
+    String zip = customer.getZip();
+    if (zip != null)
+      zip = zip.replaceAll(" ", "");
+    lines.add(elValue("typ:zip", zip));
     lines.add(elValue("typ:ico", customer.getIco()));
     lines.add(elValue("typ:dic", customer.getDic()));
     lines.add(elEnd("typ:address"));
     lines.add(elEnd("adb:identity"));
     // other
-    lines.add(elValue("adb:phone", customer.getPhone()));
-    lines.add(elValue("adb:email", customer.getEmail()));
+    String phone = customer.getPhone();
+    if (phone != null && phone.length() > PHONE_SIZE)
+      phone = phone.substring(0, PHONE_SIZE);
+    lines.add(elValue("adb:phone", phone));
+
+    String email = customer.getEmail();
+    if (email != null && email.length() > EMAIL_SIZE)
+      email = email.substring(0, EMAIL_SIZE);
+    lines.add(elValue("adb:email", email));
     lines.add(elValue("adb:adGroup", AD_GROUP_KEY));
     lines.add(elValue("adb:maturity", DUE_DAYS));
     lines.add(elValue("adb:agreement", customer.getSpsContract()));
