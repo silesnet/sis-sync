@@ -11,6 +11,7 @@ package cz.stormware.schema.invoice;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
+
 import cz.stormware.schema.type.TypeCurrencyForeign;
 import cz.stormware.schema.type.TypeCurrencyHome;
 import cz.stormware.schema.type.TypeRoundingDocument;
@@ -19,9 +20,9 @@ import cz.stormware.schema.type.TypeRoundingVAT;
 
 /**
  * <p>Java class for invoiceSummaryType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="invoiceSummaryType">
  *   &lt;complexContent>
@@ -36,8 +37,6 @@ import cz.stormware.schema.type.TypeRoundingVAT;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "invoiceSummaryType", propOrder = {
@@ -48,105 +47,89 @@ import cz.stormware.schema.type.TypeRoundingVAT;
 })
 public class InvoiceSummaryType {
 
-    protected TypeRoundingDocument roundingDocument;
-    protected TypeRoundingVAT roundingVAT;
-    protected TypeCurrencyHome homeCurrency;
-    protected TypeCurrencyForeign foreignCurrency;
+  protected TypeRoundingDocument roundingDocument;
+  protected TypeRoundingVAT roundingVAT;
+  protected TypeCurrencyHome homeCurrency;
+  protected TypeCurrencyForeign foreignCurrency;
 
-    /**
-     * Gets the value of the roundingDocument property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TypeRoundingDocument }
-     *     
-     */
-    public TypeRoundingDocument getRoundingDocument() {
-        return roundingDocument;
-    }
+  /**
+   * Gets the value of the roundingDocument property.
+   *
+   * @return possible object is
+   *         {@link TypeRoundingDocument }
+   */
+  public TypeRoundingDocument getRoundingDocument() {
+    return roundingDocument;
+  }
 
-    /**
-     * Sets the value of the roundingDocument property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TypeRoundingDocument }
-     *     
-     */
-    public void setRoundingDocument(TypeRoundingDocument value) {
-        this.roundingDocument = value;
-    }
+  /**
+   * Sets the value of the roundingDocument property.
+   *
+   * @param value allowed object is
+   *              {@link TypeRoundingDocument }
+   */
+  public void setRoundingDocument(TypeRoundingDocument value) {
+    this.roundingDocument = value;
+  }
 
-    /**
-     * Gets the value of the roundingVAT property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TypeRoundingVAT }
-     *     
-     */
-    public TypeRoundingVAT getRoundingVAT() {
-        return roundingVAT;
-    }
+  /**
+   * Gets the value of the roundingVAT property.
+   *
+   * @return possible object is
+   *         {@link TypeRoundingVAT }
+   */
+  public TypeRoundingVAT getRoundingVAT() {
+    return roundingVAT;
+  }
 
-    /**
-     * Sets the value of the roundingVAT property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TypeRoundingVAT }
-     *     
-     */
-    public void setRoundingVAT(TypeRoundingVAT value) {
-        this.roundingVAT = value;
-    }
+  /**
+   * Sets the value of the roundingVAT property.
+   *
+   * @param value allowed object is
+   *              {@link TypeRoundingVAT }
+   */
+  public void setRoundingVAT(TypeRoundingVAT value) {
+    this.roundingVAT = value;
+  }
 
-    /**
-     * Gets the value of the homeCurrency property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TypeCurrencyHome }
-     *     
-     */
-    public TypeCurrencyHome getHomeCurrency() {
-        return homeCurrency;
-    }
+  /**
+   * Gets the value of the homeCurrency property.
+   *
+   * @return possible object is
+   *         {@link TypeCurrencyHome }
+   */
+  public TypeCurrencyHome getHomeCurrency() {
+    return homeCurrency;
+  }
 
-    /**
-     * Sets the value of the homeCurrency property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TypeCurrencyHome }
-     *     
-     */
-    public void setHomeCurrency(TypeCurrencyHome value) {
-        this.homeCurrency = value;
-    }
+  /**
+   * Sets the value of the homeCurrency property.
+   *
+   * @param value allowed object is
+   *              {@link TypeCurrencyHome }
+   */
+  public void setHomeCurrency(TypeCurrencyHome value) {
+    this.homeCurrency = value;
+  }
 
-    /**
-     * Gets the value of the foreignCurrency property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TypeCurrencyForeign }
-     *     
-     */
-    public TypeCurrencyForeign getForeignCurrency() {
-        return foreignCurrency;
-    }
+  /**
+   * Gets the value of the foreignCurrency property.
+   *
+   * @return possible object is
+   *         {@link TypeCurrencyForeign }
+   */
+  public TypeCurrencyForeign getForeignCurrency() {
+    return foreignCurrency;
+  }
 
-    /**
-     * Sets the value of the foreignCurrency property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TypeCurrencyForeign }
-     *     
-     */
-    public void setForeignCurrency(TypeCurrencyForeign value) {
-        this.foreignCurrency = value;
-    }
+  /**
+   * Sets the value of the foreignCurrency property.
+   *
+   * @param value allowed object is
+   *              {@link TypeCurrencyForeign }
+   */
+  public void setForeignCurrency(TypeCurrencyForeign value) {
+    this.foreignCurrency = value;
+  }
 
 }

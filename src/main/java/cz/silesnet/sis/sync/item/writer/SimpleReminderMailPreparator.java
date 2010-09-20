@@ -23,71 +23,70 @@ import freemarker.template.TemplateException;
 /**
  * {@link ReminderMailPreparator} that prepares plain email message based on Freemarker template. It utilizes
  * {@link MimeMessageHelper} for accessing message fields.
- * 
+ *
  * @author sikorric
- * 
  */
 public class SimpleReminderMailPreparator implements ReminderMailPreparator, InitializingBean {
 
-    private static final String REMINDER_KEY = "reminder";
-    private static final String DEFAULT_TEMPLATE_ENCODING = "UTF-8";
+  private static final String REMINDER_KEY = "reminder";
+  private static final String DEFAULT_TEMPLATE_ENCODING = "UTF-8";
 
-    private Configuration cfg;
-    private String template;
-    private String encodig = DEFAULT_TEMPLATE_ENCODING;
-    private Template aTemplate;
-    private boolean isHtml = false;
-    private String from;
-    private String subject;
+  private Configuration cfg;
+  private String template;
+  private String encodig = DEFAULT_TEMPLATE_ENCODING;
+  private Template aTemplate;
+  private boolean isHtml = false;
+  private String from;
+  private String subject;
 
-    public SimpleReminderMailPreparator() throws IOException {
+  public SimpleReminderMailPreparator() throws IOException {
+  }
+
+  public void afterPropertiesSet() throws Exception {
+    cfg = new Configuration();
+    cfg.setObjectWrapper(new DefaultObjectWrapper());
+    cfg.setClassForTemplateLoading(getClass(), "/");
+    cfg.setDefaultEncoding(encodig);
+    aTemplate = cfg.getTemplate(template);
+  }
+
+  public void setTemplate(String template) {
+    this.template = template;
+  }
+
+  public void setEncodig(String encodig) {
+    this.encodig = encodig;
+  }
+
+  public void setHtml(boolean isHtml) {
+    this.isHtml = isHtml;
+  }
+
+  public void setFrom(String from) {
+    this.from = from;
+  }
+
+  public void setSubject(String subject) {
+    this.subject = subject;
+  }
+
+  public void prepare(Reminder reminder, MimeMessage message) throws MessagingException {
+    MimeMessageHelper email = new MimeMessageHelper(message, true);
+    email.setFrom(from);
+    email.setTo(reminder.getCustomer().getEmail());
+    email.setSubject(subject);
+    // render body text
+    Map<String, Object> model = new HashMap<String, Object>();
+    model.put(REMINDER_KEY, reminder);
+    StringWriter body = new StringWriter();
+    try {
+      aTemplate.process(model, body);
+    } catch (TemplateException e) {
+      throw new RuntimeException(e);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
-
-    public void afterPropertiesSet() throws Exception {
-        cfg = new Configuration();
-        cfg.setObjectWrapper(new DefaultObjectWrapper());
-        cfg.setClassForTemplateLoading(getClass(), "/");
-        cfg.setDefaultEncoding(encodig);
-        aTemplate = cfg.getTemplate(template);
-    }
-
-    public void setTemplate(String template) {
-        this.template = template;
-    }
-
-    public void setEncodig(String encodig) {
-        this.encodig = encodig;
-    }
-
-    public void setHtml(boolean isHtml) {
-        this.isHtml = isHtml;
-    }
-
-    public void setFrom(String from) {
-        this.from = from;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public void prepare(Reminder reminder, MimeMessage message) throws MessagingException {
-        MimeMessageHelper email = new MimeMessageHelper(message, true);
-        email.setFrom(from);
-        email.setTo(reminder.getCustomer().getEmail());
-        email.setSubject(subject);
-        // render body text
-        Map<String, Object> model = new HashMap<String, Object>();
-        model.put(REMINDER_KEY, reminder);
-        StringWriter body = new StringWriter();
-        try {
-            aTemplate.process(model, body);
-        } catch (TemplateException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        email.setText(body.toString(), isHtml);
-    }
+    email.setText(body.toString(), isHtml);
+  }
 
 }

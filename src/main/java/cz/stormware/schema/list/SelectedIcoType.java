@@ -18,9 +18,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for selectedIcoType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="selectedIcoType">
  *   &lt;complexContent>
@@ -32,8 +32,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "selectedIcoType", propOrder = {
@@ -41,36 +39,34 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class SelectedIcoType {
 
-    @XmlElement(required = true)
-    protected List<String> ico;
+  @XmlElement(required = true)
+  protected List<String> ico;
 
-    /**
-     * Gets the value of the ico property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the ico property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getIco().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link String }
-     * 
-     * 
-     */
-    public List<String> getIco() {
-        if (ico == null) {
-            ico = new ArrayList<String>();
-        }
-        return this.ico;
+  /**
+   * Gets the value of the ico property.
+   * <p/>
+   * <p/>
+   * This accessor method returns a reference to the live list,
+   * not a snapshot. Therefore any modification you make to the
+   * returned list will be present inside the JAXB object.
+   * This is why there is not a <CODE>set</CODE> method for the ico property.
+   * <p/>
+   * <p/>
+   * For example, to add a new item, do as follows:
+   * <pre>
+   *    getIco().add(newItem);
+   * </pre>
+   * <p/>
+   * <p/>
+   * <p/>
+   * Objects of the following type(s) are allowed in the list
+   * {@link String }
+   */
+  public List<String> getIco() {
+    if (ico == null) {
+      ico = new ArrayList<String>();
     }
+    return this.ico;
+  }
 
 }

@@ -12,24 +12,23 @@ import cz.silesnet.sis.sync.dao.ReminderDao;
 
 /**
  * @author sikorric
- * 
  */
 public class ReminderRowMapper implements RowMapper {
 
-    public static final String ID_COLUMN = "RefAD";
-    private ReminderDao dao;
+  public static final String ID_COLUMN = "RefAD";
+  private ReminderDao dao;
 
-    public void setDao(ReminderDao dao) {
-        this.dao = dao;
-    }
+  public void setDao(ReminderDao dao) {
+    this.dao = dao;
+  }
 
-    /**
-     * RowMapper that expect only one column in ResultSet containing SPS
-     * customer id. Uses {@link #ReminderDao.find()} to retrieve the reminder
-     * from SPS database.
-     */
-    public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return dao.find(rs.getLong(ID_COLUMN));
-    }
+  /**
+   * RowMapper that expect only one column in ResultSet containing SPS
+   * customer id. Uses {@link #ReminderDao.find()} to retrieve the reminder
+   * from SPS database.
+   */
+  public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+    return dao.find(rs.getLong(ID_COLUMN));
+  }
 
 }

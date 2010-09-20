@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for sexType.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p/>
  * <pre>
  * &lt;simpleType name="sexType">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -27,35 +27,34 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
- * 
  */
 @XmlType(name = "sexType")
 @XmlEnum
 public enum SexType {
 
-    @XmlEnumValue("man")
-    MAN("man"),
-    @XmlEnumValue("woman")
-    WOMAN("woman"),
-    @XmlEnumValue("unknown")
-    UNKNOWN("unknown");
-    private final String value;
+  @XmlEnumValue("man")
+  MAN("man"),
+  @XmlEnumValue("woman")
+  WOMAN("woman"),
+  @XmlEnumValue("unknown")
+  UNKNOWN("unknown");
+  private final String value;
 
-    SexType(String v) {
-        value = v;
-    }
+  SexType(String v) {
+    value = v;
+  }
 
-    public String value() {
-        return value;
-    }
+  public String value() {
+    return value;
+  }
 
-    public static SexType fromValue(String v) {
-        for (SexType c: SexType.values()) {
-            if (c.value.equals(v)) {
-                return c;
-            }
-        }
-        throw new IllegalArgumentException(v);
+  public static SexType fromValue(String v) {
+    for (SexType c : SexType.values()) {
+      if (c.value.equals(v)) {
+        return c;
+      }
     }
+    throw new IllegalArgumentException(v);
+  }
 
 }

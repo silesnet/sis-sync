@@ -11,7 +11,7 @@ import org.joda.time.DateTime;
 
 /**
  * Invoice data object. It contains only fields needed for synchronization.
- * 
+ *
  * @author Richard Sikora
  */
 public class Invoice implements ItemIdentity, Result {

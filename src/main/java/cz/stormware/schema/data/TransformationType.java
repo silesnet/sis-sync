@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for transformationType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="transformationType">
  *   &lt;complexContent>
@@ -30,8 +30,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "transformationType", propOrder = {
@@ -40,55 +38,47 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TransformationType {
 
-    protected String input;
-    protected String output;
+  protected String input;
+  protected String output;
 
-    /**
-     * Gets the value of the input property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getInput() {
-        return input;
-    }
+  /**
+   * Gets the value of the input property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getInput() {
+    return input;
+  }
 
-    /**
-     * Sets the value of the input property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setInput(String value) {
-        this.input = value;
-    }
+  /**
+   * Sets the value of the input property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setInput(String value) {
+    this.input = value;
+  }
 
-    /**
-     * Gets the value of the output property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getOutput() {
-        return output;
-    }
+  /**
+   * Gets the value of the output property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getOutput() {
+    return output;
+  }
 
-    /**
-     * Sets the value of the output property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setOutput(String value) {
-        this.output = value;
-    }
+  /**
+   * Sets the value of the output property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setOutput(String value) {
+    this.output = value;
+  }
 
 }

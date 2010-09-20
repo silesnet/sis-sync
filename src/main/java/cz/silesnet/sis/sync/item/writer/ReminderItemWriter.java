@@ -17,9 +17,8 @@ import cz.silesnet.sis.sync.domain.Reminder;
 /**
  * Reminder ItemWriter implementation that sends reminders to the customer by
  * email.
- * 
+ *
  * @author rsi
- * 
  */
 public class ReminderItemWriter implements ItemWriter<Reminder> {
 

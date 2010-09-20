@@ -130,6 +130,7 @@ public class AbstractDataPackItemWriterTest {
       }
     };
   }
+
   @Test
   public final void testItemLines() {
     // initialize data pack id

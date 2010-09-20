@@ -18,9 +18,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  * <p>Java class for itemNumericSeriesType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="itemNumericSeriesType">
  *   &lt;complexContent>
@@ -32,93 +32,78 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "itemNumericSeriesType")
 public class ItemNumericSeriesType
-    extends ItemType
-{
+    extends ItemType {
 
-    @XmlAttribute(required = true)
-    protected String name;
-    @XmlAttribute(required = true)
-    protected String agenda;
-    @XmlAttribute(required = true)
-    @XmlSchemaType(name = "gYear")
-    protected XMLGregorianCalendar year;
+  @XmlAttribute(required = true)
+  protected String name;
+  @XmlAttribute(required = true)
+  protected String agenda;
+  @XmlAttribute(required = true)
+  @XmlSchemaType(name = "gYear")
+  protected XMLGregorianCalendar year;
 
-    /**
-     * Gets the value of the name property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getName() {
-        return name;
-    }
+  /**
+   * Gets the value of the name property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getName() {
+    return name;
+  }
 
-    /**
-     * Sets the value of the name property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setName(String value) {
-        this.name = value;
-    }
+  /**
+   * Sets the value of the name property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setName(String value) {
+    this.name = value;
+  }
 
-    /**
-     * Gets the value of the agenda property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getAgenda() {
-        return agenda;
-    }
+  /**
+   * Gets the value of the agenda property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getAgenda() {
+    return agenda;
+  }
 
-    /**
-     * Sets the value of the agenda property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setAgenda(String value) {
-        this.agenda = value;
-    }
+  /**
+   * Sets the value of the agenda property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setAgenda(String value) {
+    this.agenda = value;
+  }
 
-    /**
-     * Gets the value of the year property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public XMLGregorianCalendar getYear() {
-        return year;
-    }
+  /**
+   * Gets the value of the year property.
+   *
+   * @return possible object is
+   *         {@link XMLGregorianCalendar }
+   */
+  public XMLGregorianCalendar getYear() {
+    return year;
+  }
 
-    /**
-     * Sets the value of the year property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setYear(XMLGregorianCalendar value) {
-        this.year = value;
-    }
+  /**
+   * Sets the value of the year property.
+   *
+   * @param value allowed object is
+   *              {@link XMLGregorianCalendar }
+   */
+  public void setYear(XMLGregorianCalendar value) {
+    this.year = value;
+  }
 
 }

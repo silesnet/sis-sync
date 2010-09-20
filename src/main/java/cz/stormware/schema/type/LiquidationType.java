@@ -17,11 +17,11 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  * Informace o likvidaci faktury
- * 
+ * <p/>
  * <p>Java class for liquidationType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="liquidationType">
  *   &lt;complexContent>
@@ -35,8 +35,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "liquidationType", propOrder = {
@@ -46,81 +44,69 @@ import javax.xml.datatype.XMLGregorianCalendar;
 })
 public class LiquidationType {
 
-    @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar date;
-    protected Double amountHome;
-    protected Double amountForeign;
+  @XmlSchemaType(name = "date")
+  protected XMLGregorianCalendar date;
+  protected Double amountHome;
+  protected Double amountForeign;
 
-    /**
-     * Gets the value of the date property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public XMLGregorianCalendar getDate() {
-        return date;
-    }
+  /**
+   * Gets the value of the date property.
+   *
+   * @return possible object is
+   *         {@link XMLGregorianCalendar }
+   */
+  public XMLGregorianCalendar getDate() {
+    return date;
+  }
 
-    /**
-     * Sets the value of the date property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setDate(XMLGregorianCalendar value) {
-        this.date = value;
-    }
+  /**
+   * Sets the value of the date property.
+   *
+   * @param value allowed object is
+   *              {@link XMLGregorianCalendar }
+   */
+  public void setDate(XMLGregorianCalendar value) {
+    this.date = value;
+  }
 
-    /**
-     * Gets the value of the amountHome property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getAmountHome() {
-        return amountHome;
-    }
+  /**
+   * Gets the value of the amountHome property.
+   *
+   * @return possible object is
+   *         {@link Double }
+   */
+  public Double getAmountHome() {
+    return amountHome;
+  }
 
-    /**
-     * Sets the value of the amountHome property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
-     */
-    public void setAmountHome(Double value) {
-        this.amountHome = value;
-    }
+  /**
+   * Sets the value of the amountHome property.
+   *
+   * @param value allowed object is
+   *              {@link Double }
+   */
+  public void setAmountHome(Double value) {
+    this.amountHome = value;
+  }
 
-    /**
-     * Gets the value of the amountForeign property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getAmountForeign() {
-        return amountForeign;
-    }
+  /**
+   * Gets the value of the amountForeign property.
+   *
+   * @return possible object is
+   *         {@link Double }
+   */
+  public Double getAmountForeign() {
+    return amountForeign;
+  }
 
-    /**
-     * Sets the value of the amountForeign property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
-     */
-    public void setAmountForeign(Double value) {
-        this.amountForeign = value;
-    }
+  /**
+   * Sets the value of the amountForeign property.
+   *
+   * @param value allowed object is
+   *              {@link Double }
+   */
+  public void setAmountForeign(Double value) {
+    this.amountForeign = value;
+  }
 
 }

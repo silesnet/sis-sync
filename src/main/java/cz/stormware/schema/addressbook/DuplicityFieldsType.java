@@ -14,20 +14,21 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
 import cz.stormware.schema.type.Boolean;
 import cz.stormware.schema.type.ExtIdType;
 
 
 /**
- * Pokud je u atributu nastavena hodnota actualize="false", prob\u011bhne kontrola duplicity podle následujících polí. Pokud 
- * 					bude nalezena duplicita, doklad se nenaimportuje.
- * 					Pokud je nastavewna hodnota actualize="true", provede se aktualizace záznamu v adresá\u0159i dle zadaných hodnot v XML. Podle následující 
- * 					záznam\u016f se vyfiltruje záznam pro úpravu.
- * 
+ * Pokud je u atributu nastavena hodnota actualize="false", prob\u011bhne kontrola duplicity podle následujících polí. Pokud
+ * bude nalezena duplicita, doklad se nenaimportuje.
+ * Pokud je nastavewna hodnota actualize="true", provede se aktualizace záznamu v adresá\u0159i dle zadaných hodnot v XML. Podle následující
+ * záznam\u016f se vyfiltruje záznam pro úpravu.
+ * <p/>
  * <p>Java class for duplicityFieldsType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="duplicityFieldsType">
  *   &lt;complexContent>
@@ -48,8 +49,6 @@ import cz.stormware.schema.type.ExtIdType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "duplicityFieldsType", propOrder = {
@@ -57,267 +56,227 @@ import cz.stormware.schema.type.ExtIdType;
 })
 public class DuplicityFieldsType {
 
-    protected BigInteger id;
-    protected ExtIdType extId;
-    @XmlElement(defaultValue = "false")
-    protected Boolean fieldFirma;
-    @XmlElement(defaultValue = "false")
-    protected Boolean fieldJmeno;
-    @XmlElement(defaultValue = "false")
-    protected Boolean fieldObec;
-    @XmlElement(defaultValue = "false")
-    protected Boolean fieldPSC;
-    @XmlElement(defaultValue = "false")
-    protected Boolean fieldICO;
-    @XmlElement(defaultValue = "false")
-    protected Boolean fieldDIC;
-    @XmlElement(defaultValue = "false")
-    protected Boolean fieldNumber;
-    @XmlAttribute
-    protected Boolean actualize;
+  protected BigInteger id;
+  protected ExtIdType extId;
+  @XmlElement(defaultValue = "false")
+  protected Boolean fieldFirma;
+  @XmlElement(defaultValue = "false")
+  protected Boolean fieldJmeno;
+  @XmlElement(defaultValue = "false")
+  protected Boolean fieldObec;
+  @XmlElement(defaultValue = "false")
+  protected Boolean fieldPSC;
+  @XmlElement(defaultValue = "false")
+  protected Boolean fieldICO;
+  @XmlElement(defaultValue = "false")
+  protected Boolean fieldDIC;
+  @XmlElement(defaultValue = "false")
+  protected Boolean fieldNumber;
+  @XmlAttribute
+  protected Boolean actualize;
 
-    /**
-     * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getId() {
-        return id;
-    }
+  /**
+   * Gets the value of the id property.
+   *
+   * @return possible object is
+   *         {@link BigInteger }
+   */
+  public BigInteger getId() {
+    return id;
+  }
 
-    /**
-     * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setId(BigInteger value) {
-        this.id = value;
-    }
+  /**
+   * Sets the value of the id property.
+   *
+   * @param value allowed object is
+   *              {@link BigInteger }
+   */
+  public void setId(BigInteger value) {
+    this.id = value;
+  }
 
-    /**
-     * Gets the value of the extId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ExtIdType }
-     *     
-     */
-    public ExtIdType getExtId() {
-        return extId;
-    }
+  /**
+   * Gets the value of the extId property.
+   *
+   * @return possible object is
+   *         {@link ExtIdType }
+   */
+  public ExtIdType getExtId() {
+    return extId;
+  }
 
-    /**
-     * Sets the value of the extId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ExtIdType }
-     *     
-     */
-    public void setExtId(ExtIdType value) {
-        this.extId = value;
-    }
+  /**
+   * Sets the value of the extId property.
+   *
+   * @param value allowed object is
+   *              {@link ExtIdType }
+   */
+  public void setExtId(ExtIdType value) {
+    this.extId = value;
+  }
 
-    /**
-     * Gets the value of the fieldFirma property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean getFieldFirma() {
-        return fieldFirma;
-    }
+  /**
+   * Gets the value of the fieldFirma property.
+   *
+   * @return possible object is
+   *         {@link Boolean }
+   */
+  public Boolean getFieldFirma() {
+    return fieldFirma;
+  }
 
-    /**
-     * Sets the value of the fieldFirma property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setFieldFirma(Boolean value) {
-        this.fieldFirma = value;
-    }
+  /**
+   * Sets the value of the fieldFirma property.
+   *
+   * @param value allowed object is
+   *              {@link Boolean }
+   */
+  public void setFieldFirma(Boolean value) {
+    this.fieldFirma = value;
+  }
 
-    /**
-     * Gets the value of the fieldJmeno property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean getFieldJmeno() {
-        return fieldJmeno;
-    }
+  /**
+   * Gets the value of the fieldJmeno property.
+   *
+   * @return possible object is
+   *         {@link Boolean }
+   */
+  public Boolean getFieldJmeno() {
+    return fieldJmeno;
+  }
 
-    /**
-     * Sets the value of the fieldJmeno property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setFieldJmeno(Boolean value) {
-        this.fieldJmeno = value;
-    }
+  /**
+   * Sets the value of the fieldJmeno property.
+   *
+   * @param value allowed object is
+   *              {@link Boolean }
+   */
+  public void setFieldJmeno(Boolean value) {
+    this.fieldJmeno = value;
+  }
 
-    /**
-     * Gets the value of the fieldObec property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean getFieldObec() {
-        return fieldObec;
-    }
+  /**
+   * Gets the value of the fieldObec property.
+   *
+   * @return possible object is
+   *         {@link Boolean }
+   */
+  public Boolean getFieldObec() {
+    return fieldObec;
+  }
 
-    /**
-     * Sets the value of the fieldObec property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setFieldObec(Boolean value) {
-        this.fieldObec = value;
-    }
+  /**
+   * Sets the value of the fieldObec property.
+   *
+   * @param value allowed object is
+   *              {@link Boolean }
+   */
+  public void setFieldObec(Boolean value) {
+    this.fieldObec = value;
+  }
 
-    /**
-     * Gets the value of the fieldPSC property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean getFieldPSC() {
-        return fieldPSC;
-    }
+  /**
+   * Gets the value of the fieldPSC property.
+   *
+   * @return possible object is
+   *         {@link Boolean }
+   */
+  public Boolean getFieldPSC() {
+    return fieldPSC;
+  }
 
-    /**
-     * Sets the value of the fieldPSC property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setFieldPSC(Boolean value) {
-        this.fieldPSC = value;
-    }
+  /**
+   * Sets the value of the fieldPSC property.
+   *
+   * @param value allowed object is
+   *              {@link Boolean }
+   */
+  public void setFieldPSC(Boolean value) {
+    this.fieldPSC = value;
+  }
 
-    /**
-     * Gets the value of the fieldICO property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean getFieldICO() {
-        return fieldICO;
-    }
+  /**
+   * Gets the value of the fieldICO property.
+   *
+   * @return possible object is
+   *         {@link Boolean }
+   */
+  public Boolean getFieldICO() {
+    return fieldICO;
+  }
 
-    /**
-     * Sets the value of the fieldICO property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setFieldICO(Boolean value) {
-        this.fieldICO = value;
-    }
+  /**
+   * Sets the value of the fieldICO property.
+   *
+   * @param value allowed object is
+   *              {@link Boolean }
+   */
+  public void setFieldICO(Boolean value) {
+    this.fieldICO = value;
+  }
 
-    /**
-     * Gets the value of the fieldDIC property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean getFieldDIC() {
-        return fieldDIC;
-    }
+  /**
+   * Gets the value of the fieldDIC property.
+   *
+   * @return possible object is
+   *         {@link Boolean }
+   */
+  public Boolean getFieldDIC() {
+    return fieldDIC;
+  }
 
-    /**
-     * Sets the value of the fieldDIC property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setFieldDIC(Boolean value) {
-        this.fieldDIC = value;
-    }
+  /**
+   * Sets the value of the fieldDIC property.
+   *
+   * @param value allowed object is
+   *              {@link Boolean }
+   */
+  public void setFieldDIC(Boolean value) {
+    this.fieldDIC = value;
+  }
 
-    /**
-     * Gets the value of the fieldNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean getFieldNumber() {
-        return fieldNumber;
-    }
+  /**
+   * Gets the value of the fieldNumber property.
+   *
+   * @return possible object is
+   *         {@link Boolean }
+   */
+  public Boolean getFieldNumber() {
+    return fieldNumber;
+  }
 
-    /**
-     * Sets the value of the fieldNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setFieldNumber(Boolean value) {
-        this.fieldNumber = value;
-    }
+  /**
+   * Sets the value of the fieldNumber property.
+   *
+   * @param value allowed object is
+   *              {@link Boolean }
+   */
+  public void setFieldNumber(Boolean value) {
+    this.fieldNumber = value;
+  }
 
-    /**
-     * Gets the value of the actualize property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean getActualize() {
-        if (actualize == null) {
-            return Boolean.FALSE;
-        } else {
-            return actualize;
-        }
+  /**
+   * Gets the value of the actualize property.
+   *
+   * @return possible object is
+   *         {@link Boolean }
+   */
+  public Boolean getActualize() {
+    if (actualize == null) {
+      return Boolean.FALSE;
+    } else {
+      return actualize;
     }
+  }
 
-    /**
-     * Sets the value of the actualize property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setActualize(Boolean value) {
-        this.actualize = value;
-    }
+  /**
+   * Sets the value of the actualize property.
+   *
+   * @param value allowed object is
+   *              {@link Boolean }
+   */
+  public void setActualize(Boolean value) {
+    this.actualize = value;
+  }
 
 }

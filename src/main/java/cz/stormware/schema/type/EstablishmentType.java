@@ -15,11 +15,11 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * Adresa provozovny ú\u010detní jednotky.
- * 
+ * <p/>
  * <p>Java class for establishmentType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="establishmentType">
  *   &lt;complexContent>
@@ -34,8 +34,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "establishmentType", propOrder = {
@@ -46,105 +44,89 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class EstablishmentType {
 
-    protected String company;
-    protected String city;
-    protected String street;
-    protected String zip;
+  protected String company;
+  protected String city;
+  protected String street;
+  protected String zip;
 
-    /**
-     * Gets the value of the company property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCompany() {
-        return company;
-    }
+  /**
+   * Gets the value of the company property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getCompany() {
+    return company;
+  }
 
-    /**
-     * Sets the value of the company property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCompany(String value) {
-        this.company = value;
-    }
+  /**
+   * Sets the value of the company property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setCompany(String value) {
+    this.company = value;
+  }
 
-    /**
-     * Gets the value of the city property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCity() {
-        return city;
-    }
+  /**
+   * Gets the value of the city property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getCity() {
+    return city;
+  }
 
-    /**
-     * Sets the value of the city property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCity(String value) {
-        this.city = value;
-    }
+  /**
+   * Sets the value of the city property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setCity(String value) {
+    this.city = value;
+  }
 
-    /**
-     * Gets the value of the street property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getStreet() {
-        return street;
-    }
+  /**
+   * Gets the value of the street property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getStreet() {
+    return street;
+  }
 
-    /**
-     * Sets the value of the street property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setStreet(String value) {
-        this.street = value;
-    }
+  /**
+   * Sets the value of the street property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setStreet(String value) {
+    this.street = value;
+  }
 
-    /**
-     * Gets the value of the zip property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getZip() {
-        return zip;
-    }
+  /**
+   * Gets the value of the zip property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getZip() {
+    return zip;
+  }
 
-    /**
-     * Sets the value of the zip property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setZip(String value) {
-        this.zip = value;
-    }
+  /**
+   * Sets the value of the zip property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setZip(String value) {
+    this.zip = value;
+  }
 
 }

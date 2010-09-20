@@ -16,9 +16,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for companyType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="companyType">
  *   &lt;complexContent>
@@ -31,8 +31,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "companyType", propOrder = {
@@ -41,55 +39,47 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class CompanyType {
 
-    protected BigInteger id;
-    protected String company;
+  protected BigInteger id;
+  protected String company;
 
-    /**
-     * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getId() {
-        return id;
-    }
+  /**
+   * Gets the value of the id property.
+   *
+   * @return possible object is
+   *         {@link BigInteger }
+   */
+  public BigInteger getId() {
+    return id;
+  }
 
-    /**
-     * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setId(BigInteger value) {
-        this.id = value;
-    }
+  /**
+   * Sets the value of the id property.
+   *
+   * @param value allowed object is
+   *              {@link BigInteger }
+   */
+  public void setId(BigInteger value) {
+    this.id = value;
+  }
 
-    /**
-     * Gets the value of the company property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCompany() {
-        return company;
-    }
+  /**
+   * Gets the value of the company property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getCompany() {
+    return company;
+  }
 
-    /**
-     * Sets the value of the company property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCompany(String value) {
-        this.company = value;
-    }
+  /**
+   * Sets the value of the company property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setCompany(String value) {
+    this.company = value;
+  }
 
 }

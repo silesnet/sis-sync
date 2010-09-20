@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
 import cz.stormware.schema.addressbook.AddressbookType;
 import cz.stormware.schema.invoice.InvoiceType;
 import cz.stormware.schema.list.ListAddressBookRequestType;
@@ -21,9 +22,9 @@ import cz.stormware.schema.list.ListInvoiceRequestType;
 
 /**
  * <p>Java class for dataPackItemType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="dataPackItemType">
  *   &lt;complexContent>
@@ -40,8 +41,6 @@ import cz.stormware.schema.list.ListInvoiceRequestType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "dataPackItemType", propOrder = {
@@ -52,161 +51,137 @@ import cz.stormware.schema.list.ListInvoiceRequestType;
 })
 public class DataPackItemType {
 
-    @XmlElement(namespace = "http://www.stormware.cz/schema/addressbook.xsd")
-    protected AddressbookType addressbook;
-    @XmlElement(namespace = "http://www.stormware.cz/schema/invoice.xsd")
-    protected InvoiceType invoice;
-    @XmlElement(namespace = "http://www.stormware.cz/schema/list.xsd")
-    protected ListAddressBookRequestType listAddressBookRequest;
-    @XmlElement(namespace = "http://www.stormware.cz/schema/list.xsd")
-    protected ListInvoiceRequestType listInvoiceRequest;
-    @XmlAttribute(required = true)
-    protected String version;
-    @XmlAttribute(required = true)
-    protected String id;
+  @XmlElement(namespace = "http://www.stormware.cz/schema/addressbook.xsd")
+  protected AddressbookType addressbook;
+  @XmlElement(namespace = "http://www.stormware.cz/schema/invoice.xsd")
+  protected InvoiceType invoice;
+  @XmlElement(namespace = "http://www.stormware.cz/schema/list.xsd")
+  protected ListAddressBookRequestType listAddressBookRequest;
+  @XmlElement(namespace = "http://www.stormware.cz/schema/list.xsd")
+  protected ListInvoiceRequestType listInvoiceRequest;
+  @XmlAttribute(required = true)
+  protected String version;
+  @XmlAttribute(required = true)
+  protected String id;
 
-    /**
-     * Gets the value of the addressbook property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AddressbookType }
-     *     
-     */
-    public AddressbookType getAddressbook() {
-        return addressbook;
-    }
+  /**
+   * Gets the value of the addressbook property.
+   *
+   * @return possible object is
+   *         {@link AddressbookType }
+   */
+  public AddressbookType getAddressbook() {
+    return addressbook;
+  }
 
-    /**
-     * Sets the value of the addressbook property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AddressbookType }
-     *     
-     */
-    public void setAddressbook(AddressbookType value) {
-        this.addressbook = value;
-    }
+  /**
+   * Sets the value of the addressbook property.
+   *
+   * @param value allowed object is
+   *              {@link AddressbookType }
+   */
+  public void setAddressbook(AddressbookType value) {
+    this.addressbook = value;
+  }
 
-    /**
-     * Gets the value of the invoice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link InvoiceType }
-     *     
-     */
-    public InvoiceType getInvoice() {
-        return invoice;
-    }
+  /**
+   * Gets the value of the invoice property.
+   *
+   * @return possible object is
+   *         {@link InvoiceType }
+   */
+  public InvoiceType getInvoice() {
+    return invoice;
+  }
 
-    /**
-     * Sets the value of the invoice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link InvoiceType }
-     *     
-     */
-    public void setInvoice(InvoiceType value) {
-        this.invoice = value;
-    }
+  /**
+   * Sets the value of the invoice property.
+   *
+   * @param value allowed object is
+   *              {@link InvoiceType }
+   */
+  public void setInvoice(InvoiceType value) {
+    this.invoice = value;
+  }
 
-    /**
-     * Gets the value of the listAddressBookRequest property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ListAddressBookRequestType }
-     *     
-     */
-    public ListAddressBookRequestType getListAddressBookRequest() {
-        return listAddressBookRequest;
-    }
+  /**
+   * Gets the value of the listAddressBookRequest property.
+   *
+   * @return possible object is
+   *         {@link ListAddressBookRequestType }
+   */
+  public ListAddressBookRequestType getListAddressBookRequest() {
+    return listAddressBookRequest;
+  }
 
-    /**
-     * Sets the value of the listAddressBookRequest property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ListAddressBookRequestType }
-     *     
-     */
-    public void setListAddressBookRequest(ListAddressBookRequestType value) {
-        this.listAddressBookRequest = value;
-    }
+  /**
+   * Sets the value of the listAddressBookRequest property.
+   *
+   * @param value allowed object is
+   *              {@link ListAddressBookRequestType }
+   */
+  public void setListAddressBookRequest(ListAddressBookRequestType value) {
+    this.listAddressBookRequest = value;
+  }
 
-    /**
-     * Gets the value of the listInvoiceRequest property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ListInvoiceRequestType }
-     *     
-     */
-    public ListInvoiceRequestType getListInvoiceRequest() {
-        return listInvoiceRequest;
-    }
+  /**
+   * Gets the value of the listInvoiceRequest property.
+   *
+   * @return possible object is
+   *         {@link ListInvoiceRequestType }
+   */
+  public ListInvoiceRequestType getListInvoiceRequest() {
+    return listInvoiceRequest;
+  }
 
-    /**
-     * Sets the value of the listInvoiceRequest property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ListInvoiceRequestType }
-     *     
-     */
-    public void setListInvoiceRequest(ListInvoiceRequestType value) {
-        this.listInvoiceRequest = value;
-    }
+  /**
+   * Sets the value of the listInvoiceRequest property.
+   *
+   * @param value allowed object is
+   *              {@link ListInvoiceRequestType }
+   */
+  public void setListInvoiceRequest(ListInvoiceRequestType value) {
+    this.listInvoiceRequest = value;
+  }
 
-    /**
-     * Gets the value of the version property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getVersion() {
-        return version;
-    }
+  /**
+   * Gets the value of the version property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getVersion() {
+    return version;
+  }
 
-    /**
-     * Sets the value of the version property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setVersion(String value) {
-        this.version = value;
-    }
+  /**
+   * Sets the value of the version property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setVersion(String value) {
+    this.version = value;
+  }
 
-    /**
-     * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getId() {
-        return id;
-    }
+  /**
+   * Gets the value of the id property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getId() {
+    return id;
+  }
 
-    /**
-     * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setId(String value) {
-        this.id = value;
-    }
+  /**
+   * Sets the value of the id property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setId(String value) {
+    this.id = value;
+  }
 
 }

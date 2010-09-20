@@ -10,7 +10,7 @@ import java.util.Comparator;
 /**
  * Customer data object with no logic. It contains only fields needed for
  * synchronization.
- * 
+ *
  * @author Richard Sikora
  */
 public class Customer implements ItemIdentity {

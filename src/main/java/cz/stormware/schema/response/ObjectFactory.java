@@ -15,54 +15,49 @@ import javax.xml.namespace.QName;
 
 
 /**
- * This object contains factory methods for each 
- * Java content interface and Java element interface 
- * generated in the cz.stormware.schema.response package. 
- * <p>An ObjectFactory allows you to programatically 
- * construct new instances of the Java representation 
- * for XML content. The Java representation of XML 
- * content can consist of schema derived interfaces 
- * and classes representing the binding of schema 
- * type definitions, element declarations and model 
- * groups.  Factory methods for each of these are 
+ * This object contains factory methods for each
+ * Java content interface and Java element interface
+ * generated in the cz.stormware.schema.response package.
+ * <p>An ObjectFactory allows you to programatically
+ * construct new instances of the Java representation
+ * for XML content. The Java representation of XML
+ * content can consist of schema derived interfaces
+ * and classes representing the binding of schema
+ * type definitions, element declarations and model
+ * groups.  Factory methods for each of these are
  * provided in this class.
- * 
  */
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _ResponsePack_QNAME = new QName("http://www.stormware.cz/schema/response.xsd", "responsePack");
+  private final static QName _ResponsePack_QNAME = new QName("http://www.stormware.cz/schema/response.xsd", "responsePack");
 
-    /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: cz.stormware.schema.response
-     * 
-     */
-    public ObjectFactory() {
-    }
+  /**
+   * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: cz.stormware.schema.response
+   */
+  public ObjectFactory() {
+  }
 
-    /**
-     * Create an instance of {@link ResponsePackItemType }
-     * 
-     */
-    public ResponsePackItemType createResponsePackItemType() {
-        return new ResponsePackItemType();
-    }
+  /**
+   * Create an instance of {@link ResponsePackItemType }
+   */
+  public ResponsePackItemType createResponsePackItemType() {
+    return new ResponsePackItemType();
+  }
 
-    /**
-     * Create an instance of {@link ResponsePackType }
-     * 
-     */
-    public ResponsePackType createResponsePackType() {
-        return new ResponsePackType();
-    }
+  /**
+   * Create an instance of {@link ResponsePackType }
+   */
+  public ResponsePackType createResponsePackType() {
+    return new ResponsePackType();
+  }
 
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ResponsePackType }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.stormware.cz/schema/response.xsd", name = "responsePack")
-    public JAXBElement<ResponsePackType> createResponsePack(ResponsePackType value) {
-        return new JAXBElement<ResponsePackType>(_ResponsePack_QNAME, ResponsePackType.class, null, value);
-    }
+  /**
+   * Create an instance of {@link JAXBElement }{@code <}{@link ResponsePackType }{@code >}}
+   */
+  @XmlElementDecl(namespace = "http://www.stormware.cz/schema/response.xsd", name = "responsePack")
+  public JAXBElement<ResponsePackType> createResponsePack(ResponsePackType value) {
+    return new JAXBElement<ResponsePackType>(_ResponsePack_QNAME, ResponsePackType.class, null, value);
+  }
 
 }

@@ -15,11 +15,11 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * Adresa ú\u010detní jednotky.
- * 
+ * <p/>
  * <p>Java class for addressInternetType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="addressInternetType">
  *   &lt;complexContent>
@@ -45,8 +45,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "addressInternetType", propOrder = {
@@ -68,380 +66,320 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class AddressInternetType {
 
-    protected String company;
-    protected String title;
-    protected String surname;
-    protected String name;
-    protected String city;
-    protected String street;
-    protected String number;
-    protected String zip;
-    protected String ico;
-    protected String dic;
-    protected String phone;
-    protected String mobilPhone;
-    protected String fax;
-    protected String email;
-    protected String www;
+  protected String company;
+  protected String title;
+  protected String surname;
+  protected String name;
+  protected String city;
+  protected String street;
+  protected String number;
+  protected String zip;
+  protected String ico;
+  protected String dic;
+  protected String phone;
+  protected String mobilPhone;
+  protected String fax;
+  protected String email;
+  protected String www;
 
-    /**
-     * Gets the value of the company property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCompany() {
-        return company;
-    }
+  /**
+   * Gets the value of the company property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getCompany() {
+    return company;
+  }
 
-    /**
-     * Sets the value of the company property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCompany(String value) {
-        this.company = value;
-    }
+  /**
+   * Sets the value of the company property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setCompany(String value) {
+    this.company = value;
+  }
 
-    /**
-     * Gets the value of the title property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getTitle() {
-        return title;
-    }
+  /**
+   * Gets the value of the title property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getTitle() {
+    return title;
+  }
 
-    /**
-     * Sets the value of the title property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setTitle(String value) {
-        this.title = value;
-    }
+  /**
+   * Sets the value of the title property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setTitle(String value) {
+    this.title = value;
+  }
 
-    /**
-     * Gets the value of the surname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getSurname() {
-        return surname;
-    }
+  /**
+   * Gets the value of the surname property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getSurname() {
+    return surname;
+  }
 
-    /**
-     * Sets the value of the surname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSurname(String value) {
-        this.surname = value;
-    }
+  /**
+   * Sets the value of the surname property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setSurname(String value) {
+    this.surname = value;
+  }
 
-    /**
-     * Gets the value of the name property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getName() {
-        return name;
-    }
+  /**
+   * Gets the value of the name property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getName() {
+    return name;
+  }
 
-    /**
-     * Sets the value of the name property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setName(String value) {
-        this.name = value;
-    }
+  /**
+   * Sets the value of the name property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setName(String value) {
+    this.name = value;
+  }
 
-    /**
-     * Gets the value of the city property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCity() {
-        return city;
-    }
+  /**
+   * Gets the value of the city property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getCity() {
+    return city;
+  }
 
-    /**
-     * Sets the value of the city property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCity(String value) {
-        this.city = value;
-    }
+  /**
+   * Sets the value of the city property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setCity(String value) {
+    this.city = value;
+  }
 
-    /**
-     * Gets the value of the street property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getStreet() {
-        return street;
-    }
+  /**
+   * Gets the value of the street property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getStreet() {
+    return street;
+  }
 
-    /**
-     * Sets the value of the street property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setStreet(String value) {
-        this.street = value;
-    }
+  /**
+   * Sets the value of the street property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setStreet(String value) {
+    this.street = value;
+  }
 
-    /**
-     * Gets the value of the number property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getNumber() {
-        return number;
-    }
+  /**
+   * Gets the value of the number property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getNumber() {
+    return number;
+  }
 
-    /**
-     * Sets the value of the number property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setNumber(String value) {
-        this.number = value;
-    }
+  /**
+   * Sets the value of the number property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setNumber(String value) {
+    this.number = value;
+  }
 
-    /**
-     * Gets the value of the zip property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getZip() {
-        return zip;
-    }
+  /**
+   * Gets the value of the zip property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getZip() {
+    return zip;
+  }
 
-    /**
-     * Sets the value of the zip property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setZip(String value) {
-        this.zip = value;
-    }
+  /**
+   * Sets the value of the zip property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setZip(String value) {
+    this.zip = value;
+  }
 
-    /**
-     * Gets the value of the ico property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getIco() {
-        return ico;
-    }
+  /**
+   * Gets the value of the ico property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getIco() {
+    return ico;
+  }
 
-    /**
-     * Sets the value of the ico property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setIco(String value) {
-        this.ico = value;
-    }
+  /**
+   * Sets the value of the ico property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setIco(String value) {
+    this.ico = value;
+  }
 
-    /**
-     * Gets the value of the dic property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getDic() {
-        return dic;
-    }
+  /**
+   * Gets the value of the dic property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getDic() {
+    return dic;
+  }
 
-    /**
-     * Sets the value of the dic property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setDic(String value) {
-        this.dic = value;
-    }
+  /**
+   * Sets the value of the dic property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setDic(String value) {
+    this.dic = value;
+  }
 
-    /**
-     * Gets the value of the phone property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getPhone() {
-        return phone;
-    }
+  /**
+   * Gets the value of the phone property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getPhone() {
+    return phone;
+  }
 
-    /**
-     * Sets the value of the phone property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setPhone(String value) {
-        this.phone = value;
-    }
+  /**
+   * Sets the value of the phone property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setPhone(String value) {
+    this.phone = value;
+  }
 
-    /**
-     * Gets the value of the mobilPhone property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getMobilPhone() {
-        return mobilPhone;
-    }
+  /**
+   * Gets the value of the mobilPhone property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getMobilPhone() {
+    return mobilPhone;
+  }
 
-    /**
-     * Sets the value of the mobilPhone property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setMobilPhone(String value) {
-        this.mobilPhone = value;
-    }
+  /**
+   * Sets the value of the mobilPhone property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setMobilPhone(String value) {
+    this.mobilPhone = value;
+  }
 
-    /**
-     * Gets the value of the fax property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getFax() {
-        return fax;
-    }
+  /**
+   * Gets the value of the fax property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getFax() {
+    return fax;
+  }
 
-    /**
-     * Sets the value of the fax property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setFax(String value) {
-        this.fax = value;
-    }
+  /**
+   * Sets the value of the fax property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setFax(String value) {
+    this.fax = value;
+  }
 
-    /**
-     * Gets the value of the email property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getEmail() {
-        return email;
-    }
+  /**
+   * Gets the value of the email property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getEmail() {
+    return email;
+  }
 
-    /**
-     * Sets the value of the email property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setEmail(String value) {
-        this.email = value;
-    }
+  /**
+   * Sets the value of the email property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setEmail(String value) {
+    this.email = value;
+  }
 
-    /**
-     * Gets the value of the www property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getWww() {
-        return www;
-    }
+  /**
+   * Gets the value of the www property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getWww() {
+    return www;
+  }
 
-    /**
-     * Sets the value of the www property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setWww(String value) {
-        this.www = value;
-    }
+  /**
+   * Sets the value of the www property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setWww(String value) {
+    this.www = value;
+  }
 
 }

@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for typeCurrencyHome complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="typeCurrencyHome">
  *   &lt;complexContent>
@@ -36,8 +36,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "typeCurrencyHome", propOrder = {
@@ -52,205 +50,173 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TypeCurrencyHome {
 
-    protected Double priceNone;
-    protected Double priceLow;
-    protected Double priceLowVAT;
-    protected Double priceLowSum;
-    protected Double priceHigh;
-    protected Double priceHighVAT;
-    protected Double priceHighSum;
-    protected TypeRound round;
+  protected Double priceNone;
+  protected Double priceLow;
+  protected Double priceLowVAT;
+  protected Double priceLowSum;
+  protected Double priceHigh;
+  protected Double priceHighVAT;
+  protected Double priceHighSum;
+  protected TypeRound round;
 
-    /**
-     * Gets the value of the priceNone property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getPriceNone() {
-        return priceNone;
-    }
+  /**
+   * Gets the value of the priceNone property.
+   *
+   * @return possible object is
+   *         {@link Double }
+   */
+  public Double getPriceNone() {
+    return priceNone;
+  }
 
-    /**
-     * Sets the value of the priceNone property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
-     */
-    public void setPriceNone(Double value) {
-        this.priceNone = value;
-    }
+  /**
+   * Sets the value of the priceNone property.
+   *
+   * @param value allowed object is
+   *              {@link Double }
+   */
+  public void setPriceNone(Double value) {
+    this.priceNone = value;
+  }
 
-    /**
-     * Gets the value of the priceLow property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getPriceLow() {
-        return priceLow;
-    }
+  /**
+   * Gets the value of the priceLow property.
+   *
+   * @return possible object is
+   *         {@link Double }
+   */
+  public Double getPriceLow() {
+    return priceLow;
+  }
 
-    /**
-     * Sets the value of the priceLow property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
-     */
-    public void setPriceLow(Double value) {
-        this.priceLow = value;
-    }
+  /**
+   * Sets the value of the priceLow property.
+   *
+   * @param value allowed object is
+   *              {@link Double }
+   */
+  public void setPriceLow(Double value) {
+    this.priceLow = value;
+  }
 
-    /**
-     * Gets the value of the priceLowVAT property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getPriceLowVAT() {
-        return priceLowVAT;
-    }
+  /**
+   * Gets the value of the priceLowVAT property.
+   *
+   * @return possible object is
+   *         {@link Double }
+   */
+  public Double getPriceLowVAT() {
+    return priceLowVAT;
+  }
 
-    /**
-     * Sets the value of the priceLowVAT property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
-     */
-    public void setPriceLowVAT(Double value) {
-        this.priceLowVAT = value;
-    }
+  /**
+   * Sets the value of the priceLowVAT property.
+   *
+   * @param value allowed object is
+   *              {@link Double }
+   */
+  public void setPriceLowVAT(Double value) {
+    this.priceLowVAT = value;
+  }
 
-    /**
-     * Gets the value of the priceLowSum property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getPriceLowSum() {
-        return priceLowSum;
-    }
+  /**
+   * Gets the value of the priceLowSum property.
+   *
+   * @return possible object is
+   *         {@link Double }
+   */
+  public Double getPriceLowSum() {
+    return priceLowSum;
+  }
 
-    /**
-     * Sets the value of the priceLowSum property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
-     */
-    public void setPriceLowSum(Double value) {
-        this.priceLowSum = value;
-    }
+  /**
+   * Sets the value of the priceLowSum property.
+   *
+   * @param value allowed object is
+   *              {@link Double }
+   */
+  public void setPriceLowSum(Double value) {
+    this.priceLowSum = value;
+  }
 
-    /**
-     * Gets the value of the priceHigh property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getPriceHigh() {
-        return priceHigh;
-    }
+  /**
+   * Gets the value of the priceHigh property.
+   *
+   * @return possible object is
+   *         {@link Double }
+   */
+  public Double getPriceHigh() {
+    return priceHigh;
+  }
 
-    /**
-     * Sets the value of the priceHigh property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
-     */
-    public void setPriceHigh(Double value) {
-        this.priceHigh = value;
-    }
+  /**
+   * Sets the value of the priceHigh property.
+   *
+   * @param value allowed object is
+   *              {@link Double }
+   */
+  public void setPriceHigh(Double value) {
+    this.priceHigh = value;
+  }
 
-    /**
-     * Gets the value of the priceHighVAT property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getPriceHighVAT() {
-        return priceHighVAT;
-    }
+  /**
+   * Gets the value of the priceHighVAT property.
+   *
+   * @return possible object is
+   *         {@link Double }
+   */
+  public Double getPriceHighVAT() {
+    return priceHighVAT;
+  }
 
-    /**
-     * Sets the value of the priceHighVAT property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
-     */
-    public void setPriceHighVAT(Double value) {
-        this.priceHighVAT = value;
-    }
+  /**
+   * Sets the value of the priceHighVAT property.
+   *
+   * @param value allowed object is
+   *              {@link Double }
+   */
+  public void setPriceHighVAT(Double value) {
+    this.priceHighVAT = value;
+  }
 
-    /**
-     * Gets the value of the priceHighSum property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getPriceHighSum() {
-        return priceHighSum;
-    }
+  /**
+   * Gets the value of the priceHighSum property.
+   *
+   * @return possible object is
+   *         {@link Double }
+   */
+  public Double getPriceHighSum() {
+    return priceHighSum;
+  }
 
-    /**
-     * Sets the value of the priceHighSum property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
-     */
-    public void setPriceHighSum(Double value) {
-        this.priceHighSum = value;
-    }
+  /**
+   * Sets the value of the priceHighSum property.
+   *
+   * @param value allowed object is
+   *              {@link Double }
+   */
+  public void setPriceHighSum(Double value) {
+    this.priceHighSum = value;
+  }
 
-    /**
-     * Gets the value of the round property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TypeRound }
-     *     
-     */
-    public TypeRound getRound() {
-        return round;
-    }
+  /**
+   * Gets the value of the round property.
+   *
+   * @return possible object is
+   *         {@link TypeRound }
+   */
+  public TypeRound getRound() {
+    return round;
+  }
 
-    /**
-     * Sets the value of the round property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TypeRound }
-     *     
-     */
-    public void setRound(TypeRound value) {
-        this.round = value;
-    }
+  /**
+   * Sets the value of the round property.
+   *
+   * @param value allowed object is
+   *              {@link TypeRound }
+   */
+  public void setRound(TypeRound value) {
+    this.round = value;
+  }
 
 }

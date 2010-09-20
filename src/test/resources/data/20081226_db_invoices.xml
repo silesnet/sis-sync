@@ -1,24 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-	<customers id='1' name='Test Customer1' symbol="1001" city="Test City"	account_no="1234567891" bank_no="2401" updated="2008-12-23 05:00:00" />
-	<customers id='2' name='Test Customer2' symbol="1002" city="Test City"	account_no="1234567892" bank_no="2402" updated="2008-12-23 05:00:00" />
-	<customers id='3' name='Test Customer3' symbol="1003" city="Test City"	account_no="1234567893" bank_no="2403" updated="2008-12-23 05:00:00" />
-	
-	<bills id="1" number="200800001" billing_date="2008-12-03" purge_date="2008-12-17" customer_id="1" invoicing_id="1" customer_name="Old Test Customer1" period_from="2008-12-01" period_to="2008-12-31" vat="19" hash_code="#1234567891#" synchronized="2008-12-23 05:00:00" />
-	<bills id="2" number="200800002" billing_date="2008-12-03" purge_date="2008-12-17" customer_id="2" invoicing_id="1" customer_name="Old Test Customer2" period_from="2008-12-01" period_to="2008-12-31" vat="19" hash_code="#1234567892#" synchronized="2008-12-23 05:00:00" />
-	<bills id="3" number="200800003" billing_date="2009-01-05" purge_date="2009-01-19" customer_id="1" invoicing_id="2" customer_name="Old Test Customer1" period_from="2009-01-01" period_to="2009-01-31" vat="19" hash_code="#1234567893#" />
-	<bills id="4" number="200800004" billing_date="2009-01-05" purge_date="2009-01-19" customer_id="2" invoicing_id="2" customer_name="Old Test Customer2" period_from="2009-01-01" period_to="2009-01-31" vat="19" hash_code="#1234567894#" />
-	<bills id="5" number="200800005" billing_date="2009-01-05" purge_date="2009-01-19" customer_id="3" invoicing_id="2" customer_name="Old Test Customer3" period_from="2009-01-01" period_to="2009-01-31" vat="19" hash_code="#1234567895#" />
-	<bills id="6" number="200800001" billing_date="2009-01-05" purge_date="2009-01-19" customer_id="3" invoicing_id="3" customer_name="Old Test Customer3" period_from="2009-01-01" period_to="2009-01-31" vat="19" hash_code="#1234567896#" />
-	
-	<bill_items bill_id="3" text="Connectivity 1 1024/512 kbps" amount="1.0" price="120" is_display_unit="true" />
-	<bill_items bill_id="4" text="Connectivity 2" amount="2.0" price="120" is_display_unit="true" />
-	<bill_items bill_id="5" text="Connectivity 1 256/126 kbps FUP" amount="2.0" price="60" is_display_unit="true" />
-	<bill_items bill_id="5" text="Connectivity 3" amount="1.0" price="10" is_display_unit="false" />
-    <bill_items bill_id="6" text="Connectivity 1 256/126 kbps FUP" amount="2.0" price="60" is_display_unit="true" />
-    
-    <invoicings id="1" name="Invoicing CZ 1" country="10" /> 
-    <invoicings id="2" name="Invoicing CZ 2" country="10" /> 
-    <invoicings id="3" name="Invoicing PL 1" country="20" /> 
-    
+  <customers id='1' name='Test Customer1' symbol="1001" city="Test City" account_no="1234567891" bank_no="2401"
+             updated="2008-12-23 05:00:00" />
+  <customers id='2' name='Test Customer2' symbol="1002" city="Test City" account_no="1234567892" bank_no="2402"
+             updated="2008-12-23 05:00:00" />
+  <customers id='3' name='Test Customer3' symbol="1003" city="Test City" account_no="1234567893" bank_no="2403"
+             updated="2008-12-23 05:00:00" />
+
+  <bills id="1" number="200800001" billing_date="2008-12-03" purge_date="2008-12-17" customer_id="1" invoicing_id="1"
+         customer_name="Old Test Customer1" period_from="2008-12-01" period_to="2008-12-31" vat="19"
+         hash_code="#1234567891#" synchronized="2008-12-23 05:00:00" />
+  <bills id="2" number="200800002" billing_date="2008-12-03" purge_date="2008-12-17" customer_id="2" invoicing_id="1"
+         customer_name="Old Test Customer2" period_from="2008-12-01" period_to="2008-12-31" vat="19"
+         hash_code="#1234567892#" synchronized="2008-12-23 05:00:00" />
+  <bills id="3" number="200800003" billing_date="2009-01-05" purge_date="2009-01-19" customer_id="1" invoicing_id="2"
+         customer_name="Old Test Customer1" period_from="2009-01-01" period_to="2009-01-31" vat="19"
+         hash_code="#1234567893#" />
+  <bills id="4" number="200800004" billing_date="2009-01-05" purge_date="2009-01-19" customer_id="2" invoicing_id="2"
+         customer_name="Old Test Customer2" period_from="2009-01-01" period_to="2009-01-31" vat="19"
+         hash_code="#1234567894#" />
+  <bills id="5" number="200800005" billing_date="2009-01-05" purge_date="2009-01-19" customer_id="3" invoicing_id="2"
+         customer_name="Old Test Customer3" period_from="2009-01-01" period_to="2009-01-31" vat="19"
+         hash_code="#1234567895#" />
+  <bills id="6" number="200800001" billing_date="2009-01-05" purge_date="2009-01-19" customer_id="3" invoicing_id="3"
+         customer_name="Old Test Customer3" period_from="2009-01-01" period_to="2009-01-31" vat="19"
+         hash_code="#1234567896#" />
+
+  <bill_items bill_id="3" text="Connectivity 1 1024/512 kbps" amount="1.0" price="120" is_display_unit="true" />
+  <bill_items bill_id="4" text="Connectivity 2" amount="2.0" price="120" is_display_unit="true" />
+  <bill_items bill_id="5" text="Connectivity 1 256/126 kbps FUP" amount="2.0" price="60" is_display_unit="true" />
+  <bill_items bill_id="5" text="Connectivity 3" amount="1.0" price="10" is_display_unit="false" />
+  <bill_items bill_id="6" text="Connectivity 1 256/126 kbps FUP" amount="2.0" price="60" is_display_unit="true" />
+
+  <invoicings id="1" name="Invoicing CZ 1" country="10" />
+  <invoicings id="2" name="Invoicing CZ 2" country="10" />
+  <invoicings id="3" name="Invoicing PL 1" country="20" />
+
 </dataset>

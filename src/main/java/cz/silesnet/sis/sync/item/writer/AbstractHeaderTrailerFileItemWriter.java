@@ -17,14 +17,13 @@ import org.springframework.core.io.Resource;
 /**
  * Abstract implementation of file ItemWriter with header and trailer. Delegates
  * to {@link FlatFileItemWriter}.
- * 
+ *
  * @author sikorric
- * 
  */
 public abstract class AbstractHeaderTrailerFileItemWriter<T>
     implements
-      ResourceAwareItemWriterItemStream<T>,
-      InitializingBean {
+    ResourceAwareItemWriterItemStream<T>,
+    InitializingBean {
 
   private long itemsWritten = 0;
   private final FlatFileItemWriter<String> itemWriter;

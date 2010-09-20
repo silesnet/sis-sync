@@ -18,9 +18,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for itemType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="itemType">
  *   &lt;complexContent>
@@ -31,8 +31,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "itemType")
@@ -42,57 +40,49 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class ItemType {
 
-    @XmlAttribute(required = true)
-    protected BigInteger id;
-    @XmlAttribute(required = true)
-    protected String code;
+  @XmlAttribute(required = true)
+  protected BigInteger id;
+  @XmlAttribute(required = true)
+  protected String code;
 
-    /**
-     * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getId() {
-        return id;
-    }
+  /**
+   * Gets the value of the id property.
+   *
+   * @return possible object is
+   *         {@link BigInteger }
+   */
+  public BigInteger getId() {
+    return id;
+  }
 
-    /**
-     * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setId(BigInteger value) {
-        this.id = value;
-    }
+  /**
+   * Sets the value of the id property.
+   *
+   * @param value allowed object is
+   *              {@link BigInteger }
+   */
+  public void setId(BigInteger value) {
+    this.id = value;
+  }
 
-    /**
-     * Gets the value of the code property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCode() {
-        return code;
-    }
+  /**
+   * Gets the value of the code property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getCode() {
+    return code;
+  }
 
-    /**
-     * Sets the value of the code property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCode(String value) {
-        this.code = value;
-    }
+  /**
+   * Sets the value of the code property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setCode(String value) {
+    this.code = value;
+  }
 
 }

@@ -17,9 +17,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for invoiceType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="invoiceType">
  *   &lt;complexContent>
@@ -34,8 +34,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "invoiceType", propOrder = {
@@ -45,107 +43,91 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class InvoiceType {
 
-    @XmlElement(required = true)
-    protected InvoiceHeaderType invoiceHeader;
-    protected InvoiceDetailType invoiceDetail;
-    protected InvoiceSummaryType invoiceSummary;
-    @XmlAttribute(required = true)
-    protected String version;
+  @XmlElement(required = true)
+  protected InvoiceHeaderType invoiceHeader;
+  protected InvoiceDetailType invoiceDetail;
+  protected InvoiceSummaryType invoiceSummary;
+  @XmlAttribute(required = true)
+  protected String version;
 
-    /**
-     * Gets the value of the invoiceHeader property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link InvoiceHeaderType }
-     *     
-     */
-    public InvoiceHeaderType getInvoiceHeader() {
-        return invoiceHeader;
-    }
+  /**
+   * Gets the value of the invoiceHeader property.
+   *
+   * @return possible object is
+   *         {@link InvoiceHeaderType }
+   */
+  public InvoiceHeaderType getInvoiceHeader() {
+    return invoiceHeader;
+  }
 
-    /**
-     * Sets the value of the invoiceHeader property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link InvoiceHeaderType }
-     *     
-     */
-    public void setInvoiceHeader(InvoiceHeaderType value) {
-        this.invoiceHeader = value;
-    }
+  /**
+   * Sets the value of the invoiceHeader property.
+   *
+   * @param value allowed object is
+   *              {@link InvoiceHeaderType }
+   */
+  public void setInvoiceHeader(InvoiceHeaderType value) {
+    this.invoiceHeader = value;
+  }
 
-    /**
-     * Gets the value of the invoiceDetail property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link InvoiceDetailType }
-     *     
-     */
-    public InvoiceDetailType getInvoiceDetail() {
-        return invoiceDetail;
-    }
+  /**
+   * Gets the value of the invoiceDetail property.
+   *
+   * @return possible object is
+   *         {@link InvoiceDetailType }
+   */
+  public InvoiceDetailType getInvoiceDetail() {
+    return invoiceDetail;
+  }
 
-    /**
-     * Sets the value of the invoiceDetail property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link InvoiceDetailType }
-     *     
-     */
-    public void setInvoiceDetail(InvoiceDetailType value) {
-        this.invoiceDetail = value;
-    }
+  /**
+   * Sets the value of the invoiceDetail property.
+   *
+   * @param value allowed object is
+   *              {@link InvoiceDetailType }
+   */
+  public void setInvoiceDetail(InvoiceDetailType value) {
+    this.invoiceDetail = value;
+  }
 
-    /**
-     * Gets the value of the invoiceSummary property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link InvoiceSummaryType }
-     *     
-     */
-    public InvoiceSummaryType getInvoiceSummary() {
-        return invoiceSummary;
-    }
+  /**
+   * Gets the value of the invoiceSummary property.
+   *
+   * @return possible object is
+   *         {@link InvoiceSummaryType }
+   */
+  public InvoiceSummaryType getInvoiceSummary() {
+    return invoiceSummary;
+  }
 
-    /**
-     * Sets the value of the invoiceSummary property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link InvoiceSummaryType }
-     *     
-     */
-    public void setInvoiceSummary(InvoiceSummaryType value) {
-        this.invoiceSummary = value;
-    }
+  /**
+   * Sets the value of the invoiceSummary property.
+   *
+   * @param value allowed object is
+   *              {@link InvoiceSummaryType }
+   */
+  public void setInvoiceSummary(InvoiceSummaryType value) {
+    this.invoiceSummary = value;
+  }
 
-    /**
-     * Gets the value of the version property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getVersion() {
-        return version;
-    }
+  /**
+   * Gets the value of the version property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getVersion() {
+    return version;
+  }
 
-    /**
-     * Sets the value of the version property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setVersion(String value) {
-        this.version = value;
-    }
+  /**
+   * Sets the value of the version property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setVersion(String value) {
+    this.version = value;
+  }
 
 }

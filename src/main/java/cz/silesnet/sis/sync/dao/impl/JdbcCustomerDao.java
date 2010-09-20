@@ -13,28 +13,27 @@ import cz.silesnet.sis.sync.mapping.CustomerRowMapper;
 
 /**
  * Implements CustomerDao using Sping's JdbcTemplate.
- * 
+ *
  * @author rsi
- * 
  */
 public class JdbcCustomerDao implements CustomerDao {
 
-    private static final String CUSTOMER_SQL = "SELECT * FROM customers WHERE id = ?";
+  private static final String CUSTOMER_SQL = "SELECT * FROM customers WHERE id = ?";
 
-    private JdbcTemplate template;
+  private JdbcTemplate template;
 
-    public void setJdbcTemplate(JdbcTemplate template) {
-        this.template = template;
+  public void setJdbcTemplate(JdbcTemplate template) {
+    this.template = template;
+  }
+
+  public Customer find(long id) {
+    Customer customer = null;
+    try {
+      customer = (Customer) template.queryForObject(CUSTOMER_SQL, new Object[]{id}, new CustomerRowMapper());
+    } catch (DataAccessException e) {
+      throw new IllegalArgumentException(e);
     }
-
-    public Customer find(long id) {
-        Customer customer = null;
-        try {
-            customer = (Customer) template.queryForObject(CUSTOMER_SQL, new Object[] { id }, new CustomerRowMapper());
-        } catch (DataAccessException e) {
-            throw new IllegalArgumentException(e);
-        }
-        return customer;
-    }
+    return customer;
+  }
 
 }

@@ -1,19 +1,38 @@
 <?xml version="1.0" encoding="Windows-1250"?>
-<rsp:responsePack version="1.1" id="11E6F9FA0F6" state="ok" note="" xmlns:rsp="http://www.stormware.cz/schema/response.xsd" xmlns:rdc="http://www.stormware.cz/schema/documentresponse.xsd" xmlns:typ="http://www.stormware.cz/schema/type.xsd" xmlns:lst="http://www.stormware.cz/schema/list.xsd" xmlns:acu="http://www.stormware.cz/schema/accountingunit.xsd" xmlns:inv="http://www.stormware.cz/schema/invoice.xsd" xmlns:vch="http://www.stormware.cz/schema/voucher.xsd" xmlns:int="http://www.stormware.cz/schema/intDoc.xsd" xmlns:stk="http://www.stormware.cz/schema/stock.xsd" xmlns:ord="http://www.stormware.cz/schema/order.xsd" xmlns:ofr="http://www.stormware.cz/schema/offer.xsd" xmlns:enq="http://www.stormware.cz/schema/enquiry.xsd" xmlns:vyd="http://www.stormware.cz/schema/vydejka.xsd" xmlns:pri="http://www.stormware.cz/schema/prijemka.xsd" xmlns:pre="http://www.stormware.cz/schema/prevodka.xsd" xmlns:vyr="http://www.stormware.cz/schema/vyroba.xsd" xmlns:pro="http://www.stormware.cz/schema/prodejka.xsd" xmlns:adb="http://www.stormware.cz/schema/addressbook.xsd" xmlns:prm="http://www.stormware.cz/schema/parameter.xsd">
-<rsp:responsePackItem version="1.0" id="11E6F9FA0F6_00000000_123456" state="ok">
-	<adb:addressbookResponse version="1.4" state="ok">
-		<rdc:producedDetails>
-			<rdc:id>1</rdc:id>
-			<rdc:code>Test Customer 0</rdc:code>
-		</rdc:producedDetails>
-	</adb:addressbookResponse>
-</rsp:responsePackItem>
-<rsp:responsePackItem version="1.0" id="11E6F9FA0F6_00000001_123457" state="ok">
-	<adb:addressbookResponse version="1.4" state="ok">
-		<rdc:producedDetails>
-			<rdc:id>2</rdc:id>
-			<rdc:code>Test Customer 1</rdc:code>
-		</rdc:producedDetails>
-	</adb:addressbookResponse>
-</rsp:responsePackItem>
+<rsp:responsePack version="1.1" id="11E6F9FA0F6" state="ok" note=""
+                  xmlns:rsp="http://www.stormware.cz/schema/response.xsd"
+                  xmlns:rdc="http://www.stormware.cz/schema/documentresponse.xsd"
+                  xmlns:typ="http://www.stormware.cz/schema/type.xsd"
+                  xmlns:lst="http://www.stormware.cz/schema/list.xsd"
+                  xmlns:acu="http://www.stormware.cz/schema/accountingunit.xsd"
+                  xmlns:inv="http://www.stormware.cz/schema/invoice.xsd"
+                  xmlns:vch="http://www.stormware.cz/schema/voucher.xsd"
+                  xmlns:int="http://www.stormware.cz/schema/intDoc.xsd"
+                  xmlns:stk="http://www.stormware.cz/schema/stock.xsd"
+                  xmlns:ord="http://www.stormware.cz/schema/order.xsd"
+                  xmlns:ofr="http://www.stormware.cz/schema/offer.xsd"
+                  xmlns:enq="http://www.stormware.cz/schema/enquiry.xsd"
+                  xmlns:vyd="http://www.stormware.cz/schema/vydejka.xsd"
+                  xmlns:pri="http://www.stormware.cz/schema/prijemka.xsd"
+                  xmlns:pre="http://www.stormware.cz/schema/prevodka.xsd"
+                  xmlns:vyr="http://www.stormware.cz/schema/vyroba.xsd"
+                  xmlns:pro="http://www.stormware.cz/schema/prodejka.xsd"
+                  xmlns:adb="http://www.stormware.cz/schema/addressbook.xsd"
+                  xmlns:prm="http://www.stormware.cz/schema/parameter.xsd">
+  <rsp:responsePackItem version="1.0" id="11E6F9FA0F6_00000000_123456" state="ok">
+    <adb:addressbookResponse version="1.4" state="ok">
+      <rdc:producedDetails>
+        <rdc:id>1</rdc:id>
+        <rdc:code>Test Customer 0</rdc:code>
+      </rdc:producedDetails>
+    </adb:addressbookResponse>
+  </rsp:responsePackItem>
+  <rsp:responsePackItem version="1.0" id="11E6F9FA0F6_00000001_123457" state="ok">
+    <adb:addressbookResponse version="1.4" state="ok">
+      <rdc:producedDetails>
+        <rdc:id>2</rdc:id>
+        <rdc:code>Test Customer 1</rdc:code>
+      </rdc:producedDetails>
+    </adb:addressbookResponse>
+  </rsp:responsePackItem>
 </rsp:responsePack>

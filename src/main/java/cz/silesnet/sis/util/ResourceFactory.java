@@ -8,16 +8,15 @@ import org.springframework.core.io.Resource;
 
 /**
  * Factory for creating resource in batch runtime context.
- * 
+ *
  * @author rsi
- * 
  */
 public interface ResourceFactory {
-    /**
-     * Return resource within batch runtime context.
-     * 
-     * @param fileSuffix
-     * @return new resource
-     */
-    public Resource createInstance(String fileSuffix);
+  /**
+   * Return resource within batch runtime context.
+   *
+   * @param fileSuffix
+   * @return new resource
+   */
+  public Resource createInstance(String fileSuffix);
 }

@@ -24,9 +24,8 @@ import org.springframework.jdbc.core.RowMapper;
 
 /**
  * Helper class providing database initialization and test data import.
- * 
+ *
  * @author sikorric
- * 
  */
 public class DbUtils {
 
@@ -93,7 +92,7 @@ public class DbUtils {
   }
 
   public static DataSourceDatabaseTester createAndInitializeDatabaseTester(DataSource dataSource,
-      String resourceName) throws Exception {
+                                                                           String resourceName) throws Exception {
     DataSourceDatabaseTester tester = new DataSourceDatabaseTester(dataSource);
     Resource resource = resolveResource(resourceName);
     IDataSet dataSet = new FlatXmlDataSet(resource.getFile());

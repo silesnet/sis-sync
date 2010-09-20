@@ -13,14 +13,15 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
 import cz.stormware.schema.type.StavType;
 
 
 /**
  * <p>Java class for detailType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="detailType">
  *   &lt;complexContent>
@@ -35,8 +36,6 @@ import cz.stormware.schema.type.StavType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "detailType", propOrder = {
@@ -49,157 +48,133 @@ import cz.stormware.schema.type.StavType;
 })
 public class DetailType {
 
-    @XmlElement(required = true)
-    protected StavType state;
-    protected BigInteger errno;
-    protected String note;
-    @XmlElement(name = "XPath")
-    protected String xPath;
-    protected String valueRequested;
-    protected String valueProduced;
+  @XmlElement(required = true)
+  protected StavType state;
+  protected BigInteger errno;
+  protected String note;
+  @XmlElement(name = "XPath")
+  protected String xPath;
+  protected String valueRequested;
+  protected String valueProduced;
 
-    /**
-     * Gets the value of the state property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link StavType }
-     *     
-     */
-    public StavType getState() {
-        return state;
-    }
+  /**
+   * Gets the value of the state property.
+   *
+   * @return possible object is
+   *         {@link StavType }
+   */
+  public StavType getState() {
+    return state;
+  }
 
-    /**
-     * Sets the value of the state property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link StavType }
-     *     
-     */
-    public void setState(StavType value) {
-        this.state = value;
-    }
+  /**
+   * Sets the value of the state property.
+   *
+   * @param value allowed object is
+   *              {@link StavType }
+   */
+  public void setState(StavType value) {
+    this.state = value;
+  }
 
-    /**
-     * Gets the value of the errno property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getErrno() {
-        return errno;
-    }
+  /**
+   * Gets the value of the errno property.
+   *
+   * @return possible object is
+   *         {@link BigInteger }
+   */
+  public BigInteger getErrno() {
+    return errno;
+  }
 
-    /**
-     * Sets the value of the errno property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setErrno(BigInteger value) {
-        this.errno = value;
-    }
+  /**
+   * Sets the value of the errno property.
+   *
+   * @param value allowed object is
+   *              {@link BigInteger }
+   */
+  public void setErrno(BigInteger value) {
+    this.errno = value;
+  }
 
-    /**
-     * Gets the value of the note property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getNote() {
-        return note;
-    }
+  /**
+   * Gets the value of the note property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getNote() {
+    return note;
+  }
 
-    /**
-     * Sets the value of the note property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setNote(String value) {
-        this.note = value;
-    }
+  /**
+   * Sets the value of the note property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setNote(String value) {
+    this.note = value;
+  }
 
-    /**
-     * Gets the value of the xPath property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getXPath() {
-        return xPath;
-    }
+  /**
+   * Gets the value of the xPath property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getXPath() {
+    return xPath;
+  }
 
-    /**
-     * Sets the value of the xPath property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setXPath(String value) {
-        this.xPath = value;
-    }
+  /**
+   * Sets the value of the xPath property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setXPath(String value) {
+    this.xPath = value;
+  }
 
-    /**
-     * Gets the value of the valueRequested property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getValueRequested() {
-        return valueRequested;
-    }
+  /**
+   * Gets the value of the valueRequested property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getValueRequested() {
+    return valueRequested;
+  }
 
-    /**
-     * Sets the value of the valueRequested property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setValueRequested(String value) {
-        this.valueRequested = value;
-    }
+  /**
+   * Sets the value of the valueRequested property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setValueRequested(String value) {
+    this.valueRequested = value;
+  }
 
-    /**
-     * Gets the value of the valueProduced property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getValueProduced() {
-        return valueProduced;
-    }
+  /**
+   * Gets the value of the valueProduced property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getValueProduced() {
+    return valueProduced;
+  }
 
-    /**
-     * Sets the value of the valueProduced property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setValueProduced(String value) {
-        this.valueProduced = value;
-    }
+  /**
+   * Sets the value of the valueProduced property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setValueProduced(String value) {
+    this.valueProduced = value;
+  }
 
 }

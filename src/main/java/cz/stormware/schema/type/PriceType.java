@@ -15,11 +15,11 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * Rozepsání ceny a DPH
- * 
+ * <p/>
  * <p>Java class for priceType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="priceType">
  *   &lt;complexContent>
@@ -32,8 +32,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "priceType", propOrder = {
@@ -42,39 +40,35 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class PriceType {
 
-    protected double price;
-    protected double priceVAT;
+  protected double price;
+  protected double priceVAT;
 
-    /**
-     * Gets the value of the price property.
-     * 
-     */
-    public double getPrice() {
-        return price;
-    }
+  /**
+   * Gets the value of the price property.
+   */
+  public double getPrice() {
+    return price;
+  }
 
-    /**
-     * Sets the value of the price property.
-     * 
-     */
-    public void setPrice(double value) {
-        this.price = value;
-    }
+  /**
+   * Sets the value of the price property.
+   */
+  public void setPrice(double value) {
+    this.price = value;
+  }
 
-    /**
-     * Gets the value of the priceVAT property.
-     * 
-     */
-    public double getPriceVAT() {
-        return priceVAT;
-    }
+  /**
+   * Gets the value of the priceVAT property.
+   */
+  public double getPriceVAT() {
+    return priceVAT;
+  }
 
-    /**
-     * Sets the value of the priceVAT property.
-     * 
-     */
-    public void setPriceVAT(double value) {
-        this.priceVAT = value;
-    }
+  /**
+   * Sets the value of the priceVAT property.
+   */
+  public void setPriceVAT(double value) {
+    this.priceVAT = value;
+  }
 
 }

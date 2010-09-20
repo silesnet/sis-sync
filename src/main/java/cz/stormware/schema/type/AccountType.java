@@ -16,11 +16,11 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * Ú\u010det kam zaplatit.
- * 
+ * <p/>
  * <p>Java class for accountType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="accountType">
  *   &lt;complexContent>
@@ -34,8 +34,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "accountType", propOrder = {
@@ -46,105 +44,89 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class AccountType {
 
-    protected BigInteger id;
-    protected String ids;
-    protected String accountNo;
-    protected String bankCode;
+  protected BigInteger id;
+  protected String ids;
+  protected String accountNo;
+  protected String bankCode;
 
-    /**
-     * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getId() {
-        return id;
-    }
+  /**
+   * Gets the value of the id property.
+   *
+   * @return possible object is
+   *         {@link BigInteger }
+   */
+  public BigInteger getId() {
+    return id;
+  }
 
-    /**
-     * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setId(BigInteger value) {
-        this.id = value;
-    }
+  /**
+   * Sets the value of the id property.
+   *
+   * @param value allowed object is
+   *              {@link BigInteger }
+   */
+  public void setId(BigInteger value) {
+    this.id = value;
+  }
 
-    /**
-     * Gets the value of the ids property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getIds() {
-        return ids;
-    }
+  /**
+   * Gets the value of the ids property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getIds() {
+    return ids;
+  }
 
-    /**
-     * Sets the value of the ids property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setIds(String value) {
-        this.ids = value;
-    }
+  /**
+   * Sets the value of the ids property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setIds(String value) {
+    this.ids = value;
+  }
 
-    /**
-     * Gets the value of the accountNo property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getAccountNo() {
-        return accountNo;
-    }
+  /**
+   * Gets the value of the accountNo property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getAccountNo() {
+    return accountNo;
+  }
 
-    /**
-     * Sets the value of the accountNo property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setAccountNo(String value) {
-        this.accountNo = value;
-    }
+  /**
+   * Sets the value of the accountNo property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setAccountNo(String value) {
+    this.accountNo = value;
+  }
 
-    /**
-     * Gets the value of the bankCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getBankCode() {
-        return bankCode;
-    }
+  /**
+   * Gets the value of the bankCode property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getBankCode() {
+    return bankCode;
+  }
 
-    /**
-     * Sets the value of the bankCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setBankCode(String value) {
-        this.bankCode = value;
-    }
+  /**
+   * Sets the value of the bankCode property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setBankCode(String value) {
+    this.bankCode = value;
+  }
 
 }

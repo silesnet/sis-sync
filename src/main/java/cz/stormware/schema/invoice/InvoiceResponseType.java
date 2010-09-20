@@ -11,14 +11,15 @@ package cz.stormware.schema.invoice;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
+
 import cz.stormware.schema.documentresponse.DocumentResponseType;
 
 
 /**
  * <p>Java class for invoiceResponseType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="invoiceResponseType">
  *   &lt;complexContent>
@@ -27,14 +28,11 @@ import cz.stormware.schema.documentresponse.DocumentResponseType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "invoiceResponseType")
 public class InvoiceResponseType
-    extends DocumentResponseType
-{
+    extends DocumentResponseType {
 
 
 }

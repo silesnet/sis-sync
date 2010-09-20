@@ -15,62 +15,56 @@ import javax.xml.namespace.QName;
 
 
 /**
- * This object contains factory methods for each 
- * Java content interface and Java element interface 
- * generated in the cz.stormware.schema.data package. 
- * <p>An ObjectFactory allows you to programatically 
- * construct new instances of the Java representation 
- * for XML content. The Java representation of XML 
- * content can consist of schema derived interfaces 
- * and classes representing the binding of schema 
- * type definitions, element declarations and model 
- * groups.  Factory methods for each of these are 
+ * This object contains factory methods for each
+ * Java content interface and Java element interface
+ * generated in the cz.stormware.schema.data package.
+ * <p>An ObjectFactory allows you to programatically
+ * construct new instances of the Java representation
+ * for XML content. The Java representation of XML
+ * content can consist of schema derived interfaces
+ * and classes representing the binding of schema
+ * type definitions, element declarations and model
+ * groups.  Factory methods for each of these are
  * provided in this class.
- * 
  */
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _DataPack_QNAME = new QName("http://www.stormware.cz/schema/data.xsd", "dataPack");
+  private final static QName _DataPack_QNAME = new QName("http://www.stormware.cz/schema/data.xsd", "dataPack");
 
-    /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: cz.stormware.schema.data
-     * 
-     */
-    public ObjectFactory() {
-    }
+  /**
+   * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: cz.stormware.schema.data
+   */
+  public ObjectFactory() {
+  }
 
-    /**
-     * Create an instance of {@link DataPackItemType }
-     * 
-     */
-    public DataPackItemType createDataPackItemType() {
-        return new DataPackItemType();
-    }
+  /**
+   * Create an instance of {@link DataPackItemType }
+   */
+  public DataPackItemType createDataPackItemType() {
+    return new DataPackItemType();
+  }
 
-    /**
-     * Create an instance of {@link TransformationType }
-     * 
-     */
-    public TransformationType createTransformationType() {
-        return new TransformationType();
-    }
+  /**
+   * Create an instance of {@link TransformationType }
+   */
+  public TransformationType createTransformationType() {
+    return new TransformationType();
+  }
 
-    /**
-     * Create an instance of {@link DataPackType }
-     * 
-     */
-    public DataPackType createDataPackType() {
-        return new DataPackType();
-    }
+  /**
+   * Create an instance of {@link DataPackType }
+   */
+  public DataPackType createDataPackType() {
+    return new DataPackType();
+  }
 
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link DataPackType }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.stormware.cz/schema/data.xsd", name = "dataPack")
-    public JAXBElement<DataPackType> createDataPack(DataPackType value) {
-        return new JAXBElement<DataPackType>(_DataPack_QNAME, DataPackType.class, null, value);
-    }
+  /**
+   * Create an instance of {@link JAXBElement }{@code <}{@link DataPackType }{@code >}}
+   */
+  @XmlElementDecl(namespace = "http://www.stormware.cz/schema/data.xsd", name = "dataPack")
+  public JAXBElement<DataPackType> createDataPack(DataPackType value) {
+    return new JAXBElement<DataPackType>(_DataPack_QNAME, DataPackType.class, null, value);
+  }
 
 }

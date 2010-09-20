@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for stavType.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p/>
  * <pre>
  * &lt;simpleType name="stavType">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -26,43 +26,40 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
- * 
  */
 @XmlType(name = "stavType")
 @XmlEnum
 public enum StavType {
 
 
-    /**
-     * Varování.
-     * 
-     */
-    @XmlEnumValue("warning")
-    WARNING("warning"),
+  /**
+   * Varování.
+   */
+  @XmlEnumValue("warning")
+  WARNING("warning"),
 
-    /**
-     * Chyba.
-     * 
-     */
-    @XmlEnumValue("error")
-    ERROR("error");
-    private final String value;
+  /**
+   * Chyba.
+   */
+  @XmlEnumValue("error")
+  ERROR("error");
+  private final String value;
 
-    StavType(String v) {
-        value = v;
+  StavType(String v) {
+    value = v;
+  }
+
+  public String value() {
+    return value;
+  }
+
+  public static StavType fromValue(String v) {
+    for (StavType c : StavType.values()) {
+      if (c.value.equals(v)) {
+        return c;
+      }
     }
-
-    public String value() {
-        return value;
-    }
-
-    public static StavType fromValue(String v) {
-        for (StavType c: StavType.values()) {
-            if (c.value.equals(v)) {
-                return c;
-            }
-        }
-        throw new IllegalArgumentException(v);
-    }
+    throw new IllegalArgumentException(v);
+  }
 
 }

@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for guaranteeTypeType.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p/>
  * <pre>
  * &lt;simpleType name="guaranteeTypeType">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -30,71 +30,64 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
- * 
  */
 @XmlType(name = "guaranteeTypeType")
 @XmlEnum
 public enum GuaranteeTypeType {
 
 
-    /**
-     * Bez záruky.
-     * 
-     */
-    @XmlEnumValue("none")
-    NONE("none"),
+  /**
+   * Bez záruky.
+   */
+  @XmlEnumValue("none")
+  NONE("none"),
 
-    /**
-     * Záruka je uvedena v hodinách.
-     * 
-     */
-    @XmlEnumValue("hour")
-    HOUR("hour"),
+  /**
+   * Záruka je uvedena v hodinách.
+   */
+  @XmlEnumValue("hour")
+  HOUR("hour"),
 
-    /**
-     * Záruka je uvedena v dnech.
-     * 
-     */
-    @XmlEnumValue("day")
-    DAY("day"),
+  /**
+   * Záruka je uvedena v dnech.
+   */
+  @XmlEnumValue("day")
+  DAY("day"),
 
-    /**
-     * Záruka je uvedena v m\u011bsících.
-     * 
-     */
-    @XmlEnumValue("month")
-    MONTH("month"),
+  /**
+   * Záruka je uvedena v m\u011bsících.
+   */
+  @XmlEnumValue("month")
+  MONTH("month"),
 
-    /**
-     * Záruka je uvedena v rocích.
-     * 
-     */
-    @XmlEnumValue("year")
-    YEAR("year"),
+  /**
+   * Záruka je uvedena v rocích.
+   */
+  @XmlEnumValue("year")
+  YEAR("year"),
 
-    /**
-     * Doživotní záruka.
-     * 
-     */
-    @XmlEnumValue("life")
-    LIFE("life");
-    private final String value;
+  /**
+   * Doživotní záruka.
+   */
+  @XmlEnumValue("life")
+  LIFE("life");
+  private final String value;
 
-    GuaranteeTypeType(String v) {
-        value = v;
+  GuaranteeTypeType(String v) {
+    value = v;
+  }
+
+  public String value() {
+    return value;
+  }
+
+  public static GuaranteeTypeType fromValue(String v) {
+    for (GuaranteeTypeType c : GuaranteeTypeType.values()) {
+      if (c.value.equals(v)) {
+        return c;
+      }
     }
-
-    public String value() {
-        return value;
-    }
-
-    public static GuaranteeTypeType fromValue(String v) {
-        for (GuaranteeTypeType c: GuaranteeTypeType.values()) {
-            if (c.value.equals(v)) {
-                return c;
-            }
-        }
-        throw new IllegalArgumentException(v);
-    }
+    throw new IllegalArgumentException(v);
+  }
 
 }

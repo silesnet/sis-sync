@@ -18,9 +18,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for invoiceDetailType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="invoiceDetailType">
  *   &lt;complexContent>
@@ -32,8 +32,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "invoiceDetailType", propOrder = {
@@ -41,36 +39,34 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class InvoiceDetailType {
 
-    @XmlElement(required = true)
-    protected List<InvoiceItemType> invoiceItem;
+  @XmlElement(required = true)
+  protected List<InvoiceItemType> invoiceItem;
 
-    /**
-     * Gets the value of the invoiceItem property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the invoiceItem property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getInvoiceItem().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link InvoiceItemType }
-     * 
-     * 
-     */
-    public List<InvoiceItemType> getInvoiceItem() {
-        if (invoiceItem == null) {
-            invoiceItem = new ArrayList<InvoiceItemType>();
-        }
-        return this.invoiceItem;
+  /**
+   * Gets the value of the invoiceItem property.
+   * <p/>
+   * <p/>
+   * This accessor method returns a reference to the live list,
+   * not a snapshot. Therefore any modification you make to the
+   * returned list will be present inside the JAXB object.
+   * This is why there is not a <CODE>set</CODE> method for the invoiceItem property.
+   * <p/>
+   * <p/>
+   * For example, to add a new item, do as follows:
+   * <pre>
+   *    getInvoiceItem().add(newItem);
+   * </pre>
+   * <p/>
+   * <p/>
+   * <p/>
+   * Objects of the following type(s) are allowed in the list
+   * {@link InvoiceItemType }
+   */
+  public List<InvoiceItemType> getInvoiceItem() {
+    if (invoiceItem == null) {
+      invoiceItem = new ArrayList<InvoiceItemType>();
     }
+    return this.invoiceItem;
+  }
 
 }

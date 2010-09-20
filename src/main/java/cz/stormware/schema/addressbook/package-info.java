@@ -5,5 +5,4 @@
 // Generated on: 2010.03.14 at 09:43:22 PM CET 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.stormware.cz/schema/addressbook.xsd", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package cz.stormware.schema.addressbook;
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.stormware.cz/schema/addressbook.xsd", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED) package cz.stormware.schema.addressbook;

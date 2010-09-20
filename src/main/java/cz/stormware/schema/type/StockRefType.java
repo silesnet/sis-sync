@@ -17,11 +17,11 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * Odkaz na skladovou položku. Bu\u010f p\u0159es ID nebo p\u0159es IDS, EAN, PLU. Nejvyšší prioritu má elemet "id".
- * 
+ * <p/>
  * <p>Java class for stockRefType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="stockRefType">
  *   &lt;complexContent>
@@ -42,8 +42,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "stockRefType", propOrder = {
@@ -54,107 +52,91 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class StockRefType {
 
-    protected BigInteger id;
-    protected String ids;
-    @XmlElement(name = "EAN")
-    protected String ean;
-    @XmlElement(name = "PLU")
-    protected BigInteger plu;
+  protected BigInteger id;
+  protected String ids;
+  @XmlElement(name = "EAN")
+  protected String ean;
+  @XmlElement(name = "PLU")
+  protected BigInteger plu;
 
-    /**
-     * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getId() {
-        return id;
-    }
+  /**
+   * Gets the value of the id property.
+   *
+   * @return possible object is
+   *         {@link BigInteger }
+   */
+  public BigInteger getId() {
+    return id;
+  }
 
-    /**
-     * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setId(BigInteger value) {
-        this.id = value;
-    }
+  /**
+   * Sets the value of the id property.
+   *
+   * @param value allowed object is
+   *              {@link BigInteger }
+   */
+  public void setId(BigInteger value) {
+    this.id = value;
+  }
 
-    /**
-     * Gets the value of the ids property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getIds() {
-        return ids;
-    }
+  /**
+   * Gets the value of the ids property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getIds() {
+    return ids;
+  }
 
-    /**
-     * Sets the value of the ids property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setIds(String value) {
-        this.ids = value;
-    }
+  /**
+   * Sets the value of the ids property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setIds(String value) {
+    this.ids = value;
+  }
 
-    /**
-     * Gets the value of the ean property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getEAN() {
-        return ean;
-    }
+  /**
+   * Gets the value of the ean property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getEAN() {
+    return ean;
+  }
 
-    /**
-     * Sets the value of the ean property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setEAN(String value) {
-        this.ean = value;
-    }
+  /**
+   * Sets the value of the ean property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setEAN(String value) {
+    this.ean = value;
+  }
 
-    /**
-     * Gets the value of the plu property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getPLU() {
-        return plu;
-    }
+  /**
+   * Gets the value of the plu property.
+   *
+   * @return possible object is
+   *         {@link BigInteger }
+   */
+  public BigInteger getPLU() {
+    return plu;
+  }
 
-    /**
-     * Sets the value of the plu property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setPLU(BigInteger value) {
-        this.plu = value;
-    }
+  /**
+   * Sets the value of the plu property.
+   *
+   * @param value allowed object is
+   *              {@link BigInteger }
+   */
+  public void setPLU(BigInteger value) {
+    this.plu = value;
+  }
 
 }

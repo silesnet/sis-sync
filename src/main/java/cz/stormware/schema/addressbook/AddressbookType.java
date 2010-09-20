@@ -17,9 +17,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for addressbookType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="addressbookType">
  *   &lt;complexContent>
@@ -33,8 +33,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "addressbookType", propOrder = {
@@ -43,82 +41,70 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class AddressbookType {
 
-    @XmlElement(required = true)
-    protected AddressbookHeaderType addressbookHeader;
-    protected AddressbookAccountType addressbookAccount;
-    @XmlAttribute(required = true)
-    protected String version;
+  @XmlElement(required = true)
+  protected AddressbookHeaderType addressbookHeader;
+  protected AddressbookAccountType addressbookAccount;
+  @XmlAttribute(required = true)
+  protected String version;
 
-    /**
-     * Gets the value of the addressbookHeader property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AddressbookHeaderType }
-     *     
-     */
-    public AddressbookHeaderType getAddressbookHeader() {
-        return addressbookHeader;
-    }
+  /**
+   * Gets the value of the addressbookHeader property.
+   *
+   * @return possible object is
+   *         {@link AddressbookHeaderType }
+   */
+  public AddressbookHeaderType getAddressbookHeader() {
+    return addressbookHeader;
+  }
 
-    /**
-     * Sets the value of the addressbookHeader property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AddressbookHeaderType }
-     *     
-     */
-    public void setAddressbookHeader(AddressbookHeaderType value) {
-        this.addressbookHeader = value;
-    }
+  /**
+   * Sets the value of the addressbookHeader property.
+   *
+   * @param value allowed object is
+   *              {@link AddressbookHeaderType }
+   */
+  public void setAddressbookHeader(AddressbookHeaderType value) {
+    this.addressbookHeader = value;
+  }
 
-    /**
-     * Gets the value of the addressbookAccount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AddressbookAccountType }
-     *     
-     */
-    public AddressbookAccountType getAddressbookAccount() {
-        return addressbookAccount;
-    }
+  /**
+   * Gets the value of the addressbookAccount property.
+   *
+   * @return possible object is
+   *         {@link AddressbookAccountType }
+   */
+  public AddressbookAccountType getAddressbookAccount() {
+    return addressbookAccount;
+  }
 
-    /**
-     * Sets the value of the addressbookAccount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AddressbookAccountType }
-     *     
-     */
-    public void setAddressbookAccount(AddressbookAccountType value) {
-        this.addressbookAccount = value;
-    }
+  /**
+   * Sets the value of the addressbookAccount property.
+   *
+   * @param value allowed object is
+   *              {@link AddressbookAccountType }
+   */
+  public void setAddressbookAccount(AddressbookAccountType value) {
+    this.addressbookAccount = value;
+  }
 
-    /**
-     * Gets the value of the version property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getVersion() {
-        return version;
-    }
+  /**
+   * Gets the value of the version property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getVersion() {
+    return version;
+  }
 
-    /**
-     * Sets the value of the version property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setVersion(String value) {
-        this.version = value;
-    }
+  /**
+   * Sets the value of the version property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setVersion(String value) {
+    this.version = value;
+  }
 
 }

@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for typeRoundingVAT.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p/>
  * <pre>
  * &lt;simpleType name="typeRoundingVAT">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -34,99 +34,88 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
- * 
  */
 @XmlType(name = "typeRoundingVAT")
 @XmlEnum
 public enum TypeRoundingVAT {
 
 
-    /**
-     * "DPH nezaokrouhlovat", CZ po 1.1.2005 "P\u0159esn\u011b na halé\u0159e (DPH nezaokrouhlovat)."
-     * 
-     */
-    @XmlEnumValue("none")
-    NONE("none"),
+  /**
+   * "DPH nezaokrouhlovat", CZ po 1.1.2005 "P\u0159esn\u011b na halé\u0159e (DPH nezaokrouhlovat)."
+   */
+  @XmlEnumValue("none")
+  NONE("none"),
 
-    /**
-     * "Zaokrouhlit DPH na každé položce", v CZ se nepoužívá po 1.1.2005.
-     * 
-     */
-    @XmlEnumValue("up2tenthEveryItem")
-    UP_2_TENTH_EVERY_ITEM("up2tenthEveryItem"),
+  /**
+   * "Zaokrouhlit DPH na každé položce", v CZ se nepoužívá po 1.1.2005.
+   */
+  @XmlEnumValue("up2tenthEveryItem")
+  UP_2_TENTH_EVERY_ITEM("up2tenthEveryItem"),
 
-    /**
-     * "Zaokrouhlit sou\u010det DPH v každé sazb\u011b", v CZ se nepoužívá po 1.1.2005.
-     * 
-     */
-    @XmlEnumValue("up2tenthEveryRate")
-    UP_2_TENTH_EVERY_RATE("up2tenthEveryRate"),
+  /**
+   * "Zaokrouhlit sou\u010det DPH v každé sazb\u011b", v CZ se nepoužívá po 1.1.2005.
+   */
+  @XmlEnumValue("up2tenthEveryRate")
+  UP_2_TENTH_EVERY_RATE("up2tenthEveryRate"),
 
-    /**
-     * "Matematicky zaokrouhlit na 10h". Používá se jen v CZ verzi.
-     * 
-     */
-    @XmlEnumValue("math2tenthEveryItem")
-    MATH_2_TENTH_EVERY_ITEM("math2tenthEveryItem"),
+  /**
+   * "Matematicky zaokrouhlit na 10h". Používá se jen v CZ verzi.
+   */
+  @XmlEnumValue("math2tenthEveryItem")
+  MATH_2_TENTH_EVERY_ITEM("math2tenthEveryItem"),
 
-    /**
-     * "Matematicky zaokrouhlit na 50h". Používá se jen v CZ verzi.
-     * 
-     */
-    @XmlEnumValue("math2halfEveryItem")
-    MATH_2_HALF_EVERY_ITEM("math2halfEveryItem"),
+  /**
+   * "Matematicky zaokrouhlit na 50h". Používá se jen v CZ verzi.
+   */
+  @XmlEnumValue("math2halfEveryItem")
+  MATH_2_HALF_EVERY_ITEM("math2halfEveryItem"),
 
-    /**
-     * "Zaokr. DPH v každé sazb\u011b, mat. na 10h". Používá se jen v CZ verzi.
-     * 
-     */
-    @XmlEnumValue("math2tenthEveryRate")
-    MATH_2_TENTH_EVERY_RATE("math2tenthEveryRate"),
+  /**
+   * "Zaokr. DPH v každé sazb\u011b, mat. na 10h". Používá se jen v CZ verzi.
+   */
+  @XmlEnumValue("math2tenthEveryRate")
+  MATH_2_TENTH_EVERY_RATE("math2tenthEveryRate"),
 
-    /**
-     * "Zaokr. DPH v každé sazb\u011b, mat. na 50h". Používá se jen v CZ verzi.
-     * 
-     */
-    @XmlEnumValue("math2halfEveryRate")
-    MATH_2_HALF_EVERY_RATE("math2halfEveryRate"),
+  /**
+   * "Zaokr. DPH v každé sazb\u011b, mat. na 50h". Používá se jen v CZ verzi.
+   */
+  @XmlEnumValue("math2halfEveryRate")
+  MATH_2_HALF_EVERY_RATE("math2halfEveryRate"),
 
-    /**
-     * "DPH v každé sazb\u011b nezaokrouhlovat". Používá se jen v CZ verzi.
-     * 
-     */
-    @XmlEnumValue("noneEveryRate")
-    NONE_EVERY_RATE("noneEveryRate"),
+  /**
+   * "DPH v každé sazb\u011b nezaokrouhlovat". Používá se jen v CZ verzi.
+   */
+  @XmlEnumValue("noneEveryRate")
+  NONE_EVERY_RATE("noneEveryRate"),
 
-    /**
-     * "Matematicky zaokrouhlit na koruny". Používá se jen v CZ verzi od 1.9.2008.
-     * 
-     */
-    @XmlEnumValue("math2intEveryItem")
-    MATH_2_INT_EVERY_ITEM("math2intEveryItem"),
+  /**
+   * "Matematicky zaokrouhlit na koruny". Používá se jen v CZ verzi od 1.9.2008.
+   */
+  @XmlEnumValue("math2intEveryItem")
+  MATH_2_INT_EVERY_ITEM("math2intEveryItem"),
 
-    /**
-     * "Zaokr. DPH v každé sazb\u011b, mat. na koruny". Používá se jen v CZ verzi od 1.9.2008.
-     * 
-     */
-    @XmlEnumValue("math2intEveryRate")
-    MATH_2_INT_EVERY_RATE("math2intEveryRate");
-    private final String value;
+  /**
+   * "Zaokr. DPH v každé sazb\u011b, mat. na koruny". Používá se jen v CZ verzi od 1.9.2008.
+   */
+  @XmlEnumValue("math2intEveryRate")
+  MATH_2_INT_EVERY_RATE("math2intEveryRate");
+  private final String value;
 
-    TypeRoundingVAT(String v) {
-        value = v;
+  TypeRoundingVAT(String v) {
+    value = v;
+  }
+
+  public String value() {
+    return value;
+  }
+
+  public static TypeRoundingVAT fromValue(String v) {
+    for (TypeRoundingVAT c : TypeRoundingVAT.values()) {
+      if (c.value.equals(v)) {
+        return c;
+      }
     }
-
-    public String value() {
-        return value;
-    }
-
-    public static TypeRoundingVAT fromValue(String v) {
-        for (TypeRoundingVAT c: TypeRoundingVAT.values()) {
-            if (c.value.equals(v)) {
-                return c;
-            }
-        }
-        throw new IllegalArgumentException(v);
-    }
+    throw new IllegalArgumentException(v);
+  }
 
 }

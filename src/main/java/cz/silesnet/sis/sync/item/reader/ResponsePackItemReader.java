@@ -17,13 +17,14 @@ import cz.stormware.schema.response.ResponsePackItemType;
 
 public class ResponsePackItemReader
     extends
-      AbstractItemCountingItemStreamItemReader<ResponsePackItemType>
+    AbstractItemCountingItemStreamItemReader<ResponsePackItemType>
     implements
-      ResourceAwareItemReaderItemStream<ResponsePackItemType>,
-      InitializingBean {
+    ResourceAwareItemReaderItemStream<ResponsePackItemType>,
+    InitializingBean {
   private static final Logger log = Logger.getLogger(ResponsePackItemReader.class);
 
   private static final JAXBContext jaxbContext;
+
   static {
     try {
       jaxbContext = JAXBContext.newInstance("cz.stormware.schema.response");

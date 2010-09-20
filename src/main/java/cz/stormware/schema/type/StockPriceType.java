@@ -16,9 +16,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for stockPriceType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="stockPriceType">
  *   &lt;complexContent>
@@ -32,8 +32,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "stockPriceType", propOrder = {
@@ -43,80 +41,68 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class StockPriceType {
 
-    protected BigInteger id;
-    protected String ids;
-    protected Double price;
+  protected BigInteger id;
+  protected String ids;
+  protected Double price;
 
-    /**
-     * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getId() {
-        return id;
-    }
+  /**
+   * Gets the value of the id property.
+   *
+   * @return possible object is
+   *         {@link BigInteger }
+   */
+  public BigInteger getId() {
+    return id;
+  }
 
-    /**
-     * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setId(BigInteger value) {
-        this.id = value;
-    }
+  /**
+   * Sets the value of the id property.
+   *
+   * @param value allowed object is
+   *              {@link BigInteger }
+   */
+  public void setId(BigInteger value) {
+    this.id = value;
+  }
 
-    /**
-     * Gets the value of the ids property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getIds() {
-        return ids;
-    }
+  /**
+   * Gets the value of the ids property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getIds() {
+    return ids;
+  }
 
-    /**
-     * Sets the value of the ids property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setIds(String value) {
-        this.ids = value;
-    }
+  /**
+   * Sets the value of the ids property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setIds(String value) {
+    this.ids = value;
+  }
 
-    /**
-     * Gets the value of the price property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getPrice() {
-        return price;
-    }
+  /**
+   * Gets the value of the price property.
+   *
+   * @return possible object is
+   *         {@link Double }
+   */
+  public Double getPrice() {
+    return price;
+  }
 
-    /**
-     * Sets the value of the price property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
-     */
-    public void setPrice(Double value) {
-        this.price = value;
-    }
+  /**
+   * Sets the value of the price property.
+   *
+   * @param value allowed object is
+   *              {@link Double }
+   */
+  public void setPrice(Double value) {
+    this.price = value;
+  }
 
 }

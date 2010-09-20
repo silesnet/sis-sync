@@ -5,15 +5,14 @@ package cz.silesnet.sis.sync.domain;
 
 /**
  * Enable clients to get Item identity.
- * 
+ *
  * @author sikorric
- * 
  */
 public interface ItemIdentity {
-    /**
-     * Returns item unique id.
-     * 
-     * @return item id
-     */
-    long getId();
+  /**
+   * Returns item unique id.
+   *
+   * @return item id
+   */
+  long getId();
 }

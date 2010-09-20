@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for typeRoundingDocument.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p/>
  * <pre>
  * &lt;simpleType name="typeRoundingDocument">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -34,99 +34,88 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
- * 
  */
 @XmlType(name = "typeRoundingDocument")
 @XmlEnum
 public enum TypeRoundingDocument {
 
 
-    /**
-     * Doklad nezaokrouhlovat
-     * 
-     */
-    @XmlEnumValue("none")
-    NONE("none"),
+  /**
+   * Doklad nezaokrouhlovat
+   */
+  @XmlEnumValue("none")
+  NONE("none"),
 
-    /**
-     * Zaokrouhlení matematicky na koruny.
-     * 
-     */
-    @XmlEnumValue("math2one")
-    MATH_2_ONE("math2one"),
+  /**
+   * Zaokrouhlení matematicky na koruny.
+   */
+  @XmlEnumValue("math2one")
+  MATH_2_ONE("math2one"),
 
-    /**
-     * Zaokrouhlení matematicky na padesátníky.
-     * 
-     */
-    @XmlEnumValue("math2half")
-    MATH_2_HALF("math2half"),
+  /**
+   * Zaokrouhlení matematicky na padesátníky.
+   */
+  @XmlEnumValue("math2half")
+  MATH_2_HALF("math2half"),
 
-    /**
-     * Zaokrouhlení matematicky na desetníky.
-     * 
-     */
-    @XmlEnumValue("math2tenth")
-    MATH_2_TENTH("math2tenth"),
+  /**
+   * Zaokrouhlení matematicky na desetníky.
+   */
+  @XmlEnumValue("math2tenth")
+  MATH_2_TENTH("math2tenth"),
 
-    /**
-     * Zaokrouhlení nahoru na koruny.
-     * 
-     */
-    @XmlEnumValue("up2one")
-    UP_2_ONE("up2one"),
+  /**
+   * Zaokrouhlení nahoru na koruny.
+   */
+  @XmlEnumValue("up2one")
+  UP_2_ONE("up2one"),
 
-    /**
-     * Zaokrouhlení nahoru na padesátníky.
-     * 
-     */
-    @XmlEnumValue("up2half")
-    UP_2_HALF("up2half"),
+  /**
+   * Zaokrouhlení nahoru na padesátníky.
+   */
+  @XmlEnumValue("up2half")
+  UP_2_HALF("up2half"),
 
-    /**
-     * Zaokrouhlení nahoru na desetníky.
-     * 
-     */
-    @XmlEnumValue("up2tenth")
-    UP_2_TENTH("up2tenth"),
+  /**
+   * Zaokrouhlení nahoru na desetníky.
+   */
+  @XmlEnumValue("up2tenth")
+  UP_2_TENTH("up2tenth"),
 
-    /**
-     * Zaokrouhlení dol\u016f na koruny.
-     * 
-     */
-    @XmlEnumValue("down2one")
-    DOWN_2_ONE("down2one"),
+  /**
+   * Zaokrouhlení dol\u016f na koruny.
+   */
+  @XmlEnumValue("down2one")
+  DOWN_2_ONE("down2one"),
 
-    /**
-     * Zaokrouhlení dol\u016f na padesátníky.
-     * 
-     */
-    @XmlEnumValue("down2half")
-    DOWN_2_HALF("down2half"),
+  /**
+   * Zaokrouhlení dol\u016f na padesátníky.
+   */
+  @XmlEnumValue("down2half")
+  DOWN_2_HALF("down2half"),
 
-    /**
-     * Zaokrouhlení dol\u016f na desetníky.
-     * 
-     */
-    @XmlEnumValue("down2tenth")
-    DOWN_2_TENTH("down2tenth");
-    private final String value;
+  /**
+   * Zaokrouhlení dol\u016f na desetníky.
+   */
+  @XmlEnumValue("down2tenth")
+  DOWN_2_TENTH("down2tenth");
+  private final String value;
 
-    TypeRoundingDocument(String v) {
-        value = v;
+  TypeRoundingDocument(String v) {
+    value = v;
+  }
+
+  public String value() {
+    return value;
+  }
+
+  public static TypeRoundingDocument fromValue(String v) {
+    for (TypeRoundingDocument c : TypeRoundingDocument.values()) {
+      if (c.value.equals(v)) {
+        return c;
+      }
     }
-
-    public String value() {
-        return value;
-    }
-
-    public static TypeRoundingDocument fromValue(String v) {
-        for (TypeRoundingDocument c: TypeRoundingDocument.values()) {
-            if (c.value.equals(v)) {
-                return c;
-            }
-        }
-        throw new IllegalArgumentException(v);
-    }
+    throw new IllegalArgumentException(v);
+  }
 
 }

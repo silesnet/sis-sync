@@ -13,9 +13,8 @@ import cz.silesnet.sis.sync.domain.Customer;
 /**
  * Implementation of {@link AbstractDataPackItemWriter} that writes Customer
  * into SPS XML import format.
- * 
+ *
  * @author sikorric
- * 
  */
 public class SisCustomerItemWriter extends AbstractDataPackItemWriter<Customer> {
 

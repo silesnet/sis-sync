@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for parameterAgendaType.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p/>
  * <pre>
  * &lt;simpleType name="parameterAgendaType">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -54,239 +54,208 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
- * 
  */
 @XmlType(name = "parameterAgendaType")
 @XmlEnum
 public enum ParameterAgendaType {
 
 
-    /**
-     * Parametry agendy Adresá\u0159.
-     * 
-     */
-    @XmlEnumValue("adresar")
-    ADRESAR("adresar"),
+  /**
+   * Parametry agendy Adresá\u0159.
+   */
+  @XmlEnumValue("adresar")
+  ADRESAR("adresar"),
 
-    /**
-     * Parametry agendy Události.
-     * 
-     */
-    @XmlEnumValue("udalosti")
-    UDALOSTI("udalosti"),
+  /**
+   * Parametry agendy Události.
+   */
+  @XmlEnumValue("udalosti")
+  UDALOSTI("udalosti"),
 
-    /**
-     * Parametry agendy Pokladna.
-     * 
-     */
-    @XmlEnumValue("pokladna")
-    POKLADNA("pokladna"),
+  /**
+   * Parametry agendy Pokladna.
+   */
+  @XmlEnumValue("pokladna")
+  POKLADNA("pokladna"),
 
-    /**
-     * Parametry agendy Banka.
-     * 
-     */
-    @XmlEnumValue("banka")
-    BANKA("banka"),
+  /**
+   * Parametry agendy Banka.
+   */
+  @XmlEnumValue("banka")
+  BANKA("banka"),
 
-    /**
-     * Parametry agendy Interní doklady.
-     * 
-     */
-    @XmlEnumValue("interni")
-    INTERNI("interni"),
+  /**
+   * Parametry agendy Interní doklady.
+   */
+  @XmlEnumValue("interni")
+  INTERNI("interni"),
 
-    /**
-     * Parametry agendy Nabídky.
-     * 
-     */
-    @XmlEnumValue("nabidky")
-    NABIDKY("nabidky"),
+  /**
+   * Parametry agendy Nabídky.
+   */
+  @XmlEnumValue("nabidky")
+  NABIDKY("nabidky"),
 
-    /**
-     * Parametry agendy Objednávky.
-     * 
-     */
-    @XmlEnumValue("objednavky")
-    OBJEDNAVKY("objednavky"),
+  /**
+   * Parametry agendy Objednávky.
+   */
+  @XmlEnumValue("objednavky")
+  OBJEDNAVKY("objednavky"),
 
-    /**
-     * Parametry agendy Faktury.
-     * 
-     */
-    @XmlEnumValue("faktury")
-    FAKTURY("faktury"),
+  /**
+   * Parametry agendy Faktury.
+   */
+  @XmlEnumValue("faktury")
+  FAKTURY("faktury"),
 
-    /**
-     * Parametry agendy Zásoby.
-     * 
-     */
-    @XmlEnumValue("zasoby")
-    ZASOBY("zasoby"),
+  /**
+   * Parametry agendy Zásoby.
+   */
+  @XmlEnumValue("zasoby")
+  ZASOBY("zasoby"),
 
-    /**
-     * Parametry agendy P\u0159íjemky.
-     * 
-     */
-    @XmlEnumValue("prijemky")
-    PRIJEMKY("prijemky"),
+  /**
+   * Parametry agendy P\u0159íjemky.
+   */
+  @XmlEnumValue("prijemky")
+  PRIJEMKY("prijemky"),
 
-    /**
-     * Parametry agendy Výdejky.
-     * 
-     */
-    @XmlEnumValue("vydejky")
-    VYDEJKY("vydejky"),
+  /**
+   * Parametry agendy Výdejky.
+   */
+  @XmlEnumValue("vydejky")
+  VYDEJKY("vydejky"),
 
-    /**
-     * Parametry agendy Výroba.
-     * 
-     */
-    @XmlEnumValue("vyroba")
-    VYROBA("vyroba"),
+  /**
+   * Parametry agendy Výroba.
+   */
+  @XmlEnumValue("vyroba")
+  VYROBA("vyroba"),
 
-    /**
-     * Parametry agendy P\u0159evod.
-     * 
-     */
-    @XmlEnumValue("prevod")
-    PREVOD("prevod"),
+  /**
+   * Parametry agendy P\u0159evod.
+   */
+  @XmlEnumValue("prevod")
+  PREVOD("prevod"),
 
-    /**
-     * Parametry uživatelské agendy.
-     * 
-     */
-    @XmlEnumValue("agenda")
-    AGENDA("agenda"),
+  /**
+   * Parametry uživatelské agendy.
+   */
+  @XmlEnumValue("agenda")
+  AGENDA("agenda"),
 
-    /**
-     * Parametry agendy Personalistika.
-     * 
-     */
-    @XmlEnumValue("personalistika")
-    PERSONALISTIKA("personalistika"),
+  /**
+   * Parametry agendy Personalistika.
+   */
+  @XmlEnumValue("personalistika")
+  PERSONALISTIKA("personalistika"),
 
-    /**
-     * Parametry agendy Drobný majetek.
-     * 
-     */
-    @XmlEnumValue("drobnyMajetek")
-    DROBNY_MAJETEK("drobnyMajetek"),
+  /**
+   * Parametry agendy Drobný majetek.
+   */
+  @XmlEnumValue("drobnyMajetek")
+  DROBNY_MAJETEK("drobnyMajetek"),
 
-    /**
-     * Parametry agendy Majetek.
-     * 
-     */
-    @XmlEnumValue("majetek")
-    MAJETEK("majetek"),
+  /**
+   * Parametry agendy Majetek.
+   */
+  @XmlEnumValue("majetek")
+  MAJETEK("majetek"),
 
-    /**
-     * Parametry agendy Leasingový majetek.
-     * 
-     */
-    @XmlEnumValue("leasingovyMajetek")
-    LEASINGOVY_MAJETEK("leasingovyMajetek"),
+  /**
+   * Parametry agendy Leasingový majetek.
+   */
+  @XmlEnumValue("leasingovyMajetek")
+  LEASINGOVY_MAJETEK("leasingovyMajetek"),
 
-    /**
-     * Parametry agendy Smlouvy.
-     * 
-     */
-    @XmlEnumValue("smlouvy")
-    SMLOUVY("smlouvy"),
+  /**
+   * Parametry agendy Smlouvy.
+   */
+  @XmlEnumValue("smlouvy")
+  SMLOUVY("smlouvy"),
 
-    /**
-     * Parametry agendy Vozidla.
-     * 
-     */
-    @XmlEnumValue("vozidla")
-    VOZIDLA("vozidla"),
+  /**
+   * Parametry agendy Vozidla.
+   */
+  @XmlEnumValue("vozidla")
+  VOZIDLA("vozidla"),
 
-    /**
-     * Parametry agendy Seznam \u0159idi\u010d\u016f.
-     * 
-     */
-    @XmlEnumValue("ridici")
-    RIDICI("ridici"),
+  /**
+   * Parametry agendy Seznam \u0159idi\u010d\u016f.
+   */
+  @XmlEnumValue("ridici")
+  RIDICI("ridici"),
 
-    /**
-     * Parametry agendy Jízdy.
-     * 
-     */
-    @XmlEnumValue("jizdy")
-    JIZDY("jizdy"),
+  /**
+   * Parametry agendy Jízdy.
+   */
+  @XmlEnumValue("jizdy")
+  JIZDY("jizdy"),
 
-    /**
-     * Parametry uživatelského seznamu. (není p\u0159ipraveno)
-     * 
-     */
-    @XmlEnumValue("seznam")
-    SEZNAM("seznam"),
+  /**
+   * Parametry uživatelského seznamu. (není p\u0159ipraveno)
+   */
+  @XmlEnumValue("seznam")
+  SEZNAM("seznam"),
 
-    /**
-     * Parametry agendy Ú\u010dtová osnova.
-     * 
-     */
-    @XmlEnumValue("osnova")
-    OSNOVA("osnova"),
+  /**
+   * Parametry agendy Ú\u010dtová osnova.
+   */
+  @XmlEnumValue("osnova")
+  OSNOVA("osnova"),
 
-    /**
-     * Parametry agendy Reklamace.
-     * 
-     */
-    @XmlEnumValue("reklamace")
-    REKLAMACE("reklamace"),
+  /**
+   * Parametry agendy Reklamace.
+   */
+  @XmlEnumValue("reklamace")
+  REKLAMACE("reklamace"),
 
-    /**
-     * Parametry agendy St\u0159ediska.
-     * 
-     */
-    @XmlEnumValue("strediska")
-    STREDISKA("strediska"),
+  /**
+   * Parametry agendy St\u0159ediska.
+   */
+  @XmlEnumValue("strediska")
+  STREDISKA("strediska"),
 
-    /**
-     * Parametry agendy \u010cinnosti.
-     * 
-     */
-    @XmlEnumValue("cinnosti")
-    CINNOSTI("cinnosti"),
+  /**
+   * Parametry agendy \u010cinnosti.
+   */
+  @XmlEnumValue("cinnosti")
+  CINNOSTI("cinnosti"),
 
-    /**
-     * Parametry agendy Zakázky.
-     * 
-     */
-    @XmlEnumValue("zakazky")
-    ZAKAZKY("zakazky"),
+  /**
+   * Parametry agendy Zakázky.
+   */
+  @XmlEnumValue("zakazky")
+  ZAKAZKY("zakazky"),
 
-    /**
-     * Parametry agendy Prodejky.
-     * 
-     */
-    @XmlEnumValue("prodejky")
-    PRODEJKY("prodejky"),
+  /**
+   * Parametry agendy Prodejky.
+   */
+  @XmlEnumValue("prodejky")
+  PRODEJKY("prodejky"),
 
-    /**
-     * Parametry agendy \u010císelné \u0159ady.
-     * 
-     */
-    @XmlEnumValue("ciselneRady")
-    CISELNE_RADY("ciselneRady");
-    private final String value;
+  /**
+   * Parametry agendy \u010císelné \u0159ady.
+   */
+  @XmlEnumValue("ciselneRady")
+  CISELNE_RADY("ciselneRady");
+  private final String value;
 
-    ParameterAgendaType(String v) {
-        value = v;
+  ParameterAgendaType(String v) {
+    value = v;
+  }
+
+  public String value() {
+    return value;
+  }
+
+  public static ParameterAgendaType fromValue(String v) {
+    for (ParameterAgendaType c : ParameterAgendaType.values()) {
+      if (c.value.equals(v)) {
+        return c;
+      }
     }
-
-    public String value() {
-        return value;
-    }
-
-    public static ParameterAgendaType fromValue(String v) {
-        for (ParameterAgendaType c: ParameterAgendaType.values()) {
-            if (c.value.equals(v)) {
-                return c;
-            }
-        }
-        throw new IllegalArgumentException(v);
-    }
+    throw new IllegalArgumentException(v);
+  }
 
 }

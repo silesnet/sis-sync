@@ -15,15 +15,16 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+
 import cz.stormware.schema.documentresponse.ImportDetailsType;
 import cz.stormware.schema.type.StavType2;
 
 
 /**
  * <p>Java class for listVersionType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="listVersionType">
  *   &lt;complexContent>
@@ -39,8 +40,6 @@ import cz.stormware.schema.type.StavType2;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "listVersionType", propOrder = {
@@ -52,136 +51,116 @@ import cz.stormware.schema.type.StavType2;
 })
 public class ListVersionType {
 
-    protected ImportDetailsType importDetails;
-    @XmlAttribute(required = true)
-    protected String version;
-    @XmlAttribute(required = true)
-    @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar dateTimeStamp;
-    @XmlAttribute(required = true)
-    @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar dateValidFrom;
-    @XmlAttribute(required = true)
-    protected StavType2 state;
+  protected ImportDetailsType importDetails;
+  @XmlAttribute(required = true)
+  protected String version;
+  @XmlAttribute(required = true)
+  @XmlSchemaType(name = "dateTime")
+  protected XMLGregorianCalendar dateTimeStamp;
+  @XmlAttribute(required = true)
+  @XmlSchemaType(name = "date")
+  protected XMLGregorianCalendar dateValidFrom;
+  @XmlAttribute(required = true)
+  protected StavType2 state;
 
-    /**
-     * Gets the value of the importDetails property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ImportDetailsType }
-     *     
-     */
-    public ImportDetailsType getImportDetails() {
-        return importDetails;
-    }
+  /**
+   * Gets the value of the importDetails property.
+   *
+   * @return possible object is
+   *         {@link ImportDetailsType }
+   */
+  public ImportDetailsType getImportDetails() {
+    return importDetails;
+  }
 
-    /**
-     * Sets the value of the importDetails property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ImportDetailsType }
-     *     
-     */
-    public void setImportDetails(ImportDetailsType value) {
-        this.importDetails = value;
-    }
+  /**
+   * Sets the value of the importDetails property.
+   *
+   * @param value allowed object is
+   *              {@link ImportDetailsType }
+   */
+  public void setImportDetails(ImportDetailsType value) {
+    this.importDetails = value;
+  }
 
-    /**
-     * Gets the value of the version property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getVersion() {
-        return version;
-    }
+  /**
+   * Gets the value of the version property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getVersion() {
+    return version;
+  }
 
-    /**
-     * Sets the value of the version property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setVersion(String value) {
-        this.version = value;
-    }
+  /**
+   * Sets the value of the version property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setVersion(String value) {
+    this.version = value;
+  }
 
-    /**
-     * Gets the value of the dateTimeStamp property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public XMLGregorianCalendar getDateTimeStamp() {
-        return dateTimeStamp;
-    }
+  /**
+   * Gets the value of the dateTimeStamp property.
+   *
+   * @return possible object is
+   *         {@link XMLGregorianCalendar }
+   */
+  public XMLGregorianCalendar getDateTimeStamp() {
+    return dateTimeStamp;
+  }
 
-    /**
-     * Sets the value of the dateTimeStamp property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setDateTimeStamp(XMLGregorianCalendar value) {
-        this.dateTimeStamp = value;
-    }
+  /**
+   * Sets the value of the dateTimeStamp property.
+   *
+   * @param value allowed object is
+   *              {@link XMLGregorianCalendar }
+   */
+  public void setDateTimeStamp(XMLGregorianCalendar value) {
+    this.dateTimeStamp = value;
+  }
 
-    /**
-     * Gets the value of the dateValidFrom property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public XMLGregorianCalendar getDateValidFrom() {
-        return dateValidFrom;
-    }
+  /**
+   * Gets the value of the dateValidFrom property.
+   *
+   * @return possible object is
+   *         {@link XMLGregorianCalendar }
+   */
+  public XMLGregorianCalendar getDateValidFrom() {
+    return dateValidFrom;
+  }
 
-    /**
-     * Sets the value of the dateValidFrom property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setDateValidFrom(XMLGregorianCalendar value) {
-        this.dateValidFrom = value;
-    }
+  /**
+   * Sets the value of the dateValidFrom property.
+   *
+   * @param value allowed object is
+   *              {@link XMLGregorianCalendar }
+   */
+  public void setDateValidFrom(XMLGregorianCalendar value) {
+    this.dateValidFrom = value;
+  }
 
-    /**
-     * Gets the value of the state property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link StavType2 }
-     *     
-     */
-    public StavType2 getState() {
-        return state;
-    }
+  /**
+   * Gets the value of the state property.
+   *
+   * @return possible object is
+   *         {@link StavType2 }
+   */
+  public StavType2 getState() {
+    return state;
+  }
 
-    /**
-     * Sets the value of the state property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link StavType2 }
-     *     
-     */
-    public void setState(StavType2 value) {
-        this.state = value;
-    }
+  /**
+   * Sets the value of the state property.
+   *
+   * @param value allowed object is
+   *              {@link StavType2 }
+   */
+  public void setState(StavType2 value) {
+    this.state = value;
+  }
 
 }

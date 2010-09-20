@@ -15,9 +15,8 @@ import cz.silesnet.sis.sync.domain.Invoice.Item;
 
 /**
  * Writes SIS invoice in DataPack XML format to the output file.
- * 
+ *
  * @author sikorric
- * 
  */
 public class SisInvoiceItemWriter extends AbstractDataPackItemWriter<Invoice> {
 

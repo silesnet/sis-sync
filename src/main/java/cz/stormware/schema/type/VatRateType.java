@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for vatRateType.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p/>
  * <pre>
  * &lt;simpleType name="vatRateType">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -27,50 +27,46 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
- * 
  */
 @XmlType(name = "vatRateType")
 @XmlEnum
 public enum VatRateType {
 
 
-    /**
-     * Základní sazba.
-     * 
-     */
-    @XmlEnumValue("high")
-    HIGH("high"),
+  /**
+   * Základní sazba.
+   */
+  @XmlEnumValue("high")
+  HIGH("high"),
 
-    /**
-     * Snížená sazba.
-     * 
-     */
-    @XmlEnumValue("low")
-    LOW("low"),
+  /**
+   * Snížená sazba.
+   */
+  @XmlEnumValue("low")
+  LOW("low"),
 
-    /**
-     * Bez DPH.
-     * 
-     */
-    @XmlEnumValue("none")
-    NONE("none");
-    private final String value;
+  /**
+   * Bez DPH.
+   */
+  @XmlEnumValue("none")
+  NONE("none");
+  private final String value;
 
-    VatRateType(String v) {
-        value = v;
+  VatRateType(String v) {
+    value = v;
+  }
+
+  public String value() {
+    return value;
+  }
+
+  public static VatRateType fromValue(String v) {
+    for (VatRateType c : VatRateType.values()) {
+      if (c.value.equals(v)) {
+        return c;
+      }
     }
-
-    public String value() {
-        return value;
-    }
-
-    public static VatRateType fromValue(String v) {
-        for (VatRateType c: VatRateType.values()) {
-            if (c.value.equals(v)) {
-                return c;
-            }
-        }
-        throw new IllegalArgumentException(v);
-    }
+    throw new IllegalArgumentException(v);
+  }
 
 }

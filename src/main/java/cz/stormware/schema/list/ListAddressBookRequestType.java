@@ -19,9 +19,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for listAddressBookRequestType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="listAddressBookRequestType">
  *   &lt;complexContent>
@@ -36,8 +36,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "listAddressBookRequestType", propOrder = {
@@ -45,114 +43,100 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class ListAddressBookRequestType {
 
-    @XmlElement(required = true)
-    protected List<RequestAddressBookType> requestAddressBook;
-    @XmlAttribute(required = true)
-    protected String version;
-    @XmlAttribute(required = true)
-    protected String addressBookVersion;
-    @XmlAttribute
-    protected String extSystem;
+  @XmlElement(required = true)
+  protected List<RequestAddressBookType> requestAddressBook;
+  @XmlAttribute(required = true)
+  protected String version;
+  @XmlAttribute(required = true)
+  protected String addressBookVersion;
+  @XmlAttribute
+  protected String extSystem;
 
-    /**
-     * Gets the value of the requestAddressBook property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the requestAddressBook property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRequestAddressBook().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link RequestAddressBookType }
-     * 
-     * 
-     */
-    public List<RequestAddressBookType> getRequestAddressBook() {
-        if (requestAddressBook == null) {
-            requestAddressBook = new ArrayList<RequestAddressBookType>();
-        }
-        return this.requestAddressBook;
+  /**
+   * Gets the value of the requestAddressBook property.
+   * <p/>
+   * <p/>
+   * This accessor method returns a reference to the live list,
+   * not a snapshot. Therefore any modification you make to the
+   * returned list will be present inside the JAXB object.
+   * This is why there is not a <CODE>set</CODE> method for the requestAddressBook property.
+   * <p/>
+   * <p/>
+   * For example, to add a new item, do as follows:
+   * <pre>
+   *    getRequestAddressBook().add(newItem);
+   * </pre>
+   * <p/>
+   * <p/>
+   * <p/>
+   * Objects of the following type(s) are allowed in the list
+   * {@link RequestAddressBookType }
+   */
+  public List<RequestAddressBookType> getRequestAddressBook() {
+    if (requestAddressBook == null) {
+      requestAddressBook = new ArrayList<RequestAddressBookType>();
     }
+    return this.requestAddressBook;
+  }
 
-    /**
-     * Gets the value of the version property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getVersion() {
-        return version;
-    }
+  /**
+   * Gets the value of the version property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getVersion() {
+    return version;
+  }
 
-    /**
-     * Sets the value of the version property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setVersion(String value) {
-        this.version = value;
-    }
+  /**
+   * Sets the value of the version property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setVersion(String value) {
+    this.version = value;
+  }
 
-    /**
-     * Gets the value of the addressBookVersion property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getAddressBookVersion() {
-        return addressBookVersion;
-    }
+  /**
+   * Gets the value of the addressBookVersion property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getAddressBookVersion() {
+    return addressBookVersion;
+  }
 
-    /**
-     * Sets the value of the addressBookVersion property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setAddressBookVersion(String value) {
-        this.addressBookVersion = value;
-    }
+  /**
+   * Sets the value of the addressBookVersion property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setAddressBookVersion(String value) {
+    this.addressBookVersion = value;
+  }
 
-    /**
-     * Gets the value of the extSystem property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getExtSystem() {
-        return extSystem;
-    }
+  /**
+   * Gets the value of the extSystem property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getExtSystem() {
+    return extSystem;
+  }
 
-    /**
-     * Sets the value of the extSystem property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setExtSystem(String value) {
-        this.extSystem = value;
-    }
+  /**
+   * Sets the value of the extSystem property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setExtSystem(String value) {
+    this.extSystem = value;
+  }
 
 }

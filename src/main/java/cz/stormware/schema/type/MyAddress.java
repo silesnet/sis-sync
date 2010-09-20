@@ -16,9 +16,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for myAddress complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="myAddress">
  *   &lt;complexContent>
@@ -31,8 +31,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "myAddress", propOrder = {
@@ -41,56 +39,48 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class MyAddress {
 
-    @XmlElement(required = true)
-    protected AddressInternetType address;
-    protected EstablishmentType establishment;
+  @XmlElement(required = true)
+  protected AddressInternetType address;
+  protected EstablishmentType establishment;
 
-    /**
-     * Gets the value of the address property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AddressInternetType }
-     *     
-     */
-    public AddressInternetType getAddress() {
-        return address;
-    }
+  /**
+   * Gets the value of the address property.
+   *
+   * @return possible object is
+   *         {@link AddressInternetType }
+   */
+  public AddressInternetType getAddress() {
+    return address;
+  }
 
-    /**
-     * Sets the value of the address property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AddressInternetType }
-     *     
-     */
-    public void setAddress(AddressInternetType value) {
-        this.address = value;
-    }
+  /**
+   * Sets the value of the address property.
+   *
+   * @param value allowed object is
+   *              {@link AddressInternetType }
+   */
+  public void setAddress(AddressInternetType value) {
+    this.address = value;
+  }
 
-    /**
-     * Gets the value of the establishment property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link EstablishmentType }
-     *     
-     */
-    public EstablishmentType getEstablishment() {
-        return establishment;
-    }
+  /**
+   * Gets the value of the establishment property.
+   *
+   * @return possible object is
+   *         {@link EstablishmentType }
+   */
+  public EstablishmentType getEstablishment() {
+    return establishment;
+  }
 
-    /**
-     * Sets the value of the establishment property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link EstablishmentType }
-     *     
-     */
-    public void setEstablishment(EstablishmentType value) {
-        this.establishment = value;
-    }
+  /**
+   * Sets the value of the establishment property.
+   *
+   * @param value allowed object is
+   *              {@link EstablishmentType }
+   */
+  public void setEstablishment(EstablishmentType value) {
+    this.establishment = value;
+  }
 
 }

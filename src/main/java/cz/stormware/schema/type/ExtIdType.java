@@ -16,9 +16,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for extIdType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="extIdType">
  *   &lt;complexContent>
@@ -32,8 +32,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "extIdType", propOrder = {
@@ -43,82 +41,70 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class ExtIdType {
 
-    @XmlElement(required = true)
-    protected String ids;
-    @XmlElement(required = true)
-    protected String exSystemName;
-    protected String exSystemText;
+  @XmlElement(required = true)
+  protected String ids;
+  @XmlElement(required = true)
+  protected String exSystemName;
+  protected String exSystemText;
 
-    /**
-     * Gets the value of the ids property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getIds() {
-        return ids;
-    }
+  /**
+   * Gets the value of the ids property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getIds() {
+    return ids;
+  }
 
-    /**
-     * Sets the value of the ids property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setIds(String value) {
-        this.ids = value;
-    }
+  /**
+   * Sets the value of the ids property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setIds(String value) {
+    this.ids = value;
+  }
 
-    /**
-     * Gets the value of the exSystemName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getExSystemName() {
-        return exSystemName;
-    }
+  /**
+   * Gets the value of the exSystemName property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getExSystemName() {
+    return exSystemName;
+  }
 
-    /**
-     * Sets the value of the exSystemName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setExSystemName(String value) {
-        this.exSystemName = value;
-    }
+  /**
+   * Sets the value of the exSystemName property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setExSystemName(String value) {
+    this.exSystemName = value;
+  }
 
-    /**
-     * Gets the value of the exSystemText property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getExSystemText() {
-        return exSystemText;
-    }
+  /**
+   * Gets the value of the exSystemText property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getExSystemText() {
+    return exSystemText;
+  }
 
-    /**
-     * Sets the value of the exSystemText property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setExSystemText(String value) {
-        this.exSystemText = value;
-    }
+  /**
+   * Sets the value of the exSystemText property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setExSystemText(String value) {
+    this.exSystemText = value;
+  }
 
 }

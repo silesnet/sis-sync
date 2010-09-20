@@ -12,14 +12,15 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
 import cz.stormware.schema.type.Boolean;
 
 
 /**
  * <p>Java class for accountItemType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="accountItemType">
  *   &lt;complexContent>
@@ -34,8 +35,6 @@ import cz.stormware.schema.type.Boolean;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "accountItemType", propOrder = {
@@ -46,107 +45,91 @@ import cz.stormware.schema.type.Boolean;
 })
 public class AccountItemType {
 
-    @XmlElement(required = true)
-    protected String accountNumber;
-    protected String symSpec;
-    protected String bankCode;
-    @XmlElement(defaultValue = "false")
-    protected Boolean defaultAccount;
+  @XmlElement(required = true)
+  protected String accountNumber;
+  protected String symSpec;
+  protected String bankCode;
+  @XmlElement(defaultValue = "false")
+  protected Boolean defaultAccount;
 
-    /**
-     * Gets the value of the accountNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getAccountNumber() {
-        return accountNumber;
-    }
+  /**
+   * Gets the value of the accountNumber property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getAccountNumber() {
+    return accountNumber;
+  }
 
-    /**
-     * Sets the value of the accountNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setAccountNumber(String value) {
-        this.accountNumber = value;
-    }
+  /**
+   * Sets the value of the accountNumber property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setAccountNumber(String value) {
+    this.accountNumber = value;
+  }
 
-    /**
-     * Gets the value of the symSpec property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getSymSpec() {
-        return symSpec;
-    }
+  /**
+   * Gets the value of the symSpec property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getSymSpec() {
+    return symSpec;
+  }
 
-    /**
-     * Sets the value of the symSpec property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSymSpec(String value) {
-        this.symSpec = value;
-    }
+  /**
+   * Sets the value of the symSpec property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setSymSpec(String value) {
+    this.symSpec = value;
+  }
 
-    /**
-     * Gets the value of the bankCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getBankCode() {
-        return bankCode;
-    }
+  /**
+   * Gets the value of the bankCode property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getBankCode() {
+    return bankCode;
+  }
 
-    /**
-     * Sets the value of the bankCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setBankCode(String value) {
-        this.bankCode = value;
-    }
+  /**
+   * Sets the value of the bankCode property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setBankCode(String value) {
+    this.bankCode = value;
+  }
 
-    /**
-     * Gets the value of the defaultAccount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean getDefaultAccount() {
-        return defaultAccount;
-    }
+  /**
+   * Gets the value of the defaultAccount property.
+   *
+   * @return possible object is
+   *         {@link Boolean }
+   */
+  public Boolean getDefaultAccount() {
+    return defaultAccount;
+  }
 
-    /**
-     * Sets the value of the defaultAccount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setDefaultAccount(Boolean value) {
-        this.defaultAccount = value;
-    }
+  /**
+   * Sets the value of the defaultAccount property.
+   *
+   * @param value allowed object is
+   *              {@link Boolean }
+   */
+  public void setDefaultAccount(Boolean value) {
+    this.defaultAccount = value;
+  }
 
 }

@@ -10,9 +10,8 @@ import cz.stormware.schema.response.ResponsePackItemType;
 /**
  * ItemReader that reads SPS invoice import result file and does lookup to SIS
  * for bank account.
- * 
+ *
  * @author Richard Sikora
- * 
  */
 public class InvoiceItemReader extends DaoResponsePackItemReader<Invoice, InvoiceDao> {
 

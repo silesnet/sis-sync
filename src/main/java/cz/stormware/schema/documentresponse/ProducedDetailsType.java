@@ -16,9 +16,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for producedDetailsType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="producedDetailsType">
  *   &lt;complexContent>
@@ -32,8 +32,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "producedDetailsType", propOrder = {
@@ -43,81 +41,69 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class ProducedDetailsType {
 
-    @XmlElement(required = true)
-    protected String id;
-    protected String number;
-    protected String code;
+  @XmlElement(required = true)
+  protected String id;
+  protected String number;
+  protected String code;
 
-    /**
-     * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getId() {
-        return id;
-    }
+  /**
+   * Gets the value of the id property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getId() {
+    return id;
+  }
 
-    /**
-     * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setId(String value) {
-        this.id = value;
-    }
+  /**
+   * Sets the value of the id property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setId(String value) {
+    this.id = value;
+  }
 
-    /**
-     * Gets the value of the number property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getNumber() {
-        return number;
-    }
+  /**
+   * Gets the value of the number property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getNumber() {
+    return number;
+  }
 
-    /**
-     * Sets the value of the number property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setNumber(String value) {
-        this.number = value;
-    }
+  /**
+   * Sets the value of the number property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setNumber(String value) {
+    this.number = value;
+  }
 
-    /**
-     * Gets the value of the code property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCode() {
-        return code;
-    }
+  /**
+   * Gets the value of the code property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getCode() {
+    return code;
+  }
 
-    /**
-     * Sets the value of the code property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCode(String value) {
-        this.code = value;
-    }
+  /**
+   * Sets the value of the code property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setCode(String value) {
+    this.code = value;
+  }
 
 }

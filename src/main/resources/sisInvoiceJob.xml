@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans  xmlns="http://www.springframework.org/schema/beans"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:batch="http://www.springframework.org/schema/batch"
-        xmlns:p="http://www.springframework.org/schema/p"
-        xsi:schemaLocation=
-          "http://www.springframework.org/schema/batch
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:batch="http://www.springframework.org/schema/batch"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation=
+           "http://www.springframework.org/schema/batch
            http://www.springframework.org/schema/batch/spring-batch-2.0.xsd
            http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
->
+    >
   <import resource="job-launcher-context.xml" />
 
   <bean id="sisInvoiceJob" parent="simpleJob">
@@ -27,7 +27,8 @@
       <ref bean="sisInvoiceItemReader" />
     </property>
     <property name="itemWriter">
-      <bean class="cz.silesnet.sis.sync.item.writer.SisInvoiceItemWriter" p:ico="${pohoda.ico}" p:resource-ref="invoicesImportFile" />
+      <bean class="cz.silesnet.sis.sync.item.writer.SisInvoiceItemWriter" p:ico="${pohoda.ico}"
+            p:resource-ref="invoicesImportFile" />
     </property>
   </bean>
 
@@ -50,7 +51,8 @@
 
   <bean id="importInvoices" parent="taskletStep">
     <property name="tasklet">
-      <bean parent="importTasklet" p:input-ref="invoicesImportFile" p:output-ref="invoicesResponseFile" p:ini-ref="invoicesIniFile" />
+      <bean parent="importTasklet" p:input-ref="invoicesImportFile" p:output-ref="invoicesResponseFile"
+            p:ini-ref="invoicesIniFile" />
     </property>
   </bean>
 
@@ -77,7 +79,7 @@
   <bean id="updateInvoiceAccounts" parent="simpleStep">
     <property name="itemReader">
       <bean class="cz.silesnet.sis.sync.item.reader.InvoiceItemReader" p:resource-ref="invoicesResponseFile"
-        p:dao-ref="invoiceDao" />
+            p:dao-ref="invoiceDao" />
     </property>
     <property name="itemWriter">
       <bean class="org.springframework.batch.item.database.JdbcBatchItemWriter" p:dataSource-ref="spsDataSource">

@@ -15,14 +15,15 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
 import cz.stormware.schema.invoice.InvoiceTypeType;
 
 
 /**
  * <p>Java class for listInvoiceRequestType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="listInvoiceRequestType">
  *   &lt;complexContent>
@@ -38,8 +39,6 @@ import cz.stormware.schema.invoice.InvoiceTypeType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "listInvoiceRequestType", propOrder = {
@@ -47,140 +46,122 @@ import cz.stormware.schema.invoice.InvoiceTypeType;
 })
 public class ListInvoiceRequestType {
 
-    @XmlElement(required = true)
-    protected List<RequestInvoiceType> requestInvoice;
-    @XmlAttribute(required = true)
-    protected String version;
-    @XmlAttribute(required = true)
-    protected InvoiceTypeType invoiceType;
-    @XmlAttribute(required = true)
-    protected String invoiceVersion;
-    @XmlAttribute
-    protected String extSystem;
+  @XmlElement(required = true)
+  protected List<RequestInvoiceType> requestInvoice;
+  @XmlAttribute(required = true)
+  protected String version;
+  @XmlAttribute(required = true)
+  protected InvoiceTypeType invoiceType;
+  @XmlAttribute(required = true)
+  protected String invoiceVersion;
+  @XmlAttribute
+  protected String extSystem;
 
-    /**
-     * Gets the value of the requestInvoice property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the requestInvoice property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRequestInvoice().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link RequestInvoiceType }
-     * 
-     * 
-     */
-    public List<RequestInvoiceType> getRequestInvoice() {
-        if (requestInvoice == null) {
-            requestInvoice = new ArrayList<RequestInvoiceType>();
-        }
-        return this.requestInvoice;
+  /**
+   * Gets the value of the requestInvoice property.
+   * <p/>
+   * <p/>
+   * This accessor method returns a reference to the live list,
+   * not a snapshot. Therefore any modification you make to the
+   * returned list will be present inside the JAXB object.
+   * This is why there is not a <CODE>set</CODE> method for the requestInvoice property.
+   * <p/>
+   * <p/>
+   * For example, to add a new item, do as follows:
+   * <pre>
+   *    getRequestInvoice().add(newItem);
+   * </pre>
+   * <p/>
+   * <p/>
+   * <p/>
+   * Objects of the following type(s) are allowed in the list
+   * {@link RequestInvoiceType }
+   */
+  public List<RequestInvoiceType> getRequestInvoice() {
+    if (requestInvoice == null) {
+      requestInvoice = new ArrayList<RequestInvoiceType>();
     }
+    return this.requestInvoice;
+  }
 
-    /**
-     * Gets the value of the version property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getVersion() {
-        return version;
-    }
+  /**
+   * Gets the value of the version property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getVersion() {
+    return version;
+  }
 
-    /**
-     * Sets the value of the version property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setVersion(String value) {
-        this.version = value;
-    }
+  /**
+   * Sets the value of the version property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setVersion(String value) {
+    this.version = value;
+  }
 
-    /**
-     * Gets the value of the invoiceType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link InvoiceTypeType }
-     *     
-     */
-    public InvoiceTypeType getInvoiceType() {
-        return invoiceType;
-    }
+  /**
+   * Gets the value of the invoiceType property.
+   *
+   * @return possible object is
+   *         {@link InvoiceTypeType }
+   */
+  public InvoiceTypeType getInvoiceType() {
+    return invoiceType;
+  }
 
-    /**
-     * Sets the value of the invoiceType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link InvoiceTypeType }
-     *     
-     */
-    public void setInvoiceType(InvoiceTypeType value) {
-        this.invoiceType = value;
-    }
+  /**
+   * Sets the value of the invoiceType property.
+   *
+   * @param value allowed object is
+   *              {@link InvoiceTypeType }
+   */
+  public void setInvoiceType(InvoiceTypeType value) {
+    this.invoiceType = value;
+  }
 
-    /**
-     * Gets the value of the invoiceVersion property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getInvoiceVersion() {
-        return invoiceVersion;
-    }
+  /**
+   * Gets the value of the invoiceVersion property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getInvoiceVersion() {
+    return invoiceVersion;
+  }
 
-    /**
-     * Sets the value of the invoiceVersion property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setInvoiceVersion(String value) {
-        this.invoiceVersion = value;
-    }
+  /**
+   * Sets the value of the invoiceVersion property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setInvoiceVersion(String value) {
+    this.invoiceVersion = value;
+  }
 
-    /**
-     * Gets the value of the extSystem property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getExtSystem() {
-        return extSystem;
-    }
+  /**
+   * Gets the value of the extSystem property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getExtSystem() {
+    return extSystem;
+  }
 
-    /**
-     * Sets the value of the extSystem property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setExtSystem(String value) {
-        this.extSystem = value;
-    }
+  /**
+   * Sets the value of the extSystem property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setExtSystem(String value) {
+    this.extSystem = value;
+  }
 
 }

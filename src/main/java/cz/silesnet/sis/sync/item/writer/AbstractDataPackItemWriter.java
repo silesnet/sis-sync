@@ -17,9 +17,8 @@ import cz.silesnet.sis.sync.domain.ItemIdentity;
 
 /**
  * Base implementation of SPS Import XML file ItemWriter.
- * 
+ *
  * @author sikorric
- * 
  */
 public abstract class AbstractDataPackItemWriter<T> extends AbstractHeaderTrailerFileItemWriter<T> {
 
@@ -49,7 +48,7 @@ public abstract class AbstractDataPackItemWriter<T> extends AbstractHeaderTraile
   /**
    * Returns dataPack@id based on current time stamp. The time stamp is
    * refreshed on {@link AbstractDataPackItemWriter#headerLines()} call.
-   * 
+   *
    * @return dataPack@id
    */
   protected String getDataPackId() {
@@ -57,6 +56,7 @@ public abstract class AbstractDataPackItemWriter<T> extends AbstractHeaderTraile
   }
 
   /* protected for testing purposes */
+
   protected String getItemsWrittenString() {
     return String.format("%0" + ITEMS_WRITTEN_STRING_LENGHT + "d", getItemsWritten());
   }
@@ -66,9 +66,8 @@ public abstract class AbstractDataPackItemWriter<T> extends AbstractHeaderTraile
    * dataPack@id. If item does not implement {@link ItemIdentity} then
    * hashCode() is used. This id is populated by SPS to responsePackItem@id,
    * from which the original item identity can be parsed.
-   * 
-   * @param item
-   *          dataPack content item
+   *
+   * @param item dataPack content item
    * @return dataPackItem@id
    */
   protected String getDataPackItemId(T item) {
@@ -131,7 +130,7 @@ public abstract class AbstractDataPackItemWriter<T> extends AbstractHeaderTraile
   /**
    * Returns additional name space definitions that will be added to dataPack
    * element definition.
-   * 
+   *
    * @return name space definition lines, for example
    *         xmlns:adb="http://www.stormware.cz/schema/addressbook.xsd"
    */
@@ -139,7 +138,7 @@ public abstract class AbstractDataPackItemWriter<T> extends AbstractHeaderTraile
 
   /**
    * Returns dataPackItem content lines.
-   * 
+   *
    * @param item
    * @return dataPackItem lines
    */
@@ -147,11 +146,9 @@ public abstract class AbstractDataPackItemWriter<T> extends AbstractHeaderTraile
 
   /**
    * Returns XML element with value, for example <name>value</value>.
-   * 
-   * @param name
-   *          element name
-   * @param value
-   *          element value
+   *
+   * @param name  element name
+   * @param value element value
    * @return XML element with value
    */
   protected static String elValue(String name, String value) {
@@ -169,11 +166,9 @@ public abstract class AbstractDataPackItemWriter<T> extends AbstractHeaderTraile
   /**
    * Returns XML element with value, for example <name>value</value>.
    * Convenience method for float values.
-   * 
-   * @param name
-   *          element name
-   * @param value
-   *          float element value
+   *
+   * @param name  element name
+   * @param value float element value
    * @return XML element with value
    */
   protected static String elValue(String name, float value) {
@@ -183,11 +178,9 @@ public abstract class AbstractDataPackItemWriter<T> extends AbstractHeaderTraile
   /**
    * Returns XML element with value, for example <name>value</value>.
    * Convenience method for long values.
-   * 
-   * @param name
-   *          element name
-   * @param value
-   *          long element value
+   *
+   * @param name  element name
+   * @param value long element value
    * @return XML element with value
    */
   protected static String elValue(String name, long value) {
@@ -196,9 +189,8 @@ public abstract class AbstractDataPackItemWriter<T> extends AbstractHeaderTraile
 
   /**
    * Return XML element beginning, for example <name>.
-   * 
-   * @param name
-   *          element name
+   *
+   * @param name element name
    * @return XML element beginning
    */
   protected static String elBeg(String name) {
@@ -207,9 +199,8 @@ public abstract class AbstractDataPackItemWriter<T> extends AbstractHeaderTraile
 
   /**
    * Return XML element ending, for example </name>.
-   * 
-   * @param name
-   *          element name
+   *
+   * @param name element name
    * @return XML element ending
    */
   protected static String elEnd(String name) {
@@ -219,9 +210,8 @@ public abstract class AbstractDataPackItemWriter<T> extends AbstractHeaderTraile
   /**
    * Return string with special XML characters escaped with entities. Only five
    * character will be escaped {"<&>'} => {&quot; &lt; &amp; &gt; &apos;}
-   * 
-   * @param str
-   *          input string
+   *
+   * @param str input string
    * @return XML escaped input string
    */
   protected static String escapeXml(String str) {
@@ -229,22 +219,22 @@ public abstract class AbstractDataPackItemWriter<T> extends AbstractHeaderTraile
     for (int i = 0; i < str.length(); i++) {
       char ch = str.charAt(i);
       switch (ch) {
-        case '"' :
+        case '"':
           result.append("&quot;");
           break;
-        case '<' :
+        case '<':
           result.append("&lt;");
           break;
-        case '&' :
+        case '&':
           result.append("&amp;");
           break;
-        case '>' :
+        case '>':
           result.append("&gt;");
           break;
-        case '\'' :
+        case '\'':
           result.append("&apos;");
           break;
-        default :
+        default:
           result.append(ch);
       }
     }

@@ -18,7 +18,7 @@ import org.springframework.core.io.Resource;
 
 /**
  * Tasklet that executes SPS XML import.
- * 
+ *
  * @author Richard Sikora
  */
 public class SpsImportTasklet implements Tasklet {
@@ -90,7 +90,7 @@ public class SpsImportTasklet implements Tasklet {
 
   /**
    * Creates SPS XML import configuration file based on internal object state.
-   * 
+   *
    * @throws IOException
    */
   private void createIniFile() throws IOException {
@@ -120,7 +120,7 @@ public class SpsImportTasklet implements Tasklet {
 
   /**
    * Creates command line for executing SPS XML import.
-   * 
+   *
    * @return command line
    * @throws IOException
    */
@@ -134,9 +134,8 @@ public class SpsImportTasklet implements Tasklet {
 
   /**
    * Simple command line thread.
-   * 
+   *
    * @author rsi
-   * 
    */
   private class CommandThread extends Thread {
     volatile boolean completed = false;

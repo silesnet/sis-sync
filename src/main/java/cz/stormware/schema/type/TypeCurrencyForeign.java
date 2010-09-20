@@ -17,9 +17,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for typeCurrencyForeign complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="typeCurrencyForeign">
  *   &lt;complexContent>
@@ -34,8 +34,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "typeCurrencyForeign", propOrder = {
@@ -46,106 +44,90 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TypeCurrencyForeign {
 
-    @XmlElement(required = true)
-    protected RefType currency;
-    protected Float rate;
-    protected BigInteger amount;
-    protected Double priceSum;
+  @XmlElement(required = true)
+  protected RefType currency;
+  protected Float rate;
+  protected BigInteger amount;
+  protected Double priceSum;
 
-    /**
-     * Gets the value of the currency property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link RefType }
-     *     
-     */
-    public RefType getCurrency() {
-        return currency;
-    }
+  /**
+   * Gets the value of the currency property.
+   *
+   * @return possible object is
+   *         {@link RefType }
+   */
+  public RefType getCurrency() {
+    return currency;
+  }
 
-    /**
-     * Sets the value of the currency property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link RefType }
-     *     
-     */
-    public void setCurrency(RefType value) {
-        this.currency = value;
-    }
+  /**
+   * Sets the value of the currency property.
+   *
+   * @param value allowed object is
+   *              {@link RefType }
+   */
+  public void setCurrency(RefType value) {
+    this.currency = value;
+  }
 
-    /**
-     * Gets the value of the rate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Float }
-     *     
-     */
-    public Float getRate() {
-        return rate;
-    }
+  /**
+   * Gets the value of the rate property.
+   *
+   * @return possible object is
+   *         {@link Float }
+   */
+  public Float getRate() {
+    return rate;
+  }
 
-    /**
-     * Sets the value of the rate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Float }
-     *     
-     */
-    public void setRate(Float value) {
-        this.rate = value;
-    }
+  /**
+   * Sets the value of the rate property.
+   *
+   * @param value allowed object is
+   *              {@link Float }
+   */
+  public void setRate(Float value) {
+    this.rate = value;
+  }
 
-    /**
-     * Gets the value of the amount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getAmount() {
-        return amount;
-    }
+  /**
+   * Gets the value of the amount property.
+   *
+   * @return possible object is
+   *         {@link BigInteger }
+   */
+  public BigInteger getAmount() {
+    return amount;
+  }
 
-    /**
-     * Sets the value of the amount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setAmount(BigInteger value) {
-        this.amount = value;
-    }
+  /**
+   * Sets the value of the amount property.
+   *
+   * @param value allowed object is
+   *              {@link BigInteger }
+   */
+  public void setAmount(BigInteger value) {
+    this.amount = value;
+  }
 
-    /**
-     * Gets the value of the priceSum property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getPriceSum() {
-        return priceSum;
-    }
+  /**
+   * Gets the value of the priceSum property.
+   *
+   * @return possible object is
+   *         {@link Double }
+   */
+  public Double getPriceSum() {
+    return priceSum;
+  }
 
-    /**
-     * Sets the value of the priceSum property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
-     */
-    public void setPriceSum(Double value) {
-        this.priceSum = value;
-    }
+  /**
+   * Sets the value of the priceSum property.
+   *
+   * @param value allowed object is
+   *              {@link Double }
+   */
+  public void setPriceSum(Double value) {
+    this.priceSum = value;
+  }
 
 }

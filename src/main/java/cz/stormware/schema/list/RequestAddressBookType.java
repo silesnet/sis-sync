@@ -17,9 +17,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for requestAddressBookType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="requestAddressBookType">
  *   &lt;complexContent>
@@ -33,8 +33,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "requestAddressBookType", propOrder = {
@@ -43,81 +41,69 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class RequestAddressBookType {
 
-    protected FilterFieldsType filterFields;
-    protected String userFilterName;
-    @XmlAttribute
-    protected BigInteger id;
+  protected FilterFieldsType filterFields;
+  protected String userFilterName;
+  @XmlAttribute
+  protected BigInteger id;
 
-    /**
-     * Gets the value of the filterFields property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link FilterFieldsType }
-     *     
-     */
-    public FilterFieldsType getFilterFields() {
-        return filterFields;
-    }
+  /**
+   * Gets the value of the filterFields property.
+   *
+   * @return possible object is
+   *         {@link FilterFieldsType }
+   */
+  public FilterFieldsType getFilterFields() {
+    return filterFields;
+  }
 
-    /**
-     * Sets the value of the filterFields property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link FilterFieldsType }
-     *     
-     */
-    public void setFilterFields(FilterFieldsType value) {
-        this.filterFields = value;
-    }
+  /**
+   * Sets the value of the filterFields property.
+   *
+   * @param value allowed object is
+   *              {@link FilterFieldsType }
+   */
+  public void setFilterFields(FilterFieldsType value) {
+    this.filterFields = value;
+  }
 
-    /**
-     * Gets the value of the userFilterName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getUserFilterName() {
-        return userFilterName;
-    }
+  /**
+   * Gets the value of the userFilterName property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getUserFilterName() {
+    return userFilterName;
+  }
 
-    /**
-     * Sets the value of the userFilterName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setUserFilterName(String value) {
-        this.userFilterName = value;
-    }
+  /**
+   * Sets the value of the userFilterName property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setUserFilterName(String value) {
+    this.userFilterName = value;
+  }
 
-    /**
-     * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getId() {
-        return id;
-    }
+  /**
+   * Gets the value of the id property.
+   *
+   * @return possible object is
+   *         {@link BigInteger }
+   */
+  public BigInteger getId() {
+    return id;
+  }
 
-    /**
-     * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setId(BigInteger value) {
-        this.id = value;
-    }
+  /**
+   * Sets the value of the id property.
+   *
+   * @param value allowed object is
+   *              {@link BigInteger }
+   */
+  public void setId(BigInteger value) {
+    this.id = value;
+  }
 
 }

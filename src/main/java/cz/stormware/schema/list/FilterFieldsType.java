@@ -12,14 +12,15 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
 import cz.stormware.schema.type.Boolean;
 
 
 /**
  * <p>Java class for filterFieldsType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="filterFieldsType">
  *   &lt;complexContent>
@@ -40,8 +41,6 @@ import cz.stormware.schema.type.Boolean;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "filterFieldsType", propOrder = {
@@ -49,261 +48,221 @@ import cz.stormware.schema.type.Boolean;
 })
 public class FilterFieldsType {
 
-    protected String fieldCity;
-    protected String fieldRegion;
-    protected String fieldKey;
-    protected String fieldGroup;
-    @XmlElement(defaultValue = "false")
-    protected Boolean fieldP1;
-    @XmlElement(defaultValue = "false")
-    protected Boolean fieldP2;
-    @XmlElement(defaultValue = "false")
-    protected Boolean fieldP3;
-    @XmlElement(defaultValue = "false")
-    protected Boolean fieldP4;
-    @XmlElement(defaultValue = "false")
-    protected Boolean fieldP5;
-    @XmlElement(defaultValue = "false")
-    protected Boolean fieldP6;
+  protected String fieldCity;
+  protected String fieldRegion;
+  protected String fieldKey;
+  protected String fieldGroup;
+  @XmlElement(defaultValue = "false")
+  protected Boolean fieldP1;
+  @XmlElement(defaultValue = "false")
+  protected Boolean fieldP2;
+  @XmlElement(defaultValue = "false")
+  protected Boolean fieldP3;
+  @XmlElement(defaultValue = "false")
+  protected Boolean fieldP4;
+  @XmlElement(defaultValue = "false")
+  protected Boolean fieldP5;
+  @XmlElement(defaultValue = "false")
+  protected Boolean fieldP6;
 
-    /**
-     * Gets the value of the fieldCity property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getFieldCity() {
-        return fieldCity;
-    }
+  /**
+   * Gets the value of the fieldCity property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getFieldCity() {
+    return fieldCity;
+  }
 
-    /**
-     * Sets the value of the fieldCity property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setFieldCity(String value) {
-        this.fieldCity = value;
-    }
+  /**
+   * Sets the value of the fieldCity property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setFieldCity(String value) {
+    this.fieldCity = value;
+  }
 
-    /**
-     * Gets the value of the fieldRegion property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getFieldRegion() {
-        return fieldRegion;
-    }
+  /**
+   * Gets the value of the fieldRegion property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getFieldRegion() {
+    return fieldRegion;
+  }
 
-    /**
-     * Sets the value of the fieldRegion property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setFieldRegion(String value) {
-        this.fieldRegion = value;
-    }
+  /**
+   * Sets the value of the fieldRegion property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setFieldRegion(String value) {
+    this.fieldRegion = value;
+  }
 
-    /**
-     * Gets the value of the fieldKey property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getFieldKey() {
-        return fieldKey;
-    }
+  /**
+   * Gets the value of the fieldKey property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getFieldKey() {
+    return fieldKey;
+  }
 
-    /**
-     * Sets the value of the fieldKey property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setFieldKey(String value) {
-        this.fieldKey = value;
-    }
+  /**
+   * Sets the value of the fieldKey property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setFieldKey(String value) {
+    this.fieldKey = value;
+  }
 
-    /**
-     * Gets the value of the fieldGroup property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getFieldGroup() {
-        return fieldGroup;
-    }
+  /**
+   * Gets the value of the fieldGroup property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getFieldGroup() {
+    return fieldGroup;
+  }
 
-    /**
-     * Sets the value of the fieldGroup property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setFieldGroup(String value) {
-        this.fieldGroup = value;
-    }
+  /**
+   * Sets the value of the fieldGroup property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setFieldGroup(String value) {
+    this.fieldGroup = value;
+  }
 
-    /**
-     * Gets the value of the fieldP1 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean getFieldP1() {
-        return fieldP1;
-    }
+  /**
+   * Gets the value of the fieldP1 property.
+   *
+   * @return possible object is
+   *         {@link Boolean }
+   */
+  public Boolean getFieldP1() {
+    return fieldP1;
+  }
 
-    /**
-     * Sets the value of the fieldP1 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setFieldP1(Boolean value) {
-        this.fieldP1 = value;
-    }
+  /**
+   * Sets the value of the fieldP1 property.
+   *
+   * @param value allowed object is
+   *              {@link Boolean }
+   */
+  public void setFieldP1(Boolean value) {
+    this.fieldP1 = value;
+  }
 
-    /**
-     * Gets the value of the fieldP2 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean getFieldP2() {
-        return fieldP2;
-    }
+  /**
+   * Gets the value of the fieldP2 property.
+   *
+   * @return possible object is
+   *         {@link Boolean }
+   */
+  public Boolean getFieldP2() {
+    return fieldP2;
+  }
 
-    /**
-     * Sets the value of the fieldP2 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setFieldP2(Boolean value) {
-        this.fieldP2 = value;
-    }
+  /**
+   * Sets the value of the fieldP2 property.
+   *
+   * @param value allowed object is
+   *              {@link Boolean }
+   */
+  public void setFieldP2(Boolean value) {
+    this.fieldP2 = value;
+  }
 
-    /**
-     * Gets the value of the fieldP3 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean getFieldP3() {
-        return fieldP3;
-    }
+  /**
+   * Gets the value of the fieldP3 property.
+   *
+   * @return possible object is
+   *         {@link Boolean }
+   */
+  public Boolean getFieldP3() {
+    return fieldP3;
+  }
 
-    /**
-     * Sets the value of the fieldP3 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setFieldP3(Boolean value) {
-        this.fieldP3 = value;
-    }
+  /**
+   * Sets the value of the fieldP3 property.
+   *
+   * @param value allowed object is
+   *              {@link Boolean }
+   */
+  public void setFieldP3(Boolean value) {
+    this.fieldP3 = value;
+  }
 
-    /**
-     * Gets the value of the fieldP4 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean getFieldP4() {
-        return fieldP4;
-    }
+  /**
+   * Gets the value of the fieldP4 property.
+   *
+   * @return possible object is
+   *         {@link Boolean }
+   */
+  public Boolean getFieldP4() {
+    return fieldP4;
+  }
 
-    /**
-     * Sets the value of the fieldP4 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setFieldP4(Boolean value) {
-        this.fieldP4 = value;
-    }
+  /**
+   * Sets the value of the fieldP4 property.
+   *
+   * @param value allowed object is
+   *              {@link Boolean }
+   */
+  public void setFieldP4(Boolean value) {
+    this.fieldP4 = value;
+  }
 
-    /**
-     * Gets the value of the fieldP5 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean getFieldP5() {
-        return fieldP5;
-    }
+  /**
+   * Gets the value of the fieldP5 property.
+   *
+   * @return possible object is
+   *         {@link Boolean }
+   */
+  public Boolean getFieldP5() {
+    return fieldP5;
+  }
 
-    /**
-     * Sets the value of the fieldP5 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setFieldP5(Boolean value) {
-        this.fieldP5 = value;
-    }
+  /**
+   * Sets the value of the fieldP5 property.
+   *
+   * @param value allowed object is
+   *              {@link Boolean }
+   */
+  public void setFieldP5(Boolean value) {
+    this.fieldP5 = value;
+  }
 
-    /**
-     * Gets the value of the fieldP6 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean getFieldP6() {
-        return fieldP6;
-    }
+  /**
+   * Gets the value of the fieldP6 property.
+   *
+   * @return possible object is
+   *         {@link Boolean }
+   */
+  public Boolean getFieldP6() {
+    return fieldP6;
+  }
 
-    /**
-     * Sets the value of the fieldP6 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setFieldP6(Boolean value) {
-        this.fieldP6 = value;
-    }
+  /**
+   * Sets the value of the fieldP6 property.
+   *
+   * @param value allowed object is
+   *              {@link Boolean }
+   */
+  public void setFieldP6(Boolean value) {
+    this.fieldP6 = value;
+  }
 
 }

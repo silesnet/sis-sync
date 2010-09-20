@@ -16,11 +16,11 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * Odkaz na entitu. Vyšší prioritu má elemet "id".
- * 
+ * <p/>
  * <p>Java class for refTypeLong complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="refTypeLong">
  *   &lt;complexContent>
@@ -33,8 +33,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "refTypeLong", propOrder = {
@@ -43,55 +41,47 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class RefTypeLong {
 
-    protected BigInteger id;
-    protected String ids;
+  protected BigInteger id;
+  protected String ids;
 
-    /**
-     * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getId() {
-        return id;
-    }
+  /**
+   * Gets the value of the id property.
+   *
+   * @return possible object is
+   *         {@link BigInteger }
+   */
+  public BigInteger getId() {
+    return id;
+  }
 
-    /**
-     * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setId(BigInteger value) {
-        this.id = value;
-    }
+  /**
+   * Sets the value of the id property.
+   *
+   * @param value allowed object is
+   *              {@link BigInteger }
+   */
+  public void setId(BigInteger value) {
+    this.id = value;
+  }
 
-    /**
-     * Gets the value of the ids property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getIds() {
-        return ids;
-    }
+  /**
+   * Gets the value of the ids property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getIds() {
+    return ids;
+  }
 
-    /**
-     * Sets the value of the ids property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setIds(String value) {
-        this.ids = value;
-    }
+  /**
+   * Sets the value of the ids property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setIds(String value) {
+    this.ids = value;
+  }
 
 }

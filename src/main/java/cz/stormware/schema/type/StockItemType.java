@@ -16,11 +16,11 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * Údaje skladové zásoby vložené do položky dokladu
- * 
+ * <p/>
  * <p>Java class for stockItemType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="stockItemType">
  *   &lt;complexContent>
@@ -34,8 +34,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "stockItemType", propOrder = {
@@ -45,81 +43,69 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class StockItemType {
 
-    protected RefType store;
-    @XmlElement(required = true)
-    protected StockRefType stockItem;
-    protected String serialNumber;
+  protected RefType store;
+  @XmlElement(required = true)
+  protected StockRefType stockItem;
+  protected String serialNumber;
 
-    /**
-     * Gets the value of the store property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link RefType }
-     *     
-     */
-    public RefType getStore() {
-        return store;
-    }
+  /**
+   * Gets the value of the store property.
+   *
+   * @return possible object is
+   *         {@link RefType }
+   */
+  public RefType getStore() {
+    return store;
+  }
 
-    /**
-     * Sets the value of the store property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link RefType }
-     *     
-     */
-    public void setStore(RefType value) {
-        this.store = value;
-    }
+  /**
+   * Sets the value of the store property.
+   *
+   * @param value allowed object is
+   *              {@link RefType }
+   */
+  public void setStore(RefType value) {
+    this.store = value;
+  }
 
-    /**
-     * Gets the value of the stockItem property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link StockRefType }
-     *     
-     */
-    public StockRefType getStockItem() {
-        return stockItem;
-    }
+  /**
+   * Gets the value of the stockItem property.
+   *
+   * @return possible object is
+   *         {@link StockRefType }
+   */
+  public StockRefType getStockItem() {
+    return stockItem;
+  }
 
-    /**
-     * Sets the value of the stockItem property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link StockRefType }
-     *     
-     */
-    public void setStockItem(StockRefType value) {
-        this.stockItem = value;
-    }
+  /**
+   * Sets the value of the stockItem property.
+   *
+   * @param value allowed object is
+   *              {@link StockRefType }
+   */
+  public void setStockItem(StockRefType value) {
+    this.stockItem = value;
+  }
 
-    /**
-     * Gets the value of the serialNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getSerialNumber() {
-        return serialNumber;
-    }
+  /**
+   * Gets the value of the serialNumber property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getSerialNumber() {
+    return serialNumber;
+  }
 
-    /**
-     * Sets the value of the serialNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSerialNumber(String value) {
-        this.serialNumber = value;
-    }
+  /**
+   * Sets the value of the serialNumber property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setSerialNumber(String value) {
+    this.serialNumber = value;
+  }
 
 }

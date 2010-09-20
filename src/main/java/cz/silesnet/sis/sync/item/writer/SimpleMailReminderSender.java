@@ -14,28 +14,27 @@ import cz.silesnet.sis.sync.domain.Reminder;
 
 /**
  * Simple email implementation of {@link ReminderSender}. It uses {@link JavaMailSender} to send an email.
- * 
+ *
  * @author sikorric
- * 
  */
 public class SimpleMailReminderSender implements ReminderSender {
-    private static Log log = LogFactory.getLog(SimpleMailReminderSender.class);
+  private static Log log = LogFactory.getLog(SimpleMailReminderSender.class);
 
-    private JavaMailSender mailSender;
-    private ReminderMailPreparator preparator;
+  private JavaMailSender mailSender;
+  private ReminderMailPreparator preparator;
 
-    public void setMailSender(JavaMailSender mailSender) {
-        this.mailSender = mailSender;
-    }
+  public void setMailSender(JavaMailSender mailSender) {
+    this.mailSender = mailSender;
+  }
 
-    public void setPreparator(ReminderMailPreparator preparator) {
-        this.preparator = preparator;
-    }
+  public void setPreparator(ReminderMailPreparator preparator) {
+    this.preparator = preparator;
+  }
 
-    public void send(Reminder reminder) throws MessagingException {
-        log.debug("Sending reminder email to: " + reminder.getCustomer().getEmail());
-        MimeMessage msg = mailSender.createMimeMessage();
-        preparator.prepare(reminder, msg);
-        mailSender.send(msg);
-    }
+  public void send(Reminder reminder) throws MessagingException {
+    log.debug("Sending reminder email to: " + reminder.getCustomer().getEmail());
+    MimeMessage msg = mailSender.createMimeMessage();
+    preparator.prepare(reminder, msg);
+    mailSender.send(msg);
+  }
 }

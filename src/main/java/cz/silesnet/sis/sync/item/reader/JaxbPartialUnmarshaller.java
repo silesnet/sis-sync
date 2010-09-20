@@ -27,9 +27,8 @@ public class JaxbPartialUnmarshaller implements org.springframework.oxm.Unmarsha
 
   /**
    * Sets the {@link JAXBContext} and for internal {@link Unmarshaller}.
-   * 
-   * @param context
-   *          the new context
+   *
+   * @param context the new context
    */
   public void setContext(JAXBContext context) {
     try {
@@ -42,9 +41,8 @@ public class JaxbPartialUnmarshaller implements org.springframework.oxm.Unmarsha
   /**
    * Sets the fragment class, {@link #unmarshal(XMLEventReader)} will return
    * instances of this class.
-   * 
-   * @param fragmentClass
-   *          the new fragment class
+   *
+   * @param fragmentClass the new fragment class
    */
   public void setFragmentClass(Class<?> fragmentClass) {
     this.fragmentClass = fragmentClass;

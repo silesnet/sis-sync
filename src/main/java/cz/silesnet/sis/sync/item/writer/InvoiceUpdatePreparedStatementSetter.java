@@ -15,22 +15,20 @@ import cz.stormware.schema.response.ResponsePackItemType;
 
 /**
  * Sets Invoice response parameters to SQL {@link PreparedStatement}.
- * 
+ *
  * @author Richard Sikora
  */
 public class InvoiceUpdatePreparedStatementSetter
     implements
-      ItemPreparedStatementSetter<ResponsePackItemType> {
+    ItemPreparedStatementSetter<ResponsePackItemType> {
 
   /**
    * Maps Invoice response to SQL update command.
-   * <p>
+   * <p/>
    * UPDATE invoices SET synchronized = ? WHERE id = ?
-   * 
-   * @param item
-   *          {@link ResponsePackItemType}
-   * @param ps
-   *          {@link PreparedStatement}
+   *
+   * @param item {@link ResponsePackItemType}
+   * @param ps   {@link PreparedStatement}
    */
   public void setValues(ResponsePackItemType responseItem, PreparedStatement ps)
       throws SQLException {

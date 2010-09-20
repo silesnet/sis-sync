@@ -1,4 +1,5 @@
 package cz.silesnet.sis.sync;
+
 import java.io.File;
 
 import org.springframework.core.io.Resource;
@@ -12,9 +13,8 @@ import org.springframework.core.io.Resource;
  * file and writes response XML. It expects configuration *.ini file as the
  * forts argument. The response XML simulates successful import of all input
  * items.
- * 
+ *
  * @author sikorric
- * 
  */
 public class PohodaImportStub {
 

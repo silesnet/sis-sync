@@ -16,11 +16,11 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * Odkaz kontaktní osoby na hlavní adresu.
- * 
+ * <p/>
  * <p>Java class for refAddressType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="refAddressType">
  *   &lt;complexContent>
@@ -34,8 +34,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "refAddressType", propOrder = {
@@ -45,80 +43,68 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class RefAddressType {
 
-    protected BigInteger refAD;
-    protected ExtIdType extId;
-    protected AddressType address;
+  protected BigInteger refAD;
+  protected ExtIdType extId;
+  protected AddressType address;
 
-    /**
-     * Gets the value of the refAD property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getRefAD() {
-        return refAD;
-    }
+  /**
+   * Gets the value of the refAD property.
+   *
+   * @return possible object is
+   *         {@link BigInteger }
+   */
+  public BigInteger getRefAD() {
+    return refAD;
+  }
 
-    /**
-     * Sets the value of the refAD property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setRefAD(BigInteger value) {
-        this.refAD = value;
-    }
+  /**
+   * Sets the value of the refAD property.
+   *
+   * @param value allowed object is
+   *              {@link BigInteger }
+   */
+  public void setRefAD(BigInteger value) {
+    this.refAD = value;
+  }
 
-    /**
-     * Gets the value of the extId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ExtIdType }
-     *     
-     */
-    public ExtIdType getExtId() {
-        return extId;
-    }
+  /**
+   * Gets the value of the extId property.
+   *
+   * @return possible object is
+   *         {@link ExtIdType }
+   */
+  public ExtIdType getExtId() {
+    return extId;
+  }
 
-    /**
-     * Sets the value of the extId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ExtIdType }
-     *     
-     */
-    public void setExtId(ExtIdType value) {
-        this.extId = value;
-    }
+  /**
+   * Sets the value of the extId property.
+   *
+   * @param value allowed object is
+   *              {@link ExtIdType }
+   */
+  public void setExtId(ExtIdType value) {
+    this.extId = value;
+  }
 
-    /**
-     * Gets the value of the address property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AddressType }
-     *     
-     */
-    public AddressType getAddress() {
-        return address;
-    }
+  /**
+   * Gets the value of the address property.
+   *
+   * @return possible object is
+   *         {@link AddressType }
+   */
+  public AddressType getAddress() {
+    return address;
+  }
 
-    /**
-     * Sets the value of the address property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AddressType }
-     *     
-     */
-    public void setAddress(AddressType value) {
-        this.address = value;
-    }
+  /**
+   * Sets the value of the address property.
+   *
+   * @param value allowed object is
+   *              {@link AddressType }
+   */
+  public void setAddress(AddressType value) {
+    this.address = value;
+  }
 
 }

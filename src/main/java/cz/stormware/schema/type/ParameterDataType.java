@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for parameterDataType.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p/>
  * <pre>
  * &lt;simpleType name="parameterDataType">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -31,78 +31,70 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
- * 
  */
 @XmlType(name = "parameterDataType")
 @XmlEnum
 public enum ParameterDataType {
 
 
-    /**
-     * Parametr typu Text.
-     * 
-     */
-    @XmlEnumValue("text")
-    TEXT("text"),
+  /**
+   * Parametr typu Text.
+   */
+  @XmlEnumValue("text")
+  TEXT("text"),
 
-    /**
-     * Parametr typu M\u011bna.
-     * 
-     */
-    @XmlEnumValue("currency")
-    CURRENCY("currency"),
+  /**
+   * Parametr typu M\u011bna.
+   */
+  @XmlEnumValue("currency")
+  CURRENCY("currency"),
 
-    /**
-     * Parametr typu Ano/Ne.
-     * 
-     */
-    @XmlEnumValue("boolean")
-    BOOLEAN("boolean"),
+  /**
+   * Parametr typu Ano/Ne.
+   */
+  @XmlEnumValue("boolean")
+  BOOLEAN("boolean"),
 
-    /**
-     * Parametr typu \u010císlo.
-     * 
-     */
-    @XmlEnumValue("number")
-    NUMBER("number"),
+  /**
+   * Parametr typu \u010císlo.
+   */
+  @XmlEnumValue("number")
+  NUMBER("number"),
 
-    /**
-     * Parametr typu \u010císlo (celé).
-     * 
-     */
-    @XmlEnumValue("integer")
-    INTEGER("integer"),
+  /**
+   * Parametr typu \u010císlo (celé).
+   */
+  @XmlEnumValue("integer")
+  INTEGER("integer"),
 
-    /**
-     * Parametr typu Datum.
-     * 
-     */
-    @XmlEnumValue("datetime")
-    DATETIME("datetime"),
+  /**
+   * Parametr typu Datum.
+   */
+  @XmlEnumValue("datetime")
+  DATETIME("datetime"),
 
-    /**
-     * Parametr typu Seznam.
-     * 
-     */
-    @XmlEnumValue("list")
-    LIST("list");
-    private final String value;
+  /**
+   * Parametr typu Seznam.
+   */
+  @XmlEnumValue("list")
+  LIST("list");
+  private final String value;
 
-    ParameterDataType(String v) {
-        value = v;
+  ParameterDataType(String v) {
+    value = v;
+  }
+
+  public String value() {
+    return value;
+  }
+
+  public static ParameterDataType fromValue(String v) {
+    for (ParameterDataType c : ParameterDataType.values()) {
+      if (c.value.equals(v)) {
+        return c;
+      }
     }
-
-    public String value() {
-        return value;
-    }
-
-    public static ParameterDataType fromValue(String v) {
-        for (ParameterDataType c: ParameterDataType.values()) {
-            if (c.value.equals(v)) {
-                return c;
-            }
-        }
-        throw new IllegalArgumentException(v);
-    }
+    throw new IllegalArgumentException(v);
+  }
 
 }

@@ -11,9 +11,8 @@ import cz.stormware.schema.response.ResponsePackItemType;
 /**
  * Customer ItemReader that reads SPS Customer import result XML and retrieves
  * SIS Customer using Dao.
- * 
+ *
  * @author rsi
- * 
  */
 public class CustomerItemReader extends DaoResponsePackItemReader<Customer, CustomerDao> {
 

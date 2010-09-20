@@ -16,7 +16,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class InvoiceSyncFunctionalTest {
 
 //  skipped for now
-//  @Test
+
+  //  @Test
   public void testConfirmInvoicesImportStep() throws Exception {
     ApplicationContext context = new ClassPathXmlApplicationContext("sisInvoiceJob.xml");
     DataSource dataSource = (DataSource) context.getBean("dataSource");

@@ -18,20 +18,17 @@ import cz.silesnet.sis.sync.domain.CustomerResult;
  * Sets parameters for Customer update SQL.
  *
  * @author sikorric
- *
  */
 public class CustomerUpdatePreparedStatementSetter
     implements
-      ItemPreparedStatementSetter<ResponsePackItemType> {
+    ItemPreparedStatementSetter<ResponsePackItemType> {
   /**
    * Maps Customer members to SQL update command.
-   * <p>
+   * <p/>
    * UPDATE customers SET symbol = ?, synchronized = ? WHERE id = ?
    *
-   * @param item
-   *          Customer object
-   * @param ps
-   *          SQL wrapped in PreparedStatement
+   * @param item Customer object
+   * @param ps   SQL wrapped in PreparedStatement
    */
   public void setValues(ResponsePackItemType item, PreparedStatement ps) throws SQLException {
     ResponseId sisId = ResponseId.of(item.getId());

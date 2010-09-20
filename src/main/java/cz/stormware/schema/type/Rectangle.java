@@ -17,9 +17,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for rectangle complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="rectangle">
  *   &lt;complexContent>
@@ -32,116 +32,98 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "rectangle")
 public class Rectangle {
 
-    @XmlAttribute(required = true)
-    protected BigInteger left;
-    @XmlAttribute(required = true)
-    protected BigInteger top;
-    @XmlAttribute(required = true)
-    protected BigInteger right;
-    @XmlAttribute(required = true)
-    protected BigInteger bottom;
+  @XmlAttribute(required = true)
+  protected BigInteger left;
+  @XmlAttribute(required = true)
+  protected BigInteger top;
+  @XmlAttribute(required = true)
+  protected BigInteger right;
+  @XmlAttribute(required = true)
+  protected BigInteger bottom;
 
-    /**
-     * Gets the value of the left property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getLeft() {
-        return left;
-    }
+  /**
+   * Gets the value of the left property.
+   *
+   * @return possible object is
+   *         {@link BigInteger }
+   */
+  public BigInteger getLeft() {
+    return left;
+  }
 
-    /**
-     * Sets the value of the left property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setLeft(BigInteger value) {
-        this.left = value;
-    }
+  /**
+   * Sets the value of the left property.
+   *
+   * @param value allowed object is
+   *              {@link BigInteger }
+   */
+  public void setLeft(BigInteger value) {
+    this.left = value;
+  }
 
-    /**
-     * Gets the value of the top property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getTop() {
-        return top;
-    }
+  /**
+   * Gets the value of the top property.
+   *
+   * @return possible object is
+   *         {@link BigInteger }
+   */
+  public BigInteger getTop() {
+    return top;
+  }
 
-    /**
-     * Sets the value of the top property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setTop(BigInteger value) {
-        this.top = value;
-    }
+  /**
+   * Sets the value of the top property.
+   *
+   * @param value allowed object is
+   *              {@link BigInteger }
+   */
+  public void setTop(BigInteger value) {
+    this.top = value;
+  }
 
-    /**
-     * Gets the value of the right property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getRight() {
-        return right;
-    }
+  /**
+   * Gets the value of the right property.
+   *
+   * @return possible object is
+   *         {@link BigInteger }
+   */
+  public BigInteger getRight() {
+    return right;
+  }
 
-    /**
-     * Sets the value of the right property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setRight(BigInteger value) {
-        this.right = value;
-    }
+  /**
+   * Sets the value of the right property.
+   *
+   * @param value allowed object is
+   *              {@link BigInteger }
+   */
+  public void setRight(BigInteger value) {
+    this.right = value;
+  }
 
-    /**
-     * Gets the value of the bottom property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getBottom() {
-        return bottom;
-    }
+  /**
+   * Gets the value of the bottom property.
+   *
+   * @return possible object is
+   *         {@link BigInteger }
+   */
+  public BigInteger getBottom() {
+    return bottom;
+  }
 
-    /**
-     * Sets the value of the bottom property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setBottom(BigInteger value) {
-        this.bottom = value;
-    }
+  /**
+   * Sets the value of the bottom property.
+   *
+   * @param value allowed object is
+   *              {@link BigInteger }
+   */
+  public void setBottom(BigInteger value) {
+    this.bottom = value;
+  }
 
 }

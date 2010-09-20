@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for calculationType.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p/>
  * <pre>
  * &lt;simpleType name="calculationType">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -26,43 +26,40 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
- * 
  */
 @XmlType(name = "calculationType")
 @XmlEnum
 public enum CalculationType {
 
 
-    /**
-     * Bez dan\u011b.
-     * 
-     */
-    @XmlEnumValue("excludedVAT")
-    EXCLUDED_VAT("excludedVAT"),
+  /**
+   * Bez dan\u011b.
+   */
+  @XmlEnumValue("excludedVAT")
+  EXCLUDED_VAT("excludedVAT"),
 
-    /**
-     * S daní.
-     * 
-     */
-    @XmlEnumValue("includedVAT")
-    INCLUDED_VAT("includedVAT");
-    private final String value;
+  /**
+   * S daní.
+   */
+  @XmlEnumValue("includedVAT")
+  INCLUDED_VAT("includedVAT");
+  private final String value;
 
-    CalculationType(String v) {
-        value = v;
+  CalculationType(String v) {
+    value = v;
+  }
+
+  public String value() {
+    return value;
+  }
+
+  public static CalculationType fromValue(String v) {
+    for (CalculationType c : CalculationType.values()) {
+      if (c.value.equals(v)) {
+        return c;
+      }
     }
-
-    public String value() {
-        return value;
-    }
-
-    public static CalculationType fromValue(String v) {
-        for (CalculationType c: CalculationType.values()) {
-            if (c.value.equals(v)) {
-                return c;
-            }
-        }
-        throw new IllegalArgumentException(v);
-    }
+    throw new IllegalArgumentException(v);
+  }
 
 }

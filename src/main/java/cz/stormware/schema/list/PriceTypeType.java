@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for priceTypeType.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p/>
  * <pre>
  * &lt;simpleType name="priceTypeType">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -27,50 +27,46 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
- * 
  */
 @XmlType(name = "priceTypeType")
 @XmlEnum
 public enum PriceTypeType {
 
 
-    /**
-     * Základní cena. Zvolte p\u0159i vkládání základní prodejní ceny.
-     * 
-     */
-    @XmlEnumValue("basicPrice")
-    BASIC_PRICE("basicPrice"),
+  /**
+   * Základní cena. Zvolte p\u0159i vkládání základní prodejní ceny.
+   */
+  @XmlEnumValue("basicPrice")
+  BASIC_PRICE("basicPrice"),
 
-    /**
-     * Vedlejší cena. Zvolte p\u0159i vkládání vedlejší slevy.
-     * 
-     */
-    @XmlEnumValue("accessoryPrice")
-    ACCESSORY_PRICE("accessoryPrice"),
+  /**
+   * Vedlejší cena. Zvolte p\u0159i vkládání vedlejší slevy.
+   */
+  @XmlEnumValue("accessoryPrice")
+  ACCESSORY_PRICE("accessoryPrice"),
 
-    /**
-     * Sleva. Zvolte p\u0159i vkládání prodejní slevy.
-     * 
-     */
-    @XmlEnumValue("discount")
-    DISCOUNT("discount");
-    private final String value;
+  /**
+   * Sleva. Zvolte p\u0159i vkládání prodejní slevy.
+   */
+  @XmlEnumValue("discount")
+  DISCOUNT("discount");
+  private final String value;
 
-    PriceTypeType(String v) {
-        value = v;
+  PriceTypeType(String v) {
+    value = v;
+  }
+
+  public String value() {
+    return value;
+  }
+
+  public static PriceTypeType fromValue(String v) {
+    for (PriceTypeType c : PriceTypeType.values()) {
+      if (c.value.equals(v)) {
+        return c;
+      }
     }
-
-    public String value() {
-        return value;
-    }
-
-    public static PriceTypeType fromValue(String v) {
-        for (PriceTypeType c: PriceTypeType.values()) {
-            if (c.value.equals(v)) {
-                return c;
-            }
-        }
-        throw new IllegalArgumentException(v);
-    }
+    throw new IllegalArgumentException(v);
+  }
 
 }

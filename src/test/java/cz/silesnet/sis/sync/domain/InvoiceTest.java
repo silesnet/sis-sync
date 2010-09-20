@@ -8,25 +8,25 @@ import org.junit.Test;
 
 public class InvoiceTest {
 
-    private static final float AMOUNT = 1.025F;
-    private static final int PRICE = 10;
+  private static final float AMOUNT = 1.025F;
+  private static final int PRICE = 10;
 
-    Invoice invoice;
+  Invoice invoice;
 
-    @Before
-    public void setUp() {
-        invoice = new Invoice();
-        invoice.new Item("Item 1", AMOUNT, PRICE);
-    }
+  @Before
+  public void setUp() {
+    invoice = new Invoice();
+    invoice.new Item("Item 1", AMOUNT, PRICE);
+  }
 
-    @Test
-    public void testItems() throws Exception {
-        assertEquals(1, invoice.getItems().size());
-    }
+  @Test
+  public void testItems() throws Exception {
+    assertEquals(1, invoice.getItems().size());
+  }
 
-    @After
-    public void tearDown() {
-        invoice = null;
-    }
+  @After
+  public void tearDown() {
+    invoice = null;
+  }
 
 }

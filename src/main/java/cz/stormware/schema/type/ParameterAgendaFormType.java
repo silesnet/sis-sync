@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for parameterAgendaFormType.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p/>
  * <pre>
  * &lt;simpleType name="parameterAgendaFormType">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -34,99 +34,88 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
- * 
  */
 @XmlType(name = "parameterAgendaFormType")
 @XmlEnum
 public enum ParameterAgendaFormType {
 
 
-    /**
-     * Formulá\u0159 agendy Vydané faktury.
-     * 
-     */
-    @XmlEnumValue("issuedInvoice")
-    ISSUED_INVOICE("issuedInvoice"),
+  /**
+   * Formulá\u0159 agendy Vydané faktury.
+   */
+  @XmlEnumValue("issuedInvoice")
+  ISSUED_INVOICE("issuedInvoice"),
 
-    /**
-     * Formulá\u0159 agendy P\u0159ijaté faktury.
-     * 
-     */
-    @XmlEnumValue("receivedInvoice")
-    RECEIVED_INVOICE("receivedInvoice"),
+  /**
+   * Formulá\u0159 agendy P\u0159ijaté faktury.
+   */
+  @XmlEnumValue("receivedInvoice")
+  RECEIVED_INVOICE("receivedInvoice"),
 
-    /**
-     * Formulá\u0159 agendy Ostatní pohledávky.
-     * 
-     */
-    @XmlEnumValue("receivable")
-    RECEIVABLE("receivable"),
+  /**
+   * Formulá\u0159 agendy Ostatní pohledávky.
+   */
+  @XmlEnumValue("receivable")
+  RECEIVABLE("receivable"),
 
-    /**
-     * Formulá\u0159 agendy Ostatní závazky.
-     * 
-     */
-    @XmlEnumValue("commitment")
-    COMMITMENT("commitment"),
+  /**
+   * Formulá\u0159 agendy Ostatní závazky.
+   */
+  @XmlEnumValue("commitment")
+  COMMITMENT("commitment"),
 
-    /**
-     * Formulá\u0159 agendy Vydané zálohové faktury.
-     * 
-     */
-    @XmlEnumValue("issuedAdvanceInvoice")
-    ISSUED_ADVANCE_INVOICE("issuedAdvanceInvoice"),
+  /**
+   * Formulá\u0159 agendy Vydané zálohové faktury.
+   */
+  @XmlEnumValue("issuedAdvanceInvoice")
+  ISSUED_ADVANCE_INVOICE("issuedAdvanceInvoice"),
 
-    /**
-     * Formulá\u0159 agendy P\u0159ijaté zálohové faktury.
-     * 
-     */
-    @XmlEnumValue("receivedAdvanceInvoice")
-    RECEIVED_ADVANCE_INVOICE("receivedAdvanceInvoice"),
+  /**
+   * Formulá\u0159 agendy P\u0159ijaté zálohové faktury.
+   */
+  @XmlEnumValue("receivedAdvanceInvoice")
+  RECEIVED_ADVANCE_INVOICE("receivedAdvanceInvoice"),
 
-    /**
-     * Formulá\u0159 agendy Nabídky.
-     * 
-     */
-    @XmlEnumValue("offer")
-    OFFER("offer"),
+  /**
+   * Formulá\u0159 agendy Nabídky.
+   */
+  @XmlEnumValue("offer")
+  OFFER("offer"),
 
-    /**
-     * Formulá\u0159 agendy Poptávky.
-     * 
-     */
-    @XmlEnumValue("enquiry")
-    ENQUIRY("enquiry"),
+  /**
+   * Formulá\u0159 agendy Poptávky.
+   */
+  @XmlEnumValue("enquiry")
+  ENQUIRY("enquiry"),
 
-    /**
-     * Formulá\u0159 agendy P\u0159ijaté objednávky.
-     * 
-     */
-    @XmlEnumValue("receivedOrder")
-    RECEIVED_ORDER("receivedOrder"),
+  /**
+   * Formulá\u0159 agendy P\u0159ijaté objednávky.
+   */
+  @XmlEnumValue("receivedOrder")
+  RECEIVED_ORDER("receivedOrder"),
 
-    /**
-     * Formulá\u0159 agendy Vydané objednávky.
-     * 
-     */
-    @XmlEnumValue("issuedOrder")
-    ISSUED_ORDER("issuedOrder");
-    private final String value;
+  /**
+   * Formulá\u0159 agendy Vydané objednávky.
+   */
+  @XmlEnumValue("issuedOrder")
+  ISSUED_ORDER("issuedOrder");
+  private final String value;
 
-    ParameterAgendaFormType(String v) {
-        value = v;
+  ParameterAgendaFormType(String v) {
+    value = v;
+  }
+
+  public String value() {
+    return value;
+  }
+
+  public static ParameterAgendaFormType fromValue(String v) {
+    for (ParameterAgendaFormType c : ParameterAgendaFormType.values()) {
+      if (c.value.equals(v)) {
+        return c;
+      }
     }
-
-    public String value() {
-        return value;
-    }
-
-    public static ParameterAgendaFormType fromValue(String v) {
-        for (ParameterAgendaFormType c: ParameterAgendaFormType.values()) {
-            if (c.value.equals(v)) {
-                return c;
-            }
-        }
-        throw new IllegalArgumentException(v);
-    }
+    throw new IllegalArgumentException(v);
+  }
 
 }

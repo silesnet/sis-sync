@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for sphereTypeType.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p/>
  * <pre>
  * &lt;simpleType name="sphereTypeType">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -32,85 +32,76 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
- * 
  */
 @XmlType(name = "sphereTypeType")
 @XmlEnum
 public enum SphereTypeType {
 
 
-    /**
-     * Obchodní.
-     * 
-     */
-    @XmlEnumValue("business")
-    BUSINESS("business"),
+  /**
+   * Obchodní.
+   */
+  @XmlEnumValue("business")
+  BUSINESS("business"),
 
-    /**
-     * P\u016fj\u010dka.
-     * 
-     */
-    @XmlEnumValue("loan")
-    LOAN("loan"),
+  /**
+   * P\u016fj\u010dka.
+   */
+  @XmlEnumValue("loan")
+  LOAN("loan"),
 
-    /**
-     * Zvl. p\u0159edpis.
-     * 
-     */
-    @XmlEnumValue("specificRegulations")
-    SPECIFIC_REGULATIONS("specificRegulations"),
+  /**
+   * Zvl. p\u0159edpis.
+   */
+  @XmlEnumValue("specificRegulations")
+  SPECIFIC_REGULATIONS("specificRegulations"),
 
-    /**
-     * Ostatní.
-     * 
-     */
-    @XmlEnumValue("other")
-    OTHER("other"),
+  /**
+   * Ostatní.
+   */
+  @XmlEnumValue("other")
+  OTHER("other"),
 
-    /**
-     * Šeky.
-     * 
-     */
-    @XmlEnumValue("cheques")
-    CHEQUES("cheques"),
+  /**
+   * Šeky.
+   */
+  @XmlEnumValue("cheques")
+  CHEQUES("cheques"),
 
-    /**
-     * Kursové rozdíly.
-     * 
-     */
-    @XmlEnumValue("exchangeRateDifference")
-    EXCHANGE_RATE_DIFFERENCE("exchangeRateDifference"),
+  /**
+   * Kursové rozdíly.
+   */
+  @XmlEnumValue("exchangeRateDifference")
+  EXCHANGE_RATE_DIFFERENCE("exchangeRateDifference"),
 
-    /**
-     * Penále.
-     * 
-     */
-    @XmlEnumValue("penalty")
-    PENALTY("penalty"),
+  /**
+   * Penále.
+   */
+  @XmlEnumValue("penalty")
+  PENALTY("penalty"),
 
-    /**
-     * Pracovn\u011bprávní.
-     * 
-     */
-    @XmlEnumValue("labourLaw")
-    LABOUR_LAW("labourLaw");
-    private final String value;
+  /**
+   * Pracovn\u011bprávní.
+   */
+  @XmlEnumValue("labourLaw")
+  LABOUR_LAW("labourLaw");
+  private final String value;
 
-    SphereTypeType(String v) {
-        value = v;
+  SphereTypeType(String v) {
+    value = v;
+  }
+
+  public String value() {
+    return value;
+  }
+
+  public static SphereTypeType fromValue(String v) {
+    for (SphereTypeType c : SphereTypeType.values()) {
+      if (c.value.equals(v)) {
+        return c;
+      }
     }
-
-    public String value() {
-        return value;
-    }
-
-    public static SphereTypeType fromValue(String v) {
-        for (SphereTypeType c: SphereTypeType.values()) {
-            if (c.value.equals(v)) {
-                return c;
-            }
-        }
-        throw new IllegalArgumentException(v);
-    }
+    throw new IllegalArgumentException(v);
+  }
 
 }

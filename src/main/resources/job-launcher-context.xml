@@ -19,52 +19,52 @@
         class="org.springframework.batch.core.launch.support.SimpleJobLauncher"
         p:jobRepository-ref="jobRepository">
     <property name="taskExecutor">
-      <bean class="org.springframework.core.task.SyncTaskExecutor"/>
+      <bean class="org.springframework.core.task.SyncTaskExecutor" />
     </property>
   </bean>
 
   <bean id="jobRepository"
         class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean"
-        p:transactionManager-ref="transactionManager"/>
+        p:transactionManager-ref="transactionManager" />
 
   <bean id="transactionManager"
-        class="org.springframework.batch.support.transaction.ResourcelessTransactionManager"/>
+        class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
 
   <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
         p:driverClassName="${sis.jdbc.driver}" p:url="${sis.jdbc.url}"
-        p:username="${sis.jdbc.user}" p:password="${sis.jdbc.password}"/>
+        p:username="${sis.jdbc.user}" p:password="${sis.jdbc.password}" />
 
   <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"
-        p:dataSource-ref="dataSource"/>
+        p:dataSource-ref="dataSource" />
 
   <bean id="spsDataSource" class="org.apache.commons.dbcp.BasicDataSource"
         p:driverClassName="${pohoda.jdbc.driver}" p:url="${pohoda.jdbc.url}"
-        p:username="${pohoda.jdbc.user}" p:password="${pohoda.jdbc.password}"/>
+        p:username="${pohoda.jdbc.user}" p:password="${pohoda.jdbc.password}" />
 
   <bean id="spsJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"
-        p:dataSource-ref="spsDataSource"/>
+        p:dataSource-ref="spsDataSource" />
 
   <bean id="simpleJob" abstract="true"
         class="org.springframework.batch.core.job.SimpleJob"
-        p:jobRepository-ref="jobRepository"/>
+        p:jobRepository-ref="jobRepository" />
 
   <bean id="simpleStep" abstract="true"
         class="org.springframework.batch.core.step.item.SimpleStepFactoryBean"
-        p:jobRepository-ref="jobRepository" p:transactionManager-ref="transactionManager"/>
+        p:jobRepository-ref="jobRepository" p:transactionManager-ref="transactionManager" />
 
   <bean id="taskletStep" abstract="true"
         class="org.springframework.batch.core.step.tasklet.TaskletStep"
-        p:jobRepository-ref="jobRepository" p:transactionManager-ref="transactionManager"/>
+        p:jobRepository-ref="jobRepository" p:transactionManager-ref="transactionManager" />
 
   <bean id="resourceFactory" class="cz.silesnet.sis.util.TimestampWorkdirResourceFactory"
-        p:workDir="${work.dir}"/>
+        p:workDir="${work.dir}" />
 
   <bean id="resource" abstract="true" factory-bean="resourceFactory"
-        factory-method="createInstance"/>
+        factory-method="createInstance" />
 
   <bean id="importTasklet" abstract="true"
         class="cz.silesnet.sis.sync.tasklet.SpsImportTasklet" p:executable="${pohoda.executable}"
         p:login="${pohoda.login}" p:password="${pohoda.password}"
-        p:database="${pohoda.database}"/>
+        p:database="${pohoda.database}" />
 
 </beans>

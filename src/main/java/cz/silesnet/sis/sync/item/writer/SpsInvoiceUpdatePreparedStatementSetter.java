@@ -12,23 +12,20 @@ import cz.silesnet.sis.sync.domain.Invoice;
 
 /**
  * Sets Invoice parameters to SQL PreparedStatement.
- * 
+ *
  * @author Richard Sikora
- * 
  */
 public class SpsInvoiceUpdatePreparedStatementSetter
     implements
-      ItemPreparedStatementSetter<Invoice> {
+    ItemPreparedStatementSetter<Invoice> {
 
   /**
    * Maps Invoice SIS bank account to SPS SQL update command.
-   * <p>
+   * <p/>
    * UPDATE FA SET account_number = ?, bank_code = ? WHERE id = ?
-   * 
-   * @param item
-   *          Invoice
-   * @param ps
-   *          SQL update command wrapped in PreparedStatement
+   *
+   * @param item Invoice
+   * @param ps   SQL update command wrapped in PreparedStatement
    */
   public void setValues(Invoice invoice, PreparedStatement ps) throws SQLException {
     ps.setString(1, invoice.getCustomer().getAccountNo());

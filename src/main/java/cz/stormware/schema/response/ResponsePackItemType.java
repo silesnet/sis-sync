@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
 import cz.stormware.schema.addressbook.AddressbookResponseType;
 import cz.stormware.schema.invoice.InvoiceResponseType;
 import cz.stormware.schema.list.ListAddressBookType;
@@ -22,9 +23,9 @@ import cz.stormware.schema.type.StavType2;
 
 /**
  * <p>Java class for responsePackItemType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="responsePackItemType">
  *   &lt;complexContent>
@@ -43,8 +44,6 @@ import cz.stormware.schema.type.StavType2;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "responsePackItemType", propOrder = {
@@ -55,213 +54,181 @@ import cz.stormware.schema.type.StavType2;
 })
 public class ResponsePackItemType {
 
-    @XmlElement(namespace = "http://www.stormware.cz/schema/invoice.xsd")
-    protected InvoiceResponseType invoiceResponse;
-    @XmlElement(namespace = "http://www.stormware.cz/schema/addressbook.xsd")
-    protected AddressbookResponseType addressbookResponse;
-    @XmlElement(namespace = "http://www.stormware.cz/schema/list.xsd")
-    protected ListInvoiceType listInvoice;
-    @XmlElement(namespace = "http://www.stormware.cz/schema/list.xsd")
-    protected ListAddressBookType listAddressBook;
-    @XmlAttribute(required = true)
-    protected String version;
-    @XmlAttribute(required = true)
-    protected String id;
-    @XmlAttribute(required = true)
-    protected StavType2 state;
-    @XmlAttribute
-    protected String note;
+  @XmlElement(namespace = "http://www.stormware.cz/schema/invoice.xsd")
+  protected InvoiceResponseType invoiceResponse;
+  @XmlElement(namespace = "http://www.stormware.cz/schema/addressbook.xsd")
+  protected AddressbookResponseType addressbookResponse;
+  @XmlElement(namespace = "http://www.stormware.cz/schema/list.xsd")
+  protected ListInvoiceType listInvoice;
+  @XmlElement(namespace = "http://www.stormware.cz/schema/list.xsd")
+  protected ListAddressBookType listAddressBook;
+  @XmlAttribute(required = true)
+  protected String version;
+  @XmlAttribute(required = true)
+  protected String id;
+  @XmlAttribute(required = true)
+  protected StavType2 state;
+  @XmlAttribute
+  protected String note;
 
-    /**
-     * Gets the value of the invoiceResponse property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link InvoiceResponseType }
-     *     
-     */
-    public InvoiceResponseType getInvoiceResponse() {
-        return invoiceResponse;
-    }
+  /**
+   * Gets the value of the invoiceResponse property.
+   *
+   * @return possible object is
+   *         {@link InvoiceResponseType }
+   */
+  public InvoiceResponseType getInvoiceResponse() {
+    return invoiceResponse;
+  }
 
-    /**
-     * Sets the value of the invoiceResponse property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link InvoiceResponseType }
-     *     
-     */
-    public void setInvoiceResponse(InvoiceResponseType value) {
-        this.invoiceResponse = value;
-    }
+  /**
+   * Sets the value of the invoiceResponse property.
+   *
+   * @param value allowed object is
+   *              {@link InvoiceResponseType }
+   */
+  public void setInvoiceResponse(InvoiceResponseType value) {
+    this.invoiceResponse = value;
+  }
 
-    /**
-     * Gets the value of the addressbookResponse property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AddressbookResponseType }
-     *     
-     */
-    public AddressbookResponseType getAddressbookResponse() {
-        return addressbookResponse;
-    }
+  /**
+   * Gets the value of the addressbookResponse property.
+   *
+   * @return possible object is
+   *         {@link AddressbookResponseType }
+   */
+  public AddressbookResponseType getAddressbookResponse() {
+    return addressbookResponse;
+  }
 
-    /**
-     * Sets the value of the addressbookResponse property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AddressbookResponseType }
-     *     
-     */
-    public void setAddressbookResponse(AddressbookResponseType value) {
-        this.addressbookResponse = value;
-    }
+  /**
+   * Sets the value of the addressbookResponse property.
+   *
+   * @param value allowed object is
+   *              {@link AddressbookResponseType }
+   */
+  public void setAddressbookResponse(AddressbookResponseType value) {
+    this.addressbookResponse = value;
+  }
 
-    /**
-     * Gets the value of the listInvoice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ListInvoiceType }
-     *     
-     */
-    public ListInvoiceType getListInvoice() {
-        return listInvoice;
-    }
+  /**
+   * Gets the value of the listInvoice property.
+   *
+   * @return possible object is
+   *         {@link ListInvoiceType }
+   */
+  public ListInvoiceType getListInvoice() {
+    return listInvoice;
+  }
 
-    /**
-     * Sets the value of the listInvoice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ListInvoiceType }
-     *     
-     */
-    public void setListInvoice(ListInvoiceType value) {
-        this.listInvoice = value;
-    }
+  /**
+   * Sets the value of the listInvoice property.
+   *
+   * @param value allowed object is
+   *              {@link ListInvoiceType }
+   */
+  public void setListInvoice(ListInvoiceType value) {
+    this.listInvoice = value;
+  }
 
-    /**
-     * Gets the value of the listAddressBook property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ListAddressBookType }
-     *     
-     */
-    public ListAddressBookType getListAddressBook() {
-        return listAddressBook;
-    }
+  /**
+   * Gets the value of the listAddressBook property.
+   *
+   * @return possible object is
+   *         {@link ListAddressBookType }
+   */
+  public ListAddressBookType getListAddressBook() {
+    return listAddressBook;
+  }
 
-    /**
-     * Sets the value of the listAddressBook property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ListAddressBookType }
-     *     
-     */
-    public void setListAddressBook(ListAddressBookType value) {
-        this.listAddressBook = value;
-    }
+  /**
+   * Sets the value of the listAddressBook property.
+   *
+   * @param value allowed object is
+   *              {@link ListAddressBookType }
+   */
+  public void setListAddressBook(ListAddressBookType value) {
+    this.listAddressBook = value;
+  }
 
-    /**
-     * Gets the value of the version property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getVersion() {
-        return version;
-    }
+  /**
+   * Gets the value of the version property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getVersion() {
+    return version;
+  }
 
-    /**
-     * Sets the value of the version property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setVersion(String value) {
-        this.version = value;
-    }
+  /**
+   * Sets the value of the version property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setVersion(String value) {
+    this.version = value;
+  }
 
-    /**
-     * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getId() {
-        return id;
-    }
+  /**
+   * Gets the value of the id property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getId() {
+    return id;
+  }
 
-    /**
-     * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setId(String value) {
-        this.id = value;
-    }
+  /**
+   * Sets the value of the id property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setId(String value) {
+    this.id = value;
+  }
 
-    /**
-     * Gets the value of the state property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link StavType2 }
-     *     
-     */
-    public StavType2 getState() {
-        return state;
-    }
+  /**
+   * Gets the value of the state property.
+   *
+   * @return possible object is
+   *         {@link StavType2 }
+   */
+  public StavType2 getState() {
+    return state;
+  }
 
-    /**
-     * Sets the value of the state property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link StavType2 }
-     *     
-     */
-    public void setState(StavType2 value) {
-        this.state = value;
-    }
+  /**
+   * Sets the value of the state property.
+   *
+   * @param value allowed object is
+   *              {@link StavType2 }
+   */
+  public void setState(StavType2 value) {
+    this.state = value;
+  }
 
-    /**
-     * Gets the value of the note property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getNote() {
-        return note;
-    }
+  /**
+   * Gets the value of the note property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getNote() {
+    return note;
+  }
 
-    /**
-     * Sets the value of the note property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setNote(String value) {
-        this.note = value;
-    }
+  /**
+   * Sets the value of the note property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setNote(String value) {
+    this.note = value;
+  }
 
 }

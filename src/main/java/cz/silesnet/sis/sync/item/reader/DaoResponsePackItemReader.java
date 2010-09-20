@@ -17,16 +17,15 @@ import cz.stormware.schema.response.ResponsePackItemType;
 /**
  * ItemReader that reads SPS invoice import result file and does lookup to SIS
  * for bank account.
- * 
+ *
  * @author Richard Sikora
- * 
  */
 public abstract class DaoResponsePackItemReader<T, D>
     extends
-      AbstractItemCountingItemStreamItemReader<T>
+    AbstractItemCountingItemStreamItemReader<T>
     implements
-      ResourceAwareItemReaderItemStream<T>,
-      InitializingBean {
+    ResourceAwareItemReaderItemStream<T>,
+    InitializingBean {
 
   private final ResponsePackItemReader itemReader;
   protected D dao;

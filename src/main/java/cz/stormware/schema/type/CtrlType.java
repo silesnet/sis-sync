@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for ctrlType.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p/>
  * <pre>
  * &lt;simpleType name="ctrlType">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -34,99 +34,88 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
- * 
  */
 @XmlType(name = "ctrlType")
 @XmlEnum
 public enum CtrlType {
 
 
-    /**
-     * Popis.
-     * 
-     */
-    @XmlEnumValue("text")
-    TEXT("text"),
+  /**
+   * Popis.
+   */
+  @XmlEnumValue("text")
+  TEXT("text"),
 
-    /**
-     * Tla\u010dítko.
-     * 
-     */
-    @XmlEnumValue("push")
-    PUSH("push"),
+  /**
+   * Tla\u010dítko.
+   */
+  @XmlEnumValue("push")
+  PUSH("push"),
 
-    /**
-     * Odkaz.
-     * 
-     */
-    @XmlEnumValue("link")
-    LINK("link"),
+  /**
+   * Odkaz.
+   */
+  @XmlEnumValue("link")
+  LINK("link"),
 
-    /**
-     * Ráme\u010dek skupiny.
-     * 
-     */
-    @XmlEnumValue("group")
-    GROUP("group"),
+  /**
+   * Ráme\u010dek skupiny.
+   */
+  @XmlEnumValue("group")
+  GROUP("group"),
 
-    /**
-     * Ráme\u010dek.
-     * 
-     */
-    @XmlEnumValue("rect")
-    RECT("rect"),
+  /**
+   * Ráme\u010dek.
+   */
+  @XmlEnumValue("rect")
+  RECT("rect"),
 
-    /**
-     * Obrázek.
-     * 
-     */
-    @XmlEnumValue("image")
-    IMAGE("image"),
+  /**
+   * Obrázek.
+   */
+  @XmlEnumValue("image")
+  IMAGE("image"),
 
-    /**
-     * Textové pole.
-     * 
-     */
-    @XmlEnumValue("edit")
-    EDIT("edit"),
+  /**
+   * Textové pole.
+   */
+  @XmlEnumValue("edit")
+  EDIT("edit"),
 
-    /**
-     * Zaškrtávací pole.
-     * 
-     */
-    @XmlEnumValue("check")
-    CHECK("check"),
+  /**
+   * Zaškrtávací pole.
+   */
+  @XmlEnumValue("check")
+  CHECK("check"),
 
-    /**
-     * Datumové pole.
-     * 
-     */
-    @XmlEnumValue("pick")
-    PICK("pick"),
+  /**
+   * Datumové pole.
+   */
+  @XmlEnumValue("pick")
+  PICK("pick"),
 
-    /**
-     * Seznamové pole.
-     * 
-     */
-    @XmlEnumValue("list")
-    LIST("list");
-    private final String value;
+  /**
+   * Seznamové pole.
+   */
+  @XmlEnumValue("list")
+  LIST("list");
+  private final String value;
 
-    CtrlType(String v) {
-        value = v;
+  CtrlType(String v) {
+    value = v;
+  }
+
+  public String value() {
+    return value;
+  }
+
+  public static CtrlType fromValue(String v) {
+    for (CtrlType c : CtrlType.values()) {
+      if (c.value.equals(v)) {
+        return c;
+      }
     }
-
-    public String value() {
-        return value;
-    }
-
-    public static CtrlType fromValue(String v) {
-        for (CtrlType c: CtrlType.values()) {
-            if (c.value.equals(v)) {
-                return c;
-            }
-        }
-        throw new IllegalArgumentException(v);
-    }
+    throw new IllegalArgumentException(v);
+  }
 
 }

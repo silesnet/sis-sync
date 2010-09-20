@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
+
 import cz.stormware.schema.addressbook.AddressbookResponseType;
 import cz.stormware.schema.invoice.InvoiceResponseType;
 import cz.stormware.schema.type.StavType2;
@@ -20,9 +21,9 @@ import cz.stormware.schema.type.StavType2;
 
 /**
  * <p>Java class for documentResponseType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="documentResponseType">
  *   &lt;complexContent>
@@ -37,8 +38,6 @@ import cz.stormware.schema.type.StavType2;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "documentResponseType", propOrder = {
@@ -51,107 +50,91 @@ import cz.stormware.schema.type.StavType2;
 })
 public class DocumentResponseType {
 
-    protected ImportDetailsType importDetails;
-    protected ProducedDetailsType producedDetails;
-    @XmlAttribute(required = true)
-    protected StavType2 state;
-    @XmlAttribute(required = true)
-    protected String version;
+  protected ImportDetailsType importDetails;
+  protected ProducedDetailsType producedDetails;
+  @XmlAttribute(required = true)
+  protected StavType2 state;
+  @XmlAttribute(required = true)
+  protected String version;
 
-    /**
-     * Gets the value of the importDetails property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ImportDetailsType }
-     *     
-     */
-    public ImportDetailsType getImportDetails() {
-        return importDetails;
-    }
+  /**
+   * Gets the value of the importDetails property.
+   *
+   * @return possible object is
+   *         {@link ImportDetailsType }
+   */
+  public ImportDetailsType getImportDetails() {
+    return importDetails;
+  }
 
-    /**
-     * Sets the value of the importDetails property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ImportDetailsType }
-     *     
-     */
-    public void setImportDetails(ImportDetailsType value) {
-        this.importDetails = value;
-    }
+  /**
+   * Sets the value of the importDetails property.
+   *
+   * @param value allowed object is
+   *              {@link ImportDetailsType }
+   */
+  public void setImportDetails(ImportDetailsType value) {
+    this.importDetails = value;
+  }
 
-    /**
-     * Gets the value of the producedDetails property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ProducedDetailsType }
-     *     
-     */
-    public ProducedDetailsType getProducedDetails() {
-        return producedDetails;
-    }
+  /**
+   * Gets the value of the producedDetails property.
+   *
+   * @return possible object is
+   *         {@link ProducedDetailsType }
+   */
+  public ProducedDetailsType getProducedDetails() {
+    return producedDetails;
+  }
 
-    /**
-     * Sets the value of the producedDetails property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ProducedDetailsType }
-     *     
-     */
-    public void setProducedDetails(ProducedDetailsType value) {
-        this.producedDetails = value;
-    }
+  /**
+   * Sets the value of the producedDetails property.
+   *
+   * @param value allowed object is
+   *              {@link ProducedDetailsType }
+   */
+  public void setProducedDetails(ProducedDetailsType value) {
+    this.producedDetails = value;
+  }
 
-    /**
-     * Gets the value of the state property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link StavType2 }
-     *     
-     */
-    public StavType2 getState() {
-        return state;
-    }
+  /**
+   * Gets the value of the state property.
+   *
+   * @return possible object is
+   *         {@link StavType2 }
+   */
+  public StavType2 getState() {
+    return state;
+  }
 
-    /**
-     * Sets the value of the state property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link StavType2 }
-     *     
-     */
-    public void setState(StavType2 value) {
-        this.state = value;
-    }
+  /**
+   * Sets the value of the state property.
+   *
+   * @param value allowed object is
+   *              {@link StavType2 }
+   */
+  public void setState(StavType2 value) {
+    this.state = value;
+  }
 
-    /**
-     * Gets the value of the version property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getVersion() {
-        return version;
-    }
+  /**
+   * Gets the value of the version property.
+   *
+   * @return possible object is
+   *         {@link String }
+   */
+  public String getVersion() {
+    return version;
+  }
 
-    /**
-     * Sets the value of the version property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setVersion(String value) {
-        this.version = value;
-    }
+  /**
+   * Sets the value of the version property.
+   *
+   * @param value allowed object is
+   *              {@link String }
+   */
+  public void setVersion(String value) {
+    this.version = value;
+  }
 
 }

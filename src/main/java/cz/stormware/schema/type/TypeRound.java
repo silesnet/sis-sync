@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for typeRound complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="typeRound">
  *   &lt;complexContent>
@@ -30,8 +30,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "typeRound", propOrder = {
@@ -42,105 +40,89 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TypeRound {
 
-    protected Double priceRound;
-    protected Double rateVATround;
-    protected Double priceRoundSum;
-    protected Double priceRoundSumVAT;
+  protected Double priceRound;
+  protected Double rateVATround;
+  protected Double priceRoundSum;
+  protected Double priceRoundSumVAT;
 
-    /**
-     * Gets the value of the priceRound property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getPriceRound() {
-        return priceRound;
-    }
+  /**
+   * Gets the value of the priceRound property.
+   *
+   * @return possible object is
+   *         {@link Double }
+   */
+  public Double getPriceRound() {
+    return priceRound;
+  }
 
-    /**
-     * Sets the value of the priceRound property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
-     */
-    public void setPriceRound(Double value) {
-        this.priceRound = value;
-    }
+  /**
+   * Sets the value of the priceRound property.
+   *
+   * @param value allowed object is
+   *              {@link Double }
+   */
+  public void setPriceRound(Double value) {
+    this.priceRound = value;
+  }
 
-    /**
-     * Gets the value of the rateVATround property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getRateVATround() {
-        return rateVATround;
-    }
+  /**
+   * Gets the value of the rateVATround property.
+   *
+   * @return possible object is
+   *         {@link Double }
+   */
+  public Double getRateVATround() {
+    return rateVATround;
+  }
 
-    /**
-     * Sets the value of the rateVATround property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
-     */
-    public void setRateVATround(Double value) {
-        this.rateVATround = value;
-    }
+  /**
+   * Sets the value of the rateVATround property.
+   *
+   * @param value allowed object is
+   *              {@link Double }
+   */
+  public void setRateVATround(Double value) {
+    this.rateVATround = value;
+  }
 
-    /**
-     * Gets the value of the priceRoundSum property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getPriceRoundSum() {
-        return priceRoundSum;
-    }
+  /**
+   * Gets the value of the priceRoundSum property.
+   *
+   * @return possible object is
+   *         {@link Double }
+   */
+  public Double getPriceRoundSum() {
+    return priceRoundSum;
+  }
 
-    /**
-     * Sets the value of the priceRoundSum property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
-     */
-    public void setPriceRoundSum(Double value) {
-        this.priceRoundSum = value;
-    }
+  /**
+   * Sets the value of the priceRoundSum property.
+   *
+   * @param value allowed object is
+   *              {@link Double }
+   */
+  public void setPriceRoundSum(Double value) {
+    this.priceRoundSum = value;
+  }
 
-    /**
-     * Gets the value of the priceRoundSumVAT property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getPriceRoundSumVAT() {
-        return priceRoundSumVAT;
-    }
+  /**
+   * Gets the value of the priceRoundSumVAT property.
+   *
+   * @return possible object is
+   *         {@link Double }
+   */
+  public Double getPriceRoundSumVAT() {
+    return priceRoundSumVAT;
+  }
 
-    /**
-     * Sets the value of the priceRoundSumVAT property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
-     */
-    public void setPriceRoundSumVAT(Double value) {
-        this.priceRoundSumVAT = value;
-    }
+  /**
+   * Sets the value of the priceRoundSumVAT property.
+   *
+   * @param value allowed object is
+   *              {@link Double }
+   */
+  public void setPriceRoundSumVAT(Double value) {
+    this.priceRoundSumVAT = value;
+  }
 
 }

@@ -11,29 +11,29 @@ import org.junit.Test;
 
 public class RegExpUtilsTest {
 
-    private static String TEXT = "aaabbbcccdddeee";
-    private static Pattern PATTERN = Pattern.compile(".*(bbb).*(ddd).*");
+  private static String TEXT = "aaabbbcccdddeee";
+  private static Pattern PATTERN = Pattern.compile(".*(bbb).*(ddd).*");
 
-    private Matcher matcher;
+  private Matcher matcher;
 
-    @Before
-    public void setUp() throws Exception {
-        matcher = PATTERN.matcher(TEXT);
-    }
+  @Before
+  public void setUp() throws Exception {
+    matcher = PATTERN.matcher(TEXT);
+  }
 
-    @After
-    public void tearDown() throws Exception {
-        matcher = null;
-    }
+  @After
+  public void tearDown() throws Exception {
+    matcher = null;
+  }
 
-    @Test
-    public void testFirstMatcherGroup() throws Exception {
-        assertEquals("bbb", RegExpUtils.getFirstMatcherGroup(matcher));
-    }
+  @Test
+  public void testFirstMatcherGroup() throws Exception {
+    assertEquals("bbb", RegExpUtils.getFirstMatcherGroup(matcher));
+  }
 
-    @Test
-    public void testSecondMatcherGroup() throws Exception {
-        assertEquals("ddd", RegExpUtils.getMatcherGroup(matcher, 2));
-    }
+  @Test
+  public void testSecondMatcherGroup() throws Exception {
+    assertEquals("ddd", RegExpUtils.getMatcherGroup(matcher, 2));
+  }
 
 }

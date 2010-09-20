@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for invoiceTypeType.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p/>
  * <pre>
  * &lt;simpleType name="invoiceTypeType">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -37,120 +37,106 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
- * 
  */
 @XmlType(name = "invoiceTypeType")
 @XmlEnum
 public enum InvoiceTypeType {
 
 
-    /**
-     * Faktura.
-     * 
-     */
-    @XmlEnumValue("issuedInvoice")
-    ISSUED_INVOICE("issuedInvoice"),
+  /**
+   * Faktura.
+   */
+  @XmlEnumValue("issuedInvoice")
+  ISSUED_INVOICE("issuedInvoice"),
 
-    /**
-     * Dobropis.
-     * 
-     */
-    @XmlEnumValue("issuedCreditNotice")
-    ISSUED_CREDIT_NOTICE("issuedCreditNotice"),
+  /**
+   * Dobropis.
+   */
+  @XmlEnumValue("issuedCreditNotice")
+  ISSUED_CREDIT_NOTICE("issuedCreditNotice"),
 
-    /**
-     * Vrubopis.
-     * 
-     */
-    @XmlEnumValue("issuedDebitNote")
-    ISSUED_DEBIT_NOTE("issuedDebitNote"),
+  /**
+   * Vrubopis.
+   */
+  @XmlEnumValue("issuedDebitNote")
+  ISSUED_DEBIT_NOTE("issuedDebitNote"),
 
-    /**
-     * Zálohová faktura.
-     * 
-     */
-    @XmlEnumValue("issuedAdvanceInvoice")
-    ISSUED_ADVANCE_INVOICE("issuedAdvanceInvoice"),
+  /**
+   * Zálohová faktura.
+   */
+  @XmlEnumValue("issuedAdvanceInvoice")
+  ISSUED_ADVANCE_INVOICE("issuedAdvanceInvoice"),
 
-    /**
-     * Ostatní pohledávka.
-     * 
-     */
-    @XmlEnumValue("receivable")
-    RECEIVABLE("receivable"),
+  /**
+   * Ostatní pohledávka.
+   */
+  @XmlEnumValue("receivable")
+  RECEIVABLE("receivable"),
 
-    /**
-     * Proforma faktura.
-     * 
-     */
-    @XmlEnumValue("issuedProformaInvoice")
-    ISSUED_PROFORMA_INVOICE("issuedProformaInvoice"),
+  /**
+   * Proforma faktura.
+   */
+  @XmlEnumValue("issuedProformaInvoice")
+  ISSUED_PROFORMA_INVOICE("issuedProformaInvoice"),
 
-    /**
-     * Penále.
-     * 
-     */
-    @XmlEnumValue("penalty")
-    PENALTY("penalty"),
+  /**
+   * Penále.
+   */
+  @XmlEnumValue("penalty")
+  PENALTY("penalty"),
 
-    /**
-     * P\u0159ijatá faktura.
-     * 
-     */
-    @XmlEnumValue("receivedInvoice")
-    RECEIVED_INVOICE("receivedInvoice"),
+  /**
+   * P\u0159ijatá faktura.
+   */
+  @XmlEnumValue("receivedInvoice")
+  RECEIVED_INVOICE("receivedInvoice"),
 
-    /**
-     * P\u0159ijatý dobropis.
-     * 
-     */
-    @XmlEnumValue("receivedCreditNotice")
-    RECEIVED_CREDIT_NOTICE("receivedCreditNotice"),
+  /**
+   * P\u0159ijatý dobropis.
+   */
+  @XmlEnumValue("receivedCreditNotice")
+  RECEIVED_CREDIT_NOTICE("receivedCreditNotice"),
 
-    /**
-     * P\u0159ijatý vrubopis.
-     * 
-     */
-    @XmlEnumValue("receivedDebitNote")
-    RECEIVED_DEBIT_NOTE("receivedDebitNote"),
+  /**
+   * P\u0159ijatý vrubopis.
+   */
+  @XmlEnumValue("receivedDebitNote")
+  RECEIVED_DEBIT_NOTE("receivedDebitNote"),
 
-    /**
-     * P\u0159ijatá zálohová faktura.
-     * 
-     */
-    @XmlEnumValue("receivedAdvanceInvoice")
-    RECEIVED_ADVANCE_INVOICE("receivedAdvanceInvoice"),
+  /**
+   * P\u0159ijatá zálohová faktura.
+   */
+  @XmlEnumValue("receivedAdvanceInvoice")
+  RECEIVED_ADVANCE_INVOICE("receivedAdvanceInvoice"),
 
-    /**
-     * Závazek.
-     * 
-     */
-    @XmlEnumValue("commitment")
-    COMMITMENT("commitment"),
+  /**
+   * Závazek.
+   */
+  @XmlEnumValue("commitment")
+  COMMITMENT("commitment"),
 
-    /**
-     * P\u0159ijatá proforma faktura.
-     * 
-     */
-    @XmlEnumValue("receivedProformaInvoice")
-    RECEIVED_PROFORMA_INVOICE("receivedProformaInvoice");
-    private final String value;
+  /**
+   * P\u0159ijatá proforma faktura.
+   */
+  @XmlEnumValue("receivedProformaInvoice")
+  RECEIVED_PROFORMA_INVOICE("receivedProformaInvoice");
+  private final String value;
 
-    InvoiceTypeType(String v) {
-        value = v;
+  InvoiceTypeType(String v) {
+    value = v;
+  }
+
+  public String value() {
+    return value;
+  }
+
+  public static InvoiceTypeType fromValue(String v) {
+    for (InvoiceTypeType c : InvoiceTypeType.values()) {
+      if (c.value.equals(v)) {
+        return c;
+      }
     }
-
-    public String value() {
-        return value;
-    }
-
-    public static InvoiceTypeType fromValue(String v) {
-        for (InvoiceTypeType c: InvoiceTypeType.values()) {
-            if (c.value.equals(v)) {
-                return c;
-            }
-        }
-        throw new IllegalArgumentException(v);
-    }
+    throw new IllegalArgumentException(v);
+  }
 
 }

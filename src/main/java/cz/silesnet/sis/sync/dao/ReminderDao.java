@@ -8,12 +8,11 @@ import cz.silesnet.sis.sync.domain.Reminder;
 
 /**
  * DAO for retrieving reminders from SPS database.
- * 
+ *
  * @author rsi
- * 
  */
 public interface ReminderDao {
 
-    Reminder find(long customerId);
+  Reminder find(long customerId);
 
 }

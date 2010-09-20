@@ -16,9 +16,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for address complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="address">
  *   &lt;complexContent>
@@ -33,8 +33,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "address", propOrder = {
@@ -45,105 +43,89 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class Address {
 
-    protected BigInteger id;
-    protected ExtIdType extId;
-    protected AddressType address;
-    protected ShipToAddressType shipToAddress;
+  protected BigInteger id;
+  protected ExtIdType extId;
+  protected AddressType address;
+  protected ShipToAddressType shipToAddress;
 
-    /**
-     * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getId() {
-        return id;
-    }
+  /**
+   * Gets the value of the id property.
+   *
+   * @return possible object is
+   *         {@link BigInteger }
+   */
+  public BigInteger getId() {
+    return id;
+  }
 
-    /**
-     * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setId(BigInteger value) {
-        this.id = value;
-    }
+  /**
+   * Sets the value of the id property.
+   *
+   * @param value allowed object is
+   *              {@link BigInteger }
+   */
+  public void setId(BigInteger value) {
+    this.id = value;
+  }
 
-    /**
-     * Gets the value of the extId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ExtIdType }
-     *     
-     */
-    public ExtIdType getExtId() {
-        return extId;
-    }
+  /**
+   * Gets the value of the extId property.
+   *
+   * @return possible object is
+   *         {@link ExtIdType }
+   */
+  public ExtIdType getExtId() {
+    return extId;
+  }
 
-    /**
-     * Sets the value of the extId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ExtIdType }
-     *     
-     */
-    public void setExtId(ExtIdType value) {
-        this.extId = value;
-    }
+  /**
+   * Sets the value of the extId property.
+   *
+   * @param value allowed object is
+   *              {@link ExtIdType }
+   */
+  public void setExtId(ExtIdType value) {
+    this.extId = value;
+  }
 
-    /**
-     * Gets the value of the address property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AddressType }
-     *     
-     */
-    public AddressType getAddress() {
-        return address;
-    }
+  /**
+   * Gets the value of the address property.
+   *
+   * @return possible object is
+   *         {@link AddressType }
+   */
+  public AddressType getAddress() {
+    return address;
+  }
 
-    /**
-     * Sets the value of the address property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AddressType }
-     *     
-     */
-    public void setAddress(AddressType value) {
-        this.address = value;
-    }
+  /**
+   * Sets the value of the address property.
+   *
+   * @param value allowed object is
+   *              {@link AddressType }
+   */
+  public void setAddress(AddressType value) {
+    this.address = value;
+  }
 
-    /**
-     * Gets the value of the shipToAddress property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ShipToAddressType }
-     *     
-     */
-    public ShipToAddressType getShipToAddress() {
-        return shipToAddress;
-    }
+  /**
+   * Gets the value of the shipToAddress property.
+   *
+   * @return possible object is
+   *         {@link ShipToAddressType }
+   */
+  public ShipToAddressType getShipToAddress() {
+    return shipToAddress;
+  }
 
-    /**
-     * Sets the value of the shipToAddress property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ShipToAddressType }
-     *     
-     */
-    public void setShipToAddress(ShipToAddressType value) {
-        this.shipToAddress = value;
-    }
+  /**
+   * Sets the value of the shipToAddress property.
+   *
+   * @param value allowed object is
+   *              {@link ShipToAddressType }
+   */
+  public void setShipToAddress(ShipToAddressType value) {
+    this.shipToAddress = value;
+  }
 
 }

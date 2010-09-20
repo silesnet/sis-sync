@@ -1,12 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-	<customers id='1' name='Test Customer1' symbol="" supplementary_name="Supplementary Name1" contact_name="Contact Name1" city="Test City" street="Street 1" postal_code="12345" public_id="12345671" dic="CZ12345671" phone="+420123456781" email="contact@customer1.cz" contract_no="001/2008" account_no="1234-567891" bank_no="2401" is_active="true" country="10" updated="2008-12-23 05:00:00" synchronized="2008-12-23 05:00:01" />
-	<customers id='2' name='Test Customer2' symbol="" supplementary_name="Supplementary Name2" contact_name="Contact Name2" city="Test City" street="Street 2" postal_code="12345" public_id="12345672" dic="CZ12345672" phone="+420123456782" email="contact@customer2.cz" contract_no="002/2008" account_no="1234567892" bank_no="2402" is_active="true" country="10" updated="2008-12-23 05:00:00" />
-	<customers id='3' name='Test Customer3' symbol="" supplementary_name="Supplementary Name3" contact_name="Contact Name3" city="Test City" street="Street 3" postal_code="12345" public_id="12345673" dic="CZ12345673" phone="+420123456783" email="contact@customer3.cz" contract_no="003/2008" account_no="" bank_no="" is_active="true" country="10" updated="2008-12-23 05:00:00" />
-	<customers id='4' name='Test Customer4' symbol="" supplementary_name="Supplementary Name4" contact_name="Contact Name4" city="Test City" street="Street 4" postal_code="12345" public_id="12345674" dic="CZ12345674" phone="+420123456784" email="contact@customer4.cz" contract_no="004/2008" account_no="1234-567894" bank_no="2404" is_active="true" country="10" updated="2008-12-23 05:00:00" />
-	<customers id='5' name='Test Customer5' symbol="" supplementary_name="Supplementary Name5" contact_name="Contact Name5" city="Test City" street="Street 5" postal_code="12345" public_id="12345675" dic="CZ12345675" phone="+420123456785" email="contact@customer5.cz" contract_no="005/2008" account_no="1234-567895" bank_no="2405" is_active="true" country="10" updated="2008-12-23 05:00:00" />
-	<customers id='6' name='Test Customer6' symbol="" supplementary_name="Supplementary Name6" contact_name="Contact Name6" city="Test City" street="Street 6" postal_code="12345" public_id="12345676" dic="CZ12345676" phone="+420123456786" email="contact@customer6.cz" contract_no="006/2008" account_no="1234-567896" bank_no="2406" is_active="true" country="10" updated="2008-12-23 05:00:00" synchronized="2008-12-23 05:00:01" />
-	<customers id='7' name='Test Customer7' symbol="" supplementary_name="Supplementary Name7" contact_name="Contact Name7" city="Test City" street="Street 7" postal_code="12345" public_id="12345677" dic="CZ12345677" phone="+420123456787" email="contact@customer7.cz" contract_no="007/2008" account_no="1234-567897" bank_no="2407" is_active="true" country="10" updated="2008-12-23 05:00:00" synchronized="2008-12-23 05:00:00" />
-    <customers id='8' name='Test Customer8' symbol="" supplementary_name="Supplementary Name8" contact_name="Contact Name8" city="Test City" street="Street 8" postal_code="12345" public_id="12345678" dic="CZ12345678" phone="+420123456788" email="contact@customer8.cz" contract_no="008/2008" account_no="1234-567898" bank_no="2408" is_active="false" country="10" updated="2008-12-23 05:00:00" />
-    <customers id='9' name='Test Customer9' symbol="" supplementary_name="Supplementary Name9" contact_name="Contact Name9" city="Test City" street="Street 9" postal_code="12345" public_id="12345679" dic="CZ12345679" phone="+420123456789" email="contact@customer9.cz" contract_no="009/2008" account_no="1234-567899" bank_no="2409" is_active="true" country="20" updated="2008-12-23 05:00:00" />
+  <customers id='1' name='Test Customer1' symbol="" supplementary_name="Supplementary Name1"
+             contact_name="Contact Name1" city="Test City" street="Street 1" postal_code="12345" public_id="12345671"
+             dic="CZ12345671" phone="+420123456781" email="contact@customer1.cz" contract_no="001/2008"
+             account_no="1234-567891" bank_no="2401" is_active="true" country="10" updated="2008-12-23 05:00:00"
+             synchronized="2008-12-23 05:00:01" />
+  <customers id='2' name='Test Customer2' symbol="" supplementary_name="Supplementary Name2"
+             contact_name="Contact Name2" city="Test City" street="Street 2" postal_code="12345" public_id="12345672"
+             dic="CZ12345672" phone="+420123456782" email="contact@customer2.cz" contract_no="002/2008"
+             account_no="1234567892" bank_no="2402" is_active="true" country="10" updated="2008-12-23 05:00:00" />
+  <customers id='3' name='Test Customer3' symbol="" supplementary_name="Supplementary Name3"
+             contact_name="Contact Name3" city="Test City" street="Street 3" postal_code="12345" public_id="12345673"
+             dic="CZ12345673" phone="+420123456783" email="contact@customer3.cz" contract_no="003/2008" account_no=""
+             bank_no="" is_active="true" country="10" updated="2008-12-23 05:00:00" />
+  <customers id='4' name='Test Customer4' symbol="" supplementary_name="Supplementary Name4"
+             contact_name="Contact Name4" city="Test City" street="Street 4" postal_code="12345" public_id="12345674"
+             dic="CZ12345674" phone="+420123456784" email="contact@customer4.cz" contract_no="004/2008"
+             account_no="1234-567894" bank_no="2404" is_active="true" country="10" updated="2008-12-23 05:00:00" />
+  <customers id='5' name='Test Customer5' symbol="" supplementary_name="Supplementary Name5"
+             contact_name="Contact Name5" city="Test City" street="Street 5" postal_code="12345" public_id="12345675"
+             dic="CZ12345675" phone="+420123456785" email="contact@customer5.cz" contract_no="005/2008"
+             account_no="1234-567895" bank_no="2405" is_active="true" country="10" updated="2008-12-23 05:00:00" />
+  <customers id='6' name='Test Customer6' symbol="" supplementary_name="Supplementary Name6"
+             contact_name="Contact Name6" city="Test City" street="Street 6" postal_code="12345" public_id="12345676"
+             dic="CZ12345676" phone="+420123456786" email="contact@customer6.cz" contract_no="006/2008"
+             account_no="1234-567896" bank_no="2406" is_active="true" country="10" updated="2008-12-23 05:00:00"
+             synchronized="2008-12-23 05:00:01" />
+  <customers id='7' name='Test Customer7' symbol="" supplementary_name="Supplementary Name7"
+             contact_name="Contact Name7" city="Test City" street="Street 7" postal_code="12345" public_id="12345677"
+             dic="CZ12345677" phone="+420123456787" email="contact@customer7.cz" contract_no="007/2008"
+             account_no="1234-567897" bank_no="2407" is_active="true" country="10" updated="2008-12-23 05:00:00"
+             synchronized="2008-12-23 05:00:00" />
+  <customers id='8' name='Test Customer8' symbol="" supplementary_name="Supplementary Name8"
+             contact_name="Contact Name8" city="Test City" street="Street 8" postal_code="12345" public_id="12345678"
+             dic="CZ12345678" phone="+420123456788" email="contact@customer8.cz" contract_no="008/2008"
+             account_no="1234-567898" bank_no="2408" is_active="false" country="10" updated="2008-12-23 05:00:00" />
+  <customers id='9' name='Test Customer9' symbol="" supplementary_name="Supplementary Name9"
+             contact_name="Contact Name9" city="Test City" street="Street 9" postal_code="12345" public_id="12345679"
+             dic="CZ12345679" phone="+420123456789" email="contact@customer9.cz" contract_no="009/2008"
+             account_no="1234-567899" bank_no="2409" is_active="true" country="20" updated="2008-12-23 05:00:00" />
 </dataset>
