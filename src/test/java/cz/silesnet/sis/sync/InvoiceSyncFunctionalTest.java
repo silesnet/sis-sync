@@ -1,10 +1,6 @@
 package cz.silesnet.sis.sync;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-
-import javax.sql.DataSource;
-
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.job.SimpleJob;
@@ -13,11 +9,17 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import javax.sql.DataSource;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 public class InvoiceSyncFunctionalTest {
 
 //  skipped for now
 
-  //  @Test
+  @Ignore
+  @Test
   public void testConfirmInvoicesImportStep() throws Exception {
     ApplicationContext context = new ClassPathXmlApplicationContext("sisInvoiceJob.xml");
     DataSource dataSource = (DataSource) context.getBean("dataSource");
