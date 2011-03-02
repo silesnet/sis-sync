@@ -44,6 +44,7 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter<Invoice> {
   public static final String ACCOUNTING_ACTIVATION = "aktivace";
   public static final String ACCOUNTING_ACTIVATION_PREFIX = "Aktivace";
   public static final String ACCOUNTING_DEFAULT = "servis";
+  public static final String ACCOUNTING_ROUNDING = "math2one";
 
   public SisInvoiceItemWriter() {
     super();
@@ -111,6 +112,10 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter<Invoice> {
       }
       lines.add(elEnd("inv:invoiceDetail"));
     }
+    // Summary
+    lines.add(elBeg("inv:invoiceSummary"));
+    lines.add(elValue("inv:roundingDocument", ACCOUNTING_ROUNDING));
+    lines.add(elEnd("inv:invoiceSummary"));
     // Trailer
     lines.add(elEnd("inv:invoice"));
     return lines.toArray(new String[lines.size()]);

@@ -107,6 +107,10 @@ public class SisInvoiceItemWriterTest {
     assertEquals(elEnd("inv:accounting"), lines[index++]);
     assertEquals(elEnd("inv:invoiceItem"), lines[index++]);
     assertEquals(elEnd("inv:invoiceDetail"), lines[index++]);
+    // Summary
+    assertEquals(elBeg("inv:invoiceSummary"), lines[index++]);
+    assertEquals(elValue("inv:roundingDocument", "math2one"), lines[index++]);
+    assertEquals(elEnd("inv:invoiceSummary"), lines[index++]);
     // Trailer
     assertEquals(elEnd("inv:invoice"), lines[index++]);
     assertEquals(index, lines.length);
