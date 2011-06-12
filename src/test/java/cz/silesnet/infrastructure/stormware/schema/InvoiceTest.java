@@ -16,7 +16,8 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamReader;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.custommonkey.xmlunit.Diff;
 import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Test;
@@ -33,7 +34,7 @@ import cz.stormware.schema.response.ResponsePackItemType;
  */
 public class InvoiceTest {
 
-  private static final Logger log = Logger.getLogger(InvoiceTest.class);
+  private static Log log = LogFactory.getLog(InvoiceTest.class);
 
   @Test
   public void testMarshalMapping() throws Exception {

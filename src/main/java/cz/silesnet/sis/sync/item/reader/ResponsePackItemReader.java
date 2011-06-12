@@ -3,7 +3,8 @@ package cz.silesnet.sis.sync.item.reader;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemStreamException;
 import org.springframework.batch.item.file.ResourceAwareItemReaderItemStream;
@@ -21,7 +22,7 @@ public class ResponsePackItemReader
     implements
     ResourceAwareItemReaderItemStream<ResponsePackItemType>,
     InitializingBean {
-  private static final Logger log = Logger.getLogger(ResponsePackItemReader.class);
+  private static final Log log = LogFactory.getLog(ResponsePackItemReader.class);
 
   private static final JAXBContext jaxbContext;
 

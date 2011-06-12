@@ -5,7 +5,8 @@ import cz.stormware.schema.addressbook.AddressbookType;
 import cz.stormware.schema.data.DataPackItemType;
 import cz.stormware.schema.data.DataPackType;
 import cz.stormware.schema.response.ResponsePackItemType;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.custommonkey.xmlunit.Diff;
 import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Test;
@@ -32,7 +33,7 @@ import static org.junit.Assert.assertThat;
  */
 public class CustomerTest {
 
-  private static final Logger log = Logger.getLogger(InvoiceTest.class);
+  private static Log log = LogFactory.getLog(CustomerTest.class);
 
   @Test
   public void testMarshalMapping() throws Exception {

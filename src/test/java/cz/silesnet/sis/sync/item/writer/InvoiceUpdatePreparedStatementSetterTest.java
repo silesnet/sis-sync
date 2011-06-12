@@ -1,7 +1,6 @@
 package cz.silesnet.sis.sync.item.writer;
 
 import static org.mockito.AdditionalMatchers.*;
-import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import java.sql.PreparedStatement;
