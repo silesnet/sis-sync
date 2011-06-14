@@ -27,4 +27,5 @@ public class InvoiceUpdatePreparedStatementSetterTest {
     verify(statement).setLong(2, 1);
     verify(statement).setTimestamp(eq(1), (Timestamp) geq(now));
   }
+
 }

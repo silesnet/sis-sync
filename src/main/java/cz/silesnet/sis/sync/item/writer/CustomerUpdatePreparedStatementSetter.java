@@ -3,25 +3,27 @@
  */
 package cz.silesnet.sis.sync.item.writer;
 
+import cz.silesnet.sis.sync.item.reader.ResponseId;
+import cz.stormware.schema.response.ResponsePackItemType;
+import cz.stormware.schema.type.StavType2;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.batch.item.database.ItemPreparedStatementSetter;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
-
-import cz.silesnet.sis.sync.item.reader.ResponseId;
-import cz.stormware.schema.response.ResponsePackItemType;
-import org.springframework.batch.item.database.ItemPreparedStatementSetter;
-
-import cz.silesnet.sis.sync.domain.CustomerResult;
 
 /**
  * Sets parameters for Customer update SQL.
  *
  * @author sikorric
  */
-public class CustomerUpdatePreparedStatementSetter
-    implements
-    ItemPreparedStatementSetter<ResponsePackItemType> {
+public class CustomerUpdatePreparedStatementSetter implements ItemPreparedStatementSetter<ResponsePackItemType> {
+
+  private static Logger logger = LoggerFactory.getLogger(InvoiceUpdatePreparedStatementSetter.class);
+
   /**
    * Maps Customer members to SQL update command.
    * <p/>
@@ -31,7 +33,10 @@ public class CustomerUpdatePreparedStatementSetter
    * @param ps   SQL wrapped in PreparedStatement
    */
   public void setValues(ResponsePackItemType item, PreparedStatement ps) throws SQLException {
-    ResponseId sisId = ResponseId.of(item.getId());
+    String responseId = item.getId();
+    ResponseId sisId = ResponseId.of(responseId);
+    if (item.getState() != StavType2.OK)
+      logger.error("Failed to import the customer [id={}, raw='{}']", sisId.id(), responseId);
     String spsId = item.getAddressbookResponse().getProducedDetails().getId();
     ps.setString(1, spsId);
     ps.setTimestamp(2, new Timestamp((new Date()).getTime()));

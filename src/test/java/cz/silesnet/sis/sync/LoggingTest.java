@@ -14,5 +14,6 @@ public class LoggingTest {
   public void configuration() throws Exception {
     Logger logger = LoggerFactory.getLogger(LoggingTest.class);
     logger.debug("Hello {}!", "world");
+    logger.error("Error {}!", "by mail");
   }
 }
