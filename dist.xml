@@ -42,6 +42,7 @@
       <outputDirectory>etc</outputDirectory>
       <includes>
         <include>*.properties</include>
+        <include>logback.xml</include>
       </includes>
     </fileSet>
   </fileSets>
