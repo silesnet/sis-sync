@@ -29,14 +29,14 @@ public class InvoiceUpdatePreparedStatementSetter implements ItemPreparedStateme
    * <p/>
    * UPDATE invoices SET synchronized = ? WHERE id = ?
    *
-   * @param item {@link ResponsePackItemType}
+   * @param responseItem {@link ResponsePackItemType}
    * @param ps   {@link PreparedStatement}
    */
   public void setValues(ResponsePackItemType responseItem, PreparedStatement ps) throws SQLException {
     String responseId = responseItem.getId();
     ResponseId itemId = ResponseId.of(responseId);
-    if (responseItem.getState() != StavType2.OK)
-      logger.error("Failed to import the invoice [id={}, raw='{}']", itemId.id(), responseId);
+    if (responseItem.getState() != StavType2.OK || responseItem.getInvoiceResponse().getState() != StavType2.OK)
+      throw new IllegalArgumentException("Failed to import the invoice [id='" + itemId.id() + "', raw='" + responseId + "']");
     Timestamp now = new Timestamp(new Date().getTime());
     ps.setTimestamp(1, now);
 
