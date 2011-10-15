@@ -2,6 +2,7 @@ DROP TABLE invoicings IF EXISTS;
 DROP TABLE bill_items IF EXISTS;
 DROP TABLE bills IF EXISTS;
 DROP TABLE customers IF EXISTS;
+DROP TABLE settings IF EXISTS;
 
 CREATE TABLE customers (
     id BIGINT IDENTITY NOT NULL PRIMARY KEY,  
@@ -48,11 +49,17 @@ CREATE TABLE bill_items (
     is_display_unit BOOLEAN
 );
 
-
 CREATE TABLE invoicings (
   id BIGINT NOT NULL,
   name varchar(80) NOT NULL,
   country BIGINT,
   numberingbase varchar(15),
   invoicing_date timestamp
+);
+
+CREATE TABLE settings
+(
+  id BIGINT NOT NULL,
+  name VARCHAR(50) NOT NULL,
+  value VARCHAR(250)
 );
