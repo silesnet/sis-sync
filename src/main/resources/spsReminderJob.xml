@@ -22,7 +22,7 @@
     </property>
   </bean>
 
-  <bean id="sendReminders" parent="simpleStep">
+  <bean id="sendReminders" parent="skipableStep">
     <property name="itemReader">
       <ref bean="reminderItemReader" />
     </property>

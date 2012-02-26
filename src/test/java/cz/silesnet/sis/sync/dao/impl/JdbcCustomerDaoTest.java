@@ -52,7 +52,7 @@ public class JdbcCustomerDaoTest extends AbstractDependencyInjectionSpringContex
     assertEquals("CZ12345675", customer.getDic());
     assertEquals("+420123456785", customer.getPhone());
     assertEquals("contact@customer5.cz", customer.getEmail());
-    assertEquals("005/2008", customer.getContract());
+    assertEquals("5", customer.getContract());
     assertEquals("1234-567895", customer.getAccountNo());
     assertEquals("2405", customer.getBankCode());
   }

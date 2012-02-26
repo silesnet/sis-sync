@@ -67,7 +67,7 @@ public class SisCustomerItemWriter extends AbstractDataPackItemWriter<Customer> 
     lines.add(elValue("adb:email", email));
     lines.add(elValue("adb:adGroup", AD_GROUP_KEY));
     lines.add(elValue("adb:maturity", DUE_DAYS));
-    lines.add(elValue("adb:agreement", customer.getSpsContract()));
+    lines.add(elValue("adb:agreement", customer.getContract()));
     lines.add(elValue("adb:p2", "true"));
     lines.add(elValue("adb:note", CONTACT_NAME_PREFIX + customer.getContactName()));
     // update if already exists in SPS

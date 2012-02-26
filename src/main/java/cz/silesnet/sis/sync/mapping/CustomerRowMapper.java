@@ -29,7 +29,7 @@ public class CustomerRowMapper implements RowMapper {
   public static final String DIC_COLUMN = "dic";
   public static final String PHONE_COLUMN = "phone";
   public static final String EMAIL_COLUMN = "email";
-  public static final String CONTRACT_COLUMN = "contract_no";
+  public static final String CONTRACT_COLUMN = "variable";
   public static final String ACCOUNT_NO_COLUMN = "account_no";
   public static final String BANK_CODE_COLUMN = "bank_no";
 

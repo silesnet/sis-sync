@@ -59,7 +59,7 @@ public class CustomerItemWriterTest extends XMLTestCase {
     customer.setDic("DIC12345679");
     customer.setPhone("+420123456789");
     customer.setEmail("contact@customer.cz");
-    customer.setContract("1245/2008");
+    customer.setContract("1245");
     customer.setAccountNo("1234-567890");
     customer.setBankCode("2400");
     String[] lines = writer.dataPackItemLines(customer);

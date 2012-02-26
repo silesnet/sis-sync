@@ -17,7 +17,7 @@ CREATE TABLE customers (
     dic VARCHAR(15),
     phone VARCHAR(30),
     email VARCHAR(50),
-    contract_no VARCHAR(50),
+    variable INT,
     account_no VARCHAR(17),
     bank_no VARCHAR(4),
     is_active BOOLEAN,

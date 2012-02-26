@@ -74,7 +74,7 @@ public class SisCustomerItemWriterTest {
     assertEquals(elValue("adb:email", customer.getEmail()), lines[index++]);
     assertEquals(elValue("adb:adGroup", SisCustomerItemWriter.AD_GROUP_KEY), lines[index++]);
     assertEquals(elValue("adb:maturity", SisCustomerItemWriter.DUE_DAYS), lines[index++]);
-    assertEquals(elValue("adb:agreement", customer.getSpsContract()), lines[index++]);
+    assertEquals(elValue("adb:agreement", customer.getContract()), lines[index++]);
     assertEquals(elValue("adb:p2", "true"), lines[index++]);
     assertEquals(elValue("adb:note", SisCustomerItemWriter.CONTACT_NAME_PREFIX + customer.getContactName()),
         lines[index++]);
