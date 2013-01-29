@@ -25,9 +25,9 @@ public abstract class AbstractDataPackItemWriter<T> extends AbstractHeaderTraile
   public static final String FILE_ENCODING = "Cp1250";
   public static final String XML_ENCODING = "Windows-1250";
   public static final String DATA_PACK_APPLICATION = "SIS";
-  public static final String DATA_PACK_VERSION = "1.0";
+  public static final String DATA_PACK_VERSION = "2.0";
   public static final String DATA_PACK_NOTE = "SIS import.";
-  public static final String DATA_PACK_ITEM_VERSION = "1.0";
+  public static final String DATA_PACK_ITEM_VERSION = "2.0";
   public static final DateFormat DATA_PACK_ID_DATE_FORMAT = new SimpleDateFormat(
       "yyyy-MM-dd'T'HH:mm:ss.SSS");
   public static final DateFormat ELEMENT_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
@@ -98,8 +98,8 @@ public abstract class AbstractDataPackItemWriter<T> extends AbstractHeaderTraile
     dataPackBuffer.append("version=\"" + DATA_PACK_VERSION + "\" ");
     dataPackBuffer.append("note=\"" + DATA_PACK_NOTE + "\"");
     lines.add(dataPackBuffer.toString());
-    lines.add("xmlns:dat=\"http://www.stormware.cz/schema/data.xsd\"");
-    lines.add("xmlns:typ=\"http://www.stormware.cz/schema/type.xsd\"");
+    lines.add("xmlns:dat=\"http://www.stormware.cz/schema/version_2/data.xsd\"");
+    lines.add("xmlns:typ=\"http://www.stormware.cz/schema/version_2/type.xsd\"");
     lines.addAll(Arrays.asList(nameSpaceLines()));
     lines.add(">");
     return lines.toArray(new String[lines.size()]);

@@ -125,7 +125,7 @@ public class SisInvoiceItemWriterTest {
   @Test
   public void testNameSpaceLines() throws Exception {
     String[] lines = writer.nameSpaceLines();
-    assertEquals("xmlns:inv=\"http://www.stormware.cz/schema/invoice.xsd\"", lines[0]);
+    assertEquals("xmlns:inv=\"http://www.stormware.cz/schema/version_2/invoice.xsd\"", lines[0]);
     assertEquals(1, lines.length);
   }
 

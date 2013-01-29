@@ -1,6 +1,13 @@
-<test xmlns:adb="addressbook" xmlns:typ="types">
-  <adb:addressbook version="1.5">
-    <adb:addressbookHeader>
+<test xmlns:adb="addressbook" xmlns:typ="types" xmlns:ftr="filter">
+  <adb:addressbook version="2.0">
+      <adb:actionType>
+        <adb:update>
+          <ftr:filter>
+              <ftr:id>12345</ftr:id>
+          </ftr:filter>
+        </adb:update>
+      </adb:actionType>
+      <adb:addressbookHeader>
       <adb:identity>
         <typ:address>
           <typ:company>Customer Name</typ:company>
@@ -19,9 +26,6 @@
       <adb:agreement>1245</adb:agreement>
       <adb:p2>true</adb:p2>
       <adb:note>Kontaktn&#237; osoba: Contact Name</adb:note>
-      <adb:duplicityFields actualize="true">
-        <adb:id>12345</adb:id>
-      </adb:duplicityFields>
     </adb:addressbookHeader>
     <adb:addressbookAccount>
       <adb:accountItem>

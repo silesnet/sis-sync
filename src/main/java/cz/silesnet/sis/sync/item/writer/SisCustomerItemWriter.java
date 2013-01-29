@@ -18,7 +18,7 @@ import cz.silesnet.sis.sync.domain.Customer;
  */
 public class SisCustomerItemWriter extends AbstractDataPackItemWriter<Customer> {
 
-  public static final String ADDRESSBOOK_ELEMENT_VERSION = "1.5";
+  public static final String ADDRESSBOOK_ELEMENT_VERSION = "2.0";
   public static final String AD_GROUP_KEY = "SIS";
   public static final int DUE_DAYS = 7;
   public static final String CONTACT_NAME_PREFIX = "Kontaktn\u00ed osoba: ";
@@ -38,6 +38,16 @@ public class SisCustomerItemWriter extends AbstractDataPackItemWriter<Customer> 
     List<String> lines = new ArrayList<String>();
     // header
     lines.add(elBeg("adb:addressbook version=\"" + ADDRESSBOOK_ELEMENT_VERSION + "\""));
+    // update if already exists in SPS
+    if (StringUtils.hasText(customer.getSymbol())) {
+      lines.add(elBeg("adb:actionType"));
+      lines.add(elBeg("adb:update"));
+      lines.add(elBeg("ftr:filter"));
+      lines.add(elValue("ftr:id", customer.getSymbol()));
+      lines.add(elEnd("ftr:filter"));
+      lines.add(elEnd("adb:update"));
+      lines.add(elEnd("adb:actionType"));
+    }
     // address
     lines.add(elBeg("adb:addressbookHeader"));
     // identity
@@ -70,12 +80,6 @@ public class SisCustomerItemWriter extends AbstractDataPackItemWriter<Customer> 
     lines.add(elValue("adb:agreement", customer.getContract()));
     lines.add(elValue("adb:p2", "true"));
     lines.add(elValue("adb:note", CONTACT_NAME_PREFIX + customer.getContactName()));
-    // update if already exists in SPS
-    if (StringUtils.hasText(customer.getSymbol())) {
-      lines.add(elBeg("adb:duplicityFields actualize=\"true\""));
-      lines.add(elValue("adb:id", customer.getSymbol()));
-      lines.add(elEnd("adb:duplicityFields"));
-    }
     lines.add(elEnd("adb:addressbookHeader"));
     if (StringUtils.hasText(customer.getAccountNo()) && StringUtils.hasText(customer.getBankCode())) {
       // bank account
@@ -95,7 +99,9 @@ public class SisCustomerItemWriter extends AbstractDataPackItemWriter<Customer> 
 
   @Override
   protected String[] nameSpaceLines() {
-    return new String[]{"xmlns:adb=\"http://www.stormware.cz/schema/addressbook.xsd\""};
+    return new String[]{"xmlns:adb=\"http://www.stormware.cz/schema/version_2/addressbook.xsd\"",
+                        "xmlns:ftr=\"http://www.stormware.cz/schema/version_2/filter.xsd\""
+    };
   }
 
 }

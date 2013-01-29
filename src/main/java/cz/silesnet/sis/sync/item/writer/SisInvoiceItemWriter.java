@@ -20,7 +20,7 @@ import cz.silesnet.sis.sync.domain.Invoice.Item;
  */
 public class SisInvoiceItemWriter extends AbstractDataPackItemWriter<Invoice> {
 
-  public static final String INVOICE_ELEMENT_VERSION = "1.3";
+  public static final String INVOICE_ELEMENT_VERSION = "2.0";
   public static final String ITEM_UNIT = "m\u011Bs.";
   public static final String CLASSIFICATION_VAT_TYPE = "UD";
   public static final String SYM_CONST = "0308";
@@ -127,7 +127,7 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter<Invoice> {
    */
   @Override
   protected String[] nameSpaceLines() {
-    return new String[]{"xmlns:inv=\"http://www.stormware.cz/schema/invoice.xsd\""};
+    return new String[]{"xmlns:inv=\"http://www.stormware.cz/schema/version_2/invoice.xsd\""};
   }
 
   protected static String getInvoiceText(Invoice invoice) {

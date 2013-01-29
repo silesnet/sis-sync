@@ -17,7 +17,7 @@ public class SpsImportTaskletTest {
 
   private static final Log log = LogFactory.getLog(SpsImportTaskletTest.class);
 
-  private static final String SPS_EXECUTABLE = "C:\\Program Files\\STORMWARE\\Pohoda\\Pohoda.exe";
+  private static final String SPS_EXECUTABLE = "C:\\Program Files\\STORMWARE\\POHODA\\Pohoda.exe";
   private static final String SIS_CUSTOMERS_FILE = "data/20081206_sis_customers.xml";
   private static final String SPS_CUSTOMERS_FILE = "target/20081206_sps_customers.TEMP.xml";
   private static final String SPS_INI_FILE = "target/sisImport.ini";

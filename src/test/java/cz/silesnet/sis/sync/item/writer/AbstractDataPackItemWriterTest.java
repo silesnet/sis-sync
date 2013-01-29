@@ -73,9 +73,9 @@ public class AbstractDataPackItemWriterTest {
     assertEquals(AbstractDataPackItemWriter.DATA_PACK_VERSION, matcher.group(4));
     assertEquals(AbstractDataPackItemWriter.DATA_PACK_NOTE, matcher.group(5));
     log.debug(headerLines[2]);
-    assertEquals("xmlns:dat=\"http://www.stormware.cz/schema/data.xsd\"", headerLines[2]);
+    assertEquals("xmlns:dat=\"http://www.stormware.cz/schema/version_2/data.xsd\"", headerLines[2]);
     log.debug(headerLines[3]);
-    assertEquals("xmlns:typ=\"http://www.stormware.cz/schema/type.xsd\"", headerLines[3]);
+    assertEquals("xmlns:typ=\"http://www.stormware.cz/schema/version_2/type.xsd\"", headerLines[3]);
     log.debug(headerLines[4]);
     assertEquals(NAME_SPACE_1, headerLines[4]);
     log.debug(headerLines[5]);

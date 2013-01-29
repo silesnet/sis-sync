@@ -55,7 +55,15 @@ public class SisCustomerItemWriterTest {
     // header
     assertEquals(elBeg("adb:addressbook version=\"" + SisCustomerItemWriter.ADDRESSBOOK_ELEMENT_VERSION + "\""),
         lines[index++]);
-    // address
+    // duplicity check
+    assertEquals(elBeg("adb:actionType"), lines[index++]);
+    assertEquals(elBeg("adb:update"), lines[index++]);
+    assertEquals(elBeg("ftr:filter"), lines[index++]);
+    assertEquals(elValue("ftr:id", customer.getSymbol()), lines[index++]);
+    assertEquals(elEnd("ftr:filter"), lines[index++]);
+    assertEquals(elEnd("adb:update"), lines[index++]);
+    assertEquals(elEnd("adb:actionType"), lines[index++]);
+      // address
     assertEquals(elBeg("adb:addressbookHeader"), lines[index++]);
     // identity
     assertEquals(elBeg("adb:identity"), lines[index++]);
@@ -78,10 +86,6 @@ public class SisCustomerItemWriterTest {
     assertEquals(elValue("adb:p2", "true"), lines[index++]);
     assertEquals(elValue("adb:note", SisCustomerItemWriter.CONTACT_NAME_PREFIX + customer.getContactName()),
         lines[index++]);
-    // duplicity check
-    assertEquals(elBeg("adb:duplicityFields actualize=\"true\""), lines[index++]);
-    assertEquals(elValue("adb:id", customer.getSymbol()), lines[index++]);
-    assertEquals(elEnd("adb:duplicityFields"), lines[index++]);
     assertEquals(elEnd("adb:addressbookHeader"), lines[index++]);
     // bank account
     assertEquals(elBeg("adb:addressbookAccount"), lines[index++]);
@@ -122,8 +126,9 @@ public class SisCustomerItemWriterTest {
   @Test
   public void testNameSpaceLines() throws Exception {
     String[] lines = writer.nameSpaceLines();
-    assertEquals("xmlns:adb=\"http://www.stormware.cz/schema/addressbook.xsd\"", lines[0]);
-    assertEquals(1, lines.length);
+    assertEquals("xmlns:adb=\"http://www.stormware.cz/schema/version_2/addressbook.xsd\"", lines[0]);
+    assertEquals("xmlns:ftr=\"http://www.stormware.cz/schema/version_2/filter.xsd\"", lines[1]);
+    assertEquals(2, lines.length);
   }
 
   @Test

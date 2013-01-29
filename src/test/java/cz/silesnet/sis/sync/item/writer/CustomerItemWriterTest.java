@@ -65,7 +65,7 @@ public class CustomerItemWriterTest extends XMLTestCase {
     String[] lines = writer.dataPackItemLines(customer);
     String linesString = StringUtils.collectionToDelimitedString(Arrays.asList(lines), "\n");
 
-    String xmlLines = "<test xmlns:adb=\"addressbook\" xmlns:typ=\"types\">" + linesString
+    String xmlLines = "<test xmlns:adb=\"addressbook\" xmlns:typ=\"types\" xmlns:ftr=\"filter\">" + linesString
         + "</test>";
     Reader customerXml = new StringReader(xmlLines);
     Reader expectedXml = new FileReader((new ClassPathResource("data/20090208_customers.xml"))
@@ -73,6 +73,7 @@ public class CustomerItemWriterTest extends XMLTestCase {
     Map<String, String> ns = new HashMap<String, String>();
     ns.put("adb", "addressbook");
     ns.put("typ", "types");
+    ns.put("ftr", "filter");
     XMLUnit.setXpathNamespaceContext(new SimpleNamespaceContext(ns));
     XMLUnit.setIgnoreWhitespace(true);
     Diff diff = new Diff(expectedXml, customerXml);
@@ -97,7 +98,8 @@ public class CustomerItemWriterTest extends XMLTestCase {
   @Test
   public void testNameSpaceLines() throws Exception {
     String[] lines = writer.nameSpaceLines();
-    assertEquals("xmlns:adb=\"http://www.stormware.cz/schema/addressbook.xsd\"", lines[0]);
-    assertEquals(1, lines.length);
+    assertEquals("xmlns:adb=\"http://www.stormware.cz/schema/version_2/addressbook.xsd\"", lines[0]);
+    assertEquals("xmlns:ftr=\"http://www.stormware.cz/schema/version_2/filter.xsd\"", lines[1]);
+    assertEquals(2, lines.length);
   }
 }
