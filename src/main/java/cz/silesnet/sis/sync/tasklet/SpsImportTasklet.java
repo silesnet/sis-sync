@@ -29,6 +29,8 @@ public class SpsImportTasklet implements Tasklet {
   private Resource output;
   private Resource ini;
   private Resource executable;
+  private Resource inputXslt;
+  private Resource outputXslt;
 
   private String login;
   private String password;
@@ -67,7 +69,15 @@ public class SpsImportTasklet implements Tasklet {
     this.database = database;
   }
 
-  @Override
+    public void setInputXslt(Resource inputXslt) {
+        this.inputXslt = inputXslt;
+    }
+
+    public void setOutputXslt(Resource outputXslt) {
+        this.outputXslt = outputXslt;
+    }
+
+    @Override
   public RepeatStatus execute(StepContribution arg0, ChunkContext arg1) throws Exception {
     // prepare
     createIniFile();
@@ -115,6 +125,10 @@ public class SpsImportTasklet implements Tasklet {
     config.append("database=").append(database).append("\n");
     config.append("check_duplicity=1\n");
     config.append("format_output=1\n");
+    if (inputXslt != null)
+      config.append("XSLT_input=").append(inputXslt.getFile().getCanonicalPath()).append("\n");
+    if (outputXslt != null)
+      config.append("XSLT_output=").append(outputXslt.getFile().getCanonicalPath()).append("\n");
     return config.toString();
   }
 
