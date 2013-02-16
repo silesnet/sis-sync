@@ -58,7 +58,7 @@
 
   <bean id="confirmInvoicesImport" parent="simpleStep">
     <property name="itemReader">
-      <bean class="cz.silesnet.sis.sync.item.reader.ResponsePackItemReader" p:resource-ref="invoicesResponseFile" />
+      <bean class="cz.silesnet.sis.sync.item.reader.ResponsePackItemReader" p:resource-ref="invoicesResponseFileNormalized" />
     </property>
     <property name="itemWriter">
       <bean class="org.springframework.batch.item.database.JdbcBatchItemWriter" p:dataSource-ref="dataSource">
@@ -78,7 +78,7 @@
 
   <bean id="updateInvoiceAccounts" parent="simpleStep">
     <property name="itemReader">
-      <bean class="cz.silesnet.sis.sync.item.reader.InvoiceItemReader" p:resource-ref="invoicesResponseFile"
+      <bean class="cz.silesnet.sis.sync.item.reader.InvoiceItemReader" p:resource-ref="invoicesResponseFileNormalized"
             p:dao-ref="invoiceDao" />
     </property>
     <property name="itemWriter">
@@ -105,6 +105,10 @@
 
   <bean id="invoicesResponseFile" parent="resource">
     <constructor-arg value="${invoices.response.file.suffix}" />
+  </bean>
+
+  <bean id="invoicesResponseFileNormalized" parent="resource">
+      <constructor-arg value="${invoices.response.file.normalized.suffix}" />
   </bean>
 
   <bean id="invoicesIniFile" parent="resource">

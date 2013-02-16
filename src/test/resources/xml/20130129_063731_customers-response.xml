@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="Windows-1250"?>
+<rsp:responsePack version="2.0" id="2013-01-29T06:37:32.359" state="ok" note="" programVersion="10205.3 (7.1.2013)" xmlns:rsp="http://www.stormware.cz/schema/version_2/response.xsd" xmlns:rdc="http://www.stormware.cz/schema/version_2/documentresponse.xsd" xmlns:typ="http://www.stormware.cz/schema/version_2/type.xsd" xmlns:lst="http://www.stormware.cz/schema/version_2/list.xsd" xmlns:lStk="http://www.stormware.cz/schema/version_2/list_stock.xsd" xmlns:lAdb="http://www.stormware.cz/schema/version_2/list_addBook.xsd" xmlns:acu="http://www.stormware.cz/schema/version_2/accountingunit.xsd" xmlns:inv="http://www.stormware.cz/schema/version_2/invoice.xsd" xmlns:vch="http://www.stormware.cz/schema/version_2/voucher.xsd" xmlns:int="http://www.stormware.cz/schema/version_2/intDoc.xsd" xmlns:stk="http://www.stormware.cz/schema/version_2/stock.xsd" xmlns:ord="http://www.stormware.cz/schema/version_2/order.xsd" xmlns:ofr="http://www.stormware.cz/schema/version_2/offer.xsd" xmlns:enq="http://www.stormware.cz/schema/version_2/enquiry.xsd" xmlns:vyd="http://www.stormware.cz/schema/version_2/vydejka.xsd" xmlns:pri="http://www.stormware.cz/schema/version_2/prijemka.xsd" xmlns:bal="http://www.stormware.cz/schema/version_2/balance.xsd" xmlns:pre="http://www.stormware.cz/schema/version_2/prevodka.xsd" xmlns:vyr="http://www.stormware.cz/schema/version_2/vyroba.xsd" xmlns:pro="http://www.stormware.cz/schema/version_2/prodejka.xsd" xmlns:con="http://www.stormware.cz/schema/version_2/contract.xsd" xmlns:adb="http://www.stormware.cz/schema/version_2/addressbook.xsd" xmlns:prm="http://www.stormware.cz/schema/version_2/parameter.xsd" xmlns:lCon="http://www.stormware.cz/schema/version_2/list_contract.xsd" xmlns:ctg="http://www.stormware.cz/schema/version_2/category.xsd" xmlns:ipm="http://www.stormware.cz/schema/version_2/intParam.xsd" xmlns:str="http://www.stormware.cz/schema/version_2/storage.xsd">
+<rsp:responsePackItem version="2.0" id="2013-01-29T06:37:32.359_0000000000_8295" state="ok">
+	<adb:addressbookResponse version="2.0" state="ok">
+		<rdc:importDetails>
+			<rdc:detail>
+				<rdc:state>warning</rdc:state>
+				<rdc:errno>602</rdc:errno>
+				<rdc:note>Agenda Adresář nemá nastaveno použití číslování zákazníků</rdc:note>
+				<rdc:XPath>dat:dataPack/dat:dataPackItem[1]/adb:addressbookadb:addressbookHeader/adb:number</rdc:XPath>
+			</rdc:detail>
+		</rdc:importDetails>
+		<rdc:producedDetails>
+			<rdc:id>24</rdc:id>
+			<rdc:code>Roman Suhaj</rdc:code>
+		</rdc:producedDetails>
+	</adb:addressbookResponse>
+</rsp:responsePackItem>
+<rsp:responsePackItem version="2.0" id="2013-01-29T06:37:32.359_0000000001_7539" state="ok">
+	<adb:addressbookResponse version="2.0" state="error">
+		<rdc:importDetails>
+			<rdc:detail>
+				<rdc:state>error</rdc:state>
+				<rdc:errno>115</rdc:errno>
+				<rdc:note>Zadaný záznam se nepodařilo najít.</rdc:note>
+				<rdc:XPath>dat:dataPack/dat:dataPackItem[2]/adb:addressbook/adb:actionType/adb:update</rdc:XPath>
+			</rdc:detail>
+		</rdc:importDetails>
+		<rdc:producedDetails>
+			<rdc:id>0</rdc:id>
+			<rdc:code/>
+		</rdc:producedDetails>
+	</adb:addressbookResponse>
+</rsp:responsePackItem>
+<rsp:responsePackItem version="2.0" id="2013-01-29T06:37:32.359_0000000002_8294" state="ok">
+	<adb:addressbookResponse version="2.0" state="error">
+		<rdc:importDetails>
+			<rdc:detail>
+				<rdc:state>error</rdc:state>
+				<rdc:errno>104</rdc:errno>
+				<rdc:note>Nebyla zadána adresa firmy.</rdc:note>
+				<rdc:XPath>/adb:identity/typ:address/typ:city</rdc:XPath>
+			</rdc:detail>
+		</rdc:importDetails>
+		<rdc:producedDetails>
+			<rdc:id>0</rdc:id>
+			<rdc:code/>
+		</rdc:producedDetails>
+	</adb:addressbookResponse>
+</rsp:responsePackItem>
+<rsp:responsePackItem version="2.0" id="2013-01-29T06:37:32.359_0000000003_8289" state="ok">
+	<adb:addressbookResponse version="2.0" state="ok">
+		<rdc:importDetails>
+			<rdc:detail>
+				<rdc:state>warning</rdc:state>
+				<rdc:errno>602</rdc:errno>
+				<rdc:note>Agenda Adresář nemá nastaveno použití číslování zákazníků</rdc:note>
+				<rdc:XPath>dat:dataPack/dat:dataPackItem[4]/adb:addressbookadb:addressbookHeader/adb:number</rdc:XPath>
+			</rdc:detail>
+		</rdc:importDetails>
+		<rdc:producedDetails>
+			<rdc:id>25</rdc:id>
+			<rdc:code>Tomalová Lenka</rdc:code>
+		</rdc:producedDetails>
+	</adb:addressbookResponse>
+</rsp:responsePackItem>
+<rsp:responsePackItem version="2.0" id="2013-01-29T06:37:32.359_0000000004_8290" state="ok">
+	<adb:addressbookResponse version="2.0" state="ok">
+		<rdc:importDetails>
+			<rdc:detail>
+				<rdc:state>warning</rdc:state>
+				<rdc:errno>602</rdc:errno>
+				<rdc:note>Agenda Adresář nemá nastaveno použití číslování zákazníků</rdc:note>
+				<rdc:XPath>dat:dataPack/dat:dataPackItem[5]/adb:addressbookadb:addressbookHeader/adb:number</rdc:XPath>
+			</rdc:detail>
+		</rdc:importDetails>
+		<rdc:producedDetails>
+			<rdc:id>26</rdc:id>
+			<rdc:code>Zipser Vilém</rdc:code>
+		</rdc:producedDetails>
+	</adb:addressbookResponse>
+</rsp:responsePackItem>
+</rsp:responsePack>

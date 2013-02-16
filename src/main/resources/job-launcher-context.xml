@@ -80,6 +80,6 @@
     <bean id="importTasklet" abstract="true"
           class="cz.silesnet.sis.sync.tasklet.SpsImportTasklet" p:executable="${pohoda.executable}"
           p:login="${pohoda.login}" p:password="${pohoda.password}"
-          p:database="${pohoda.database}" />
+          p:database="${pohoda.database}" p:outputXslt="${pohoda.output.xslt}" />
 
 </beans>
