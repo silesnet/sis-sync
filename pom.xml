@@ -5,7 +5,7 @@
   <groupId>cz.silesnet.sis</groupId>
   <artifactId>sync</artifactId>
   <name>SilesNet Information System Synchronizer</name>
-  <version>1.2.0</version>
+  <version>1.2.1</version>
   <description>Set of stand alone synchronization batches that import, export and update SIS databases.</description>
   <properties>
     <spring.batch.version>2.1.0.RELEASE</spring.batch.version>

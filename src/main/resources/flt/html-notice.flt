@@ -37,7 +37,6 @@ zasíláme Vám upomínku k faktuře.</p>
   <tr class="notices_header">
     <th>Čís. faktury/Var. symbol</th>
     <th>Datum splatnosti</th>
-    <th>Celkem/Kč</th>
     <th>K zaplacení/Kč</th>
   </th>
 <#assign row = 0>
@@ -45,7 +44,6 @@ zasíláme Vám upomínku k faktuře.</p>
       <tr class="<#if (row % 2) == 0>notices_line_b<#else>notices_line_b</#if>">
         <td><b>${invoice.referenceNumber}</b></td>
         <td>${invoice.dueDate}</td>
-        <td>${invoice.totalAmount}</td>
         <td><b>${invoice.dueAmount}</b></td>
       </tr>
 <#assign row = row + 1>
