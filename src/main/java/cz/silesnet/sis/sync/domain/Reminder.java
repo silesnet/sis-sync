@@ -42,6 +42,14 @@ public class Reminder {
     invoices.add(invoice);
   }
 
+  public BigDecimal getDueAmount() {
+      BigDecimal sum = BigDecimal.ZERO;
+      for (Invoice invoice : invoices) {
+          sum = sum.add(invoice.dueAmount);
+      }
+      return sum;
+  }
+
   @Override
   public String toString() {
     StringBuilder reminder = new StringBuilder();

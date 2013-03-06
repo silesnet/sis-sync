@@ -53,10 +53,12 @@ zasíláme Vám upomínku k faktuře.</p>
 <p>Číslo účtu SilesNet: <b>75583001/5500</b></p>
 <p>Pokud jste fakturu zaplatili po termínu splatnosti, považujte tuto upomínku za bezpředmětnou.</p>
 
-<p>Dodržujte prosím termíny splatnosti faktur. U platby uvádějte správný variabilní symbol, který je nutný k identifikaci Vaší platby.</p>
+<#if (reminder.dueAmount >= 50)>
+    <p>Dodržujte prosím termíny splatnosti faktur. U platby uvádějte správný variabilní symbol, který je nutný k identifikaci Vaší platby.</p>
 
-<p>Pokud nebude faktura zaplacena, může dojít k dočasnému přerušení služby až do úhrady všech dlužných faktur v plné výši.<br/>
-Za následnou aktivaci služby účtujeme jednorázově 100,-Kč bez DPH.</p>
+    <p>Pokud nebude faktura zaplacena, může dojít k dočasnému přerušení služby až do úhrady všech dlužných faktur v plné výši.<br/>
+    Za následnou aktivaci služby účtujeme jednorázově 100,-Kč bez DPH.</p>
+</#if>
 
 <p>Pro více informací ohledně plateb volejte prosím naši zákaznickou linku: 558 711 585 nebo 777 27 28 28.</p>
 <p>S pozdravem,</p>

@@ -55,4 +55,16 @@ public class SimpleReminderMailPreparatorTest {
     log.debug(emailStream.toString());
   }
 
+  @Test
+  public void testPrepareSmall() throws MessagingException, IOException {
+      // prepare small reminder
+      reminder = new Reminder(1, "Reminded Customer", "fido@dido", "Street 123");
+      reminder.addInvoice(reminder.new Invoice(2, 1, "002", "002", new LocalDate("2009-03-15"), new BigDecimal(
+              "120.00"), new BigDecimal("49.99")));
+      MimeMessage message = new MimeMessage((Session) null);
+      preparator.prepare(reminder, message);
+      ByteArrayOutputStream emailStream = new ByteArrayOutputStream();
+      message.writeTo(emailStream);
+      log.debug(emailStream.toString());
+  }
 }
