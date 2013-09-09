@@ -43,7 +43,7 @@ zasíláme Vám upomínku k faktuře.</p>
 <#list reminder.invoices as invoice>
       <tr class="<#if (row % 2) == 0>notices_line_b<#else>notices_line_b</#if>">
         <td><b>${invoice.referenceNumber}</b></td>
-        <td>${invoice.dueDate}</td>
+        <td>${invoice.dueDate.toString("dd.MM.yyyy")}</td>
         <td><b>${invoice.dueAmount}</b></td>
       </tr>
 <#assign row = row + 1>
