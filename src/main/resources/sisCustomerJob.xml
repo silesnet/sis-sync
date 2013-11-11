@@ -51,7 +51,7 @@
     </property>
   </bean>
 
-  <bean id="confirmCustomersImport" parent="simpleStep">
+  <bean id="confirmCustomersImport" parent="skipableStep">
     <property name="itemReader">
       <bean class="cz.silesnet.sis.sync.item.reader.ResponsePackItemReader" p:resource-ref="customersResponseFileNormalized" />
     </property>
@@ -72,7 +72,7 @@
     </property>
   </bean>
 
-  <bean id="updateInvoiceAccounts" parent="simpleStep">
+  <bean id="updateInvoiceAccounts" parent="skipableStep">
     <property name="itemReader">
       <bean class="cz.silesnet.sis.sync.item.reader.CustomerItemReader" p:resource-ref="customersResponseFileNormalized"
             p:dao-ref="customerDao" />

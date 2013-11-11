@@ -52,7 +52,7 @@ public class CustomerUpdatePreparedStatementSetterTest {
     setter.setValues(item, null);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = CustomerSpsImportException.class)
   public void testAddressBookError() throws Exception {
     final ResponsePackItemType item = new ResponsePackItemType();
     item.setId(SIS_ITEM_ID);

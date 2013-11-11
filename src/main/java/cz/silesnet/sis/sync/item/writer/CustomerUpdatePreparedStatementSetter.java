@@ -35,8 +35,10 @@ public class CustomerUpdatePreparedStatementSetter implements ItemPreparedStatem
   public void setValues(ResponsePackItemType item, PreparedStatement ps) throws SQLException {
     String responseId = item.getId();
     ResponseId sisId = ResponseId.of(responseId);
-    if (item.getState() != StavType2.OK || item.getAddressbookResponse().getState() != StavType2.OK)
-      throw new IllegalArgumentException("Failed to import the customer [id='" + sisId.id() + "', raw='" + responseId + "']");
+    if (item.getState() != StavType2.OK)
+      throw new IllegalArgumentException("Customer import error [id='" + sisId.id() + "', raw='" + responseId + "']");
+    if (item.getAddressbookResponse().getState() != StavType2.OK)
+      throw new CustomerSpsImportException("Failed to import the customer [id='" + sisId.id() + "', raw='" + responseId + "']");
     String spsId = item.getAddressbookResponse().getProducedDetails().getId();
     ps.setString(1, spsId);
     ps.setTimestamp(2, new Timestamp((new Date()).getTime()));

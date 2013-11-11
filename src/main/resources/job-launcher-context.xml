@@ -63,6 +63,7 @@
         <property name="skippableExceptionClasses">
             <util:map>
                 <entry key="org.springframework.dao.EmptyResultDataAccessException" value="true" />
+                <entry key="cz.silesnet.sis.sync.item.writer.CustomerSpsImportException" value="true" />
             </util:map>
         </property>
     </bean>
