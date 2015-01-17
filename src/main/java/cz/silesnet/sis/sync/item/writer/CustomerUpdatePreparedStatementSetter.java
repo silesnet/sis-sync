@@ -6,8 +6,6 @@ package cz.silesnet.sis.sync.item.writer;
 import cz.silesnet.sis.sync.item.reader.ResponseId;
 import cz.stormware.schema.response.ResponsePackItemType;
 import cz.stormware.schema.type.StavType2;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.database.ItemPreparedStatementSetter;
 
 import java.sql.PreparedStatement;
@@ -22,8 +20,6 @@ import java.util.Date;
  */
 public class CustomerUpdatePreparedStatementSetter implements ItemPreparedStatementSetter<ResponsePackItemType> {
 
-  private static Logger logger = LoggerFactory.getLogger(InvoiceUpdatePreparedStatementSetter.class);
-
   /**
    * Maps Customer members to SQL update command.
    * <p/>
@@ -36,9 +32,11 @@ public class CustomerUpdatePreparedStatementSetter implements ItemPreparedStatem
     String responseId = item.getId();
     ResponseId sisId = ResponseId.of(responseId);
     if (item.getState() != StavType2.OK)
-      throw new IllegalArgumentException("Customer import error [id='" + sisId.id() + "', raw='" + responseId + "']");
+      throw new CustomerSpsImportException(
+          String.format("Customer import error [id='%d', raw='%s']", sisId.id(), responseId));
     if (item.getAddressbookResponse().getState() != StavType2.OK)
-      throw new CustomerSpsImportException("Failed to import the customer [id='" + sisId.id() + "', raw='" + responseId + "']");
+      throw new CustomerSpsImportException(
+          String.format("Failed to import the customer [id='%d', raw='%s']", sisId.id(), responseId));
     String spsId = item.getAddressbookResponse().getProducedDetails().getId();
     ps.setString(1, spsId);
     ps.setTimestamp(2, new Timestamp((new Date()).getTime()));

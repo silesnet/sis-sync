@@ -1,19 +1,17 @@
 package cz.silesnet.sis.sync.item.writer;
 
-import static org.mockito.AdditionalMatchers.*;
-import static org.mockito.Mockito.*;
-
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-
 import cz.stormware.schema.addressbook.AddressbookResponseType;
 import cz.stormware.schema.documentresponse.ProducedDetailsType;
 import cz.stormware.schema.response.ResponsePackItemType;
 import cz.stormware.schema.type.StavType2;
 import org.junit.Test;
 
-import cz.silesnet.sis.sync.domain.CustomerResult;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+
+import static org.mockito.AdditionalMatchers.leq;
+import static org.mockito.Mockito.*;
 
 public class CustomerUpdatePreparedStatementSetterTest {
 
@@ -43,7 +41,7 @@ public class CustomerUpdatePreparedStatementSetterTest {
     verify(ps).setLong(3, ID);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = CustomerSpsImportException.class)
   public void testResponseError() throws Exception {
     final ResponsePackItemType item = new ResponsePackItemType();
     item.setId(SIS_ITEM_ID);

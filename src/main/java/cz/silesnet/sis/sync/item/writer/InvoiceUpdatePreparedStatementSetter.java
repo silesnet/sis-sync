@@ -6,8 +6,6 @@ package cz.silesnet.sis.sync.item.writer;
 import cz.silesnet.sis.sync.item.reader.ResponseId;
 import cz.stormware.schema.response.ResponsePackItemType;
 import cz.stormware.schema.type.StavType2;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.database.ItemPreparedStatementSetter;
 
 import java.sql.PreparedStatement;
@@ -21,8 +19,6 @@ import java.util.Date;
  * @author Richard Sikora
  */
 public class InvoiceUpdatePreparedStatementSetter implements ItemPreparedStatementSetter<ResponsePackItemType> {
-
-  private static Logger logger = LoggerFactory.getLogger(InvoiceUpdatePreparedStatementSetter.class);
 
   /**
    * Maps Invoice response to SQL update command.
