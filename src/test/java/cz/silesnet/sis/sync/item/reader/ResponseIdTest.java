@@ -22,7 +22,7 @@ public class ResponseIdTest {
 
   @Test
   public void testId() throws Exception {
-    assertThat(RID.id(), is(134409));
+    assertThat(RID.id(), is(134409L));
   }
 
   @Test
