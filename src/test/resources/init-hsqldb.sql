@@ -46,7 +46,8 @@ CREATE TABLE bill_items (
     text VARCHAR(100),
     amount FLOAT, 
     price INT,
-    is_display_unit BOOLEAN
+    is_display_unit BOOLEAN,
+    dph BOOLEAN
 );
 
 CREATE TABLE invoicings (

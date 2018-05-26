@@ -62,6 +62,7 @@ public class JdbcInvoiceDao implements InvoiceDao {
     private static final String ITEMS_AMOUNT_COLUMN = "amount";
     private static final String ITEMS_PRICE_COLUMN = "price";
     private static final String ITEMS_DISPLAY_UNIT_COLUMN = "is_display_unit";
+    private static final String ITEMS_INCLUDE_VAT= "dph";
     private static final String CUSTOMERS_SYMBOL_SQL = "SELECT * FROM customers WHERE id = ?";
 
     /**
@@ -87,7 +88,7 @@ public class JdbcInvoiceDao implements InvoiceDao {
         public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
           // result set contains row from invoice items table
           invoice.new Item(rs.getString(ITEMS_TEXT_COLUMN), rs.getFloat(ITEMS_AMOUNT_COLUMN), rs
-              .getInt(ITEMS_PRICE_COLUMN), rs.getBoolean(ITEMS_DISPLAY_UNIT_COLUMN));
+              .getInt(ITEMS_PRICE_COLUMN), rs.getBoolean(ITEMS_DISPLAY_UNIT_COLUMN), rs.getBoolean(ITEMS_INCLUDE_VAT));
           // just creating new Item automatically associates it with
           // the invoice
           // result is not read, null can be returned

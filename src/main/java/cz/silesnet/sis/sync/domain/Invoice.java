@@ -127,16 +127,18 @@ public class Invoice implements ItemIdentity, Result {
     private final float amount;
     private final int price;
     private final boolean isDisplayUnit;
+    private final boolean isIncludeVat;
 
     public Item(String text, float amount, int price) {
-      this(text, amount, price, true);
+      this(text, amount, price, true, true);
     }
 
-    public Item(String text, float amount, int price, boolean isDisplayUnit) {
+    public Item(String text, float amount, int price, boolean isDisplayUnit, boolean isIncludeVat) {
       this.text = text;
       this.amount = amount;
       this.price = price;
       this.isDisplayUnit = isDisplayUnit;
+      this.isIncludeVat = isIncludeVat;
       // automatically associates new item with the invoice
       addItem(this);
     }
@@ -157,6 +159,9 @@ public class Invoice implements ItemIdentity, Result {
       return isDisplayUnit;
     }
 
+    public boolean isIncludeVat() {
+      return isIncludeVat;
+    }
   }
 
 }

@@ -26,7 +26,8 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter<Invoice> {
   public static final String SYM_CONST = "0308";
   public static final String DEFAULT_NOTE = null;
   public static final String DEFAULT_INTERNAL_NOTE = "Generov\u00e1no syst\u00e9mem SIS.";
-  public static final String RATE_VAT = "high";
+  public static final String RATE_VAT_HIGH = "high";
+  public static final String RATE_VAT_NONE= "none";
   public static final String INVOICE_TEXT = "Na z\u00e1klad\u011b smlouvy V\u00e1m fakturujeme poskytov\u00e1n\u00ed slu\u017eby";
   public static final String INVOICE_TEXT_PERIOD = "za obdob\u00ed";
   private static final DateTimeFormatter PERIOD_DATE_FORMATTER = DateTimeFormat
@@ -101,7 +102,11 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter<Invoice> {
         if (item.isDisplayUnit()) {
           lines.add(elValue("inv:unit", ITEM_UNIT));
         }
-        lines.add(elValue("inv:rateVAT", RATE_VAT));
+        if (item.isIncludeVat()) {
+          lines.add(elValue("inv:rateVAT", RATE_VAT_HIGH));
+        } else {
+          lines.add(elValue("inv:rateVAT", RATE_VAT_NONE));
+        }
         lines.add(elBeg("inv:homeCurrency"));
         lines.add(elValue("typ:unitPrice", item.getPrice()));
         lines.add(elEnd("inv:homeCurrency"));
