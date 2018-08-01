@@ -49,6 +49,7 @@ public class SisInvoiceItemWriterTest {
     Customer customer = new Customer();
     customer.setId(1234L);
     customer.setSymbol("1235");
+    customer.setContract("98765");
     invoice.setCustomer(customer);
     int index = 0;
     String[] lines = writer.dataPackItemLines(invoice);
@@ -75,6 +76,7 @@ public class SisInvoiceItemWriterTest {
     assertEquals(elValue("typ:id", invoice.getCustomer().getSymbol()), lines[index++]);
     assertEquals(elEnd("inv:partnerIdentity"), lines[index++]);
     assertEquals(elValue("inv:symConst", SisInvoiceItemWriter.SYM_CONST), lines[index++]);
+    assertEquals(elValue("inv:symSpec", "98765"), lines[index++]);
     assertEquals(elValue("inv:note", SisInvoiceItemWriter.DEFAULT_NOTE), lines[index++]);
     assertEquals(elValue("inv:intNote", SisInvoiceItemWriter.DEFAULT_INTERNAL_NOTE), lines[index++]);
     assertEquals(elEnd("inv:invoiceHeader"), lines[index++]);

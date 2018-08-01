@@ -85,6 +85,7 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter<Invoice> {
     lines.add(elValue("typ:id", invoice.getCustomer().getSymbol()));
     lines.add(elEnd("inv:partnerIdentity"));
     lines.add(elValue("inv:symConst", SYM_CONST));
+    lines.add(elValue("inv:symSpec", invoice.getCustomer().getContract()));
     lines.add(elValue("inv:note", DEFAULT_NOTE));
     lines.add(elValue("inv:intNote", DEFAULT_INTERNAL_NOTE));
     lines.add(elEnd("inv:invoiceHeader"));
