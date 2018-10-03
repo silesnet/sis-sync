@@ -36,6 +36,20 @@ public class SisInvoiceItemWriterTest {
   }
 
   @Test
+  public void shouldRenderProperAccountingConstant() {
+    assertEquals("with bps", "konektivita", SisInvoiceItemWriter.getItemAccounting(item("text with 'bps' inside")));
+    assertEquals("starting with DF", "konektivita", SisInvoiceItemWriter.getItemAccounting(item("DFxyz")));
+    assertEquals("without bps", "servis", SisInvoiceItemWriter.getItemAccounting(item("text without speed inside")));
+    assertEquals("webhosting", "webhosting", SisInvoiceItemWriter.getItemAccounting(item("WEBhosting with text")));
+    assertEquals("serverhousin", "serverhousing", SisInvoiceItemWriter.getItemAccounting(item("SERVERhousing with text")));
+    assertEquals("aktivace", "aktivace", SisInvoiceItemWriter.getItemAccounting(item("Aktivace with text")));
+  }
+
+  private Invoice.Item item(String text) {
+    return invoice.new Item(text, 1.0F, 10, true, true);
+  }
+
+  @Test
   public void testInvoiceLines() throws Exception {
     invoice.setNumber("1234567890");
     invoice.setDate(new DateTime("2009-01-01"));

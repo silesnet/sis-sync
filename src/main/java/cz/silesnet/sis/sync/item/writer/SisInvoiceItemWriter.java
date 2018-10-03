@@ -34,8 +34,7 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter<Invoice> {
       .forPattern("dd.MM.yyyy");
 
   public static final String ACCOUNTING_CONNECTIVITY = "konektivita";
-  public static final String ACCOUNTING_CONNECTIVITY_SUFFIX1 = "bps";
-  public static final String ACCOUNTING_CONNECTIVITY_SUFFIX2 = "bps FUP";
+  public static final String ACCOUNTING_CONNECTIVITY_TOKEN = "bps";
   public static final String ACCOUNTING_WEBHOSTING = "webhosting";
   public static final String ACCOUNTING_WEBHOSTING_PREFIX = "WEBhosting";
   public static final String ACCOUNTING_SERVERHOUSING = "serverhousing";
@@ -44,6 +43,7 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter<Invoice> {
   public static final String ACCOUNTING_ACTIVATION_PREFIX = "Aktivace";
   public static final String ACCOUNTING_DEFAULT = "servis";
   public static final String ACCOUNTING_ROUNDING = "math2one";
+  public static final String ACCOUNTING_CONNECTIVITY_DARKFIBER = "DF";
 
   public SisInvoiceItemWriter() {
     super();
@@ -143,10 +143,11 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter<Invoice> {
   }
 
   protected static String getItemAccounting(Invoice.Item item) {
-    String text = item.getText();
-    if (text.endsWith(ACCOUNTING_CONNECTIVITY_SUFFIX1)
-        || text.endsWith(ACCOUNTING_CONNECTIVITY_SUFFIX2))
+    final String text = item.getText();
+    if (text.contains(ACCOUNTING_CONNECTIVITY_TOKEN) ||
+        text.startsWith(ACCOUNTING_CONNECTIVITY_DARKFIBER)) {
       return ACCOUNTING_CONNECTIVITY;
+    }
     if (text.startsWith(ACCOUNTING_WEBHOSTING_PREFIX))
       return ACCOUNTING_WEBHOSTING;
     if (text.startsWith(ACCOUNTING_SERVERHOUSING_PREFIX))
