@@ -33,8 +33,6 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter<Invoice> {
   private static final DateTimeFormatter PERIOD_DATE_FORMATTER = DateTimeFormat
       .forPattern("dd.MM.yyyy");
 
-  public static final String SERVICE_ITEM_TEXT_PREFIX = "Slu\u017eba - ";
-
   public static final String ACCOUNTING_CONNECTIVITY = "konektivita";
   public static final String ACCOUNTING_CONNECTIVITY_SUFFIX1 = "bps";
   public static final String ACCOUNTING_CONNECTIVITY_SUFFIX2 = "bps FUP";
@@ -94,11 +92,7 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter<Invoice> {
       lines.add(elBeg("inv:invoiceDetail"));
       for (Item item : invoice.getItems()) {
         lines.add(elBeg("inv:invoiceItem"));
-        if (item.isDisplayUnit()) {
-          lines.add(elValue("inv:text", SERVICE_ITEM_TEXT_PREFIX + item.getText()));
-        } else {
-          lines.add(elValue("inv:text", item.getText()));
-        }
+        lines.add(elValue("inv:text", item.getText()));
         lines.add(elValue("inv:quantity", item.getAmount()));
         if (item.isDisplayUnit()) {
           lines.add(elValue("inv:unit", ITEM_UNIT));

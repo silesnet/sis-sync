@@ -84,8 +84,7 @@ public class SisInvoiceItemWriterTest {
     assertEquals(elBeg("inv:invoiceDetail"), lines[index++]);
     // item #1
     assertEquals(elBeg("inv:invoiceItem"), lines[index++]);
-    assertEquals(elValue("inv:text", SisInvoiceItemWriter.SERVICE_ITEM_TEXT_PREFIX + item1.getText()),
-        lines[index++]);
+    assertEquals(elValue("inv:text", item1.getText()), lines[index++]);
     assertEquals(elValue("inv:quantity", item1.getAmount()), lines[index++]);
     assertEquals(elValue("inv:unit", SisInvoiceItemWriter.ITEM_UNIT), lines[index++]);
     assertEquals(elValue("inv:rateVAT", SisInvoiceItemWriter.RATE_VAT_HIGH), lines[index++]);
