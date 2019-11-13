@@ -27,6 +27,8 @@ public class Invoice implements ItemIdentity, Result {
   private DateTime periodTo;
   private final List<Item> items = new ArrayList<Item>();
   private Customer customer;
+  private int vatPct;
+  private Charge charge;
 
   private void addItem(Item item) {
     if (item == null)
@@ -118,6 +120,14 @@ public class Invoice implements ItemIdentity, Result {
     return spsId;
   }
 
+  public void setVatPct(final int vatPct) {
+    this.vatPct = vatPct;
+  }
+
+  public int getVatPct() {
+    return vatPct;
+  }
+
   public void setSpsId(long spsId) {
     this.spsId = spsId;
   }
@@ -128,17 +138,19 @@ public class Invoice implements ItemIdentity, Result {
     private final int price;
     private final boolean isDisplayUnit;
     private final boolean isIncludeVat;
+    private final Charge charge;
 
-    public Item(String text, float amount, int price) {
-      this(text, amount, price, true, true);
+    public Item(String text, float amount, int price, int vatRate) {
+      this(text, amount, price, true, true, vatRate);
     }
 
-    public Item(String text, float amount, int price, boolean isDisplayUnit, boolean isIncludeVat) {
+    public Item(String text, float amount, int price, boolean isDisplayUnit, boolean isIncludeVat, int vatPct) {
       this.text = text;
       this.amount = amount;
       this.price = price;
       this.isDisplayUnit = isDisplayUnit;
       this.isIncludeVat = isIncludeVat;
+      this.charge = Charge.of(amount, price, vatPct);
       // automatically associates new item with the invoice
       addItem(this);
     }
@@ -162,6 +174,11 @@ public class Invoice implements ItemIdentity, Result {
     public boolean isIncludeVat() {
       return isIncludeVat;
     }
+
+    public Charge getCharge() {
+      return charge;
+    }
+
   }
 
 }

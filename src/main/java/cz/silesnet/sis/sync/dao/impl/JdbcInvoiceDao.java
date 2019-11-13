@@ -83,12 +83,14 @@ public class JdbcInvoiceDao implements InvoiceDao {
       Customer customer = (Customer) template.queryForObject(CUSTOMERS_SYMBOL_SQL, new Object[]{rs
           .getLong(CUSTOMER_ID_COLUMN)}, new CustomerRowMapper());
       invoice.setCustomer(customer);
+      invoice.setVatPct(rs.getInt(""));
       // retrieve invoice items from database by invoice_id
       template.query(ITEMS_SQL, new Object[]{invoice.getId()}, new RowMapper() {
         public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
           // result set contains row from invoice items table
           invoice.new Item(rs.getString(ITEMS_TEXT_COLUMN), rs.getFloat(ITEMS_AMOUNT_COLUMN), rs
-              .getInt(ITEMS_PRICE_COLUMN), rs.getBoolean(ITEMS_DISPLAY_UNIT_COLUMN), rs.getBoolean(ITEMS_INCLUDE_VAT));
+              .getInt(ITEMS_PRICE_COLUMN), rs.getBoolean(ITEMS_DISPLAY_UNIT_COLUMN), rs.getBoolean(ITEMS_INCLUDE_VAT), invoice.getVatPct()
+              );
           // just creating new Item automatically associates it with
           // the invoice
           // result is not read, null can be returned
