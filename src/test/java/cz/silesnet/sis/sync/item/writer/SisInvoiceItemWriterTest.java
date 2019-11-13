@@ -46,7 +46,7 @@ public class SisInvoiceItemWriterTest {
   }
 
   private Invoice.Item item(String text) {
-    return invoice.new Item(text, 1.0F, 10, true, true);
+    return invoice.new Item(text, 1.0F, 10, true, true, 21);
   }
 
   @Test
@@ -56,8 +56,8 @@ public class SisInvoiceItemWriterTest {
     invoice.setDueDate(new DateTime("2009-01-15"));
     invoice.setPeriodFrom(new DateTime("2009-01-01"));
     invoice.setPeriodTo(new DateTime("2009-01-31"));
-    invoice.new Item("WIRELESSdirect 10/20 kbps", 1.0F, 10, true, true);
-    invoice.new Item("Aktivace&Servis", 1.0F, 20, false, true);
+    invoice.new Item("WIRELESSdirect 10/20 kbps", 1.0F, 10, true, true, 21);
+    invoice.new Item("Aktivace&Servis", 1.0F, 20, false, true, 21);
     Item item1 = invoice.getItems().get(0);
     Item item2 = invoice.getItems().get(1);
     Customer customer = new Customer();

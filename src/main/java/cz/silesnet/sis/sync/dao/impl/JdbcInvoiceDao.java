@@ -57,6 +57,7 @@ public class JdbcInvoiceDao implements InvoiceDao {
     private static final String CUSTOMER_NAME_COLUMN = "customer_name";
     private static final String PERIOD_FROM_COLUMN = "period_from";
     private static final String PERIOD_TO_COLUMN = "period_to";
+    private static final String VAT_COLUMN = "vat";
     private static final String ITEMS_SQL = "SELECT * FROM bill_items WHERE bill_id = ?";
     private static final String ITEMS_TEXT_COLUMN = "text";
     private static final String ITEMS_AMOUNT_COLUMN = "amount";
@@ -83,7 +84,7 @@ public class JdbcInvoiceDao implements InvoiceDao {
       Customer customer = (Customer) template.queryForObject(CUSTOMERS_SYMBOL_SQL, new Object[]{rs
           .getLong(CUSTOMER_ID_COLUMN)}, new CustomerRowMapper());
       invoice.setCustomer(customer);
-      invoice.setVatPct(rs.getInt(""));
+      invoice.setVatPct(rs.getInt(VAT_COLUMN));
       // retrieve invoice items from database by invoice_id
       template.query(ITEMS_SQL, new Object[]{invoice.getId()}, new RowMapper() {
         public Object mapRow(ResultSet rs, int rowNum) throws SQLException {

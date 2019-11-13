@@ -46,7 +46,7 @@ public class SisInvoiceItemWriterStaticMethodsTest {
 
   @Test
   public void testAccountingConnectivityKbps() throws Exception {
-    invoice.new Item("Connectivity 1234/456 kbps", 1, 10);
+    invoice.new Item("Connectivity 1234/456 kbps", 1, 10, 21);
     String accounting = SisInvoiceItemWriter.getItemAccounting(invoice.getItems().get(0));
     assertEquals(SisInvoiceItemWriter.ACCOUNTING_CONNECTIVITY, accounting);
     log.debug(accounting);
@@ -54,7 +54,7 @@ public class SisInvoiceItemWriterStaticMethodsTest {
 
   @Test
   public void testAccountingConnectivityFup() throws Exception {
-    invoice.new Item("Connectivity 1234/456 kbps FUP", 1, 10);
+    invoice.new Item("Connectivity 1234/456 kbps FUP", 1, 10, 21);
     String accounting = SisInvoiceItemWriter.getItemAccounting(invoice.getItems().get(0));
     assertEquals(SisInvoiceItemWriter.ACCOUNTING_CONNECTIVITY, accounting);
     log.debug(accounting);
@@ -62,7 +62,7 @@ public class SisInvoiceItemWriterStaticMethodsTest {
 
   @Test
   public void testAccountingConnectivityMbps() throws Exception {
-    invoice.new Item("Connectivity 1234/456 Mbps", 1, 10);
+    invoice.new Item("Connectivity 1234/456 Mbps", 1, 10, 21);
     String accounting = SisInvoiceItemWriter.getItemAccounting(invoice.getItems().get(0));
     assertEquals(SisInvoiceItemWriter.ACCOUNTING_CONNECTIVITY, accounting);
     log.debug(accounting);
@@ -70,7 +70,7 @@ public class SisInvoiceItemWriterStaticMethodsTest {
 
   @Test
   public void testAccountingConnectivityMbpsFup() throws Exception {
-    invoice.new Item("Connectivity 1234/456 Mbps FUP", 1, 10);
+    invoice.new Item("Connectivity 1234/456 Mbps FUP", 1, 10, 21);
     String accounting = SisInvoiceItemWriter.getItemAccounting(invoice.getItems().get(0));
     assertEquals(SisInvoiceItemWriter.ACCOUNTING_CONNECTIVITY, accounting);
     log.debug(accounting);
@@ -78,7 +78,7 @@ public class SisInvoiceItemWriterStaticMethodsTest {
 
   @Test
   public void testAccountingWebhosting() throws Exception {
-    invoice.new Item("WEBhosting", 1, 10);
+    invoice.new Item("WEBhosting", 1, 10, 21);
     String accounting = SisInvoiceItemWriter.getItemAccounting(invoice.getItems().get(0));
     assertEquals(SisInvoiceItemWriter.ACCOUNTING_WEBHOSTING, accounting);
     log.debug(accounting);
@@ -86,7 +86,7 @@ public class SisInvoiceItemWriterStaticMethodsTest {
 
   @Test
   public void testAccountingServerHousing() throws Exception {
-    invoice.new Item("SERVERhousing", 1, 10);
+    invoice.new Item("SERVERhousing", 1, 10, 21);
     String accounting = SisInvoiceItemWriter.getItemAccounting(invoice.getItems().get(0));
     assertEquals(SisInvoiceItemWriter.ACCOUNTING_SERVERHOUSING, accounting);
     log.debug(accounting);
@@ -94,7 +94,7 @@ public class SisInvoiceItemWriterStaticMethodsTest {
 
   @Test
   public void testAccountingActivation() throws Exception {
-    invoice.new Item("Aktivace", 1, 10);
+    invoice.new Item("Aktivace", 1, 10, 21);
     String accounting = SisInvoiceItemWriter.getItemAccounting(invoice.getItems().get(0));
     assertEquals(SisInvoiceItemWriter.ACCOUNTING_ACTIVATION, accounting);
     log.debug(accounting);
@@ -102,7 +102,7 @@ public class SisInvoiceItemWriterStaticMethodsTest {
 
   @Test
   public void testAccountingDefault() throws Exception {
-    invoice.new Item("Default", 1, 10);
+    invoice.new Item("Default", 1, 10, 21);
     String accounting = SisInvoiceItemWriter.getItemAccounting(invoice.getItems().get(0));
     assertEquals(SisInvoiceItemWriter.ACCOUNTING_DEFAULT, accounting);
     log.debug(accounting);

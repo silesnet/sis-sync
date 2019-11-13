@@ -132,6 +132,17 @@ public class Invoice implements ItemIdentity, Result {
     this.spsId = spsId;
   }
 
+  public Charge getCharge() {
+    if (charge == null) {
+      Charge accumulator = Charge.ZERO;
+      for (Item item : getItems()) {
+        accumulator = accumulator.add(item.getCharge());
+      }
+      charge = accumulator;
+    }
+    return charge;
+  }
+
   public class Item {
     private final String text;
     private final float amount;
