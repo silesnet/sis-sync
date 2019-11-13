@@ -56,8 +56,9 @@ public class SisInvoiceItemWriterTest {
     invoice.setDueDate(new DateTime("2009-01-15"));
     invoice.setPeriodFrom(new DateTime("2009-01-01"));
     invoice.setPeriodTo(new DateTime("2009-01-31"));
-    invoice.new Item("WIRELESSdirect 10/20 kbps", 1.0F, 10, true, true, 21);
-    invoice.new Item("Aktivace&Servis", 1.0F, 20, false, true, 21);
+    invoice.setVatPct(21);
+    invoice.new Item("WIRELESSdirect 10/20 kbps", 1.2F, 10, true, true, 21);
+    invoice.new Item("Aktivace&Servis", 1.2F, 20, false, true, 21);
     Item item1 = invoice.getItems().get(0);
     Item item2 = invoice.getItems().get(1);
     Customer customer = new Customer();
@@ -99,11 +100,11 @@ public class SisInvoiceItemWriterTest {
     // item #1
     assertEquals(elBeg("inv:invoiceItem"), lines[index++]);
     assertEquals(elValue("inv:text", item1.getText()), lines[index++]);
-    assertEquals(elValue("inv:quantity", item1.getAmount()), lines[index++]);
+    assertEquals(elValue("inv:quantity", 1), lines[index++]);
     assertEquals(elValue("inv:unit", SisInvoiceItemWriter.ITEM_UNIT), lines[index++]);
     assertEquals(elValue("inv:rateVAT", SisInvoiceItemWriter.RATE_VAT_HIGH), lines[index++]);
     assertEquals(elBeg("inv:homeCurrency"), lines[index++]);
-    assertEquals(elValue("typ:unitPrice", item1.getPrice()), lines[index++]);
+    assertEquals(elValue("typ:unitPrice", item1.getCharge().getNet().toString()), lines[index++]);
     assertEquals(elEnd("inv:homeCurrency"), lines[index++]);
     assertEquals(elBeg("inv:accounting"), lines[index++]);
     assertEquals(elValue("typ:ids", SisInvoiceItemWriter.getItemAccounting(item1)), lines[index++]);
@@ -112,10 +113,10 @@ public class SisInvoiceItemWriterTest {
     // item #2
     assertEquals(elBeg("inv:invoiceItem"), lines[index++]);
     assertEquals(elValue("inv:text", item2.getText()), lines[index++]);
-    assertEquals(elValue("inv:quantity", item2.getAmount()), lines[index++]);
+    assertEquals(elValue("inv:quantity", 1), lines[index++]);
     assertEquals(elValue("inv:rateVAT", SisInvoiceItemWriter.RATE_VAT_HIGH), lines[index++]);
     assertEquals(elBeg("inv:homeCurrency"), lines[index++]);
-    assertEquals(elValue("typ:unitPrice", item2.getPrice()), lines[index++]);
+    assertEquals(elValue("typ:unitPrice", item2.getCharge().getNet().toString()), lines[index++]);
     assertEquals(elEnd("inv:homeCurrency"), lines[index++]);
     assertEquals(elBeg("inv:accounting"), lines[index++]);
     assertEquals(elValue("typ:ids", SisInvoiceItemWriter.getItemAccounting(item2)), lines[index++]);

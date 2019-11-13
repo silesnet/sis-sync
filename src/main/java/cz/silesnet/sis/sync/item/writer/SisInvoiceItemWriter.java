@@ -93,7 +93,7 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter<Invoice> {
       for (Item item : invoice.getItems()) {
         lines.add(elBeg("inv:invoiceItem"));
         lines.add(elValue("inv:text", item.getText()));
-        lines.add(elValue("inv:quantity", item.getAmount()));
+        lines.add(elValue("inv:quantity", 1));
         if (item.isDisplayUnit()) {
           lines.add(elValue("inv:unit", ITEM_UNIT));
         }
@@ -103,7 +103,7 @@ public class SisInvoiceItemWriter extends AbstractDataPackItemWriter<Invoice> {
           lines.add(elValue("inv:rateVAT", RATE_VAT_NONE));
         }
         lines.add(elBeg("inv:homeCurrency"));
-        lines.add(elValue("typ:unitPrice", item.getPrice()));
+        lines.add(elValue("typ:unitPrice", item.getCharge().getNet().toString()));
         lines.add(elEnd("inv:homeCurrency"));
         lines.add(elBeg("inv:accounting"));
         lines.add(elValue("typ:ids", getItemAccounting(item)));

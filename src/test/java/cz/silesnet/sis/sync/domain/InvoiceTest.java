@@ -6,6 +6,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.math.BigDecimal;
+
 public class InvoiceTest {
 
   private static final float AMOUNT = 1.025F;
@@ -23,6 +25,12 @@ public class InvoiceTest {
   @Test
   public void testItems() throws Exception {
     assertEquals(1, invoice.getItems().size());
+    assertNotNull(invoice.getItems().get(0).getCharge());
+    assertNotNull(invoice.getCharge());
+    assertEquals(invoice.getItems().get(0).getCharge(), invoice.getCharge());
+    assertEquals(BigDecimal.valueOf(992, 2), invoice.getCharge().getNet());
+    assertEquals(BigDecimal.valueOf(208, 2), invoice.getCharge().getVat());
+    assertEquals(BigDecimal.valueOf(1200, 2), invoice.getCharge().getBrt());
   }
 
   @After
