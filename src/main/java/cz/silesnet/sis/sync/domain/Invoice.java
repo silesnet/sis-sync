@@ -161,7 +161,7 @@ public class Invoice implements ItemIdentity, Result {
       this.price = price;
       this.isDisplayUnit = isDisplayUnit;
       this.isIncludeVat = isIncludeVat;
-      this.charge = Charge.of(amount, price, vatPct);
+      this.charge = Charge.of(amount, price, isIncludeVat? vatPct : 0);
       // automatically associates new item with the invoice
       addItem(this);
     }

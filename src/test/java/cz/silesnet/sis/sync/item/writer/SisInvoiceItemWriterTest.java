@@ -58,7 +58,7 @@ public class SisInvoiceItemWriterTest {
     invoice.setPeriodTo(new DateTime("2009-01-31"));
     invoice.setVatPct(21);
     invoice.new Item("WIRELESSdirect 10/20 kbps", 1.2F, 10, true, true, 21);
-    invoice.new Item("Aktivace&Servis", 1.2F, 20, false, true, 21);
+    invoice.new Item("Aktivace&Servis", 1.2F, 20, false, false, 21);
     Item item1 = invoice.getItems().get(0);
     Item item2 = invoice.getItems().get(1);
     Customer customer = new Customer();
@@ -114,7 +114,7 @@ public class SisInvoiceItemWriterTest {
     assertEquals(elBeg("inv:invoiceItem"), lines[index++]);
     assertEquals(elValue("inv:text", item2.getText()), lines[index++]);
     assertEquals(elValue("inv:quantity", 1), lines[index++]);
-    assertEquals(elValue("inv:rateVAT", SisInvoiceItemWriter.RATE_VAT_HIGH), lines[index++]);
+    assertEquals(elValue("inv:rateVAT", SisInvoiceItemWriter.RATE_VAT_NONE), lines[index++]);
     assertEquals(elBeg("inv:homeCurrency"), lines[index++]);
     assertEquals(elValue("typ:unitPrice", item2.getCharge().getNet().toString()), lines[index++]);
     assertEquals(elEnd("inv:homeCurrency"), lines[index++]);
