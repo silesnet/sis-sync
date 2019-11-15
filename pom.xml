@@ -8,7 +8,7 @@
   <version>1.2.2</version>
   <description>Set of stand alone synchronization batches that import, export and update SIS databases.</description>
   <properties>
-    <spring.batch.version>2.1.0.RELEASE</spring.batch.version>
+    <spring.batch.version>4.2.0.RELEASE</spring.batch.version>
     <spring.version>2.5.6</spring.version>
   </properties>
   <dependencies>
